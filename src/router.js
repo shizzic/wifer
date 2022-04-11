@@ -1,7 +1,8 @@
 import { createWebHistory, createRouter } from "vue-router";
+// import Chat from "@/components/chat/Chat";
 
 const routes = [
-    // { path: '/authentication/:token(.+)?', name: 'authentication', component: Authentication, props: true },
+    // { path: "/about", name: "about", component: Chat, props: true },
 ];
 
 const router = createRouter({

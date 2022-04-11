@@ -1,32 +1,37 @@
 <template>
-	<div />
+	<Nav />
 </template>
 
-<script>
-import { test } from "@/store/test"
+<script scoped>
+import { langJS } from "@/store/lang"
+import { navJS } from "@/store/nav"
+import Nav from "@/components/Nav"
 export default {
 	name: 'App',
 	components: {
-		
+		Nav
 	},
 	data() {
 		return {
 		}
 	},
 	setup() {
-		const store = test();
+		const lang = langJS()["lang"];
+		const nav = navJS()["list"][lang];
 
 		return {
-			store
+			lang,
+			nav
 		}
 	},
 	mounted() {
-		this.store.test();
+		console.log(this.lang);
+		console.log(this.nav);
 	},
 	methods: {
 	}
 }
 </script>
 
-<style>
+<style scoped>
 </style>
