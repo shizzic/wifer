@@ -8,8 +8,6 @@ export const test = defineStore("test", {
 
     },
     actions:{
-        test() {
-            console.log(123);
-        }
+        
     }
 })

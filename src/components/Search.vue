@@ -1,14 +1,10 @@
 <template>
-	<Nav />
+	<div>Search</div>
 </template>
 
 <script scoped>
-import Nav from "@/components/Nav"
 export default {
-	name: 'App',
-	components: {
-		Nav
-	},
+	name: 'Search',
 	data() {
 		return {
 		}
