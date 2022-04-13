@@ -1,9 +1,12 @@
 <template>
 	<nav>
-		<div v-for="(elem, key) in list" :key="key">
-			<router-link class="router" :class="{ 'checked': checked === key }" :to="{ name: elem['name'] }" @click="checked = key">
-				{{ elem["title"][lang] }}
-			</router-link>
+		<div id="links">
+			<div v-for="(elem, key) in list" :key="key" class="wrap">
+				<router-link class="router" :class="{ 'checked': checked === key }" :to="{ name: elem['name'] }" @click="checked = key">
+					{{ elem["title"][lang] }}
+				</router-link>
+				<div class="border" :class="{ 'checked': checked === key }" />
+			</div>
 		</div>
 	</nav>
 </template>
@@ -41,35 +44,43 @@ nav {
 	justify-content: space-around;
 }
 
-div {
-	border: 1px solid;
+#links {
+	width: 30%;
 	display: flex;
-	align-items: center;
+	justify-content: space-between;
 }
 
 .router {
+	cursor: pointer;
 	text-decoration: none;
 	color: #8C8D99;
+	font-size: 16px;
+	border-radius: 12px;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-	display: block;
-	height: 100%;
-	border: 1px solid;
+	height: 95%;
+	width: 100%;
+	padding: 0 10px;
+
+	transition: background-color .2s;
 }
 
-.router::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2.5px;
+.router:hover {
+	background-color: aliceblue;
+}
+
+.border {
+	width: 0;
+    height: 5%;
     background-color: #000;
     transition: width .2s;
 }
 
-.router:hover::after {
-    width: 100%;
+.checked {
+	color: #000;
+	width: 100%;
 }
-
-/* .checked {
-	border-bottom: 2.5px solid #334040;
-} */
 </style>

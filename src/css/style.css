@@ -1,3 +1,21 @@
+@font-face {
+    font-family: 'PT Sans';
+    font-weight: 400;
+    font-style: normal;
+    font-display: auto;
+    unicode-range: U+000-5FF;
+    src: url("/fonts/Ptsans/ptsans.woff2") format('woff2'), url("/fonts/Ptsans/ptsans.woff") format('woff'), url("/fonts/Ptsans/ptsans.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'PT Sans';
+    font-weight: 700;
+    font-style: normal;
+    font-display: auto;
+    unicode-range: U+000-5FF;
+    src: url("/fonts/Ptsans/ptsansbold.woff2") format('woff2'), url("/fonts/Ptsans/ptsansbold.woff") format('woff'), url("/fonts/Ptsans/ptsansbold.ttf") format('truetype');
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -9,6 +27,7 @@
 }
 
 body {
+    font-family: 'PT Sans';
     height: 100vh;
 }
 
