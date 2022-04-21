@@ -1,5 +1,5 @@
 <template>
-	<div>Search</div>
+	<div>SearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearchSearch</div>
 </template>
 
 <script scoped>
@@ -15,4 +15,11 @@ export default {
 </script>
 
 <style scoped>
+div {
+	background-color: #286DA8;
+	word-break: break-all;
+	height: 100%;
+	
+	overflow-y: auto;
+}
 </style>

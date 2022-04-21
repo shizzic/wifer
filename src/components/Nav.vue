@@ -1,10 +1,11 @@
 <template>
 	<nav>
 		<div id="links">
-			<div v-for="(elem, key) in list" :key="key" class="wrap">
-				<router-link class="router" :class="{ 'checked': checked === key }" :to="{ name: elem['name'] }" @click="checked = key">
-					{{ elem["title"][lang] }}
+			<div v-for="(elem, key) in list" :key="key" class="wrap" :title="elem.title[lang]">
+				<router-link class="wrapper" :to="{ name: elem.name }" @click="checked = key">
+					<img :src="elem.image"  />
 				</router-link>
+
 				<div class="border" :class="{ 'checked': checked === key }" />
 			</div>
 		</div>
@@ -27,49 +28,64 @@ export default {
 	},
 	data() {
 		return {
-			checked: null
+			checked: 0
 		}
-	},
-	methods: {
 	}
 }
 </script>
 
 <style scoped>
 nav {
+	z-index: 1;
+	background-color: #FFFFFF;
+
 	width: 100%;
-	height: 7%;
+	height: 50px;
 
 	display: flex;
 	justify-content: space-around;
+
+	position: fixed;
+
+	/* background-color: #286DA8; */
+	/* background-color: #CD5360; */
+	/* background-color: #B37D4E; */
+	/* background-color: #438496; */
 }
 
 #links {
-	width: 30%;
+	height: 100%;
 	display: flex;
 	justify-content: space-between;
 }
 
-.router {
-	cursor: pointer;
-	text-decoration: none;
-	color: #8C8D99;
-	font-size: 16px;
-	border-radius: 12px;
-	
+.wrap {
+	height: 100%;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+}
 
+.wrapper {
 	height: 95%;
-	width: 100%;
-	padding: 0 10px;
+	cursor: pointer;
+	border-radius: 12px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 0 20px;
 
 	transition: background-color .2s;
 }
 
-.router:hover {
+.wrapper:hover {
 	background-color: aliceblue;
+}
+
+img {
+	width: 20px;
 }
 
 .border {
