@@ -1,10 +1,10 @@
 <template>
-	<div>Chat</div>
+	<div>Profile</div>
 </template>
 
 <script scoped>
 export default {
-	name: "Chat",
+	name: "Profile",
 	data() {
 		return {
 		}
@@ -15,11 +15,4 @@ export default {
 </script>
 
 <style scoped>
-div {
-	background-color: #B37D4E;
-	word-break: break-all;
-	height: 100%;
-	
-	overflow-y: auto;
-}
 </style>

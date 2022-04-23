@@ -4,7 +4,7 @@
 
 <script scoped>
 export default {
-	name: 'About',
+	name: "About",
 	data() {
 		return {
 		}

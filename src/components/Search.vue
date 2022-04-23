@@ -4,7 +4,7 @@
 
 <script scoped>
 export default {
-	name: 'Search',
+	name: "Search",
 	data() {
 		return {
 		}

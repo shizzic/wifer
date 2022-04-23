@@ -2,44 +2,69 @@ import { defineStore } from "pinia"
 
 export const navJS = defineStore("nav", {
     getters: {
-        list: function(){
-            return [
-                { "name": "search", "title":
+        inner() {
+            return {
+                "search": { "title":
                     {
                         "RU": "Поиск",
                         "EN": "Search"
                     },
                     "image": "/search.webp"
                 },
-                { "name": "heart", "title":
+                "heart": { "title":
                     {
                         "RU": "Интересы",
                         "EN": "Interests"
                     },
                     "image": "/heart.webp"
                 },
-                { "name": "chat", "title":
+                "chat": { "title":
                     {
                         "RU": "Чат",
                         "EN": "Chat"
                     },
-                    "image": "/comment.webp"
+                    "image": "/chat.webp"
                 },
-                { "name": "premium", "title":
+                "premium": { "title":
                     {
                         "RU": "Премиум",
                         "EN": "Premium"
                     },
-                    "image": "/premium.webp"
+                    "image": "/diamond.webp"
                 },
-                { "name": "about", "title":
+                "profile": { "title":
                     {
-                        "RU": "О мне",
-                        "EN": "About"
+                        "RU": "Профиль",
+                        "EN": "Profile"
                     },
-                    "image": "/info.webp"
+                    "image": "/profile.webp"
                 }
-            ]
+            }
         },
+        outer() {
+            return {
+                "search": { "title":
+                    {
+                        "RU": "Поиск",
+                        "EN": "Search"
+                    },
+                    "image": "/search.webp"
+                },
+                "login": { "title":
+                    {
+                        "RU": "Вход",
+                        "EN": "Login"
+                    },
+                    "image": "/login.webp"
+                },
+                "premium": { "title":
+                    {
+                        "RU": "Премиум",
+                        "EN": "Premium"
+                    },
+                    "image": "/diamond.webp"
+                }
+            }
+        }
     }
 })

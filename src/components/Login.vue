@@ -1,10 +1,10 @@
 <template>
-	<div>Heart</div>
+	<div>Login</div>
 </template>
 
 <script scoped>
 export default {
-	name: "Heart",
+	name: "Login",
 	data() {
 		return {
 		}
@@ -16,10 +16,10 @@ export default {
 
 <style scoped>
 div {
-	background-color: #CD5360;
+	background-color: #438496;
+
 	word-break: break-all;
 	height: 100%;
-	width: 100%;
 	
 	overflow-y: auto;
 }

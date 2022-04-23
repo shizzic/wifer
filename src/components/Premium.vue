@@ -4,7 +4,7 @@
 
 <script scoped>
 export default {
-	name: 'Premium',
+	name: "Premium",
 	data() {
 		return {
 		}
@@ -15,4 +15,12 @@ export default {
 </script>
 
 <style scoped>
+div {
+	background-color: #438496;
+
+	word-break: break-all;
+	height: 100%;
+	
+	overflow-y: auto;
+}
 </style>

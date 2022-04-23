@@ -1,13 +1,27 @@
 <template>
 	<nav>
 		<div id="links">
-			<div v-for="(elem, key) in list" :key="key" class="wrap" :title="elem.title[lang]">
-				<router-link class="wrapper" :to="{ name: elem.name }" @click="checked = key">
-					<img :src="elem.image"  />
-				</router-link>
+			
+			<template v-if="logged">
+				<div v-for="(elem, key) in inner" :key="key" class="wrap" :title="elem.title[lang]">
+					<router-link class="wrapper" :to="{ name: key }" @click="checked = key">
+						<img :src="elem.image"  />
+					</router-link>
 
-				<div class="border" :class="{ 'checked': checked === key }" />
-			</div>
+					<div class="border" :class="{ 'checked': checked === key }" />
+				</div>
+			</template>
+
+			<template v-else>
+				<div v-for="(elem, key) in outer" :key="key" class="wrap" :title="elem.title[lang]">
+					<router-link class="wrapper" :to="{ name: key }" @click="checked = key">
+						<img :src="elem.image"  />
+					</router-link>
+
+					<div class="border" :class="{ 'checked': checked === key }" />
+				</div>
+			</template>
+
 		</div>
 	</nav>
 </template>
@@ -18,17 +32,20 @@ import { navJS } from "@/store/nav"
 export default {
 	name: 'Nav',
 	setup() {
-		const lang = langJS()["lang"];
-		const list = navJS()["list"];
+		const lang  = langJS()["lang"];
+		const inner = navJS()["inner"];
+		const outer = navJS()["outer"];
 
 		return {
 			lang,
-			list
+			inner,
+			outer
 		}
 	},
 	data() {
 		return {
-			checked: 0
+			checked: 0,
+			logged: true
 		}
 	}
 }
@@ -43,7 +60,7 @@ nav {
 	height: 50px;
 
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 
 	position: fixed;
 
@@ -56,36 +73,58 @@ nav {
 #links {
 	height: 100%;
 	display: flex;
-	justify-content: space-between;
+}
+
+@media screen and (min-width: 529px) {
+	.wrapper {
+		padding: 0 40px;
+	}
+}
+
+@media screen and (max-width: 529px) {
+	#links {
+		width: 100%;
+	}
+
+	.wrap {
+		flex: 1;
+	}
+
+	.wrapper {
+		flex: 1;
+		padding: 0 0;
+	}
 }
 
 .wrap {
+	flex: 1;
 	height: 100%;
+	border-radius: 12px;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
 .wrapper {
+	-webkit-tap-highlight-color: transparent;
 	height: 95%;
 	cursor: pointer;
-	border-radius: 12px;
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 0 20px;
 
 	transition: background-color .2s;
 }
 
-.wrapper:hover {
+.wrap:hover {
 	background-color: aliceblue;
 }
 
 img {
-	width: 20px;
+	width: 24px;
 }
 
 .border {
