@@ -1,21 +1,34 @@
 <template>
-	<Nav id="menu" />
-	<div id="wrap"><router-view /></div>
+	<Nav id="menu" :l="l" />
+	<div id="wrap"><router-view :l="l" /></div>
 </template>
 
 <script scoped>
+import { langJS } from "@/store/lang"
 import Nav from "@/components/Nav"
 export default {
 	name: 'App',
 	components: {
 		Nav
 	},
+	setup() {
+		const language = langJS();
+
+		return {
+			language
+		}
+	},
+	computed: {
+        l() {
+            return this.language["lang"];
+        }
+    },
 	data() {
 		return {
 		}
 	},
 	beforeMount() {
-		this.$router.push({ name: "search" })
+		// this.$router.push({ name: "search" })
 	}
 }
 </script>
@@ -45,12 +58,20 @@ export default {
 	position: relative;
 }
 
+#app {
+	word-break: break-word;
+}
+
 #wrap {
+	background-color: #286DA8;
 	width: 100%;
 	height: calc(100% - 50px);
+
 	position: absolute;
 	top: 50px;
 	left: 0;
+
+	overflow-y: auto;
 }
 
 @media screen and (max-width: 529px) {

@@ -5,7 +5,7 @@ import Chat from "@/components/Chat"
 import Premium from "@/components/Premium"
 import Heart from "@/components/Heart"
 import Profile from "@/components/Profile/Profile"
-import Login from "@/components/Login"
+import Login from "@/components/Enter/Login/Main"
 
 const routes = [
     { path: "/", name: "about", component: About, props: true },

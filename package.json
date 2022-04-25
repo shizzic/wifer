@@ -11,9 +11,11 @@
     "@vueuse/core": "^8.2.5",
     "core-js": "^3.6.5",
     "pinia": "^2.0.12",
+    "vee-validate": "^4.5.11",
     "vue": "^3.0.0",
     "vue-advanced-cropper": "^2.8.1",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.14",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.15",

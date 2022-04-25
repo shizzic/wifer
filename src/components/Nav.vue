@@ -3,8 +3,8 @@
 		<div id="links">
 			
 			<template v-if="logged">
-				<div v-for="(elem, key) in inner" :key="key" class="wrap" :title="elem.title[lang]">
-					<router-link class="wrapper" :to="{ name: key }" @click="checked = key">
+				<div v-for="(elem, key) in inner" :key="key" class="wrap" :title="elem.title[l]" @click="checked = key">
+					<router-link class="wrapper" :to="{ name: key }">
 						<img :src="elem.image"  />
 					</router-link>
 
@@ -13,8 +13,8 @@
 			</template>
 
 			<template v-else>
-				<div v-for="(elem, key) in outer" :key="key" class="wrap" :title="elem.title[lang]">
-					<router-link class="wrapper" :to="{ name: key }" @click="checked = key">
+				<div v-for="(elem, key) in outer" :key="key" class="wrap" :title="elem.title[l]" @click="checked = key">
+					<router-link class="wrapper" :to="{ name: key }">
 						<img :src="elem.image"  />
 					</router-link>
 
@@ -27,17 +27,15 @@
 </template>
 
 <script scoped>
-import { langJS } from "@/store/lang"
 import { navJS } from "@/store/nav"
 export default {
 	name: 'Nav',
+	props: ["l"],
 	setup() {
-		const lang  = langJS()["lang"];
 		const inner = navJS()["inner"];
 		const outer = navJS()["outer"];
 
 		return {
-			lang,
 			inner,
 			outer
 		}
@@ -45,7 +43,7 @@ export default {
 	data() {
 		return {
 			checked: 0,
-			logged: true
+			logged: null
 		}
 	}
 }
@@ -63,11 +61,6 @@ nav {
 	justify-content: center;
 
 	position: fixed;
-
-	/* background-color: #286DA8; */
-	/* background-color: #CD5360; */
-	/* background-color: #B37D4E; */
-	/* background-color: #438496; */
 }
 
 #links {
@@ -98,6 +91,7 @@ nav {
 
 .wrap {
 	flex: 1;
+	cursor: pointer;
 	height: 100%;
 	border-radius: 12px;
 
@@ -109,7 +103,6 @@ nav {
 .wrapper {
 	-webkit-tap-highlight-color: transparent;
 	height: 95%;
-	cursor: pointer;
 
 	display: flex;
 	flex-direction: column;
