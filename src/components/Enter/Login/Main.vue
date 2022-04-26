@@ -54,7 +54,7 @@ export default {
 	align-items: center;
 
 	margin: 0 auto;
-	padding: 0 20px;
+	padding: 50px 20px;
 
 	overflow-y: auto;
 }
