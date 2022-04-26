@@ -78,6 +78,7 @@ button {
 	border: none;
 	outline: none;
 	border-radius: 30px;
+	-webkit-tap-highlight-color: transparent;
 
 	display: block;
 	margin: 0 auto;
