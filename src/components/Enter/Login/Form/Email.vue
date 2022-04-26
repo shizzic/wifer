@@ -1,10 +1,14 @@
 <template>
 	<h3>{{ title }}</h3>
 	<div>
-        <Field name="email" type="email" :rules="rules" maxlength="255" v-slot="{ valid }" @input="good = valid" />
-		<i v-show="!good">&#10003;</i>
+        <Field name="email" :rules="rules" maxlength="254" v-slot="{ field, errorMessage }">
+			<input v-bind="field" type="email" v-model="value" />
+
+			<span v-show="!errorMessage && value" style="color: #40e64e;">&#10004;</span>
+			<span v-show="errorMessage" style="font-size: 12px;">&#10060;</span>
+		</Field>
 	</div>
-	<ErrorMessage name="email" />
+	<ErrorMessage name="email" class="error" />
 </template>
 
 <script scoped>
@@ -20,7 +24,7 @@ export default {
 	data() {
 		return {
 			rules: yup.string().email(this.error["email"]).required(this.error["required"]),
-			good: null
+			value: null
 		}
 	}
 }
@@ -28,28 +32,29 @@ export default {
 
 <style scoped>
 h3 {
+	font-size: 20px;
 	color: #aeacd8;
+
 	margin-bottom: 10px;
 }
 
 div {
-	display: flex;
 	border-bottom: 2px solid #ffffff;
+
+	display: flex;
+	margin-bottom: 10px;
 }
 
 input {
 	color: #ffffff;
-	font-size: 16px;
+	font-size: 18px;
 	letter-spacing: 1px;
 	outline: none;
 	border: none;
 	background: none;
 	width: 100%;
-}
 
-i {
-	font-weight: 600;
-	color: #40e64e;
+	padding-bottom: 5px;
 }
 
 input:-webkit-autofill,
@@ -61,5 +66,11 @@ input:-webkit-autofill:active
 	color: #ffffff;
 	-webkit-text-fill-color: #ffffff;
 	caret-color: #ffffff;
+}
+
+.error {
+	font-size: 15px;
+	font-weight: 600;
+	color: #fd8692;
 }
 </style>

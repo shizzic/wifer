@@ -8,7 +8,7 @@
 						<img :src="elem.image"  />
 					</router-link>
 
-					<div class="border" :class="{ 'checked': checked === key }" />
+					<div class="border" :class="{ 'checked': $route.name === key }" />
 				</div>
 			</template>
 
@@ -18,7 +18,7 @@
 						<img :src="elem.image"  />
 					</router-link>
 
-					<div class="border" :class="{ 'checked': checked === key }" />
+					<div class="border" :class="{ 'checked': $route.name === key }" />
 				</div>
 			</template>
 

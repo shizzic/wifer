@@ -4,7 +4,8 @@
 
 		<Form name="login" @submit="onSubmit">
 			<Email :title="lang['input'][l]['email']" :error="lang['error'][l]['email']" />
-			<!-- <button>submit</button> -->
+			<Password :title="lang['input'][l]['password']" :error="lang['error'][l]['password']" />
+			<button>{{ lang['button'][l] }}</button>
 		</Form>
 	</div>
 </template>
@@ -13,6 +14,7 @@
 import { LoginJS } from "@/store/Langs/Login";
 import Title from "@/components/Enter/Login/Title"
 import Email from "@/components/Enter/Login/Form/Email"
+import Password from "@/components/Enter/Login/Form/Password"
 import { Form } from 'vee-validate';
 export default {
 	name: "Login",
@@ -20,7 +22,8 @@ export default {
 	components: {
 		Title,
 		Form,
-		Email
+		Email,
+		Password
 	},
 	setup() {
         const lang  = LoginJS();
@@ -36,7 +39,7 @@ export default {
 	methods: {
 		onSubmit(values) {
 			console.log(values);
-		},
+		}
 	}
 }
 </script>
@@ -49,14 +52,36 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 
 	margin: 0 auto;
 	padding: 0 20px;
+
+	overflow-y: auto;
+}
+
+.wrap::before, .wrap::after {
+  content: '';
+  margin: auto;
 }
 
 form {
-	width: 35%;
-	min-width: 320px;
+	width: 100%;
+	min-width: 200px;
+	max-width: 550px;
+}
+
+button {
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: 600;
+	background-color: #ffffff;
+	border: none;
+	outline: none;
+	border-radius: 30px;
+
+	display: block;
+	margin: 0 auto;
+	margin-top: 50px;
+	padding: 15px 40px;
 }
 </style>

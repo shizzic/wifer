@@ -1,5 +1,5 @@
 <template>
-	<h1 class="title">{{ lang[l]["title"] }}</h1>
+    <h1 class="title">{{ lang[l]["title"] }}</h1>
     <h2 class="text">{{ lang[l]["text"] }}</h2>
 </template>
 
@@ -18,13 +18,23 @@ h1, h2 {
 
 .title {
     font-weight: 600;
-    font-size: 26px;
+    font-size: 30px;
     margin-bottom: 20px;
 }
 
 .text {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 22px;
     margin-bottom: 75px;
+}
+
+@media screen and (max-width: 600px) {
+    .title {
+        font-size: 24px;
+    }
+
+    .text {
+        font-size: 18px;
+    }
 }
 </style>

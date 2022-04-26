@@ -56,9 +56,6 @@ export default {
 	
 #app {
 	position: relative;
-}
-
-#app {
 	word-break: break-word;
 }
 
@@ -70,8 +67,6 @@ export default {
 	position: absolute;
 	top: 50px;
 	left: 0;
-
-	overflow-y: auto;
 }
 
 @media screen and (max-width: 529px) {
@@ -82,5 +77,5 @@ export default {
 	#wrap {
 		top: 0;
 	}
-  }
+}
 </style>

@@ -10,7 +10,7 @@ export const LoginJS = defineStore("Login", {
                 },
                 "RU": {
                     "title": "Вход",
-                    "text": "Кулити всем. Если ты хочешь лучший опыт знакомств в инете, тогда присаживайся к столу :)"
+                    "text": "Кулити, если ты хочешь лучший опыт знакомств в инете, тогда присаживайся к столу :)"
                 }
             }
         },
@@ -30,16 +30,32 @@ export const LoginJS = defineStore("Login", {
             return {
                 "EN": {
                     "email": {
-                        "email": "A,a,a. Field must be an email",
+                        "email": "A-a-a. Field must be an email",
                         "required": "Hey, fill it!"
+                    },
+                    "password": {
+                        "space": "Space is not allowed",
+                        "required": "Hey, fill it!",
+                        "min": "8 characters minimum"
                     }
                 },
                 "RU": {
                     "email": {
-                        "email": "Не, не, не. Введи почту, а не что то другое",
+                        "password": "Не, не, не. Введи почту, а не что то другое",
                         "required": "Хей, заполни поле!"
+                    },
+                    "password": {
+                        "space": "Пробел запрещен",
+                        "required": "Хей, заполни поле!",
+                        "min": "8 символов минимум"
                     }
                 }
+            }
+        },
+        button() {
+            return {
+                "EN": "Submit",
+                "RU": "Входи"
             }
         }
     }
