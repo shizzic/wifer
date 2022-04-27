@@ -57,6 +57,34 @@ export const LoginJS = defineStore("Login", {
                 "EN": "Submit",
                 "RU": "Входи"
             }
+        },
+        reset() {
+            return {
+                "EN": {
+                    "text": "Forgot password?",
+                    "button": "Reset"
+                },
+                "RU": {
+                    "text": "Забыли пароль?",
+                    "button": "Сменить"
+                }
+            }
+        },
+        result() {
+            return {
+                "EN": {
+                    "0": "There is no account with such email",
+                    "1": "Wrong password",
+                    "2": "Email isn't confirmed",
+                    "3": "Something went wrong, try again"
+                },
+                "RU": {
+                    "0": "Аккаунта с такой почтой не существует",
+                    "1": "Не верный пароль",
+                    "2": "Почта не подтверждена",
+                    "3": "Что то пошло не так, попробуйте снова"
+                }
+            }
         }
     }
 })

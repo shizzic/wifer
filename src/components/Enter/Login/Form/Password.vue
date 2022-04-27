@@ -49,7 +49,7 @@ div {
 input {
 	color: #ffffff;
 	font-size: 22px;
-	letter-spacing: 1px;
+	font-weight: 400;
 	outline: none;
 	border: none;
 	background: none;

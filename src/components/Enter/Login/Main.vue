@@ -7,6 +7,8 @@
 			<Password :title="lang['input'][l]['password']" :error="lang['error'][l]['password']" />
 			<button>{{ lang['button'][l] }}</button>
 		</Form>
+
+		<Forget :l="l" :lang="lang['reset']" />
 	</div>
 </template>
 
@@ -16,6 +18,7 @@ import Title from "@/components/Enter/Login/Title"
 import Email from "@/components/Enter/Login/Form/Email"
 import Password from "@/components/Enter/Login/Form/Password"
 import { Form } from 'vee-validate';
+import Forget from "@/components/Enter/Login/Forget"
 export default {
 	name: "Login",
 	props: ["l"],
@@ -23,7 +26,8 @@ export default {
 		Title,
 		Form,
 		Email,
-		Password
+		Password,
+		Forget
 	},
 	setup() {
         const lang  = LoginJS();
@@ -80,9 +84,40 @@ button {
 	border-radius: 30px;
 	-webkit-tap-highlight-color: transparent;
 
+	position: relative;
 	display: block;
 	margin: 0 auto;
 	margin-top: 50px;
+	margin-bottom: 20px;
 	padding: 15px 40px;
+}
+
+button:hover {
+  transition-duration: 0.1s;
+  background-color: #dadada;
+}
+
+button:after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 4em;
+  left: 0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.5s;
+  box-shadow: 0 0 10px 40px white;
+}
+
+button:active:after {
+  box-shadow: 0 0 0 0 white;
+  position: absolute;
+  border-radius: 4em;
+  left: 0;
+  top:0;
+  opacity: 1;
+  transition: 0s;
 }
 </style>
