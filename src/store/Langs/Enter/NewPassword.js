@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 
-export const LoginJS = defineStore("Login", {
+export const NewPasswordJS = defineStore("NewPassword", {
     getters: {
         title() {
             return {
@@ -70,7 +70,7 @@ export const LoginJS = defineStore("Login", {
                 }
             }
         },
-        result() {
+        response() {
             return {
                 "EN": {
                     "0": "There is no account with such email",
@@ -84,6 +84,12 @@ export const LoginJS = defineStore("Login", {
                     "2": "Почта не подтверждена",
                     "3": "Что то пошло не так, попробуйте снова"
                 }
+            }
+        },
+        success() {
+            return {
+                "EN": "You logged. Enjoy :)",
+                "RU": "Вы вошли. Наслождайтесь :)"
             }
         }
     }

@@ -31,13 +31,6 @@ export const navJS = defineStore("nav", {
                         "EN": "Premium"
                     },
                     "image": "/diamond.webp"
-                },
-                "profile": { "title":
-                    {
-                        "RU": "Профиль",
-                        "EN": "Profile"
-                    },
-                    "image": "/profile.webp"
                 }
             }
         },
@@ -63,6 +56,14 @@ export const navJS = defineStore("nav", {
                         "EN": "Premium"
                     },
                     "image": "/diamond.webp"
+                }
+            }
+        },
+        profile() {
+            return {
+                "title": {
+                    "RU": "Профиль",
+                    "EN": "Profile"
                 }
             }
         }

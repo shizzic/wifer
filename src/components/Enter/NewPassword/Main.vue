@@ -13,7 +13,7 @@
 </template>
 
 <script scoped>
-import { LoginJS } from "@/store/Langs/Enter/Login";
+import { NewPasswordJS } from "@/store/Langs/Enter/NewPassword";
 import Title from "@/components/Enter/Login/Title"
 import Email from "@/components/Enter/Login/Form/Email"
 import Password from "@/components/Enter/Login/Form/Password"
@@ -30,9 +30,9 @@ export default {
 		Forget
 	},
 	setup() {
-        const lang 	   = LoginJS();
-		const response = LoginJS()["response"];
-		const success  = LoginJS()["success"];
+        const lang 	   = NewPasswordJS();
+		const response = NewPasswordJS()["response"];
+		const success  = NewPasswordJS()["success"];
 
 		return {
             lang,

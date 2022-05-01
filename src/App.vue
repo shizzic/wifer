@@ -28,7 +28,17 @@ export default {
 		}
 	},
 	beforeMount() {
-		// this.$router.push({ name: "search" })
+		this.check()
+	},
+	methods: {
+		check() {
+			fetch(this.$domain + "test", {
+				method: "GET",
+				credentials: 'include'
+			})
+				.then(data => { return data.text() })
+				.then(data => { console.log(data) })
+		}
 	}
 }
 </script>

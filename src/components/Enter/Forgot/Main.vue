@@ -2,37 +2,30 @@
 	<div class="wrap">
 		<Title :l="l" :lang="lang['title']" />
 
-		<Form name="login" @submit="login">
-			<Email :title="lang['input'][l]['email']" :error="lang['error'][l]['email']" />
-			<Password :title="lang['input'][l]['password']" :error="lang['error'][l]['password']" />
+		<Form name="login" @submit="send">
+			<Email :title="lang['input'][l]" :error="lang['error'][l]" />
 			<button>{{ lang['button'][l] }}</button>
 		</Form>
-
-		<Forget :l="l" :lang="lang['reset']" />
 	</div>
 </template>
 
 <script scoped>
-import { LoginJS } from "@/store/Langs/Enter/Login";
-import Title from "@/components/Enter/Login/Title"
-import Email from "@/components/Enter/Login/Form/Email"
-import Password from "@/components/Enter/Login/Form/Password"
+import { ForgotJS } from "@/store/Langs/Enter/Forgot";
+import Title from "@/components/Enter/Forgot/Title"
+import Email from "@/components/Enter/Forgot/Form/Email"
 import { Form } from 'vee-validate';
-import Forget from "@/components/Enter/Login/Forget"
 export default {
-	name: "Login",
+	name: "Forgot",
 	props: ["l"],
 	components: {
 		Title,
 		Form,
-		Email,
-		Password,
-		Forget
+		Email
 	},
 	setup() {
-        const lang 	   = LoginJS();
-		const response = LoginJS()["response"];
-		const success  = LoginJS()["success"];
+        const lang 	   = ForgotJS();
+		const response = ForgotJS()["response"];
+		const success  = ForgotJS()["success"];
 
 		return {
             lang,
@@ -45,26 +38,21 @@ export default {
 		}
 	},
 	methods: {
-		login(values) {
+		send(values) {
 			let form = new FormData();
 			form.append("email", values["email"]);
-			form.append("password", values["password"]);
 
-			fetch(this.$domain + "login", {
+			fetch(this.$domain + "forgotPassword", {
 				method: "POST",
 				credentials: 'include',
 				body: form
 			})
 				.then(data => { return data.json() })
 				.then(data => {
-					if ("error" in data)
+					if (data !== true && "error" in data)
 						this.$toast.error(this.response[this.l][data["error"]])
-					else {
-						this.$user.setAvatar(data["avatar"])
-						this.$user.setID(data["id"])
-						this.$router.push({ name: "search" })
+					else
 						this.$toast.success(this.success[this.l])
-					}
 				})
 		}
 	}

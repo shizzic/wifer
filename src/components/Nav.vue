@@ -2,13 +2,21 @@
 	<nav>
 		<div id="links">
 			
-			<template v-if="logged">
+			<template v-if="id">
 				<div v-for="(elem, key) in inner" :key="key" class="wrap" :title="elem.title[l]" @click="checked = key">
 					<router-link class="wrapper" :to="{ name: key }">
 						<img :src="elem.image"  />
 					</router-link>
 
 					<div class="border" :class="{ 'checked': $route.name === key }" />
+				</div>
+
+				<div class="wrap" :title="profile.title[l]" @click="checked = 'profile'">
+					<router-link class="wrapper" :to="{ name: 'profile' }">
+						<img :src="avatar" style="border-radius: 50%;"  />
+					</router-link>
+
+					<div class="border" :class="{ 'checked': $route.name === 'profile' }" />
 				</div>
 			</template>
 
@@ -28,22 +36,32 @@
 
 <script scoped>
 import { navJS } from "@/store/nav"
+import { userJS } from "@/store/user"
 export default {
 	name: 'Nav',
 	props: ["l"],
 	setup() {
-		const inner = navJS()["inner"];
-		const outer = navJS()["outer"];
+		const inner   = navJS()["inner"];
+		const outer   = navJS()["outer"];
+		const profile = navJS()["profile"];
 
 		return {
 			inner,
-			outer
+			outer,
+			profile
+		}
+	},
+	computed: {
+		id() {
+			return userJS()["id"]
+		},
+		avatar() {
+			return userJS()["avatar"]
 		}
 	},
 	data() {
 		return {
-			checked: 0,
-			logged: null
+			checked: 0
 		}
 	}
 }
@@ -118,6 +136,7 @@ nav {
 
 img {
 	width: 24px;
+	height: 24px;
 }
 
 .border {
