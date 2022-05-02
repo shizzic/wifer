@@ -10,14 +10,6 @@
 
 					<div class="border" :class="{ 'checked': $route.name === key }" />
 				</div>
-
-				<div class="wrap" :title="profile.title[l]" @click="checked = 'profile'">
-					<router-link class="wrapper" :to="{ name: 'profile' }">
-						<img :src="avatar" style="border-radius: 50%;"  />
-					</router-link>
-
-					<div class="border" :class="{ 'checked': $route.name === 'profile' }" />
-				</div>
 			</template>
 
 			<template v-else>
@@ -43,20 +35,15 @@ export default {
 	setup() {
 		const inner   = navJS()["inner"];
 		const outer   = navJS()["outer"];
-		const profile = navJS()["profile"];
 
 		return {
 			inner,
-			outer,
-			profile
+			outer
 		}
 	},
 	computed: {
 		id() {
 			return userJS()["id"]
-		},
-		avatar() {
-			return userJS()["avatar"]
 		}
 	},
 	data() {

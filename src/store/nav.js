@@ -4,66 +4,65 @@ export const navJS = defineStore("nav", {
     getters: {
         inner() {
             return {
-                "search": { "title":
-                    {
+                "search": { 
+                    "title": {
                         "RU": "Поиск",
                         "EN": "Search"
                     },
                     "image": "/search.webp"
                 },
-                "heart": { "title":
-                    {
+                "heart": { 
+                    "title": {
                         "RU": "Интересы",
                         "EN": "Interests"
                     },
                     "image": "/heart.webp"
                 },
-                "chat": { "title":
-                    {
+                "chat": { 
+                    "title": {
                         "RU": "Чат",
                         "EN": "Chat"
                     },
                     "image": "/chat.webp"
                 },
-                "premium": { "title":
-                    {
+                "premium": { 
+                    "title": {
                         "RU": "Премиум",
                         "EN": "Premium"
                     },
                     "image": "/diamond.webp"
+                },
+                "profile": {
+                    "title": {
+                        "RU": "Профиль",
+                        "EN": "Profile"
+                    },
+                    "image": "/profile.webp"
                 }
             }
         },
         outer() {
             return {
-                "search": { "title":
-                    {
+                "search": { 
+                    "title": {
                         "RU": "Поиск",
                         "EN": "Search"
                     },
                     "image": "/search.webp"
                 },
-                "login": { "title":
-                    {
+                "login": { 
+                    "title": {
                         "RU": "Вход",
                         "EN": "Login"
                     },
                     "image": "/login.webp"
                 },
-                "premium": { "title":
-                    {
+                "premium": { 
+                    "title": {
                         "RU": "Премиум",
                         "EN": "Premium"
                     },
                     "image": "/diamond.webp"
-                }
-            }
-        },
-        profile() {
-            return {
-                "title": {
-                    "RU": "Профиль",
-                    "EN": "Profile"
                 }
             }
         }

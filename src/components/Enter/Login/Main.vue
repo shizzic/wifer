@@ -46,9 +46,9 @@ export default {
 	},
 	methods: {
 		login(values) {
-			let form = new FormData();
-			form.append("email", values["email"]);
-			form.append("password", values["password"]);
+			let form = new FormData()
+			form.append("email", values["email"])
+			form.append("password", values["password"])
 
 			fetch(this.$domain + "login", {
 				method: "POST",
@@ -60,7 +60,6 @@ export default {
 					if ("error" in data)
 						this.$toast.error(this.response[this.l][data["error"]])
 					else {
-						this.$user.setAvatar(data["avatar"])
 						this.$user.setID(data["id"])
 						this.$router.push({ name: "search" })
 						this.$toast.success(this.success[this.l])
@@ -142,5 +141,14 @@ button:active:after {
   top:0;
   opacity: 1;
   transition: 0s;
+}
+
+.wrap::-webkit-scrollbar {
+  width: 8px;
+}
+
+.wrap::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 15px;
 }
 </style>

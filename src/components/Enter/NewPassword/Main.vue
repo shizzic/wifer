@@ -138,4 +138,13 @@ button:active:after {
   opacity: 1;
   transition: 0s;
 }
+
+.wrap::-webkit-scrollbar {
+  width: 8px;
+}
+
+.wrap::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 15px;
+}
 </style>

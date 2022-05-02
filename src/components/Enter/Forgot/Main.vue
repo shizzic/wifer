@@ -39,8 +39,8 @@ export default {
 	},
 	methods: {
 		send(values) {
-			let form = new FormData();
-			form.append("email", values["email"]);
+			let form = new FormData()
+			form.append("email", values["email"])
 
 			fetch(this.$domain + "forgotPassword", {
 				method: "POST",
@@ -49,7 +49,7 @@ export default {
 			})
 				.then(data => { return data.json() })
 				.then(data => {
-					if (data !== true && "error" in data)
+					if ("error" in data)
 						this.$toast.error(this.response[this.l][data["error"]])
 					else
 						this.$toast.success(this.success[this.l])
@@ -130,5 +130,14 @@ button:active:after {
   top:0;
   opacity: 1;
   transition: 0s;
+}
+
+.wrap::-webkit-scrollbar {
+  width: 8px;
+}
+
+.wrap::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 15px;
 }
 </style>
