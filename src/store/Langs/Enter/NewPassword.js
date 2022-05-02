@@ -5,91 +5,77 @@ export const NewPasswordJS = defineStore("NewPassword", {
         title() {
             return {
                 "EN": {
-                    "title": "Sign in",
-                    "text": "Hello there! If you want the best sugar on web, than welcome aboard :)"
+                    "title": "New password",
+                    "text": "Just write a new password and confirm it :)"
                 },
                 "RU": {
-                    "title": "Вход",
-                    "text": "Кулити, если ты хочешь лучший опыт знакомств в инете, тогда присаживайся к столу :)"
+                    "title": "Новый пароль",
+                    "text": "Просто придумай новый пароль и подтверди его :)"
                 }
             }
         },
         input() {
             return {
                 "EN": {
-                    "email": "Email",
-                    "password": "Password"
+                    "password": "New password",
+                    "confirm": "Confirm"
                 },
                 "RU": {
-                    "email": "Почта",
-                    "password": "Пароль"
+                    "password": "Новый пароль",
+                    "confirm": "Подтвердить"
                 }
             }
         },
         error() {
             return {
                 "EN": {
-                    "email": {
-                        "email": "A-a-a. Field must be an email",
-                        "required": "Hey, fill it!"
-                    },
                     "password": {
                         "space": "Space is not allowed",
                         "required": "Hey, fill it!",
                         "min": "8 characters minimum"
+                    },
+                    "confirm": {
+                        "match": "Passwords must match",
+                        "required": "Hey, fill it!"
                     }
                 },
                 "RU": {
-                    "email": {
-                        "password": "Не, не, не. Введи почту, а не что то другое",
-                        "required": "Хей, заполни поле!"
-                    },
                     "password": {
                         "space": "Пробел запрещен",
                         "required": "Хей, заполни поле!",
                         "min": "8 символов минимум"
+                    },
+                    "confirm": {
+                        "match": "Пароли должны совпадать",
+                        "required": "Хей, заполни поле!"
                     }
                 }
             }
         },
         button() {
             return {
-                "EN": "Submit",
-                "RU": "Входи"
-            }
-        },
-        reset() {
-            return {
-                "EN": {
-                    "text": "Forgot password?",
-                    "button": "Reset"
-                },
-                "RU": {
-                    "text": "Забыли пароль?",
-                    "button": "Сменить"
-                }
+                "EN": "Change",
+                "RU": "Изменить"
             }
         },
         response() {
             return {
                 "EN": {
-                    "0": "There is no account with such email",
-                    "1": "Wrong password",
-                    "2": "Email isn't confirmed",
-                    "3": "Something went wrong, try again"
+                    "0": "New password has wrong length",
+                    "1": "Don't try to hack me senpai",
+                    "2": "Something went wrong. Try make a request for new password again",
                 },
                 "RU": {
-                    "0": "Аккаунта с такой почтой не существует",
-                    "1": "Не верный пароль",
-                    "2": "Почта не подтверждена",
-                    "3": "Что то пошло не так, попробуйте снова"
+                    "0": "Новый пароль имеет недопустимую длину",
+                    "1": "Не старайся хакнуть меня семпай",
+                    "2": "Что-то пошло не так. Попробуйте ссделать запрос на смену пароля еще раз",
                 }
             }
         },
         success() {
             return {
-                "EN": "You logged. Enjoy :)",
-                "RU": "Вы вошли. Наслождайтесь :)"
+                "EN": "Passwword is changed :)",
+                "RU": "Пароль изменен :)"
             }
         }
     }

@@ -2,32 +2,28 @@
 	<div class="wrap">
 		<Title :l="l" :lang="lang['title']" />
 
-		<Form name="login" @submit="login">
-			<Email :title="lang['input'][l]['email']" :error="lang['error'][l]['email']" />
-			<Password :title="lang['input'][l]['password']" :error="lang['error'][l]['password']" />
+		<Form name="login" @submit="change">
+			<Password :title="lang['input'][l]['password']" :error="lang['error'][l]['password']" @password="password = $event" />
+			<Confirm :title="lang['input'][l]['confirm']" :error="lang['error'][l]['confirm']" :password="password" />
 			<button>{{ lang['button'][l] }}</button>
 		</Form>
-
-		<Forget :l="l" :lang="lang['reset']" />
 	</div>
 </template>
 
 <script scoped>
 import { NewPasswordJS } from "@/store/Langs/Enter/NewPassword";
-import Title from "@/components/Enter/Login/Title"
-import Email from "@/components/Enter/Login/Form/Email"
-import Password from "@/components/Enter/Login/Form/Password"
+import Title from "@/components/Enter/NewPassword/Title"
+import Password from "@/components/Enter/NewPassword/Form/Password"
+import Confirm from "@/components/Enter/NewPassword/Form/Confirm"
 import { Form } from 'vee-validate';
-import Forget from "@/components/Enter/Login/Forget"
 export default {
-	name: "Login",
+	name: "NewPassword",
 	props: ["l"],
 	components: {
 		Title,
 		Form,
-		Email,
 		Password,
-		Forget
+		Confirm
 	},
 	setup() {
         const lang 	   = NewPasswordJS();
@@ -42,16 +38,17 @@ export default {
 	},
 	data() {
 		return {
+			password: null
 		}
 	},
 	methods: {
-		login(values) {
-			let form = new FormData();
-			form.append("email", values["email"]);
-			form.append("password", values["password"]);
+		change(values) {
+			let form = new FormData()
+			form.append("password", values["password"])
+			form.append("token", this.$route.params.token)
 
-			fetch(this.$domain + "login", {
-				method: "POST",
+			fetch(this.$domain + "changePasswordByToken", {
+				method: "PUT",
 				credentials: 'include',
 				body: form
 			})
@@ -60,10 +57,8 @@ export default {
 					if ("error" in data)
 						this.$toast.error(this.response[this.l][data["error"]])
 					else {
-						this.$user.setAvatar(data["avatar"])
-						this.$user.setID(data["id"])
-						this.$router.push({ name: "search" })
 						this.$toast.success(this.success[this.l])
+						this.$router.push({ name: "login" })
 					}
 				})
 		}

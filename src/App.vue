@@ -28,7 +28,7 @@ export default {
 		}
 	},
 	beforeMount() {
-		this.check()
+		// this.check()
 	},
 	methods: {
 		check() {
