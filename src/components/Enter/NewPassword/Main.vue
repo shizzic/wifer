@@ -12,9 +12,9 @@
 
 <script scoped>
 import { NewPasswordJS } from "@/store/Langs/Enter/NewPassword";
-import Title from "@/components/Enter/NewPassword/Title"
-import Password from "@/components/Enter/NewPassword/Form/Password"
-import Confirm from "@/components/Enter/NewPassword/Form/Confirm"
+import Title from "@/components/Enter/NewPassword/Title.vue"
+import Password from "@/components/Enter/NewPassword/Form/Password.vue"
+import Confirm from "@/components/Enter/NewPassword/Form/Confirm.vue"
 import { Form } from 'vee-validate';
 export default {
 	name: "NewPassword",

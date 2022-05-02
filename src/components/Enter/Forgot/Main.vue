@@ -11,8 +11,8 @@
 
 <script scoped>
 import { ForgotJS } from "@/store/Langs/Enter/Forgot";
-import Title from "@/components/Enter/Forgot/Title"
-import Email from "@/components/Enter/Forgot/Form/Email"
+import Title from "@/components/Enter/Forgot/Title.vue"
+import Email from "@/components/Enter/Forgot/Form/Email.vue"
 import { Form } from 'vee-validate';
 export default {
 	name: "Forgot",

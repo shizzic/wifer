@@ -5,7 +5,7 @@
 
 <script scoped>
 import { langJS } from "@/store/lang"
-import Nav from "@/components/Nav"
+import Nav from "@/components/Nav.vue"
 export default {
 	name: 'App',
 	components: {

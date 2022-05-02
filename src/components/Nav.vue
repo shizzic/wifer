@@ -27,8 +27,8 @@
 </template>
 
 <script scoped>
-import { navJS } from "@/store/nav"
-import { userJS } from "@/store/user"
+import { navJS } from "@/store/nav.js"
+import { userJS } from "@/store/user.js"
 export default {
 	name: 'Nav',
 	props: ["l"],

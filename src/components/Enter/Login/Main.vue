@@ -14,11 +14,11 @@
 
 <script scoped>
 import { LoginJS } from "@/store/Langs/Enter/Login";
-import Title from "@/components/Enter/Login/Title"
-import Email from "@/components/Enter/Login/Form/Email"
-import Password from "@/components/Enter/Login/Form/Password"
+import Title from "@/components/Enter/Login/Title.vue"
+import Email from "@/components/Enter/Login/Form/Email.vue"
+import Password from "@/components/Enter/Login/Form/Password.vue"
+import Forget from "@/components/Enter/Login/Forget.vue"
 import { Form } from 'vee-validate';
-import Forget from "@/components/Enter/Login/Forget"
 export default {
 	name: "Login",
 	props: ["l"],
