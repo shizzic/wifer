@@ -1,40 +1,42 @@
 <template>
 	<div class="wrap">
-		<router-link class="link" :to="{ name: 'registration' }">{{ link[l] }}</router-link>
+		<router-link class="link" :to="{ name: 'login' }">{{ link[l] }}</router-link>
 		<Title :l="l" :lang="lang['title']" />
+		<Api />
 
-		<Form name="login" @submit="login">
+		<Form name="registration" @submit="login">
 			<Email :title="lang['input'][l]['email']" :error="lang['error'][l]['email']" />
-			<Password :title="lang['input'][l]['password']" :error="lang['error'][l]['password']" />
+			<Password :title="lang['input'][l]['password']" :error="lang['error'][l]['password']" @password="password = $event" />
+			<Confirm :title="lang['input'][l]['confirm']" :error="lang['error'][l]['confirm']" :password="password" />
 			<button>{{ lang['button'][l] }}</button>
 		</Form>
-
-		<Forget :l="l" :lang="lang['reset']" />
 	</div>
 </template>
 
 <script scoped>
-import { LoginJS } from "@/store/Langs/Enter/Login";
-import Title from "@/components/Enter/Login/Title.vue"
-import Email from "@/components/Enter/Login/Form/Email.vue"
-import Password from "@/components/Enter/Login/Form/Password.vue"
-import Forget from "@/components/Enter/Login/Forget.vue"
+import { RegistrationJS } from "@/store/Langs/Enter/Registration";
+import Title from "@/components/Enter/Registration/Title.vue"
+import Api from "@/components/Enter/Registration/Api.vue"
+import Email from "@/components/Enter/Registration/Form/Email.vue"
+import Password from "@/components/Enter/Registration/Form/Password.vue"
+import Confirm from "@/components/Enter/Registration/Form/Confirm.vue"
 import { Form } from 'vee-validate';
 export default {
-	name: "Login",
+	name: "Registration",
 	props: ["l"],
 	components: {
 		Title,
+		Api,
 		Form,
 		Email,
 		Password,
-		Forget
+		Confirm
 	},
 	setup() {
-        const lang 	   = LoginJS();
-		const response = LoginJS()["response"];
-		const success  = LoginJS()["success"];
-		const link 	   = LoginJS()["link"];
+        const lang 	   = RegistrationJS();
+		const response = RegistrationJS()["response"];
+		const success  = RegistrationJS()["success"];
+		const link 	   = RegistrationJS()["link"];
 
 		return {
             lang,
@@ -45,6 +47,7 @@ export default {
 	},
 	data() {
 		return {
+			password: null
 		}
 	},
 	methods: {
@@ -161,14 +164,13 @@ button:active:after {
 }
 
 .wrap::-webkit-scrollbar {
-  width: 1px;
+  width: 3px;
 }
 
-.wrap:hover::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+.wrap:hover .wrap::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
 }
-
 .wrap::-webkit-scrollbar-thumb {
   background-color: #999;
   border-radius: 15px;

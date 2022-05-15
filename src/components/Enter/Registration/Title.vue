@@ -25,7 +25,7 @@ h1, h2 {
 .text {
     font-weight: 400;
     font-size: 22px;
-    margin-bottom: 25px;
+    margin-bottom: 35px;
 }
 
 @media screen and (max-width: 600px) {

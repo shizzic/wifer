@@ -7,6 +7,7 @@ import Premium from "@/components/Premium.vue"
 import Heart from "@/components/Heart.vue"
 import Profile from "@/components/Profile/Profile.vue"
 import Login from "@/components/Enter/Login/Main.vue"
+import Registration from "@/components/Enter/Registration/Main.vue"
 import Forgot from "@/components/Enter/Forgot/Main.vue"
 import NewPassword from "@/components/Enter/NewPassword/Main.vue"
 
@@ -18,6 +19,7 @@ const routes = [
     { path: "/heart", name: "heart", component: Heart, props: true },
     { path: "/profile", name: "profile", component: Profile, props: true },
     { path: "/login", name: "login", component: Login, props: true },
+    { path: "/registration", name: "registration", component: Registration, props: true },
     { path: "/forgotPassword", name: "forgot", component: Forgot, props: true },
     { path: "/newPassword/:token(\\S+)", name: "newPassword", component: NewPassword, props: true }
 ]

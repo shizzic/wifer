@@ -1,29 +1,34 @@
 <template>
 	<h3>{{ title }}</h3>
 	<div>
-        <Field name="password" :rules="rules" maxlength="128" v-slot="{ field, errorMessage }">
+        <Field name="confirm" :rules="rules" maxlength="128" v-slot="{ field, errorMessage }">
 			<input v-bind="field" type="password" v-model="value" />
 
 			<span v-show="!errorMessage && value" style="color: #40e64e;">&#10004;</span>
 			<span v-show="errorMessage" style="font-size: 12px;">&#10060;</span>
 		</Field>
 	</div>
-	<ErrorMessage name="password" class="error" />
+	<ErrorMessage name="confirm" class="error" />
 </template>
 
 <script scoped>
 import { Field, ErrorMessage  } from 'vee-validate';
 import * as yup from 'yup';
 export default {
-	name: "Password",
-	props: ["title", "error"],
+	name: "Confirm",
+	props: ["title", "error", "password"],
 	components: {
 		Field,
-		ErrorMessage
+		ErrorMessage 
+	},
+	watch: {
+		password(n) {
+			this.rules = yup.string().required(this.error["required"]).oneOf([n], this.error["match"])
+		}
 	},
 	data() {
 		return {
-			rules: yup.string().min(8, this.error["min"]).matches(/^[\S]+$/, this.error["space"]).required(this.error["required"]),
+			rules: yup.string().required(this.error["required"]).oneOf([this.password], this.error["match"]),
 			value: null
 		}
 	}

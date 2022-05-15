@@ -1,5 +1,7 @@
 <template>
-	<div>Premium</div>
+	<div>
+		Premium
+	</div>
 </template>
 
 <script scoped>
@@ -10,17 +12,11 @@ export default {
 		}
 	},
 	methods: {
+		
 	}
 }
 </script>
 
-<style scoped>
-div {
-	background-color: #438496;
+<style>
 
-	word-break: break-all;
-	height: 100%;
-	
-	overflow-y: auto;
-}
 </style>

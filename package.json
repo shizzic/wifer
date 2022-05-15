@@ -1,5 +1,5 @@
 {
-  "name": "vite-project",
+  "name": "www",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -13,7 +13,9 @@
     "pinia": "^2.0.13",
     "vee-validate": "^4.5.11",
     "vue": "^3.2.25",
+    "vue-facebook-login-component-next": "^1.0.4",
     "vue-router": "^4.0.14",
+    "vue3-google-login": "^1.0.8",
     "yup": "^0.32.11"
   },
   "devDependencies": {

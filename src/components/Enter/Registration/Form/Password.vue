@@ -2,7 +2,7 @@
 	<h3>{{ title }}</h3>
 	<div>
         <Field name="password" :rules="rules" maxlength="128" v-slot="{ field, errorMessage }">
-			<input v-bind="field" type="password" v-model="value" />
+			<input v-bind="field" type="password" v-model="value" @input="$emit('password', $event.target.value)" />
 
 			<span v-show="!errorMessage && value" style="color: #40e64e;">&#10004;</span>
 			<span v-show="errorMessage" style="font-size: 12px;">&#10060;</span>
@@ -17,9 +17,10 @@ import * as yup from 'yup';
 export default {
 	name: "Password",
 	props: ["title", "error"],
+	emits: ["password"],
 	components: {
 		Field,
-		ErrorMessage
+		ErrorMessage 
 	},
 	data() {
 		return {

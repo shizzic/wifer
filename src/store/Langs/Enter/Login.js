@@ -2,15 +2,21 @@ import { defineStore } from "pinia"
 
 export const LoginJS = defineStore("Login", {
     getters: {
+        link() {
+            return {
+                "EN": "Sign up for free",
+                "RU": "Зарегестрируйся бесплатно"
+            }
+        },
         title() {
             return {
                 "EN": {
                     "title": "Sign in",
-                    "text": "Hello there! If you want the best sugar on web, than welcome aboard :)"
+                    "text": "Come back dear :)"
                 },
                 "RU": {
                     "title": "Вход",
-                    "text": "Кулити, если ты хочешь лучший опыт знакомств в инете, тогда присаживайся к столу :)"
+                    "text": "Вернись зай :)"
                 }
             }
         },
