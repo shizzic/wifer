@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap">
+	<div class="wrap scroll">
 		<router-link class="link" :to="{ name: 'login' }">{{ link[l] }}</router-link>
 		<Title :l="l" :lang="lang['title']" />
 		<Api />
@@ -161,18 +161,5 @@ button:active:after {
   top:0;
   opacity: 1;
   transition: 0s;
-}
-
-.wrap::-webkit-scrollbar {
-  width: 3px;
-}
-
-.wrap:hover .wrap::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
-}
-.wrap::-webkit-scrollbar-thumb {
-  background-color: #999;
-  border-radius: 15px;
 }
 </style>

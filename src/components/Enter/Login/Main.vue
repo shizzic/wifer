@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap">
+	<div class="wrap scroll">
 		<router-link class="link" :to="{ name: 'registration' }">{{ link[l] }}</router-link>
 		<Title :l="l" :lang="lang['title']" />
 
@@ -158,19 +158,5 @@ button:active:after {
   top:0;
   opacity: 1;
   transition: 0s;
-}
-
-.wrap::-webkit-scrollbar {
-  width: 1px;
-}
-
-.wrap:hover::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-.wrap::-webkit-scrollbar-thumb {
-  background-color: #999;
-  border-radius: 15px;
 }
 </style>

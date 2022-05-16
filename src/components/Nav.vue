@@ -1,27 +1,18 @@
 <template>
 	<nav>
 		<div id="links">
-			
-			<template v-if="id">
-				<div v-for="(elem, key) in inner" :key="key" class="wrap" :title="elem.title[l]" @click="checked = key">
-					<router-link class="wrapper" :to="{ name: key }">
+			<router-link v-for="(elem, key) in list" :key="key" :to="{ name: key }" class="wrap" :title="elem.title[l]" 
+			@click="checked = key">
+				<div class="elem">
+					<div class="circle" />
+
+					<div class="link">
 						<img :src="elem.image"  />
-					</router-link>
-
-					<div class="border" :class="{ 'checked': $route.name === key }" />
+					</div>
 				</div>
-			</template>
 
-			<template v-else>
-				<div v-for="(elem, key) in outer" :key="key" class="wrap" :title="elem.title[l]" @click="checked = key">
-					<router-link class="wrapper" :to="{ name: key }">
-						<img :src="elem.image"  />
-					</router-link>
-
-					<div class="border" :class="{ 'checked': $route.name === key }" />
-				</div>
-			</template>
-
+				<div class="border" :class="{ 'checked': $route.name === key }" />
+			</router-link>
 		</div>
 	</nav>
 </template>
@@ -33,8 +24,8 @@ export default {
 	name: 'Nav',
 	props: ["l"],
 	setup() {
-		const inner   = navJS()["inner"];
-		const outer   = navJS()["outer"];
+		const inner   = navJS()["inner"]
+		const outer   = navJS()["outer"]
 
 		return {
 			inner,
@@ -44,6 +35,9 @@ export default {
 	computed: {
 		id() {
 			return userJS()["id"]
+		},
+		list() {
+			return this.id ? this.inner : this.outer
 		}
 	},
 	data() {
@@ -74,7 +68,7 @@ nav {
 }
 
 @media screen and (min-width: 529px) {
-	.wrapper {
+	.link {
 		padding: 0 40px;
 	}
 }
@@ -88,37 +82,65 @@ nav {
 		flex: 1;
 	}
 
-	.wrapper {
+	.elem {
 		flex: 1;
 		padding: 0 0;
 	}
 }
 
 .wrap {
-	flex: 1;
 	cursor: pointer;
 	height: 100%;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.elem {
+	flex: 1;
+	cursor: pointer;
+	height: 95%;
 	border-radius: 12px;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+
+	position: relative;
+  	overflow: hidden;
 }
 
-.wrapper {
+.link {
+	position: relative;
 	-webkit-tap-highlight-color: transparent;
-	height: 95%;
+	height: 100%;
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-
-	transition: background-color .2s;
 }
 
-.wrap:hover {
-	background-color: aliceblue;
+.circle {
+	width: 0%;
+	height: 0%;
+	opacity: 0;
+
+	border-radius: 50%;
+	background-color:rgb(226, 235, 253);
+	
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	transition: all .5s ease-Out;
+}
+
+.wrap:active .circle {
+	width: 200%;
+	height: 500%;
+	opacity: 1;
+
+	top: -200%;
+	left: -50%;
 }
 
 img {
@@ -134,7 +156,6 @@ img {
 }
 
 .checked {
-	color: #000;
 	width: 100%;
 }
 </style>

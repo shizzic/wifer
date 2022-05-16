@@ -34,3 +34,18 @@ html, body, #app {
 body {
     font-family: 'PT Sans';
 }
+
+.scroll::-webkit-scrollbar {
+    width: 5px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 15px;
+}
+
+@media screen and (max-width: 529px) {
+    .scroll::-webkit-scrollbar {
+        width: 0;
+    }
+}
