@@ -131,10 +131,10 @@ nav {
 	top: 50%;
 	left: 50%;
 
-	transition: all .5s ease-Out;
+	transition: all .8s ease-Out;
 }
 
-.wrap:active .circle {
+.wrap:focus .circle {
 	width: 200%;
 	height: 500%;
 	opacity: 1;
@@ -152,6 +152,7 @@ img {
 	width: 0;
     height: 5%;
     background-color: #000;
+
     transition: width .2s;
 }
 
