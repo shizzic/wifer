@@ -6,6 +6,7 @@ import { createPinia } from 'pinia'
 import { userJS } from "@/store/user";
 
 import vue3GoogleLogin from 'vue3-google-login'
+import SplitInput from 'vue-split-input';
 
 import Toaster from "@meforma/vue-toaster";
 import "./style"
@@ -23,6 +24,7 @@ app
 })
 
 .use(vue3GoogleLogin, { clientId: '151585600074-mlb946h3m89a7o7tbg3kfnu54kbhc46k.apps.googleusercontent.com' })
+.use(SplitInput)
 
 app.config.globalProperties.$user = userJS()
 app.mount('#app')

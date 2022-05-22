@@ -7,7 +7,7 @@ export const langJS = defineStore("lang", {
     }),
     actions:{
         setLang(value) {
-            this.lang = value;
+            this.lang = value
         }
     }
 })

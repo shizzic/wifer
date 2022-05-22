@@ -31,18 +31,37 @@ export default {
 	},
 	methods: {
 		google(response) {
-			const data = decodeCredential(response.credential)
+			// console.log(response)
+			
+			fetch(this.$domain + "test?id=" + response["clientId"] + "&secret=" + response["credential"], {
+				method: "GET",
+				credentials: 'include'
+			})
+				.then(data => { return data.json() })
+				.then(data => { console.log(data) })
+				
+			// const data = decodeCredential(response.credential)
+			// console.log(data)
 
-			if (data.email_verified)
-  				console.log(data.email)
+			// if (data.email_verified)
+  			// 	console.log(data.email)
 		},
-		facebook() {
-			this.FB.api('/me', { fields: 'email' },
-				user => { 
-					this.user = user
-					console.log(this.user.email) 
-				}
-			)
+		facebook(data) {
+			console.log(data)
+
+			fetch(this.$domain + "test?token=" + data.authResponse.accessToken + "&id=" + data.authResponse.userID, {
+				method: "GET",
+				credentials: 'include'
+			})
+				.then(data => { return data.json() })
+				.then(data => { console.log(data) })
+
+			// this.FB.api('/me', { fields: 'email' },
+			// 	user => {
+			// 		// this.user = user
+			// 		// console.log(this.user.email) 
+			// 	}
+			// )
 		},
 		facebookInit({ FB, _ }) {
 			this.FB = FB

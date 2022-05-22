@@ -50,12 +50,12 @@ export const navJS = defineStore("nav", {
                     },
                     "image": "/search.webp"
                 },
-                "login": { 
+                "signin": { 
                     "title": {
                         "RU": "Вход",
                         "EN": "Login"
                     },
-                    "image": "/login.webp"
+                    "image": "/signin.webp"
                 },
                 "premium": { 
                     "title": {

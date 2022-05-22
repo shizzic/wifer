@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 
-export const RegistrationJS = defineStore("Registration", {
+export const SigninJS = defineStore("Signin", {
     getters: {
         link() {
             return {
@@ -11,11 +11,11 @@ export const RegistrationJS = defineStore("Registration", {
         title() {
             return {
                 "EN": {
-                    "title": "Registration",
+                    "title": "Enter",
                     "text": "Hello there! If you want the best sugar on web, than welcome aboard :)"
                 },
                 "RU": {
-                    "title": "Регистрация",
+                    "title": "Вход",
                     "text": "Кулити, если ты хочешь лучший опыт знакомств в инете, тогда присаживайся к столу :)"
                 }
             }
@@ -23,14 +23,10 @@ export const RegistrationJS = defineStore("Registration", {
         input() {
             return {
                 "EN": {
-                    "email": "Email",
-                    "password": "Password",
-                    "confirm": "Confirm"
+                    "email": "Email"
                 },
                 "RU": {
-                    "email": "Почта",
-                    "password": "Пароль",
-                    "confirm": "Подтвердить"
+                    "email": "Почта"
                 }
             }
         },
@@ -40,29 +36,11 @@ export const RegistrationJS = defineStore("Registration", {
                     "email": {
                         "email": "A-a-a. Field must be an email",
                         "required": "Hey, fill it!"
-                    },
-                    "password": {
-                        "space": "Space is not allowed",
-                        "required": "Hey, fill it!",
-                        "min": "8 characters minimum"
-                    },
-                    "confirm": {
-                        "match": "Passwords must match",
-                        "required": "Hey, fill it!"
                     }
                 },
                 "RU": {
                     "email": {
                         "password": "Не, не, не. Введи почту, а не что то другое",
-                        "required": "Хей, заполни поле!"
-                    },
-                    "password": {
-                        "space": "Пробел запрещен",
-                        "required": "Хей, заполни поле!",
-                        "min": "8 символов минимум"
-                    },
-                    "confirm": {
-                        "match": "Пароли должны совпадать",
                         "required": "Хей, заполни поле!"
                     }
                 }
@@ -70,8 +48,8 @@ export const RegistrationJS = defineStore("Registration", {
         },
         button() {
             return {
-                "EN": "Sign up",
-                "RU": "Подтвердить"
+                "EN": "Sign up or sign in",
+                "RU": "Зарегаться или войти"
             }
         }
     }
