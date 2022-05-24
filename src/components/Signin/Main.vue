@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap scroll">
 		<Title :l="l" :lang="lang.title" />
-		<Api />
+		<Api :success="success" :response="response" :l="l" />
 
 		<Form name="signin" @submit="signin">
 			<Email :title="lang.input[l]" :error="lang.error[l]" />
@@ -11,11 +11,12 @@
 </template>
 
 <script scoped>
-import { SigninJS } from "@/store/Langs/Signin";
+import { userJS } from "@/store/user"
+import { SigninJS } from "@/store/Langs/Signin"
 import Title from "@/components/Signin/Title.vue"
 import Api from "@/components/Signin/Api/Main.vue"
 import Email from "@/components/Signin/Form/Email.vue"
-import { Form } from 'vee-validate';
+import { Form } from 'vee-validate'
 export default {
 	name: "Signin",
 	props: ["l"],
@@ -38,6 +39,10 @@ export default {
 			email
 		}
 	},
+	beforeMount() {
+		if (userJS().id)
+			this.$router.push({ name: "search" })
+	},
 	methods: {
 		signin(values) {
 			let form = new FormData()
@@ -49,18 +54,11 @@ export default {
 				body: form
 			})
 				.then(data => { return data.json() })
-				.then(data => { console.log(data); console.log(this.response);
+				.then(data => {
 					if ("error" in data)
 						this.$toast.error(this.response[this.l][data["error"]])
-					else {
-						if (data.id === 0)
-							this.$toast.show(this.email[this.l])
-						else {
-							this.$user.setID(data["id"])
-							this.$router.push({ name: "profile" })
-							this.$toast.success(this.success[this.l])
-						}
-					}
+					else
+						this.$toast.show(this.email[this.l])
 				})
 		}
 	}

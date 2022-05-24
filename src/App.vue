@@ -12,7 +12,7 @@ export default {
 		Nav
 	},
 	setup() {
-		const language = langJS();
+		const language = langJS()
 
 		return {
 			language
@@ -20,7 +20,7 @@ export default {
 	},
 	computed: {
         l() {
-            return this.language["lang"];
+            return this.language["lang"]
         }
     },
 	data() {

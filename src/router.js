@@ -6,10 +6,8 @@ import Chat from "@/components/Chat.vue"
 import Premium from "@/components/Premium.vue"
 import Heart from "@/components/Heart.vue"
 import Profile from "@/components/Profile/Profile.vue"
-import Login from "@/components/Enter/Login/Main.vue"
 import Signin from "@/components/Signin/Main.vue"
-import Forgot from "@/components/Enter/Forgot/Main.vue"
-import NewPassword from "@/components/Enter/NewPassword/Main.vue"
+import Auth from "@/components/Auth.vue"
 
 const routes = [
     { path: "/", name: "about", component: About, props: true },
@@ -18,10 +16,8 @@ const routes = [
     { path: "/premium", name: "premium", component: Premium, props: true },
     { path: "/heart", name: "heart", component: Heart, props: true },
     { path: "/profile", name: "profile", component: Profile, props: true },
-    { path: "/login", name: "login", component: Login, props: true },
     { path: "/signin", name: "signin", component: Signin, props: true },
-    { path: "/forgotPassword", name: "forgot", component: Forgot, props: true },
-    { path: "/newPassword/:token(\\S+)", name: "newPassword", component: NewPassword, props: true }
+    { path: "/auth/:id(\\S+)/:code", name: "auth", component: Auth, props: true }
 ]
 
 const router = createRouter({

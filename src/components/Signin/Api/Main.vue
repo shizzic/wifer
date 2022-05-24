@@ -10,13 +10,10 @@ import Google from "@/components/Signin/Api/Google.vue"
 import Facebook from "@/components/Signin/Api/Facebook.vue"
 export default {
 	name: "Api",
+	props: ["l", "success", "response"],
 	components: {
 		Google,
 		Facebook
-	},
-	data() {
-		return {
-		}
 	},
 	methods: {
 		signin(data) {
@@ -32,13 +29,13 @@ export default {
 				body: form
 			})
 				.then(data => { return data.json() })
-				.then(data => { console.log(data)
+				.then(data => {
 					if ("error" in data)
 						this.$toast.error(this.response[this.l][data["error"]])
 					else {
-						// this.$user.setID(data["id"])
-						this.$router.push({ name: "search" })
-						// this.$toast.success(this.success[this.l])
+						this.$user.setID(data["id"])
+						this.$router.push({ name: "profile" })
+						this.$toast.success(this.success[this.l])
 					}
 				})
 		}

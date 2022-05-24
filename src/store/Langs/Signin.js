@@ -47,11 +47,13 @@ export const SigninJS = defineStore("Signin", {
         response() {
             return {
                 "EN": {
+                    "0": "Don't try to hack me bro :)",
                     "1": "Wrong email",
                     "2": "Email with link wasn't sent to you 'cause of some reason. Please, try again",
                     "3": "Some error occured on server. Try again and never give up"
                 },
                 "RU": {
+                    "0": "Не пытайся хакнуть меня бро :)",
                     "1": "Это не почта",
                     "2": "Письмо с сылкой не было отправленно на вашу почту по какой-то причине. Пожалуста, попробуйте снова",
                     "3": "Че то на сервере бахнуло. Попробуй снова и не здавайся"
