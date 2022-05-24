@@ -1,12 +1,11 @@
 <template>
 	<div class="wrap scroll">
-		<Title :l="l" :lang="lang['title']" />
+		<Title :l="l" :lang="lang.title" />
 		<Api />
 
 		<Form name="signin" @submit="signin">
-			<Email :title="lang['input'][l]['email']" :error="lang['error'][l]['email']" />
-			<Code :title="lang['input'][l]['email']" :error="lang['error'][l]['email']" />
-			<button>{{ lang['button'][l] }}</button>
+			<Email :title="lang.input[l]" :error="lang.error[l]" />
+			<button>{{ lang.button[l] }}</button>
 		</Form>
 	</div>
 </template>
@@ -16,7 +15,6 @@ import { SigninJS } from "@/store/Langs/Signin";
 import Title from "@/components/Signin/Title.vue"
 import Api from "@/components/Signin/Api/Main.vue"
 import Email from "@/components/Signin/Form/Email.vue"
-import Code from "@/components/Signin/Form/Code.vue"
 import { Form } from 'vee-validate';
 export default {
 	name: "Signin",
@@ -25,24 +23,19 @@ export default {
 		Title,
 		Api,
 		Form,
-		Code,
 		Email
 	},
 	setup() {
-        const lang 	   = SigninJS();
-		const response = SigninJS()["response"];
-		const success  = SigninJS()["success"];
-		const link 	   = SigninJS()["link"];
+        const lang 	   = SigninJS()
+		const response = SigninJS()["response"]
+		const success  = SigninJS()["success"]
+		const email    = SigninJS()["email"]
 
 		return {
             lang,
 			response,
 			success,
-			link
-		}
-	},
-	data() {
-		return {
+			email
 		}
 	},
 	methods: {
@@ -56,14 +49,18 @@ export default {
 				body: form
 			})
 				.then(data => { return data.json() })
-				.then(data => { console.log(data)
+				.then(data => { console.log(data); console.log(this.response);
 					if ("error" in data)
 						this.$toast.error(this.response[this.l][data["error"]])
-					// else {
-					// 	this.$user.setID(data["id"])
-					// 	this.$router.push({ name: "search" })
-					// 	this.$toast.success(this.success[this.l])
-					// }
+					else {
+						if (data.id === 0)
+							this.$toast.show(this.email[this.l])
+						else {
+							this.$user.setID(data["id"])
+							this.$router.push({ name: "profile" })
+							this.$toast.success(this.success[this.l])
+						}
+					}
 				})
 		}
 	}

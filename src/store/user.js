@@ -7,10 +7,10 @@ export const userJS = defineStore("user", {
     }),
     actions:{
         setID(value) {
-            this.id = value;
+            this.id = value
         },
         logout() {
-            this.id     = null;
+            this.id = null
         }
     }
 })
