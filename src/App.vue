@@ -1,6 +1,6 @@
 <template>
 	<Nav id="menu" :l="l" />
-	<div id="wrap"><router-view :l="l" /></div>
+	<main id="wrap"><router-view :l="l" /></main>
 </template>
 
 <script scoped>
@@ -21,23 +21,34 @@ export default {
 	computed: {
         l() {
             return this.language["lang"]
-        }
+        },
+		id() {
+			return this.$user.id
+		}
     },
-	data() {
-		return {
+	watch: {
+		id(id) {
+			if (id)
+				this.makeOnline(true)
+			else
+				this.makeOnline(false)
 		}
 	},
 	beforeMount() {
-		// this.check()
+		if (this.id)
+			this.makeOnline(true)
+
+		window.addEventListener('beforeunload', (event) => {
+			event.preventDefault()
+			this.makeOnline(false)
+		})
 	},
 	methods: {
-		check() {
-			fetch(this.$domain + "test", {
-				method: "GET",
-				credentials: 'include'
+		makeOnline(value) {
+			fetch(this.$domain + "online?id=" + this.id + "&online=" + value, {
+				method: "PUT",
+				credentials: "include"
 			})
-				.then(data => { return data.text() })
-				.then(data => { console.log(data) })
 		}
 	}
 }

@@ -15,6 +15,11 @@ export default {
 		Google,
 		Facebook
 	},
+	computed: {
+		id() {
+			return this.$user.id
+		}
+    },
 	methods: {
 		signin(data) {
 			let form = new FormData()
@@ -34,7 +39,7 @@ export default {
 						this.$toast.error(this.response[this.l][data["error"]])
 					else {
 						this.$user.setID(data["id"])
-						this.$router.push({ name: "profile" })
+						this.$router.push({ name: "profile", params: { id: this.id } })
 						this.$toast.success(this.success[this.l])
 					}
 				})

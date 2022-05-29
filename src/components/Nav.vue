@@ -1,7 +1,7 @@
 <template>
 	<nav>
 		<div id="links">
-			<router-link v-for="(elem, key) in list" :key="key" :to="{ name: key }" class="wrap" :title="elem.title[l]" 
+			<router-link v-for="(elem, key) in list" :key="key" :to="{ name: key, params: { id: id } }" class="wrap" :title="elem.title[l]" 
 			@click="checked = key">
 				<div class="elem">
 					<div class="circle" />
@@ -19,13 +19,12 @@
 
 <script scoped>
 import { navJS } from "@/store/nav.js"
-import { userJS } from "@/store/user.js"
 export default {
 	name: 'Nav',
 	props: ["l"],
 	setup() {
-		const inner   = navJS()["inner"]
-		const outer   = navJS()["outer"]
+		const inner = navJS()["inner"]
+		const outer = navJS()["outer"]
 
 		return {
 			inner,
@@ -34,7 +33,7 @@ export default {
 	},
 	computed: {
 		id() {
-			return userJS()["id"]
+			return this.$user.id
 		},
 		list() {
 			return this.id ? this.inner : this.outer

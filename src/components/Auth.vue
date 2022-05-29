@@ -17,7 +17,10 @@ export default {
 	computed: {
         l() {
             return langJS()["lang"]
-        }
+        },
+		id() {
+			return this.$user.id
+		}
     },
 	beforeMount() {
 		if (this.$route.params.code.length === 6)
@@ -40,7 +43,7 @@ export default {
 						this.$toast.error(this.response[this.l][data["error"]])
 					else {
 						this.$user.setID(data["id"])
-						this.$router.push({ name: "profile" })
+						this.$router.push({ name: "profile", params: { id: this.id } })
 						this.$toast.success(this.success[this.l])
 					}
 				})

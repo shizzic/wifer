@@ -1,0 +1,103 @@
+<template>
+    <div class="wrap">
+        <div v-for="(elem, index) in text" :key="index" class="row">
+            <img :src="'/' + index + '.webp'">
+            <span v-if="elem === 0">-</span>
+            <span v-else>{{ elem }}</span>
+        </div>
+
+        <div v-for="(elem, place) in place" :key="place" class="row">
+            <img :src="'/' + place + '.webp'">
+            <span v-if="elem === 0">-</span>
+            <span v-else>{{ getPlace(place, elem) }}</span>
+        </div>
+
+        <div v-for="(time, index) in time" :key="index" class="row">
+            <img :src="'/' + index + '.webp'">
+            <span>{{ getDate(time) }}</span>
+        </div>
+    </div>
+</template>
+
+<script scoped>
+export default {
+	name: "Icons",
+    props: ["time", "text", "place"],
+    methods: {
+        getPlace(place, index) {
+            console.log(this.$.place)
+            if (place === "city")
+                if (index in this.$city.city)
+                    return this.$city.city[index]
+                else
+                    this.test(place, index)
+            else
+                if (index in this.$country.country)
+                    return this.$country.country[index]
+                else
+                    this.test(place, index)
+        },
+        getDate(time) {
+            var date = new Date(time * 1000)
+            var hours = date.getHours()
+            var minutes = "0" + date.getMinutes()
+            var seconds = "0" + date.getSeconds()
+            var formattedTime = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear() + " " + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2)
+            return formattedTime
+        },
+        test(place, id) {
+            fetch(this.$domain + place + "?id=" + id, {
+				method: "GET",
+				credentials: "include"
+			})
+				.then(data => { return data.json() })
+				.then(data => { console.log(data)
+					// if ("error" in data)
+					// 	this.$toast.error(this.response[this.l])
+					// else {
+					// 	this.data = data
+					// 	console.log(data)
+					// }
+				})
+        }
+    }
+}
+</script>
+
+<style scoped>
+.wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row {
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+
+    margin-top: 10px;
+}
+
+img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+span {
+    /* color: gray; */
+    font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+    .wrap {
+        flex-direction: column;
+    }
+
+    .row {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+}
+</style>

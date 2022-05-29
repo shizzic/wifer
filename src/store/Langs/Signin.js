@@ -2,12 +2,6 @@ import { defineStore } from "pinia"
 
 export const SigninJS = defineStore("Signin", {
     getters: {
-        link() {
-            return {
-                "EN": "Back to login",
-                "RU": "Вернуться к входу"
-            }
-        },
         title() {
             return {
                 "EN": {
