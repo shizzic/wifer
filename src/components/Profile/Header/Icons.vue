@@ -25,17 +25,16 @@ export default {
     props: ["time", "text", "place"],
     methods: {
         getPlace(place, index) {
-            console.log(this.$.place)
             if (place === "city")
-                if (index in this.$city.city)
-                    return this.$city.city[index]
+                if (this.place.country in this.$city.city && index in this.$city.city[this.place.country])
+                    return this.$city.city[this.place.country][index]
                 else
-                    this.test(place, index)
+                    this.returnPlace(place)
             else
                 if (index in this.$country.country)
                     return this.$country.country[index]
                 else
-                    this.test(place, index)
+                    this.returnPlace(place)
         },
         getDate(time) {
             var date = new Date(time * 1000)
@@ -45,19 +44,25 @@ export default {
             var formattedTime = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear() + " " + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2)
             return formattedTime
         },
-        test(place, id) {
-            fetch(this.$domain + place + "?id=" + id, {
+        returnPlace(place) {
+            fetch(this.$domain + place + "?country=" + this.place.country, {
 				method: "GET",
 				credentials: "include"
 			})
 				.then(data => { return data.json() })
-				.then(data => { console.log(data)
-					// if ("error" in data)
-					// 	this.$toast.error(this.response[this.l])
-					// else {
-					// 	this.data = data
-					// 	console.log(data)
-					// }
+				.then(data => {
+                    let obj = {}
+
+                    for (let index in data)
+                        obj[data[index]._id] = data[index].title
+
+                    if (place === "city") {
+                        this.$city.set({ "data" : obj, "country_id": this.place.country })
+                        return this.$city.city[this.place.country][this.place.city]
+                    } else {
+                        this.$country.set(obj)
+                        return this.$country.country[this.place.country]
+                    }
 				})
         }
     }
@@ -97,7 +102,6 @@ span {
     .row {
         width: 100%;
         align-items: center;
-        justify-content: center;
     }
 }
 </style>

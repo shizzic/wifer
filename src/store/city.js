@@ -6,8 +6,8 @@ export const cityJS = defineStore("city", {
         city: useStorage("city", {})
     }),
     actions:{
-        set(value) {
-            this.data[value.id] = value.title
+        set(data) {
+            this.city[data.country_id] = data.data
         }
     }
 })

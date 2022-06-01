@@ -9,6 +9,7 @@
                 :place="{ country: data.country_id, city: data.city_id }"
             />
         </div>
+        <Buttons />
     </div>
 </template>
 
@@ -16,13 +17,15 @@
 import Avatar from "@/components/Profile/Header/Avatar.vue"
 import Username from "@/components/Profile/Header/Username.vue"
 import Icons from "@/components/Profile/Header/Icons.vue"
+import Buttons from "@/components/Profile/Header/Buttons.vue"
 export default {
 	name: "Header",
     props: ["data"],
     components: {
         Avatar,
         Username,
-        Icons
+        Icons,
+        Buttons
     }
 }
 </script>
@@ -34,6 +37,7 @@ export default {
     border-radius: 16px;
 
     display: flex;
+    justify-content: space-between;
 
     padding: 30px;
 }
@@ -44,7 +48,13 @@ export default {
     justify-content: space-between;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width : 992px) {
+    .header {
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
     .header {
         flex-direction: column;
         align-items: center;

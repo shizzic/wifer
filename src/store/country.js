@@ -6,8 +6,8 @@ export const countryJS = defineStore("country", {
         country: useStorage("country", {})
     }),
     actions:{
-        set(value) {
-            this.data[value.id] = value.title
+        set(data) {
+            this.country = data
         }
     }
 })
