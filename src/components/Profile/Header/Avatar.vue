@@ -40,11 +40,7 @@ div {
     max-height: 100%;
 }
 
-@media screen and (max-width: 992px) {
-    
-}
-
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
     div {
         margin: 0 auto;
     }

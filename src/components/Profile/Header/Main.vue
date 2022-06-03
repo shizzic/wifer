@@ -37,7 +37,6 @@ export default {
     border-radius: 16px;
 
     display: flex;
-    justify-content: space-between;
 
     padding: 30px;
 }
@@ -46,15 +45,17 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    margin-right: 25px;
 }
 
-@media only screen and (max-width : 992px) {
+@media only screen and (max-width : 800px) {
     .header {
         align-items: center;
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
     .header {
         flex-direction: column;
         align-items: center;

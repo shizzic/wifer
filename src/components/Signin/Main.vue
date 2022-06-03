@@ -66,20 +66,6 @@ export default {
 </script>
 
 <style scoped>
-.link {
-	cursor: pointer;
-	color: #000;
-	font-size: 17px;
-	font-weight: 600;
-	background-color: #ffffff;
-	text-decoration: none;
-	border-radius: 6px;
-	
-	display: block;
-	padding: 10px 30px;
-	margin-bottom: 50px;
-}
-
 .wrap {
 	width: 100%;
 	height: 100%;

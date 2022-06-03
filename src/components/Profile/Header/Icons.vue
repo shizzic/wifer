@@ -90,11 +90,10 @@ img {
 }
 
 span {
-    /* color: gray; */
     font-size: 18px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
     .wrap {
         flex-direction: column;
     }

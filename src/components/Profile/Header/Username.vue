@@ -100,8 +100,14 @@ export default {
     100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
 }
 
-@media screen and (max-width: 768px) {
-    div {
+@media screen and (max-width: 800px) {
+    .wrap {
+        margin-bottom: 25px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .wrap {
         align-items: center;
     }
 }

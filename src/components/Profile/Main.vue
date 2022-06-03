@@ -1,5 +1,5 @@
 <template>
-	<div v-if="data" class="wrap">
+	<div v-if="data" class="wrap scroll">
 		<Header :data="data" />
 	</div>
 </template>
@@ -56,7 +56,18 @@ export default {
 
 <style scoped>
 .wrap {
+	width: 100%;
+	height: 100%;
+
+	background-color: #286DA8;
 	padding: 30px;
+
+	overflow-y: auto;
+}
+
+.wrap::before, .wrap::after {
+  content: '';
+  margin: auto;
 }
 
 @media screen and (max-width: 768px) {
