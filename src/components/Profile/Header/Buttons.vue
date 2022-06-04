@@ -38,7 +38,7 @@ export default {
     
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    border: 1px solid;
+    border: 1px solid #000;
     border-radius: 6px;
 
     display: flex;
