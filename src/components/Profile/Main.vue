@@ -1,26 +1,32 @@
 <template>
 	<div v-if="data" class="wrap scroll">
 		<Header :data="data" />
+		<Images v-if="data && (data.public > 0 || data.private > 0 || data._id == $user.id)" :data="data" :lang="cropper" :l="l"
+			@avatar="data.avatar = true" />
 	</div>
 </template>
 
 <script scoped>
 import { ProfileJS } from "@/store/Langs/Profile"
 import Header from "@/components/Profile/Header/Main.vue"
+import Images from "@/components/Profile/Images/Main.vue"
 export default {
 	name: "Profile",
 	props: ["l"],
 	setup() {
-		const errors = ProfileJS()["errors"]
+		const errors   = ProfileJS()["errors"]
 		const response = ProfileJS()["response"]
+		const cropper  = ProfileJS()["cropper"]
 
 		return {
             errors,
-			response
+			response,
+			cropper
 		}
 	},
 	components: {
-		Header
+		Header,
+		Images
 	},
 	data() {
 		return {

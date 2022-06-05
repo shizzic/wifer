@@ -37,6 +37,28 @@ export const ProfileJS = defineStore("Profile", {
                 "EN": "You signed in. Enjoy yourself :)",
                 "RU": "Вы вошли. Развлекайтесь :)"
             }
+        },
+        cropper() {
+            return {
+                "EN": {
+                    "upload": "Upload",
+                    "public": "Public",
+                    "private": "Private",
+                    "cancel": "Cancel",
+                    "max_size": "Max size of image is 3 MB",
+                    "error": "Something occured to the server, try again",
+                    "success": "Image was added)"
+                },
+                "RU": {
+                    "upload": "Загрузить",
+                    "public": "Публичная",
+                    "private": "Приватная",
+                    "cancel": "Отменить",
+                    "max_size": "Максимальный размер фотки 3 мб",
+                    "error": "Что-то случилось с сервером, попробуйте снова",
+                    "success": "Фотка добавлена)"
+                }
+            }
         }
     }
 })

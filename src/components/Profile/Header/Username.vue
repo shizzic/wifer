@@ -1,13 +1,13 @@
 <template>
     <div class="wrap">
         <div class="username">
-            <span>My nickname</span>
+            <span>{{ username }}</span>
             <div class="ring-container">
                 <div v-show="online === true" class="ring green-bor" />
                 <div class="circle" :class="{ 'green-back': online === true, 'red-back': online === false }" />
             </div>
         </div>
-        <span class="title">Some title about me</span>
+        <span class="title">{{ title }}</span>
     </div>
 </template>
 

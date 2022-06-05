@@ -39,6 +39,7 @@ export default {
     display: flex;
 
     padding: 30px;
+    margin-bottom: 30px;
 }
 
 .right {

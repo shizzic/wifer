@@ -1,29 +1,22 @@
 <template>
-	<div class="wrap scroll">
+	<div class="wrap">
 		<div class="wrapper scroll">
 			<cropper
 				ref="cropper"
 				class="cropper"
 				:src="image.src"
 				:debounce="false"
-				@change="getPreview"
 			/>
 
 			<div class="right">
-				<div class="preview-wrap">
-					<preview
-						:image="result.image"
-						:coordinates="result.coordinates"
-						class="preview"
-					/>
-				</div>
-
 				<div class="buttons">
-					<div class="button">Upload</div>
+					<div class="button" @click="upload">{{ lang[l].upload }}</div>
+					<div class="button" :class="{ 'active' : mode, 'inactive' : !mode }" @click="mode = true">{{ lang[l].public }}</div>
+					<div class="button" :class="{ 'active' : !mode, 'inactive' : mode }" @click="mode = null">{{ lang[l].private }}</div>
 					<div class="button" @click="rotate(90)">
 						<img src="/rotate.webp" />
 					</div>
-					<div class="button" @click="$emit('clear')">Cancel</div>
+					<div class="button" @click="$emit('clear'); mode = true">{{ lang[l].cancel }}</div>
 				</div>
 			</div>
 		</div>
@@ -31,51 +24,57 @@
 </template>
 
 <script scoped>
-import { Cropper, Preview } from 'vue-advanced-cropper'
-import 'vue-advanced-cropper/dist/style.css';
+import { Cropper } from 'vue-advanced-cropper'
+import 'vue-advanced-cropper/dist/style.css'
 
 export default {
 	name: 'Copper',
-	props: ["image"],
+	props: ["image", "lang", "l"],
 	components: {
-		Cropper,
-		Preview
+		Cropper
 	},
 	data() {
 		return {
 			result: {
 				coordinates: null,
 				image: null
-			}
+			},
+			mode: true
 		};
 	},
 	methods: {
-		uploadImage() {
+		upload() {
 			const { canvas } = this.$refs.cropper.getResult();
 
 			if (canvas) {
+				let mode = "public"
+				if (!this.mode)
+					mode = "private"
+				
 				const form = new FormData();
+				form.append("dir", mode);
 				canvas.toBlob(blob => {
-					form.append('file', blob);
-					fetch('https://wifer-test.ru/upload', {
-						method: 'POST',
+					form.append("file", blob);
+					fetch(this.$domain + "upload", {
+						method: "POST",
+						credentials: "include",
 						body: form,
 					})
-						.then(data => { return data.text() })
-						.then(data => { console.log(data) })
+						.then(data => { return data.json() })
+						.then(data => { this.$emit("clear")
+							if ("error" in data)
+								this.$toast.error(this.lang[this.l].error)
+							else {
+								this.$emit("avatar")
+								this.$toast.success(this.lang[this.l].success)
+							}
+						})
 				}, 'image/*');
 			}
 		},
 
-		getPreview({ coordinates, image }) {
-			this.result = {
-				coordinates,
-				image
-			}
-		},
-
 		rotate(angle) {
-			this.$refs.cropper.rotate(angle);
+			this.$refs.cropper.rotate(angle)
 		}
 	}
 }
@@ -89,27 +88,28 @@ export default {
 
     width: 100%;
     height: 100%;
-
-	/* display: flex;
-	justify-content: center;
-	align-items: center; */
+	margin: 0 auto;
 
     position: absolute;
     top: 0;
     left: 0;
 
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	overflow: hidden;
 }
 
 .wrap::before, .wrap::after {
-  content: '';
-  margin: auto;
+	content: '';
+	margin: auto;
 }
-
 
 .wrapper {
 	width: 50%;
 	min-width: 450px;
+	height: 70%;
 	border-radius: 12px;
 
 	background: rgb(2,0,36);
@@ -121,7 +121,7 @@ export default {
 }
 
 .cropper {
-    width: 55%;
+    width: 65%;
     height: 100%;
 	border-radius: 12px;
 
@@ -129,36 +129,21 @@ export default {
 }
 
 .right {
-	width: calc(45% - 25px);
+	width: calc(35% - 25px);
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.preview-wrap {
-	width: 100%;
-	border-radius: 12px;
-
-	display: flex;
-	justify-content: center;
-
-	margin-bottom: 25px;
-}
-
-.preview {
-	width: 150px;
-	height: 150px;
-	border-radius: 12px;
-}
-
 .buttons {
-	width: 70%;
+	width: 100%;
 	height: 100%;
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 }
 
 .button {
@@ -180,6 +165,14 @@ export default {
 	margin-bottom: 0;
 }
 
+.active {
+	background-color: #1CCC4D;;
+}
+
+.inactive {
+	background-color: #EB3636;;
+}
+
 img {
 	width: 16px;
 	filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
@@ -188,20 +181,23 @@ img {
 
 @media screen and (max-width: 450px) {
 	.wrap {
-		/* display: flex;
-		flex-direction: column; */
-		/* align-items: center; */
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 5px;
+	}
+
+	.wrapper {
+		width: 95%;
+		min-width: 100px;
+		height: auto;
 
 		overflow-y: auto;
 	}
 
-	.wrapper {
-		width: 100%;
-		min-width: 100px;
-	}
-
     .cropper {
 		width: 100%;
+		height: auto;
 		margin-right: 0;
 		margin-bottom: 25px;
 	}

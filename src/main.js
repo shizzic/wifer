@@ -11,6 +11,8 @@ import vue3GoogleLogin from 'vue3-google-login'
 
 import vClickOutside from "click-outside-vue3"
 import Toaster from "@meforma/vue-toaster"
+import 'viewerjs/dist/viewer.css'
+import VueViewer from 'v-viewer'
 import "./style"
 
 const app = createApp(App)
@@ -21,6 +23,7 @@ app
 .use(Toaster, { position: "bottom-left", maxToasts: 3, duration: 5000 })
 .use(vClickOutside)
 .use(vue3GoogleLogin, { clientId: '151585600074-mlb946h3m89a7o7tbg3kfnu54kbhc46k.apps.googleusercontent.com' })
+.use(VueViewer)
 
 app.config.globalProperties.$domain  = "https://wifer-test.ru/"
 app.config.globalProperties.$ip      = "http://213.189.217.231:81/"
