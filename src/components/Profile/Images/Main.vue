@@ -1,18 +1,36 @@
 <template>
-	<div class="images" v-viewer="options">
-        <input type="file" style="display: none;" ref="avatar" @change="load($event)" accept="image/*">
+	<div class="images" :id="'gallery'">
+        <input type="file" style="display: none;" ref="input" @change="load($event)" accept="image/*">
         <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" @clear="clear" @avatar="$emit('avatar')" />
 
-        <div v-show="data._id == $user.id" class="image" :style="'border: 1px solid;'" @click="$refs.avatar.click()">
+        <div v-show="data._id == $user.id" class="image" :style="'border: 1px solid;'" @click="$refs.input.click()">
             <div class="plus" />
         </div>
+
+        <a v-show="null" ref="avatar"
+            :href="$ip + $route.params.id + '/avatar.webp?' + Date.now()"
+            target="_blank"
+            rel="noreferrer"
+        >
+            <img :src="$ip + $route.params.id + '/avatar.webp?' + Date.now()" alt="" class="image" />
+        </a>
         
-        <img v-for="(num, index) in data.public" :key="index" :src="$ip + $route.params.id + '/public/' + num + '.webp'" class="image">
+        <a
+            v-for="(num, index) in data.public"
+            :key="index"
+            :href="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()"
+            target="_blank"
+            rel="noreferrer"
+        >
+            <img :src="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()" alt="" class="image" />
+        </a>
     </div>
 </template>
 
 <script scoped>
 import Cropper from "@/components/Profile/Cropper.vue"
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
 
 function getMimeType(file, fallback = null) {
 	const byteArray = (new Uint8Array(file)).subarray(0, 4)
@@ -36,7 +54,7 @@ function getMimeType(file, fallback = null) {
 
 export default {
 	name: "Images",
-    props: ["data", "lang", "l"],
+    props: ["data", "lang", "l", "avatar"],
     components: {
         Cropper
     },
@@ -45,18 +63,44 @@ export default {
 			image: {
 				src: null,
 				type: null
-			},
-            options: {
-                focus: false,
-                toolbar: false,
-                title: false,
-                tooltip: false,
-                shown: this.showButtons,
-                view: this.currentImage,
-                hide: this.hideButtons
-            },
+			}
 		}
 	},
+    watch: {
+        avatar() {
+            this.$refs.avatar.click()
+        }
+    },
+    mounted() {
+        if (!this.lightbox) {
+            this.lightbox = new PhotoSwipeLightbox({
+                gallery: '#' + "gallery",
+                children: 'a',
+                pswpModule: () => import('photoswipe'),
+                wheelToZoom: true,
+                loop: true,
+                pinchToClose: false,
+                clickToCloseNonZoomable: false
+            })
+
+            this.lightbox.on('loadComplete', (data) => {
+                console.log(data)
+                if (null !== data.slide.image) {
+                    this.lightbox.pswp.currSlide.width = data.slide.width
+                    this.lightbox.pswp.currSlide.height = data.slide.height
+                    this.lightbox.pswp.currSlide.resize()
+                }
+            })
+
+            this.lightbox.init()
+        }
+    },
+    unmounted() {
+        if (this.lightbox) {
+            this.lightbox.destroy()
+            this.lightbox = null
+        }
+    },
     methods: {
         load(event) {
 			const { files } = event.target
@@ -118,8 +162,6 @@ export default {
     
     margin-right: 20px;
     margin-bottom: 20px;
-
-    border: 1px solid;
 }
 
 @media only screen and (max-width : 644px) {
@@ -165,5 +207,17 @@ export default {
     height: 2px;
     width: 20px;
     transform:translateY(-50%);
+}
+</style>
+
+<style>
+.pswp {
+    top: 50px;
+}
+
+@media screen and (max-width: 529px) {
+.pswp {
+    top: 0;
+}
 }
 </style>

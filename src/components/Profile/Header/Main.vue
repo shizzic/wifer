@@ -1,6 +1,6 @@
 <template>
 	<div class="header">
-        <Avatar :avatar="data.avatar" />
+        <Avatar :avatar="data.avatar" @avatar="$emit('avatar')" />
         <div class="right">
             <Username :username="data.username" :title="data.title" :online="data.online" />
             <Icons 

@@ -1,8 +1,10 @@
 <template>
 	<div v-if="data" class="wrap scroll">
-		<Header :data="data" />
-		<Images v-if="data && (data.public > 0 || data.private > 0 || data._id == $user.id)" :data="data" :lang="cropper" :l="l"
-			@avatar="data.avatar = true" />
+		<Header :data="data" @avatar="++avatar" />
+		<Images v-if="data && (data.public > 0 || data.private > 0 || data._id == $user.id)" 
+			:data="data" :lang="cropper" :l="l" :avatar="avatar"
+			@avatar="data.avatar = true" 
+		/>
 	</div>
 </template>
 
@@ -30,7 +32,8 @@ export default {
 	},
 	data() {
 		return {
-			data: null
+			data: null,
+			avatar: 0
 		}
 	},
 	beforeMount() {

@@ -1,7 +1,7 @@
 <template>
     <div>
         <img v-if="avatar === false" src="/avatar.webp" class="no">
-        <img v-else :src="$ip + $route.params.id + '/avatar.webp'" class="avatar">
+        <img v-else :src="$ip + $route.params.id + '/avatar.webp?' + Date.now()" class="avatar" @click="$emit('avatar')">
     </div>
 </template>
 
@@ -59,6 +59,7 @@ img {
 @media screen and (max-width: 600px) {
     div {
         margin: 0 auto;
+        margin-bottom: 25px;
     }
 }
 </style>
