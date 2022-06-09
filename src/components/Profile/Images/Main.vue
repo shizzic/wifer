@@ -3,11 +3,14 @@
         <input type="file" style="display: none;" ref="input" @change="load($event)" accept="image/*">
         <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" @clear="clear" @avatar="$emit('avatar')" />
 
-        <div v-show="data._id == $user.id" class="image" :style="'border: 1px solid;'" @click="$refs.input.click()">
+        <div v-show="data._id == $user.id" class="image" :style="'border: 1px solid; margin-right: 20px;'" 
+            @click="$refs.input.click()"
+        >
             <div class="plus" />
         </div>
 
-        <a v-show="null" ref="avatar"
+        <a
+            ref="avatar"
             :href="$ip + $route.params.id + '/avatar.webp?' + Date.now()"
             target="_blank"
             rel="noreferrer"
@@ -21,6 +24,7 @@
             :href="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()"
             target="_blank"
             rel="noreferrer"
+            :style="'margin-right: 20px; margin-bottom: 20px;'"
         >
             <img :src="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()" alt="" class="image" />
         </a>
@@ -29,6 +33,7 @@
 
 <script scoped>
 import Cropper from "@/components/Profile/Cropper.vue"
+
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
 
@@ -63,12 +68,14 @@ export default {
 			image: {
 				src: null,
 				type: null
-			}
+			},
+            lightbox: null
 		}
 	},
     watch: {
         avatar() {
-            this.$refs.avatar.click()
+            // this.$refs.avatar.click()
+            this.lightbox.loadAndOpen(0)
         }
     },
     mounted() {
@@ -80,16 +87,28 @@ export default {
                 wheelToZoom: true,
                 loop: true,
                 pinchToClose: false,
-                clickToCloseNonZoomable: false
+                clickToCloseNonZoomable: false,
+                modal: false
             })
 
-            this.lightbox.on('loadComplete', (data) => {
-                console.log(data)
-                if (null !== data.slide.image) {
-                    this.lightbox.pswp.currSlide.width = data.slide.width
-                    this.lightbox.pswp.currSlide.height = data.slide.height
-                    this.lightbox.pswp.currSlide.resize()
+            this.lightbox.on('contentInit', (e) => {
+                console.log(this.lightbox)
+                console.log('contentInit', e.content)
+            })
+            
+
+            this.lightbox.on('contentResize', (e) => {
+                e.content.width = e.content.element.naturalWidth
+                e.content.height = e.content.element.naturalHeight
+            })
+            
+            this.lightbox.on('change', () => {
+                if (this.lightbox.pswp.currSlide) {
+                    this.lightbox.pswp.currSlide.width  = this.lightbox.options.dataSource.items[this.lightbox.pswp.currIndex].firstChild.naturalWidth
+                    this.lightbox.pswp.currSlide.height = this.lightbox.options.dataSource.items[this.lightbox.pswp.currIndex].firstChild.naturalHeight
                 }
+
+                this.lightbox.pswp.updateSize(true)
             })
 
             this.lightbox.init()
@@ -142,8 +161,6 @@ export default {
     padding-left: 30px;
     padding-bottom: 10px;
     padding-right: 10px;
-
-    border: 1px solid;
 }
 
 .image {
@@ -159,9 +176,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    margin-right: 20px;
-    margin-bottom: 20px;
 }
 
 @media only screen and (max-width : 644px) {
@@ -216,8 +230,8 @@ export default {
 }
 
 @media screen and (max-width: 529px) {
-.pswp {
-    top: 0;
-}
+    .pswp {
+        top: 0;
+    }
 }
 </style>
