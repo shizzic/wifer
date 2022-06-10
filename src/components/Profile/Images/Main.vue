@@ -9,7 +9,7 @@
             <div class="plus" />
         </div>
 
-        <a
+        <a v-show="null"
             ref="avatar"
             :href="$ip + $route.params.id + '/avatar.webp?' + Date.now()"
             target="_blank"
@@ -69,13 +69,13 @@ export default {
 				src: null,
 				type: null
 			},
-            lightbox: null
+            lightbox: null,
+            first: true
 		}
 	},
     watch: {
         avatar() {
-            // this.$refs.avatar.click()
-            this.lightbox.loadAndOpen(0)
+            this.$refs.avatar.click()
         }
     },
     mounted() {
@@ -91,24 +91,25 @@ export default {
                 modal: false
             })
 
-            this.lightbox.on('contentInit', (e) => {
-                console.log(this.lightbox)
-                console.log('contentInit', e.content)
-            })
-            
-
             this.lightbox.on('contentResize', (e) => {
-                e.content.width = e.content.element.naturalWidth
-                e.content.height = e.content.element.naturalHeight
+                if (this.first) {
+                    e.content.width = e.content.element.naturalWidth
+                    e.content.height = e.content.element.naturalHeight
+                }
             })
             
             this.lightbox.on('change', () => {
-                if (this.lightbox.pswp.currSlide) {
+                if (this.lightbox.pswp.currSlide && !this.first) {
                     this.lightbox.pswp.currSlide.width  = this.lightbox.options.dataSource.items[this.lightbox.pswp.currIndex].firstChild.naturalWidth
                     this.lightbox.pswp.currSlide.height = this.lightbox.options.dataSource.items[this.lightbox.pswp.currIndex].firstChild.naturalHeight
-                }
+                    this.lightbox.pswp.updateSize(true)
+                } 
+                
+                this.first = null
+            })
 
-                this.lightbox.pswp.updateSize(true)
+            this.lightbox.on('close', () => {
+                this.first = true
             })
 
             this.lightbox.init()
