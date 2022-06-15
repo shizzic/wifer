@@ -69,8 +69,7 @@ export default {
 				src: null,
 				type: null
 			},
-            lightbox: null,
-            first: true
+            lightbox: null
 		}
 	},
     watch: {
@@ -91,25 +90,33 @@ export default {
                 modal: false
             })
 
-            this.lightbox.on('contentResize', (e) => {
-                if (this.first) {
-                    e.content.width = e.content.element.naturalWidth
-                    e.content.height = e.content.element.naturalHeight
+            this.lightbox.on('afterInit', () => {
+                console.log(this.lightbox.pswp)
+
+                if (this.lightbox.pswp.options.dataSource.items[0].firstChild.naturalHeight > 0) {
+                    for (let key in this.lightbox.pswp.options.dataSource.items) {
+                        this.lightbox.pswp.options.dataSource.items[key] = { 
+                            src: this.lightbox.pswp.options.dataSource.items[key].href,
+                            width: this.lightbox.pswp.options.dataSource.items[key].firstChild.naturalWidth,
+                            height: this.lightbox.pswp.options.dataSource.items[key].firstChild.naturalHeight
+                        }
+                    }
                 }
             })
-            
-            this.lightbox.on('change', () => {
-                if (this.lightbox.pswp.currSlide && !this.first) {
-                    this.lightbox.pswp.currSlide.width  = this.lightbox.options.dataSource.items[this.lightbox.pswp.currIndex].firstChild.naturalWidth
-                    this.lightbox.pswp.currSlide.height = this.lightbox.options.dataSource.items[this.lightbox.pswp.currIndex].firstChild.naturalHeight
-                    this.lightbox.pswp.updateSize(true)
-                } 
-                
-                this.first = null
-            })
 
-            this.lightbox.on('close', () => {
-                this.first = true
+            // this.lightbox.on('contentAppend', (e) => {
+            //     console.log(e.content.element.naturalHeight)
+
+            //     this.lightbox.pswp.options.dataSource.items[e.content.index] = { 
+            //         src: e.content.element.href,
+            //         width: e.content.element.naturalWidth,
+            //         height: e.content.element.naturalHeight
+            //     }
+            // })
+
+            this.lightbox.on('contentResize', (e) => {
+                e.content.height = e.content.element.naturalHeight
+                e.content.width  = e.content.element.naturalWidth
             })
 
             this.lightbox.init()
@@ -227,12 +234,6 @@ export default {
 
 <style>
 .pswp {
-    top: 50px;
-}
-
-@media screen and (max-width: 529px) {
-    .pswp {
-        top: 0;
-    }
+    z-index: 2147483647;
 }
 </style>

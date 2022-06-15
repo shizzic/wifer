@@ -49,7 +49,7 @@ export default {
 
 <style scoped>
 nav {
-	z-index: 2147483647;
+	z-index: 2147483646;
 	background-color: #FFFFFF;
 
 	width: 100%;
