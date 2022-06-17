@@ -69,7 +69,9 @@ export default {
 				src: null,
 				type: null
 			},
-            lightbox: null
+            lightbox: null,
+            first: true,
+            last: true
 		}
 	},
     watch: {
@@ -90,33 +92,35 @@ export default {
                 modal: false
             })
 
-            this.lightbox.on('afterInit', () => {
-                console.log(this.lightbox.pswp)
+            this.lightbox.on("afterInit", () => {
+                let length = this.lightbox.pswp.options.dataSource.items.length - 1
 
-                if (this.lightbox.pswp.options.dataSource.items[0].firstChild.naturalHeight > 0) {
-                    for (let key in this.lightbox.pswp.options.dataSource.items) {
-                        this.lightbox.pswp.options.dataSource.items[key] = { 
-                            src: this.lightbox.pswp.options.dataSource.items[key].href,
-                            width: this.lightbox.pswp.options.dataSource.items[key].firstChild.naturalWidth,
-                            height: this.lightbox.pswp.options.dataSource.items[key].firstChild.naturalHeight
-                        }
-                    }
+                if (this.lightbox.pswp.options.dataSource.items[length].firstChild.naturalHeight > 0) {
+                    this.first = null
+                    this.resize()
                 }
             })
 
-            // this.lightbox.on('contentAppend', (e) => {
-            //     console.log(e.content.element.naturalHeight)
+            this.lightbox.on("contentAppend", () => {
+                if (this.last && this.lightbox.pswp && this.lightbox.pswp.options.dataSource.items[this.lightbox.pswp.options.dataSource.items.length - 1].height) {
+                    this.last = null
+                    this.lightbox.pswp.refreshSlideContent(this.lightbox.pswp.options.dataSource.items.length - 1)
+                }
 
-            //     this.lightbox.pswp.options.dataSource.items[e.content.index] = { 
-            //         src: e.content.element.href,
-            //         width: e.content.element.naturalWidth,
-            //         height: e.content.element.naturalHeight
-            //     }
-            // })
+                if (this.first) {
+                    this.first = null
+                    this.resize()
+                }
+            })
 
-            this.lightbox.on('contentResize', (e) => {
+            this.lightbox.on("contentResize", (e) => {
                 e.content.height = e.content.element.naturalHeight
                 e.content.width  = e.content.element.naturalWidth
+            })
+
+            this.lightbox.on("close", () => {
+                this.first = true
+                this.last  = true
             })
 
             this.lightbox.init()
@@ -151,6 +155,29 @@ export default {
         clear() {
             this.image = { src : null, type : null }
             this.$refs.avatar.value = ""
+        },
+
+        resize() {
+            let length = this.lightbox.pswp.options.dataSource.items.length - 1
+
+            if (this.lightbox.pswp.options.dataSource.items[length].firstChild.naturalHeight)
+                for (let key in this.lightbox.pswp.options.dataSource.items) {
+                    if (this.lightbox.pswp.options.dataSource.items[key].firstChild.naturalHeight > 0)
+                        this.lightbox.pswp.options.dataSource.items[key] = { 
+                            src: this.lightbox.pswp.options.dataSource.items[key].href,
+                            width: this.lightbox.pswp.options.dataSource.items[key].firstChild.naturalWidth,
+                            height: this.lightbox.pswp.options.dataSource.items[key].firstChild.naturalHeight
+                        }
+                }
+            else
+                for (let key in this.lightbox.pswp.options.dataSource.items) {
+                    if (this.lightbox.pswp.options.dataSource.items[key].height > 0)
+                        this.lightbox.pswp.options.dataSource.items[key] = { 
+                            src: this.lightbox.pswp.options.dataSource.items[key].src,
+                            width: this.lightbox.pswp.options.dataSource.items[key].width,
+                            height: this.lightbox.pswp.options.dataSource.items[key].height
+                        }
+                }
         }
     }
 }
