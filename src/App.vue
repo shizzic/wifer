@@ -38,8 +38,8 @@ export default {
 		if (this.id)
 			this.makeOnline(true)
 
-		window.addEventListener('beforeunload', (event) => {
-			event.preventDefault()
+		window.addEventListener('beforeunload', (e) => {
+			e.preventDefault()
 			this.makeOnline(false)
 		})
 	},
@@ -47,6 +47,7 @@ export default {
 		makeOnline(value) {
 			fetch(this.$domain + "online?id=" + this.id + "&online=" + value, {
 				method: "PUT",
+				headers: { "Access-Control-Max-Age": 600 },
 				credentials: "include"
 			})
 		}

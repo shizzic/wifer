@@ -44,7 +44,7 @@ export default {
 	},
 	methods: {
 		upload() {
-			const { canvas } = this.$refs.cropper.getResult();
+			const { canvas } = this.$refs.cropper.getResult()
 
 			if (canvas) {
 				let mode = "public"

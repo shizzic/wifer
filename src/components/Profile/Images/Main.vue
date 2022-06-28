@@ -1,5 +1,14 @@
 <template>
 	<div class="images" :id="'gallery'">
+        <div v-show="icons" class="dots" @click="showButtons" v-click-outside="() => { buttons = null }">
+            <div v-for="(_, index) in 3" :key="index" class="dot" />
+        </div>
+
+        <div v-show="buttons" class="buttons">
+            <img class="button" src="/public.webp" />
+            <img class="button" src="/private.webp" />
+        </div>
+
         <input type="file" style="display: none;" ref="input" @change="load($event)" accept="image/*">
         <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" @clear="clear" @avatar="$emit('avatar')" />
 
@@ -28,14 +37,25 @@
         >
             <img :src="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()" alt="" class="image" />
         </a>
+
+        <a
+            v-for="(num, index) in data.private"
+            :key="index"
+            :href="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()"
+            target="_blank"
+            rel="noreferrer"
+            :style="'margin-right: 20px; margin-bottom: 20px;'"
+        >
+            <img :src="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()" alt="" class="image" />
+        </a>
     </div>
 </template>
 
 <script scoped>
 import Cropper from "@/components/Profile/Cropper.vue"
 
-import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import 'photoswipe/style.css';
+import PhotoSwipeLightbox from 'photoswipe/lightbox'
+import 'photoswipe/style.css'
 
 function getMimeType(file, fallback = null) {
 	const byteArray = (new Uint8Array(file)).subarray(0, 4)
@@ -71,7 +91,9 @@ export default {
 			},
             lightbox: null,
             first: true,
-            last: true
+            last: true,
+            icons: null,
+            buttons: null
 		}
 	},
     watch: {
@@ -119,8 +141,14 @@ export default {
             })
 
             this.lightbox.on("close", () => {
-                this.first = true
-                this.last  = true
+                this.icons   = null
+                this.buttons = null
+                this.first   = true
+                this.last    = true
+            })
+
+            this.lightbox.on("beforeOpen", () => {
+                this.icons = true
             })
 
             this.lightbox.init()
@@ -178,6 +206,13 @@ export default {
                             height: this.lightbox.pswp.options.dataSource.items[key].height
                         }
                 }
+        },
+
+        showButtons() {
+            if (this.buttons)
+                this.buttons = null
+            else
+                this.buttons = true
         }
     }
 }
@@ -257,10 +292,80 @@ export default {
     width: 20px;
     transform:translateY(-50%);
 }
+
+.dots {
+    z-index: 2147483647;
+    cursor: pointer;
+    width: 25px;
+    -webkit-tap-highlight-color: transparent;
+
+    position: absolute;
+    top: -29px;
+    left: 62.5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dot {
+    padding: 2px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.dot:not(:last-of-type) {
+    margin-bottom: 3px;
+}
+
+.buttons {
+    z-index: 2147483647;
+    list-style-type: none;
+    cursor: default;
+    -webkit-tap-highlight-color: transparent;
+
+    position: absolute;
+    top: -35px;
+    left: 100px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* border: 1px solid white; */
+}
+
+.button {
+    cursor: pointer;
+    width: 25px;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(331deg) brightness(101%) contrast(102%);
+    padding: 5px 2px;
+    border-radius: 50%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.button:hover {
+    background-color: #b2b2b2;
+}
+
+.button:first-of-type {
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 529px) {
+    .dots {
+        top: 21px;
+    }
+
+    .buttons {
+        top: 15px;
+    }
+}
 </style>
 
 <style>
 .pswp {
-    z-index: 2147483647;
+    z-index: 2147483646;
 }
 </style>

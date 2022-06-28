@@ -8,15 +8,7 @@
 <script scoped>
 export default {
 	name: "Avatar",
-    props: ["avatar"],
-    data() {
-		return {
-			image: {
-				src: null,
-				type: null
-			}
-		}
-	}
+    props: ["avatar"]
 }
 </script>
 
