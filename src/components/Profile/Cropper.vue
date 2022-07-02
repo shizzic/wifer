@@ -65,8 +65,8 @@ export default {
 							if ("error" in data)
 								this.$toast.error(this.lang[this.l].error)
 							else {
-								this.$emit("avatar")
-								this.$toast.success(this.lang[this.l].success)
+								location.reload()
+								// this.$toast.success(this.lang[this.l].success)
 							}
 						})
 				}, 'image/*');

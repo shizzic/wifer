@@ -28,6 +28,7 @@ div {
 
 img {
     -webkit-tap-highlight-color: transparent;
+    object-fit: cover;
 }
 
 .no {

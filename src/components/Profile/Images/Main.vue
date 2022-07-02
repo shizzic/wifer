@@ -1,57 +1,66 @@
 <template>
 	<div class="images" :id="'gallery'">
-        <div v-show="icons" class="dots" @click="showButtons" v-click-outside="() => { buttons = null }">
+        <div v-show="opened && data['_id'] == $user.id" class="dots" @click="showButtons" v-click-outside="() => { buttons = null }">
             <div v-for="(_, index) in 3" :key="index" class="dot" />
         </div>
 
         <div v-show="buttons" class="buttons">
-            <img class="button" src="/public.webp" />
-            <img class="button" src="/private.webp" />
+            <img v-show="params.mode !== null" class="button" src="/profile.webp" @click="makeProfile" />
+            <img v-show="params.mode !== true && params.mode !== null" class="button" src="/public.webp" @click="dir('public')" />
+            <img v-show="params.mode !== false" class="button" src="/private.webp" @click="dir('private')" />
+            <img class="button" src="/delete.webp" @click="deleteImg" />
         </div>
 
         <input type="file" style="display: none;" ref="input" @change="load($event)" accept="image/*">
-        <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" @clear="clear" @avatar="$emit('avatar')" />
+        <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" @clear="clear" />
 
-        <div v-show="data._id == $user.id" class="image" :style="'border: 1px solid; margin-right: 20px;'" 
+        <div v-show="data._id == $user.id" class="image" :style="'border: 1px solid; margin-right: 20px; margin-bottom: 20px;'" 
             @click="$refs.input.click()"
         >
             <div class="plus" />
         </div>
 
-        <a v-show="null"
-            ref="avatar"
-            :href="$ip + $route.params.id + '/avatar.webp?' + Date.now()"
-            target="_blank"
-            rel="noreferrer"
-        >
-            <img :src="$ip + $route.params.id + '/avatar.webp?' + Date.now()" alt="" class="image" />
-        </a>
+        <div v-if="data.avatar === true" class="image" style="display: none;">
+            <a
+                ref="avatar"
+                :href="$ip + $route.params.id + '/avatar.webp?' + Date.now()"
+                target="_blank"
+                rel="noreferrer"
+            >
+                <img :src="$ip + $route.params.id + '/avatar.webp?' + Date.now()" alt="" />
+            </a>
+        </div>
         
-        <a
-            v-for="(num, index) in data.public"
-            :key="index"
-            :href="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()"
-            target="_blank"
-            rel="noreferrer"
-            :style="'margin-right: 20px; margin-bottom: 20px;'"
-        >
-            <img :src="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()" alt="" class="image" />
-        </a>
+        <div v-for="(num, index) in data.public" :key="index" class="image-wrap">
+            <a
+                :href="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()"
+                target="_blank"
+                rel="noreferrer"
+            >
+                <img :src="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()" alt="" class="image" />
+            </a>
+            
+            <img v-show="$user.id == data._id" src="/public.webp" alt="" class="icon" />
+        </div>
 
-        <a
-            v-for="(num, index) in data.private"
-            :key="index"
-            :href="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()"
-            target="_blank"
-            rel="noreferrer"
-            :style="'margin-right: 20px; margin-bottom: 20px;'"
-        >
-            <img :src="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()" alt="" class="image" />
-        </a>
+        <template v-if="true">
+            <div v-for="(num, index) in data.private" :key="index" class="image-wrap">
+                <a
+                    :href="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <img :src="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()" alt="" class="image" />
+                </a>
+
+                <img v-show="$user.id == data._id" src="/private.webp" alt="" class="icon" />
+            </div>
+        </template>
     </div>
 </template>
 
 <script scoped>
+import { ImageJS } from "@/store/Langs/Image"
 import Cropper from "@/components/Profile/Cropper.vue"
 
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
@@ -80,6 +89,15 @@ function getMimeType(file, fallback = null) {
 export default {
 	name: "Images",
     props: ["data", "lang", "l", "avatar"],
+    setup() {
+		const del   = ImageJS()["delete"]
+        const error = ImageJS()["error"]
+
+		return {
+            del,
+            error
+		}
+	},
     components: {
         Cropper
     },
@@ -89,11 +107,18 @@ export default {
 				src: null,
 				type: null
 			},
+
             lightbox: null,
             first: true,
             last: true,
-            icons: null,
-            buttons: null
+            buttons: null,
+            opened: null,
+
+            params: {
+                mode: null,
+                dir: "public",
+                number: 1
+            }
 		}
 	},
     watch: {
@@ -113,6 +138,8 @@ export default {
                 clickToCloseNonZoomable: false,
                 modal: false
             })
+
+            this.lightbox.on("afterInit", () => { this.opened = true })
 
             this.lightbox.on("afterInit", () => {
                 let length = this.lightbox.pswp.options.dataSource.items.length - 1
@@ -140,15 +167,27 @@ export default {
                 e.content.width  = e.content.element.naturalWidth
             })
 
-            this.lightbox.on("close", () => {
-                this.icons   = null
-                this.buttons = null
-                this.first   = true
-                this.last    = true
-            })
+            this.lightbox.on("close", () => { this.close() })
 
-            this.lightbox.on("beforeOpen", () => {
-                this.icons = true
+            this.lightbox.on("change", () => {
+                this.buttons = null
+                let src = this.lightbox.pswp.options.dataSource.items[this.lightbox.pswp.currIndex].src
+
+                if (src) {
+                    let arr  = this.lightbox.pswp.options.dataSource.items[this.lightbox.pswp.currIndex].src.split("/")
+                    let mode = arr[arr.length - 2]
+                    
+                    this.params.dir    = mode
+                    this.params.number = arr[arr.length - 1].split(".")[0]
+
+                    if (isNaN(mode) === false)
+                        this.params.mode = null
+                    else
+                        if (mode === "public")
+                            this.params.mode = true
+                        else
+                            this.params.mode = false
+                }
             })
 
             this.lightbox.init()
@@ -161,10 +200,51 @@ export default {
         }
     },
     methods: {
+        makeProfile() {
+            fetch(this.$domain + "replaceAvatar?dir=" + this.params.dir + "&number=" + this.params.number, {
+                method: "PUT",
+				credentials: "include"
+            })
+                .then(data => { return data.json() })
+                .then(() => { location.reload() })
+                .catch(() => { this.$toast.error(this.error[this.l]) })
+        },
+
+        dir(newDir) {
+            let isAvatar = "0"
+            if (this.params.mode === null)
+                isAvatar = "1"
+
+            fetch(this.$domain + "changeImageDir?isAvatar=" + isAvatar + "&dir=" + this.params.dir + "&number=" + this.params.number + "&new=" + newDir, {
+                method: "PUT",
+				credentials: "include"
+            })
+                .then(data => { return data.json() })
+                .then(() => { location.reload() })
+                .catch(() => { this.$toast.error(this.error[this.l]) })
+        },
+
+        deleteImg() {
+            let isAvatar = 0
+            if (this.params.mode === null)
+                isAvatar = 1
+            
+            fetch(this.$domain + "deleteImage?isAvatar=" + isAvatar + "&dir=" + this.params.dir +"&number=" + this.params.number, {
+                method: "DELETE",
+				credentials: "include"
+            })
+                .then(data => { return data.json() })
+                .then(() => {
+                    location.reload()
+                    // this.$toast.success(this.del[this.l])
+                })
+                .catch(() => { this.$toast.error(this.error[this.l]) })
+        },
+
         load(event) {
 			const { files } = event.target
 		
-			if (files && files[0] && files[0].size < 3000001) {
+			if (files && files[0] && files[0].size < 2000001) {
 				const blob = URL.createObjectURL(files[0])
 				const reader = new FileReader()
 
@@ -182,7 +262,9 @@ export default {
 
         clear() {
             this.image = { src : null, type : null }
-            this.$refs.avatar.value = ""
+
+            if (this.$refs.avatar)
+                this.$refs.avatar.value = ""
         },
 
         resize() {
@@ -213,6 +295,13 @@ export default {
                 this.buttons = null
             else
                 this.buttons = true
+        },
+
+        close() {
+            this.buttons = null
+            this.opened  = null
+            this.first   = true
+            this.last    = true
         }
     }
 }
@@ -231,11 +320,21 @@ export default {
     padding-left: 30px;
     padding-bottom: 10px;
     padding-right: 10px;
+    margin-bottom: 30px;
+}
+
+.image-wrap {
+    position: relative;
+    border-radius: 12px;
+
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .image {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+    object-fit: cover;
 
     width: 125px;
     min-width: 125px;
@@ -332,8 +431,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    /* border: 1px solid white; */
 }
 
 .button {
@@ -341,16 +438,13 @@ export default {
     width: 25px;
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(331deg) brightness(101%) contrast(102%);
     padding: 5px 2px;
-    border-radius: 50%;
+    border-radius: 2px;
     -webkit-tap-highlight-color: transparent;
+    margin-right: 20px;
 }
 
 .button:hover {
     background-color: #b2b2b2;
-}
-
-.button:first-of-type {
-    margin-right: 20px;
 }
 
 @media screen and (max-width: 529px) {
@@ -361,6 +455,16 @@ export default {
     .buttons {
         top: 15px;
     }
+}
+
+.icon {
+    width: 20px;
+
+    position: absolute;
+    left: 5px;
+    bottom: 2.5px;
+
+    filter: invert(100%) sepia(3%) saturate(7472%) hue-rotate(50deg) brightness(108%) contrast(108%);
 }
 </style>
 

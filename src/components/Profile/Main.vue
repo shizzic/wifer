@@ -3,8 +3,8 @@
 		<Header :data="data" @avatar="++avatar" />
 		<Images v-if="data && (data.public > 0 || data.private > 0 || data._id == $user.id)" 
 			:data="data" :lang="cropper" :l="l" :avatar="avatar"
-			@avatar="data.avatar = true" 
 		/>
+		<Info :data="data" :l="l" />
 	</div>
 </template>
 
@@ -12,6 +12,7 @@
 import { ProfileJS } from "@/store/Langs/Profile"
 import Header from "@/components/Profile/Header/Main.vue"
 import Images from "@/components/Profile/Images/Main.vue"
+import Info from "@/components/Profile/Info/Main.vue"
 export default {
 	name: "Profile",
 	props: ["l"],
@@ -28,7 +29,8 @@ export default {
 	},
 	components: {
 		Header,
-		Images
+		Images,
+		Info
 	},
 	data() {
 		return {
