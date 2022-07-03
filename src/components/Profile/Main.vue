@@ -5,7 +5,7 @@
 			:data="data" :lang="cropper" :l="l" :avatar="avatar"
 		/>
 		<Info :data="data" :l="l" />
-		<About :about="data.about" :l="l" />
+		<About v-show="data.about !== ''" :about="data.about" :l="l" />
 	</div>
 </template>
 

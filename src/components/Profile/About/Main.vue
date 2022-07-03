@@ -68,6 +68,7 @@ export default {
     flex-wrap: wrap;
 
     padding: 30px;
+	margin-top: 30px;
 }
 
 img {

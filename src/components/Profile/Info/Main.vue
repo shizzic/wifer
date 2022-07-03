@@ -54,7 +54,6 @@ export default {
     flex-wrap: wrap;
 
     padding: 30px;
-    margin-bottom: 30px;
 }
 
 .block {
