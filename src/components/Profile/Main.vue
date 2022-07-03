@@ -5,6 +5,7 @@
 			:data="data" :lang="cropper" :l="l" :avatar="avatar"
 		/>
 		<Info :data="data" :l="l" />
+		<About :about="data.about" :l="l" />
 	</div>
 </template>
 
@@ -13,13 +14,14 @@ import { ProfileJS } from "@/store/Langs/Profile"
 import Header from "@/components/Profile/Header/Main.vue"
 import Images from "@/components/Profile/Images/Main.vue"
 import Info from "@/components/Profile/Info/Main.vue"
+import About from "@/components/Profile/About/Main.vue"
 export default {
 	name: "Profile",
 	props: ["l"],
 	setup() {
-		const errors   = ProfileJS()["errors"]
-		const response = ProfileJS()["response"]
-		const cropper  = ProfileJS()["cropper"]
+		const errors   = ProfileJS().errors
+		const response = ProfileJS().response
+		const cropper  = ProfileJS().cropper
 
 		return {
             errors,
@@ -30,7 +32,8 @@ export default {
 	components: {
 		Header,
 		Images,
-		Info
+		Info,
+		About
 	},
 	data() {
 		return {

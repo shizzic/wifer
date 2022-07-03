@@ -4,11 +4,11 @@ export const ProfileJS = defineStore("Profile", {
     getters: {
         fields() {
             return {
-                "EN": {
+                en: {
                     "title": "Enter",
                     "text": "Hello there! If you want the best sugar on web, than welcome aboard :)"
                 },
-                "RU": {
+                ru: {
                     "title": "Вход",
                     "text": "Кулити, если ты хочешь лучший опыт знакомств в инете, тогда присаживайся к столу :)"
                 }
@@ -16,11 +16,11 @@ export const ProfileJS = defineStore("Profile", {
         },
         errors() {
             return {
-                "EN": {
+                en: {
                     "int": "Id must contain only integers",
                     "server": "Something occured to a server. Try again"
                 },
-                "RU": {
+                ru: {
                     "int": "Индификатор должен состоять только из цифр",
                     "server": "Что-то случилось с сервером. Попробуйте снова"
                 }
@@ -28,19 +28,19 @@ export const ProfileJS = defineStore("Profile", {
         },
         response() {
             return {
-                "EN": "User doesn't exist or has been banned",
-                "RU": "Пользователь не существует или был забанен"
+                en: "User doesn't exist or has been banned",
+                ru: "Пользователь не существует или был забанен"
             }
         },
         success() {
             return {
-                "EN": "You signed in. Enjoy yourself :)",
-                "RU": "Вы вошли. Развлекайтесь :)"
+                en: "You signed in. Enjoy yourself :)",
+                ru: "Вы вошли. Развлекайтесь :)"
             }
         },
         cropper() {
             return {
-                "EN": {
+                en: {
                     "upload": "Upload",
                     "public": "Public",
                     "private": "Private",
@@ -49,7 +49,7 @@ export const ProfileJS = defineStore("Profile", {
                     "error": "Something occured to the server, try again",
                     "success": "Image was added)"
                 },
-                "RU": {
+                ru: {
                     "upload": "Загрузить",
                     "public": "Публичная",
                     "private": "Приватная",

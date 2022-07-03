@@ -4,65 +4,65 @@ export const navJS = defineStore("nav", {
     getters: {
         inner() {
             return {
-                "search": { 
-                    "title": {
-                        "RU": "Поиск",
-                        "EN": "Search"
+                search: { 
+                    title: {
+                        ru: "Поиск",
+                        en: "Search"
                     },
-                    "image": "/search.webp"
+                    image: "/search.webp"
                 },
-                "heart": { 
-                    "title": {
-                        "RU": "Интересы",
-                        "EN": "Interests"
+                heart: { 
+                    title: {
+                        ru: "Интересы",
+                        en: "Interests"
                     },
-                    "image": "/heart.webp"
+                    image: "/heart.webp"
                 },
-                "chat": { 
-                    "title": {
-                        "RU": "Чат",
-                        "EN": "Chat"
+                chat: { 
+                    title: {
+                        ru: "Чат",
+                        en: "Chat"
                     },
-                    "image": "/chat.webp"
+                    image: "/chat.webp"
                 },
-                "premium": { 
-                    "title": {
-                        "RU": "Премиум",
-                        "EN": "Premium"
+                premium: { 
+                    title: {
+                        ru: "Премиум",
+                        en: "Premium"
                     },
-                    "image": "/diamond.webp"
+                    image: "/diamond.webp"
                 },
-                "profile": {
-                    "title": {
-                        "RU": "Профиль",
-                        "EN": "Profile"
+                profile: {
+                    title: {
+                        ru: "Профиль",
+                        en: "Profile"
                     },
-                    "image": "/profile.webp"
+                    image: "/profile.webp"
                 }
             }
         },
         outer() {
             return {
-                "search": { 
-                    "title": {
-                        "RU": "Поиск",
-                        "EN": "Search"
+                search: { 
+                    title: {
+                        ru: "Поиск",
+                        en: "Search"
                     },
-                    "image": "/search.webp"
+                    image: "/search.webp"
                 },
-                "signin": { 
-                    "title": {
-                        "RU": "Вход",
-                        "EN": "Sign in"
+                signin: { 
+                    title: {
+                        ru: "Вход",
+                        en: "Sign in"
                     },
-                    "image": "/signin.webp"
+                    image: "/signin.webp"
                 },
-                "premium": { 
-                    "title": {
-                        "RU": "Премиум",
-                        "EN": "Premium"
+                premium: { 
+                    title: {
+                        ru: "Премиум",
+                        en: "Premium"
                     },
-                    "image": "/diamond.webp"
+                    image: "/diamond.webp"
                 }
             }
         }

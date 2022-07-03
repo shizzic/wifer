@@ -4,19 +4,19 @@ export const InfoJS = defineStore("Info", {
     getters: {
         keys() {
             return {
-                EN: {
+                en: {
                     height: "Height",
                     weight: "Weight",
                     body: "Body's type",
-                    smokes: "Smoke",
-                    drinks: "Drinks",
+                    smokes: "Smoking",
+                    drinks: "Drinking",
                     ethnicity: "Ethnicity",
                     income: "Annual income $",
                     industry: "Industry",
                     search: "Search",
                     children: "Children"
                 },
-                RU: {
+                ru: {
                     height: "Рост",
                     weight: "Вес",
                     body: "Тип тела",
@@ -32,7 +32,7 @@ export const InfoJS = defineStore("Info", {
         },
         values() {
             return {
-                EN: {
+                en: {
                     body: {
                         1: "Slim",
                         2: "Athletic",
@@ -102,7 +102,7 @@ export const InfoJS = defineStore("Info", {
                         3: "Both"
                     }
                 },
-                RU: {
+                ru: {
                     body: {
                         1: "Худая/ой",
                         2: "Атлетичная/ый",

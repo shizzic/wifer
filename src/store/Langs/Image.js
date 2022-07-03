@@ -4,14 +4,14 @@ export const ImageJS = defineStore("Image", {
     getters: {
         delete() {
             return {
-                "EN": "Image was successfully deleted",
-                "RU": "Фотка была удалена"
+                en: "Image was successfully deleted",
+                ru: "Фотка была удалена"
             }
         },
         error() {
             return {
-                "EN": "Bad request. Try again",
-                "RU": "Че то шальнуло. Попробуй снова)"
+                en: "Bad request. Try again",
+                ru: "Че то шальнуло. Попробуй снова)"
             }
         }
     }

@@ -33,13 +33,14 @@ export default {
 }
 
 .username span {
+    color: #4d4d4d;
     font-size: 30px;
     font-weight: 400;
     letter-spacing: 1px;
 }
 
 .title {
-    color: gray;
+    color: #4d4d4d;
     font-size: 17px;
 }
 

@@ -2,11 +2,11 @@
 	<div class="info">
         <div v-for="(elem, index) in keys" :key="index" class="block">
             <h3 class="title">{{ titles[l][index] }}</h3>
-            <template v-if="elem">
-                <span v-if="data[index] !== 0">{{ values[l][index][data[index]] }}</span>
-                <span v-else>-</span>
+            <template v-if="data[index] !== 0">
+                <span v-show="elem">{{ values[l][index][data[index]] }}</span>
+                <span v-show="!elem">{{ data[index] }}</span>
             </template>
-            <span v-else>{{ data[index] }}</span>
+            <span v-else>-</span>
         </div>
     </div>
 </template>
@@ -54,14 +54,16 @@ export default {
     flex-wrap: wrap;
 
     padding: 30px;
+    margin-bottom: 30px;
 }
 
 .block {
+    color: #4d4d4d;
     width: 33%;
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
 
     margin-bottom: 20px;
 }
@@ -82,6 +84,7 @@ export default {
 @media only screen and (max-width : 350px) {
     .block {
         width: 100%;
+        align-items: center;
     }
 }
 </style>

@@ -4,11 +4,11 @@ export const SigninJS = defineStore("Signin", {
     getters: {
         title() {
             return {
-                "EN": {
+                en: {
                     "title": "Enter",
                     "text": "Hello there! If you want the best sugar on web, than welcome aboard :)"
                 },
-                "RU": {
+                ru: {
                     "title": "Вход",
                     "text": "Кулити, если ты хочешь лучший опыт знакомств в инете, тогда присаживайся к столу :)"
                 }
@@ -16,17 +16,17 @@ export const SigninJS = defineStore("Signin", {
         },
         input() {
             return {
-                "EN": "Email",
-                "RU": "Почта"
+                en: "Email",
+                ru: "Почта"
             }
         },
         error() {
             return {
-                "EN": {
+                en: {
                     "email": "A-a-a. Field must be an email",
                     "required": "Hey, fill it!"
                 },
-                "RU": {
+                ru: {
                     "password": "Не, не, не. Введи почту, а не что то другое",
                     "required": "Хей, заполни поле!"
                 }
@@ -34,19 +34,19 @@ export const SigninJS = defineStore("Signin", {
         },
         button() {
             return {
-                "EN": "Sign up or sign in",
-                "RU": "Зарегаться или войти"
+                en: "Sign up or sign in",
+                ru: "Зарегаться или войти"
             }
         },
         response() {
             return {
-                "EN": {
+                en: {
                     "0": "Don't try to hack me bro :)",
                     "1": "Wrong email",
                     "2": "Email with link wasn't sent to you 'cause of some reason. Please, try again",
                     "3": "Some error occured on server. Try again and never give up"
                 },
-                "RU": {
+                ru: {
                     "0": "Не пытайся хакнуть меня бро :)",
                     "1": "Это не почта",
                     "2": "Письмо с сылкой не было отправленно на вашу почту по какой-то причине. Пожалуста, попробуйте снова",
@@ -56,14 +56,14 @@ export const SigninJS = defineStore("Signin", {
         },
         success() {
             return {
-                "EN": "You signed in. Enjoy yourself :)",
-                "RU": "Вы вошли. Развлекайтесь :)"
+                en: "You signed in. Enjoy yourself :)",
+                ru: "Вы вошли. Развлекайтесь :)"
             }
         },
         email() {
             return {
-                "EN": "An email with login link was sent to your typed email. Just follow the link. And check spam box if you don't see an email",
-                "RU": "Письмо с сылкой было отправленно на указанную вами почту. Просто проследуйте по сылке. И не забудьте чекнуть спам ящик, если не найдете письмо"
+                en: "An email with login link was sent to your typed email. Just follow the link. And check spam box if you don't see an email",
+                ru: "Письмо с сылкой было отправленно на указанную вами почту. Просто проследуйте по сылке. И не забудьте чекнуть спам ящик, если не найдете письмо"
             }
         }
     }
