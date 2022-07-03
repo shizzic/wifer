@@ -44,13 +44,23 @@ export default {
     display: flex;
     justify-content: right;
     align-items: center;
-    
-    margin-bottom: 30px;
+
     padding: 5px;
 }
 
-.button:last-child {
-    margin-bottom: 0;
+.button:active {
+    border-width: 2px;
+    background-color: #F7F7F7;
+    transition: all 0.1s ease-out;
+}
+
+.button:active img {
+    width: 26px;
+    transition: all 0.1s linear;
+}
+
+.button:not(:last-child) {
+    margin-bottom: 30px;
 }
 
 img {
