@@ -62,7 +62,7 @@ export default {
     width: 25px;
 
     position: absolute;
-    left: -6.2px;
+    left: -6.25px;
     top: -6.2px;
 
     animation: pulsate 1s ease-out;

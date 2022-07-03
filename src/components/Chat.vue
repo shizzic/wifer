@@ -1,5 +1,5 @@
 <template>
-	<div>Chat</div>
+	<div @click="$user.logout()">Chat</div>
 </template>
 
 <script scoped>
