@@ -92,6 +92,7 @@ form {
 }
 
 button {
+	font-family: 'PT Sans';
 	cursor: pointer;
 	font-size: 16px;
 	font-weight: 600;

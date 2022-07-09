@@ -1,11 +1,13 @@
 <template>
 	<div v-if="data" class="wrap scroll">
-		<Header :data="data" @avatar="++avatar" />
+		<Header :data="data" @avatar="++avatar" @settings="settings = true" />
 		<Images v-if="data && (data.public > 0 || data.private > 0 || data._id == $user.id)" 
 			:data="data" :lang="cropper" :l="l" :avatar="avatar"
 		/>
 		<Info :data="data" :l="l" />
 		<About v-show="data.about !== ''" :about="data.about" :l="l" />
+
+		<Settings :settings="settings" @settings="settings = null" />
 	</div>
 </template>
 
@@ -15,6 +17,7 @@ import Header from "@/components/Profile/Header/Main.vue"
 import Images from "@/components/Profile/Images/Main.vue"
 import Info from "@/components/Profile/Info/Main.vue"
 import About from "@/components/Profile/About/Main.vue"
+import Settings from "@/components/Settings/Main.vue"
 export default {
 	name: "Profile",
 	props: ["l"],
@@ -33,12 +36,14 @@ export default {
 		Header,
 		Images,
 		Info,
-		About
+		About,
+		Settings
 	},
 	data() {
 		return {
 			data: null,
-			avatar: 0
+			avatar: 0,
+			settings: null
 		}
 	},
 	beforeMount() {
@@ -73,7 +78,6 @@ export default {
 	width: 100%;
 	height: 100%;
 
-	background-color: #286DA8;
 	padding: 30px;
 
 	overflow-y: auto;
@@ -86,7 +90,7 @@ export default {
 
 @media screen and (max-width: 768px) {
     .wrap {
-        padding: 10px;
+        padding: 15px;
     }
 }
 </style>

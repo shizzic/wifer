@@ -9,7 +9,7 @@
                 :place="{ country: data.country_id, city: data.city_id }"
             />
         </div>
-        <Buttons />
+        <Buttons @settings="$emit('settings')" />
     </div>
 </template>
 

@@ -82,7 +82,8 @@ export default {
 }
 
 #wrap {
-	background-color: #286DA8;
+	/* background-color: #286DA8; */
+	background-color: #1f80aa;
 	width: 100%;
 	height: calc(100% - 50px);
 

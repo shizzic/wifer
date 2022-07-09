@@ -7,7 +7,6 @@ import Heart from "@/components/Heart.vue"
 import Profile from "@/components/Profile/Main.vue"
 import Signin from "@/components/Signin/Main.vue"
 import Auth from "@/components/Auth.vue"
-import Settings from "@/components/Settings/Main.vue"
 
 const routes = [
     { path: "/", name: "premium", component: Premium, props: true },
@@ -16,8 +15,7 @@ const routes = [
     { path: "/heart", name: "heart", component: Heart, props: true },
     { path: "/profile/:id", name: "profile", component: Profile, props: true },
     { path: "/signin", name: "signin", component: Signin, props: true },
-    { path: "/auth/:id(\\S+)/:code", name: "auth", component: Auth, props: true },
-    { path: "/settings", name: "settings", component: Settings, props: true }
+    { path: "/auth/:id(\\S+)/:code", name: "auth", component: Auth, props: true }
 ]
 
 const router = createRouter({
