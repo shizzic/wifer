@@ -113,7 +113,7 @@ li {
 	font-weight: 400;
 	cursor: pointer;
 	font-size: 18px;
-	color: #a3a3a3;
+	color: #949494;
 	list-style-type: none;
 	background-color: #fff;
 	word-break: break-all;

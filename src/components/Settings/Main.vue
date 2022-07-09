@@ -3,6 +3,7 @@
 		<Form class="form scroll" name="settings" @submit="change">
 			<Title />
 			<Smoke />
+			<About />
 			<div class="buttons">
 				<div @click="$emit('settings')" class="btn">Cancel</div>
 				<button class="btn">Save</button>
@@ -15,13 +16,15 @@
 import { Form } from "vee-validate"
 import Title from "@/components/Settings/Title.vue"
 import Smoke from "@/components/Settings/Smoke.vue"
+import About from "@/components/Settings/About.vue"
 export default {
 	name: "Settings",
 	props: ["settings"],
 	components: {
 		Form,
 		Title,
-		Smoke
+		Smoke,
+		About
 	},
 	data() {
 		return {

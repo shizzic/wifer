@@ -30,7 +30,7 @@ h3 {
 }
 
 input {
-	color: #4d4d4d;
+	color: #000;
 	font-size: 20px;
 	letter-spacing: 1px;
 	outline: none;
@@ -45,25 +45,13 @@ input {
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   	-webkit-tap-highlight-color: transparent;
 
-	border-radius: 6px;
-	background-color: #e0e5ec;
-	background-color: #ededed;
-
-  	box-shadow:
-	-7px -7px 20px 0px #fff9,
-	-4px -4px 5px 0px #fff9,
-	7px 7px 20px 0px #0002,
-	4px 4px 5px 0px #0001;
-
- 	transition:box-shadow 0.6s cubic-bezier(.79,.21,.06,.81);
+	border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
 }
 
 input:focus {
-	box-shadow:
-	4px 4px 6px 0 rgba(255,255,255,.5),
-  	-4px -4px 6px 0 rgba(116, 125, 136, .2), 
-    inset -4px -4px 6px 0 rgba(255,255,255,.5),
-    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+	border-color: #000;
 }
 
 input:-webkit-autofill,
