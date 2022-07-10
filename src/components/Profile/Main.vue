@@ -7,12 +7,15 @@
 		<Info :data="data" :l="l" />
 		<About v-show="data.about !== ''" :about="data.about" :l="l" />
 
-		<Settings :settings="settings" @settings="settings = null" />
+		<Settings v-if="data" :settings="settings" :l="l" :lang="settingsJS" :titles="titles" :fields="data" :info="values[l]"
+		@settings="settings = null" @data="data = $event" />
 	</div>
 </template>
 
 <script scoped>
 import { ProfileJS } from "@/store/Langs/Profile"
+import { InfoJS } from "@/store/Langs/Info"
+import { SettingsJS } from "@/store/Langs/Settings"
 import Header from "@/components/Profile/Header/Main.vue"
 import Images from "@/components/Profile/Images/Main.vue"
 import Info from "@/components/Profile/Info/Main.vue"
@@ -22,14 +25,20 @@ export default {
 	name: "Profile",
 	props: ["l"],
 	setup() {
-		const errors   = ProfileJS().errors
-		const response = ProfileJS().response
-		const cropper  = ProfileJS().cropper
+		const errors   	 = ProfileJS().errors
+		const response 	 = ProfileJS().response
+		const cropper  	 = ProfileJS().cropper
+		const titles  	 = InfoJS().keys
+		const values  	 = InfoJS().values
+		const settingsJS = SettingsJS()
 
 		return {
             errors,
 			response,
-			cropper
+			cropper,
+			titles,
+			values,
+			settingsJS
 		}
 	},
 	components: {

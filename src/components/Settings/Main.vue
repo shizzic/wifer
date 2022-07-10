@@ -1,12 +1,45 @@
 <template>
 	<div class="wrapper" :class="{ none: !settings, visible: settings }">
 		<Form class="form scroll" name="settings" @submit="change">
-			<Title />
-			<Smoke />
-			<About />
+			<Username :title="titles[l].username" :value="data.username" :holder="lang.placeholder[l].username" :lang="lang.username[l]" />
+			<Title :title="titles[l].title" :value="data.title" :holder="lang.placeholder[l].title" />
+
+			<Sex :title="titles[l].sex" :value="data.sex" @value="data.sex = $event" />
+
+			<Age :title="titles[l].age" :value="data.age" @value="data.age = $event" />
+			<Height :title="titles[l].height" :value="data.height" @value="data.height = $event" />
+			<Weight :title="titles[l].weight" :value="data.weight" @value="data.weight = $event" />
+
+			<div class="block">
+				<Smoke :title="titles[l].smokes" :list="info.smokes" :value="data.smokes" :blank="lang.blank[l]" 
+				@value="data.smokes = $event" />
+				<Drink :title="titles[l].drinks" :list="info.drinks" :value="data.drinks" :blank="lang.blank[l]" 
+				@value="data.drinks = $event" />
+			</div>
+
+			<div class="block">
+				<Body :title="titles[l].body" :list="info.body" :value="data.body" :blank="lang.blank[l]" 
+				@value="data.body = $event" />
+				<Ethnicity :title="titles[l].ethnicity" :list="info.ethnicity" :value="data.ethnicity" :blank="lang.blank[l]" 
+				@value="data.ethnicity = $event" />
+			</div>
+
+			<div class="block">
+				<Income :title="titles[l].income" :list="info.income" :value="data.income" :blank="lang.blank[l]" 
+				@value="data.income = $event" />
+				<Industry :title="titles[l].industry" :list="info.industry" :value="data.industry" :blank="lang.blank[l]" 
+				@value="data.industry = $event" />
+			</div>
+
+			<Search :title="titles[l].search" :list="info.search" :value="data.search" :blank="lang.blank[l]" 
+			@value="data.search = $event" />
+
+			<About :title="titles[l].about" :value="data.about" :holder="lang.placeholder[l].about" />
+			<Children :title="titles[l].children" :value="data.children" @value="data.children = $event" />
+
 			<div class="buttons">
-				<div @click="$emit('settings')" class="btn">Cancel</div>
-				<button class="btn">Save</button>
+				<div @click="$emit('settings')" class="btn">{{ lang.buttons[l].cancel }}</div>
+				<button class="btn">{{ lang.buttons[l].save }}</button>
 			</div>
 		</Form>
 	</div>
@@ -14,25 +47,61 @@
 
 <script scoped>
 import { Form } from "vee-validate"
+import Username from "@/components/Settings/Username.vue"
 import Title from "@/components/Settings/Title.vue"
+
+import Sex from "@/components/Settings/Sex.vue"
+
+import Age from "@/components/Settings/Age.vue"
+import Height from "@/components/Settings/Height.vue"
+import Weight from "@/components/Settings/Weight.vue"
+
 import Smoke from "@/components/Settings/Smoke.vue"
+import Drink from "@/components/Settings/Drink.vue"
+
+import Body from "@/components/Settings/Body.vue"
+import Ethnicity from "@/components/Settings/Ethnicity.vue"
+
+import Income from "@/components/Settings/Income.vue"
+import Industry from "@/components/Settings/Industry.vue"
+
+import Search from "@/components/Settings/Search.vue"
+import Children from "@/components/Settings/Children.vue"
+
 import About from "@/components/Settings/About.vue"
 export default {
 	name: "Settings",
-	props: ["settings"],
+	props: ["settings", "l", "lang", "titles", "fields", "info"],
 	components: {
-		Form,
-		Title,
-		Smoke,
-		About
-	},
+    Form,
+	Username,
+    Title,
+    Sex,
+    Age,
+    Height,
+    Weight,
+    Smoke,
+    Drink,
+	Body,
+	Ethnicity,
+	Income,
+	Industry,
+	Search,
+	Children,
+    About
+},
 	data() {
 		return {
+			data: null
 		}
+	},
+	beforeMount() {
+		let data = Object.assign({}, this.fields)
+		this.data = data
 	},
 	methods: {
 		change(values) {
-			console.log(values)
+			console.log(this.data)
 		}
 	}
 }
@@ -58,11 +127,12 @@ export default {
 
 .form {
 	height: 100%;
+	height: auto;
 	width: 50%;
 	min-width: 500px;
 
 	background-color: #fff;
-	border-radius: 16px;
+	border-radius: 10px;
 
 	display: flex;
 	flex-direction: column;
@@ -71,6 +141,14 @@ export default {
 	padding: 30px;
 
 	overflow-y: auto;
+}
+
+.block {
+	width: 100%;
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
 .buttons {
@@ -137,6 +215,14 @@ export default {
 		padding: 8px 18px;
 	}
 }
+
+@media screen and (max-width: 480px) {
+    .block {
+		flex-direction: column;
+		flex-wrap: nowrap;
+	}
+}
+
 
 .visible {
 	visibility: visible;

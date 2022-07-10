@@ -1,23 +1,33 @@
 <template>
 	<h3>{{ title }}</h3>
-	<div style="width: 400px;">
-		<Field name="title" v-slot="{ field }" v-model="value">
-			<input v-bind="field" maxlength="150" :placeholder="holder" />
+	<div>
+		<Field name="username" :rules="rules" v-slot="{ field }">
+			<input v-bind="field" maxlength="20" :placeholder="holder" v-model="value" />
 		</Field>
-		<div class="count">
-			<span>{{ value.length }}</span>
-			<span> / 150</span>
+		<div>
+			<ErrorMessage name="username" class="error" />
+			<div class="count">
+				<span>{{ value.length }}</span>
+				<span> / 20</span>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script scoped>
-import { Field } from 'vee-validate';
+import { Field, ErrorMessage   } from 'vee-validate'
+import * as yup from 'yup'
 export default {
 	name: "Title",
-	props: ["title", "holder", "value"],
+	props: ["title", "holder", "value", "lang"],
 	components: {
-		Field
+		Field,
+		ErrorMessage
+	},
+	data() {
+		return {
+			rules: yup.string().matches(/^[\S]+$/, this.lang.space).required(this.lang.required)
+		}
 	}
 }
 </script>
@@ -69,5 +79,11 @@ input:-webkit-autofill:active
     margin-bottom: 30px;
 
     float: right;
+}
+
+.error {
+	font-size: 15px;
+	font-weight: 600;
+	color: #fd8692;
 }
 </style>

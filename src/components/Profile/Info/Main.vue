@@ -3,8 +3,8 @@
         <div v-for="(elem, index) in keys" :key="index" class="block">
             <h3 class="title">{{ titles[l][index] }}</h3>
             <template v-if="data[index] !== 0">
-                <span v-show="elem">{{ values[l][index][data[index]] }}</span>
-                <span v-show="!elem">{{ data[index] }}</span>
+                <span v-if="elem">{{ values[l][index][data[index]] }}</span>
+                <span v-else>{{ data[index] }}</span>
             </template>
             <span v-else>-</span>
         </div>

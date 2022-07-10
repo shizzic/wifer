@@ -1,29 +1,29 @@
 <template>
-	<div class="body">
-		<h3>{{ title }}</h3>
-		<div class="wrapper" v-click-outside="() => { mode = null }">
-			<div v-if="value > 0" class="result" @click="show">{{ list[value] }}</div>
-			<div v-else class="result" @click="show">{{ blank }}</div>
-			<div class="arrow" :class="{ closed: !mode, opened: mode }" @click="show" />
+    <div class="body">
+        <h3>{{ title }}</h3>
+        <div class="wrapper" v-click-outside="() => { mode = null }">
+            <div v-if="value > 0" class="result" @click="show">{{ list[value] }}</div>
+            <div v-else class="result" @click="show">{{ blank }}</div>
+            <div class="arrow" :class="{ closed: !mode, opened: mode }" @click="show" />
 
-			<transition name="slide-fade">
-				<div v-if="mode">
-					<div class="mini" />
+            <transition name="slide-fade">
+                <div v-if="mode">
+                    <div class="mini" />
 
-					<ul class="ul scroll">
-						<template v-for="(elem, index) in list" :key="index">
-							<li v-if="index != value" @click="$emit('value', +index); mode = null;">{{ elem }}</li>
-						</template>
-					</ul>
-				</div>
-			</transition>
-		</div>
-	</div>
+                    <ul class="ul scroll">
+                        <template v-for="(elem, index) in list" :key="index">
+                            <li v-if="index != value" @click="$emit('value', +index); mode = null;">{{ elem }}</li>
+                        </template>
+                    </ul>
+                </div>
+            </transition>
+        </div>
+    </div>
 </template>
 
 <script scoped>
 export default {
-	name: "Smoke",
+	name: "Industry",
 	props: ["title", "list", "value", "blank"],
 	emits: ["value"],
 	data() {
@@ -44,11 +44,11 @@ export default {
 
 <style scoped>
 .body {
-	z-index: 10;
+    z-index: 5;
 	position: relative;
-	width: 45%;
+    width: 45%;
 	min-width: 175px;
-	max-width: 225px;
+    max-width: 225px;
 
 	margin-bottom: 30px;
 }
@@ -111,8 +111,8 @@ h3 {
 ul {
 	width: 100%;
 	max-height: 300px;
-	background-color: #fff;
 	border: 1px solid #b5b5b5;
+    background-color: #fff;
 	border-radius: 4px;
 
 	position: absolute;

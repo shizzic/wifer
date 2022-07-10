@@ -5,6 +5,10 @@ export const InfoJS = defineStore("Info", {
         keys() {
             return {
                 en: {
+                    username: "Username",
+                    title: "Your title",
+                    sex: "Sex",
+                    age: "Age",
                     height: "Height",
                     weight: "Weight",
                     body: "Body's type",
@@ -14,9 +18,14 @@ export const InfoJS = defineStore("Info", {
                     income: "Annual income $",
                     industry: "Industry",
                     search: "Search",
-                    children: "Children"
+                    children: "Children",
+                    about: "About me"
                 },
                 ru: {
+                    username: "Ник",
+                    title: "Ваша надпись",
+                    sex: "Пол",
+                    age: "Возраст",
                     height: "Рост",
                     weight: "Вес",
                     body: "Тип тела",
@@ -26,7 +35,8 @@ export const InfoJS = defineStore("Info", {
                     income: "Годовой доход $",
                     industry: "Сфера деятельности",
                     search: "Ищу",
-                    children: "Дети"
+                    children: "Дети",
+                    about: "Обо мне"
                 }
             }
         },
