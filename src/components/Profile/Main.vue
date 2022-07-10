@@ -1,6 +1,6 @@
 <template>
 	<div v-if="data" class="wrap scroll">
-		<Header :data="data" @avatar="++avatar" @settings="settings = true" />
+		<Header :data="data" :lang="values[l].sex" @avatar="++avatar" @settings="settings = true" />
 		<Images v-if="data && (data.public > 0 || data.private > 0 || data._id == $user.id)" 
 			:data="data" :lang="cropper" :l="l" :avatar="avatar"
 		/>

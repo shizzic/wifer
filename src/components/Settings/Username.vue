@@ -1,8 +1,8 @@
 <template>
 	<h3>{{ title }}</h3>
-	<div>
-		<Field name="username" :rules="rules" v-slot="{ field }">
-			<input v-bind="field" maxlength="20" :placeholder="holder" v-model="value" />
+	<div style="margin-bottom: 20px;">
+		<Field name="username" :rules="rules" v-slot="{ field }" v-model="value">
+			<input v-bind="field" maxlength="20" :placeholder="holder" @input="$emit('value', $event.target.value)" />
 		</Field>
 		<div>
 			<ErrorMessage name="username" class="error" />
@@ -15,11 +15,12 @@
 </template>
 
 <script scoped>
-import { Field, ErrorMessage   } from 'vee-validate'
+import { Field, ErrorMessage } from 'vee-validate'
 import * as yup from 'yup'
 export default {
 	name: "Title",
-	props: ["title", "holder", "value", "lang"],
+	props: ["title", "holder", "lang", "value"],
+	emits: ["value"],
 	components: {
 		Field,
 		ErrorMessage
@@ -76,7 +77,6 @@ input:-webkit-autofill:active
 .count {
     font-weight: 700;
     color: #4d4d4d;
-    margin-bottom: 30px;
 
     float: right;
 }

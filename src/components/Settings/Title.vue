@@ -1,8 +1,8 @@
 <template>
 	<h3>{{ title }}</h3>
-	<div style="width: 400px;">
+	<div style="width: 400px; margin-bottom: 20px;">
 		<Field name="title" v-slot="{ field }" v-model="value">
-			<input v-bind="field" maxlength="150" :placeholder="holder" />
+			<input v-bind="field" maxlength="150" :placeholder="holder" @input="$emit('value', $event.target.value)" />
 		</Field>
 		<div class="count">
 			<span>{{ value.length }}</span>
@@ -16,6 +16,7 @@ import { Field } from 'vee-validate';
 export default {
 	name: "Title",
 	props: ["title", "holder", "value"],
+	emits: ["value"],
 	components: {
 		Field
 	}
@@ -66,7 +67,6 @@ input:-webkit-autofill:active
 .count {
     font-weight: 700;
     color: #4d4d4d;
-    margin-bottom: 30px;
 
     float: right;
 }

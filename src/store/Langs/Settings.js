@@ -45,6 +45,24 @@ export const SettingsJS = defineStore("Settings", {
                     space: "Вы не можете использовать пробел в нике"
                 }
             }
+        },
+        response() {
+            return {
+                en: {
+                    0: "Validation failed",
+                    1: "Account hasn't changed. Try again"
+                },
+                ru: {
+                    0: "Валидация провалена",
+                    1: "Данные не изменились. Попробуйте снова"
+                }
+            }
+        },
+        success() {
+            return {
+                en: "Your info was changed",
+                ru: "Ваша инфа была изменена"
+            }
         }
     }
 })

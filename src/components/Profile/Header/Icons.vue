@@ -3,7 +3,10 @@
         <div v-for="(elem, index) in text" :key="index" class="row">
             <img :src="'/' + index + '.webp'">
             <span v-if="elem === 0">-</span>
-            <span v-else>{{ elem }}</span>
+            <template v-else>
+                <span v-if="elem < 3">{{ lang[elem] }}</span>
+                <span v-else>{{ elem }}</span>
+            </template>
         </div>
 
         <div v-for="(elem, place) in place" :key="place" class="row">
@@ -22,7 +25,7 @@
 <script scoped>
 export default {
 	name: "Icons",
-    props: ["time", "text", "place"],
+    props: ["time", "text", "place", "lang"],
     methods: {
         getPlace(place, index) {
             if (place === "city")

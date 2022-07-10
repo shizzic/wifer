@@ -1,8 +1,9 @@
 <template>
 	<div class="wrapper" :class="{ none: !settings, visible: settings }">
 		<Form class="form scroll" name="settings" @submit="change">
-			<Username :title="titles[l].username" :value="data.username" :holder="lang.placeholder[l].username" :lang="lang.username[l]" />
-			<Title :title="titles[l].title" :value="data.title" :holder="lang.placeholder[l].title" />
+			<Username :title="titles[l].username" :holder="lang.placeholder[l].username" :lang="lang.username[l]" :value="data.username"
+			@value="data.username = $event" />
+			<Title :title="titles[l].title" :holder="lang.placeholder[l].title" :value="data.title" @value="data.title = $event" />
 
 			<Sex :title="titles[l].sex" :value="data.sex" @value="data.sex = $event" />
 
@@ -34,11 +35,11 @@
 			<Search :title="titles[l].search" :list="info.search" :value="data.search" :blank="lang.blank[l]" 
 			@value="data.search = $event" />
 
-			<About :title="titles[l].about" :value="data.about" :holder="lang.placeholder[l].about" />
+			<About :title="titles[l].about" :holder="lang.placeholder[l].about" :value="data.about" @value="data.about = $event" />
 			<Children :title="titles[l].children" :value="data.children" @value="data.children = $event" />
 
 			<div class="buttons">
-				<div @click="$emit('settings')" class="btn">{{ lang.buttons[l].cancel }}</div>
+				<div @click="data = Object.assign({}, fields); $emit('settings');" class="btn">{{ lang.buttons[l].cancel }}</div>
 				<button class="btn">{{ lang.buttons[l].save }}</button>
 			</div>
 		</Form>
@@ -96,12 +97,28 @@ export default {
 		}
 	},
 	beforeMount() {
-		let data = Object.assign({}, this.fields)
-		this.data = data
+		this.data = Object.assign({}, this.fields)
 	},
 	methods: {
-		change(values) {
-			console.log(this.data)
+		change() {
+			let form = new FormData()
+			for (let key in this.data)
+				form.append(key, this.data[key])
+
+			fetch(this.$domain + "change", {
+				method: "PUT",
+				credentials: 'include',
+				body: form
+			})
+				.then(data => { return data.json() })
+				.then(data => { this.$emit('settings')
+					if ("error" in data)
+						this.$toast.error(this.lang.response[this.l][data.error])
+					else {
+						this.$emit("data", this.data)
+						this.$toast.success(this.lang.success[this.l])
+					}
+				})
 		}
 	}
 }

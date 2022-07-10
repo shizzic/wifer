@@ -1,7 +1,7 @@
 <template>
     <div style="width: 100%;">
         <h3>{{ title }}</h3>
-        <textarea class="scroll" v-model="value" :placeholder="holder" maxlength="1500" />
+        <textarea class="scroll" v-model="value" :placeholder="holder" maxlength="1500" @input="$emit('value', $event.target.value)" />
         <div class="count">
             <span>{{ value.length }}</span>
             <span> / 1500</span>
@@ -13,16 +13,17 @@
 export default {
 	name: "About",
 	props: ["title", "holder", "value"],
-    methods: {
-        // @keydown="autosize"
-        // autosize(e) {
-        //     var el = e.target
-        //     setTimeout(function() {
-        //         el.style.cssText = "height:auto"
-        //         el.style.cssText = "height:" + el.scrollHeight + "px"
-        //     }, 0)
-        // }
-    }
+    emits: ["value"]
+    // methods: {
+    //     @keydown="autosize"
+    //     autosize(e) {
+    //         var el = e.target
+    //         setTimeout(function() {
+    //             el.style.cssText = "height:auto"
+    //             el.style.cssText = "height:" + el.scrollHeight + "px"
+    //         }, 0)
+    //     }
+    // }
 }
 </script>
 

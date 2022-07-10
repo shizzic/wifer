@@ -25,11 +25,14 @@ export default {
     data() {
 		return {
 			mode: true
-		};
+		}
 	},
     mounted() {
         if (this.value === 0)
             this.$emit("value", 1)
+        else
+            if (this.value === 2)
+                this.mode = null
     },
     methods: {
         get(bool) {

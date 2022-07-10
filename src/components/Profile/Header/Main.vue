@@ -3,7 +3,8 @@
         <Avatar :avatar="data.avatar" @avatar="$emit('avatar')" />
         <div class="right">
             <Username :username="data.username" :title="data.title" :online="data.online" />
-            <Icons 
+            <Icons
+                :lang="lang"
                 :time="{ created_at: data.created_at, last_time: data.last_time }" 
                 :text="{ age: data.age, sex: data.sex }"
                 :place="{ country: data.country_id, city: data.city_id }"
@@ -20,7 +21,7 @@ import Icons from "@/components/Profile/Header/Icons.vue"
 import Buttons from "@/components/Profile/Header/Buttons.vue"
 export default {
 	name: "Header",
-    props: ["data"],
+    props: ["data", "lang"],
     components: {
         Avatar,
         Username,

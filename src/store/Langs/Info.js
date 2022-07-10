@@ -43,6 +43,10 @@ export const InfoJS = defineStore("Info", {
         values() {
             return {
                 en: {
+                    sex: {
+                        1: "Man",
+                        2: "Woman"
+                    },
                     body: {
                         1: "Slim",
                         2: "Athletic",
@@ -113,6 +117,10 @@ export const InfoJS = defineStore("Info", {
                     }
                 },
                 ru: {
+                    sex: {
+                        1: "Мужчина",
+                        2: "Женщина"
+                    },
                     body: {
                         1: "Худая/ой",
                         2: "Атлетичная/ый",

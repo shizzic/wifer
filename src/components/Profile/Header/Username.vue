@@ -29,7 +29,7 @@ export default {
 .username {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
 }
 
 .username span {
