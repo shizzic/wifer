@@ -2,7 +2,7 @@
 	<h3>{{ title }}</h3>
 	<div style="width: 400px; margin-bottom: 20px;">
 		<Field name="title" v-slot="{ field }" v-model="value">
-			<input v-bind="field" maxlength="150" :placeholder="holder" @input="$emit('value', $event.target.value)" />
+			<input v-bind="field" maxlength="150" :placeholder="holder" v-model="value" @input="$emit('value', $event.target.value)" />
 		</Field>
 		<div class="count">
 			<span>{{ value.length }}</span>

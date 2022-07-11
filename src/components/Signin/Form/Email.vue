@@ -1,7 +1,7 @@
 <template>
 	<h3>{{ title }}</h3>
 	<div>
-        <Field name="email" :rules="rules" maxlength="254" v-slot="{ field, errorMessage }">
+        <Field name="email" :rules="rules" maxlength="254" v-slot="{ field, errorMessage }" v-model="value">
 			<input v-bind="field" type="email" v-model="value" />
 
 			<span v-show="!errorMessage && value" style="color: #40e64e;">&#10004;</span>

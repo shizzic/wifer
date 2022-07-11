@@ -2,7 +2,7 @@
 	<h3>{{ title }}</h3>
 	<div style="margin-bottom: 20px;">
 		<Field name="username" :rules="rules" v-slot="{ field }" v-model="value">
-			<input v-bind="field" maxlength="20" :placeholder="holder" @input="$emit('value', $event.target.value)" />
+			<input v-bind="field" maxlength="20" :placeholder="holder" v-model="value" @input="$emit('value', $event.target.value)" />
 		</Field>
 		<div>
 			<ErrorMessage name="username" class="error" />
