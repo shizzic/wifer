@@ -1,11 +1,15 @@
 <template>
 	<h3>{{ title }}</h3>
 	<div style="margin-bottom: 20px;">
-		<Field name="username" :rules="rules" v-slot="{ field }" v-model="value">
-			<input v-bind="field" maxlength="20" :placeholder="holder" v-model="value" @input="$emit('value', $event.target.value)" />
+		<Field name="username" :rules="rules" v-slot="{ field, errorMessage }" v-model="value">
+			<input v-bind="field" maxlength="20" :placeholder="holder" v-model="value" @input="error = errorMessage; get($event.target.value);" />
 		</Field>
 		<div>
 			<ErrorMessage name="username" class="error" />
+			<template v-if="!error && fetched">
+				<span v-show="!available" class="error">{{ lang.taken }}</span>
+				<span v-show="available" class="success">{{ lang.available }}</span>
+			</template>
 			<div class="count">
 				<span>{{ value.length }}</span>
 				<span> / 20</span>
@@ -27,7 +31,43 @@ export default {
 	},
 	data() {
 		return {
-			rules: yup.string().matches(/^[\S]+$/, this.lang.space).required(this.lang.required)
+			rules: yup.string().matches(/^[\S]+$/, this.lang.space).required(this.lang.required),
+			fetched: null,
+			available: null,
+			error: null,
+			timeout: null
+		}
+	},
+	methods: {
+		get(username) {
+			this.fetched = null
+			this.$emit('value', username)
+			
+			if (this.timeout)
+				clearTimeout(this.timeout)
+			
+			this.timeout = setTimeout(() => {
+				this.check(username)
+			}, 850)
+		},
+
+		check(username) {
+			if (!this.error && username !== "")
+				fetch(this.$domain + "checkUsername?username=" + username, {
+					method: "GET",
+					credentials: 'include'
+				})
+					.then(data => { return data.json() })
+					.then(data => {
+						if (data === true || data === false) {
+							this.fetched = true
+
+							if (data === true)
+								this.available = true
+							else
+								this.available = null
+						}
+					})
 		}
 	}
 }
@@ -84,6 +124,12 @@ input:-webkit-autofill:active
 .error {
 	font-size: 15px;
 	font-weight: 600;
-	color: #fd8692;
+	color: #ff6b7a;
+}
+
+.success {
+	font-size: 15px;
+	font-weight: 600;
+	color: #10b981;
 }
 </style>

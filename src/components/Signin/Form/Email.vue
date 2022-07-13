@@ -24,7 +24,7 @@ export default {
 	data() {
 		return {
 			rules: yup.string().email(this.error["email"]).required(this.error["required"]),
-			value: null
+			value: ""
 		}
 	}
 }

@@ -111,10 +111,11 @@ export default {
 				body: form
 			})
 				.then(data => { return data.json() })
-				.then(data => { this.$emit('settings')
+				.then(data => {
 					if ("error" in data)
 						this.$toast.error(this.lang.response[this.l][data.error])
 					else {
+						this.$emit('settings')
 						this.$emit("data", this.data)
 						this.$toast.success(this.lang.success[this.l])
 					}

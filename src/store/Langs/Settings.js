@@ -38,11 +38,15 @@ export const SettingsJS = defineStore("Settings", {
             return {
                 en: {
                     required: "U need some username :)",
-                    space: "U can't use spaces for username"
+                    space: "U can't use spaces for username",
+                    available: "Available",
+                    taken: "This username is already used"
                 },
                 ru: {
                     required: "Вам нужен ник :)",
-                    space: "Вы не можете использовать пробел в нике"
+                    space: "Вы не можете использовать пробел в нике",
+                    available: "Доступен",
+                    taken: "Этот ник уже занят"
                 }
             }
         },
@@ -50,11 +54,13 @@ export const SettingsJS = defineStore("Settings", {
             return {
                 en: {
                     0: "Validation failed",
-                    1: "Account hasn't changed. Try again"
+                    1: "Such username is already used",
+                    2: "Account hasn't changed. Try again"
                 },
                 ru: {
                     0: "Валидация провалена",
-                    1: "Данные не изменились. Попробуйте снова"
+                    1: "Такой ник уже используется",
+                    2: "Данные не изменились. Попробуйте снова"
                 }
             }
         },
