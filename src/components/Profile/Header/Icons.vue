@@ -48,7 +48,7 @@ export default {
             return formattedTime
         },
         returnPlace(place) {
-            fetch(this.$domain + place + "?country=" + this.place.country, {
+            fetch(this.$domain + place + "?country_id=" + this.place.country, {
 				method: "GET",
 				credentials: "include"
 			})

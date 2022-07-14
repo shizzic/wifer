@@ -12,6 +12,11 @@
 			<Weight :title="titles[l].weight" :value="data.weight" @value="data.weight = $event" />
 
 			<div class="block">
+				<Country :title="titles[l].country" :id="data.country_id" @value="data.country_id = $event" />
+				<City :title="titles[l].city" :id="data.city_id" :country="data.country_id" @value="data.city_id = $event" />
+			</div>
+
+			<div class="block">
 				<Smoke :title="titles[l].smokes" :list="info.smokes" :value="data.smokes" :blank="lang.blank[l]" 
 				@value="data.smokes = $event" />
 				<Drink :title="titles[l].drinks" :list="info.drinks" :value="data.drinks" :blank="lang.blank[l]" 
@@ -57,6 +62,9 @@ import Age from "@/components/Settings/Age.vue"
 import Height from "@/components/Settings/Height.vue"
 import Weight from "@/components/Settings/Weight.vue"
 
+import Country from "@/components/Settings/Country.vue"
+import City from "@/components/Settings/City.vue"
+
 import Smoke from "@/components/Settings/Smoke.vue"
 import Drink from "@/components/Settings/Drink.vue"
 
@@ -81,6 +89,8 @@ export default {
     Age,
     Height,
     Weight,
+	Country,
+	City,
     Smoke,
     Drink,
 	Body,

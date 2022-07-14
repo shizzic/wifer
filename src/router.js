@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router"
 
-import Search from "@/components/Search.vue"
+import Search from "@/components/Search/Main.vue"
 import Chat from "@/components/Chat.vue"
 import Premium from "@/components/Premium.vue"
 import Heart from "@/components/Heart.vue"
