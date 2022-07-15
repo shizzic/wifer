@@ -1,27 +1,35 @@
 <template>
-	<div />
+	<div class="wrapper scroll">
+		<Locations :lang="lang" />
+	</div>
 </template>
 
 <script scoped>
+import Locations from "@/components/Search/Sidebar/Locations/Main.vue"
 export default {
 	name: "Sidebar",
+	props: ["lang"],
+	components: {
+		Locations
+	},
 	data() {
 		return {
 		}
 	},
 	methods: {
+		
 	}
 }
 </script>
 
 <style scoped>
-div {
+.wrapper {
 	background-color: #fff;
 	word-break: break-all;
     border-radius: 4px;
 
-    width: 325px;
-    min-width: 325px;
+    width: 25%;
+	min-width: 300px;
 	height: 100%;
     margin-right: 25px;
 	
@@ -29,7 +37,7 @@ div {
 }
 
 @media screen and (max-width: 730px) {
-    div {
+    .wrapper {
         position: absolute;
         left: -500px;
         top: 0;

@@ -1,9 +1,8 @@
 <template>
-	<div v-if="country > 0 && fetched" class="body">
+	<div v-if="fetched" class="body">
 		<h3>{{ title }}</h3>
 		<div class="wrapper" v-click-outside="() => { mode = null }">
             <input type="text" class="result" v-model="value" @input="input($event.target.value)" @click="show" />
-			<div class="arrow" :class="{ closed: !mode, opened: mode }" @click="show" />
 
 			<transition name="slide-fade">
 				<div v-if="mode">
@@ -11,8 +10,13 @@
 
 					<ul class="ul scroll">
 						<template v-for="(elem, index) in list" :key="index">
-							<li v-if="(!reg || reg && elem.match(reg)) && index != id" 
-                                @click="$emit('value', +index); value = elem; reg = null; mode = null;"
+							<li v-if="(!reg || reg && elem.match(reg))" 
+                                @click="
+									$emit('value', { id : +index, title : elem, country : country }); 
+									value = ''; 
+									reg = null; 
+									mode = null;
+								"
                             >
                                 {{ elem }}
                             </li>
@@ -27,7 +31,7 @@
 <script scoped>
 export default {
 	name: "City",
-	props: ["title", "id", "country"],
+	props: ["title", "country"],
 	emits: ["value"],
 	data() {
 		return {
@@ -42,31 +46,21 @@ export default {
 	},
     watch: {
         country(n) {
-            if (n > 0)
-                if (this.$city.city[n]) {
-                    this.reg     = null
-                    this.list    = Object.assign({}, this.$city.city[n])
-                    this.value   = null
-                    this.fetched = true
-                } else
-                    this.returnCity()
-            else {
-                this.fetched = null
-                this.reg     = null
-            }
-        }
-    },
-    beforeMount() {
-		if (this.country > 0)
-			if (this.$city.city[this.country]) {
-				this.list = Object.assign({}, this.$city.city[this.country])
-
-				if (this.$city.city[this.country][this.id])
-					this.value = this.list[this.id]
-				
+			if (this.$city.city[n]) {
+				this.reg     = null
+				this.list    = Object.assign({}, this.$city.city[n])
+				this.value   = null
 				this.fetched = true
 			} else
 				this.returnCity()
+        }
+    },
+    beforeMount() {
+        if (this.$city.city[this.country]) {
+            this.list 	 = Object.assign({}, this.$city.city[this.country])
+            this.fetched = true
+        } else
+			this.returnCity()
     },
 	methods: {
         returnCity() {
@@ -86,17 +80,12 @@ export default {
 
                     this.$city.set({ "data" : obj, "country_id": this.country })
                     this.list = Object.assign({}, this.$city.city[this.country])
-
-                    if (this.list[this.id])
-                        this.value   = this.list[this.id]
-                    
                     this.fetched = true
 				})
         },
 
         input(value) {
             this.reg = new RegExp(value, 'giy')
-            this.$emit("value", 0)
         },
 
 		show() {
@@ -111,10 +100,8 @@ export default {
 
 <style scoped>
 .body {
-	z-index: 11;
 	position: relative;
-	width: 45%;
-	min-width: 175px;
+	width: 100%;
 	max-width: 225px;
 
 	margin-bottom: 30px;
@@ -132,43 +119,22 @@ h3 {
 }
 
 .result {
-    width: 100%;
-	cursor: pointer;
+    color: #000;
 	font-size: 20px;
-	color: #fff;
-	background-color: #5c9cd8;
-	border-radius: 4px;
+	letter-spacing: 1px;
+	background: none;
 
-	padding: 11px 22px;
-	padding-right: 45px;
-}
+	width: 100%;
+	max-width: 400px;
+	padding: 10px 15px;
+	margin-bottom: 5px;
 
-.arrow {
-	cursor: pointer;
-    display: block;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  	-webkit-tap-highlight-color: transparent;
 
-    width: 10px;
-    height: 10px;
-
-	position: absolute;
-    top: 50%;
-    right: 25px;
-
-    margin-top: -3px;
-
-    border-bottom: 1px solid #fff;
-    border-right: 1px solid #fff;
-    transition: all .3s ease-in-out;
-    transform-origin: 50% 0;
-}
-
-.closed {
-	transform: rotate(45deg) translateY(-50%);
-}
-
-.opened {
-	top: calc(50% + 5px);
-	transform: rotate(-135deg) translateY(-50%);
+	border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
 }
 
 .ul {
@@ -243,10 +209,5 @@ li:not(:last-child) {
 
 .slide-fade-leave-to, .slide-fade-enter-from {
     transform: translateX(10px);
-}
-
-input {
-    border: none;
-    outline: none;
 }
 </style>

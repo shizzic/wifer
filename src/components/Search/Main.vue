@@ -1,18 +1,27 @@
 <template>
 	<div class="wrap">
-		<Sidebar />
+		<Sidebar :lang="titles[l]" />
 		<List />
 	</div>
 </template>
 
 <script scoped>
+import { InfoJS } from "@/store/Langs/Info"
 import Sidebar from "@/components/Search/Sidebar/Main.vue"
 import List from "@/components/Search/List/Main.vue"
 export default {
 	name: "Search",
+	props: ["l"],
 	components: {
 		Sidebar,
 		List
+	},
+	setup() {
+		const titles = InfoJS().keys
+
+		return {
+			titles
+		}
 	},
 	data() {
 		return {
