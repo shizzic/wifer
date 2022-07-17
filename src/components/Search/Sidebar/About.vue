@@ -1,10 +1,12 @@
 <template>
     <div class="block">
+        {{data.about.value}}
         <div class="box">
 			<label for="about">
 				<div class="checkbox" :class="{ checked : full }" />
 				<input id="about" type="checkbox" v-model="data.about.full">
 				{{ lang.full }}
+                <span v-show="!data.about.full" class="question">?</span>
 			</label>
 		</div>
 
@@ -20,7 +22,6 @@
 export default {
 	name: "About",
 	props: ["lang", "data", "full"],
-    emits: ["value"],
     methods: {
         autosize(e) {
             this.$emit('value', e.target.value)
@@ -101,5 +102,10 @@ label {
 
 .checked {
 	background-color: #10b981;
+}
+
+.question {
+    display: inline-block;
+    padding-left: 3px;
 }
 </style>
