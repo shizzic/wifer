@@ -1,6 +1,5 @@
 <template>
     <div class="block">
-        {{data.about.value}}
         <div class="box">
 			<label for="about">
 				<div class="checkbox" :class="{ checked : full }" />
