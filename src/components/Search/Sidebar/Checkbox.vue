@@ -19,18 +19,23 @@ export default {
 
 <style scoped>
 .block {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  	-webkit-tap-highlight-color: transparent;
 	background-color: #fff;
 	word-break: break-all;
 
-    width: 25%;
+    width: 100%;
 	min-width: 300px;
-	padding: 10px 20px;
 }
 
 .box {
     display: flex;
     align-items: center;
     user-select: none;
+}
+
+.box:not(:last-of-type) {
+	border-bottom: 1px solid #d4d4d4;
 }
 
 input {
@@ -47,7 +52,7 @@ label {
 	display: flex;
 	align-items: center;
 	
-	padding: 10px 0;
+	padding: 10px 20px;
 }
 
 .checkbox {

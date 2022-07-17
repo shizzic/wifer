@@ -1,12 +1,13 @@
 <template>
 	<div class="wrap">
-		<Sidebar :titles="titles[l]" :values="values[l]" />
+		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" />
 		<List />
 	</div>
 </template>
 
 <script scoped>
 import { InfoJS } from "@/store/Langs/Info"
+import { SearchJS } from "@/store/Langs/Search"
 import Sidebar from "@/components/Search/Sidebar/Main.vue"
 import List from "@/components/Search/List/Main.vue"
 export default {
@@ -19,10 +20,14 @@ export default {
 	setup() {
 		const titles = InfoJS().keys
 		const values = InfoJS().values
+		const text   = SearchJS().text
+		const search = SearchJS().search
 
 		return {
 			titles,
-			values
+			values,
+			text,
+			search
 		}
 	},
 	data() {
