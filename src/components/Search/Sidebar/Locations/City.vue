@@ -10,7 +10,7 @@
 
 					<ul class="ul scroll">
 						<template v-for="(elem, index) in list" :key="index">
-							<li v-if="(!reg || reg && elem.match(reg))" 
+							<li v-if="(!reg || reg && elem.match(reg)) && (!has || !(index in has))" 
                                 @click="
 									$emit('value', { id : +index, title : elem, country : country }); 
 									value = ''; 
@@ -31,7 +31,7 @@
 <script scoped>
 export default {
 	name: "City",
-	props: ["title", "country"],
+	props: ["title", "country", "has"],
 	emits: ["value"],
 	data() {
 		return {
@@ -85,7 +85,7 @@ export default {
         },
 
         input(value) {
-            this.reg = new RegExp(value, 'giy')
+            this.reg = new RegExp(value, 'gi')
         },
 
 		show() {
@@ -104,7 +104,7 @@ export default {
 	width: 100%;
 	max-width: 225px;
 
-	margin-bottom: 30px;
+	margin-top: 15px;
 }
 
 h3 {

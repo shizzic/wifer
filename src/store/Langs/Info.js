@@ -5,6 +5,7 @@ export const InfoJS = defineStore("Info", {
         keys() {
             return {
                 en: {
+                    locations: "Locations",
                     username: "Username",
                     title: "Your title",
                     sex: "Sex",
@@ -21,9 +22,11 @@ export const InfoJS = defineStore("Info", {
                     industry: "Industry",
                     search: "Search",
                     children: "Children",
-                    about: "About me"
+                    about: "About me",
+                    prefer: "Prefer"
                 },
                 ru: {
+                    locations: "Местоположения",
                     username: "Ник",
                     title: "Ваша надпись",
                     sex: "Пол",
@@ -40,7 +43,8 @@ export const InfoJS = defineStore("Info", {
                     industry: "Сфера деятельности",
                     search: "Ищу",
                     children: "Дети",
-                    about: "Обо мне"
+                    about: "Обо мне",
+                    prefer: "Предпочитаю"
                 }
             }
         },
@@ -115,8 +119,20 @@ export const InfoJS = defineStore("Info", {
                         17: "Other"
                     },
                     search: {
-                        1: "Men",
-                        2: "Women",
+                        1: "Relationships",
+                        2: "Marriage",
+                        3: "One time sex",
+                        4: "Long term sex",
+                        5: "Friend",
+                        6: "Travel",
+                        7: "Fetish",
+                        8: "Platonic love",
+                        9: "Dunno",
+                        10: "Other"
+                    },
+                    prefer: {
+                        1: "Women",
+                        2: "Men",
                         3: "Both"
                     }
                 },
@@ -189,9 +205,21 @@ export const InfoJS = defineStore("Info", {
                         17: "Другое"
                     },
                     search: {
-                        1: "Мужчин",
-                        2: "Женщин",
-                        3: "Обоих"
+                        1: "Отношения",
+                        2: "Брак",
+                        3: "Секс на разок",
+                        4: "Содержание",
+                        5: "Друга",
+                        6: "Путешествие",
+                        7: "Фетиш",
+                        8: "Платоническая любовь",
+                        9: "Не знаю",
+                        10: "Другое"
+                    },
+                    prefer: {
+                        1: "Женщин",
+                        2: "Мужчин",
+                        3: "Всех"
                     }
                 }
             }

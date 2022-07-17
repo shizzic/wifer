@@ -70,7 +70,7 @@ export default {
         },
 
         input(value) {
-            this.reg = new RegExp(value, 'giy')
+            this.reg = new RegExp(value, 'gi')
             this.$emit("value", 0)
         },
 

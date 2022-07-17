@@ -1,6 +1,6 @@
 <template>
 	<div class="wrap">
-		<Sidebar :lang="titles[l]" />
+		<Sidebar :titles="titles[l]" :values="values[l]" />
 		<List />
 	</div>
 </template>
@@ -18,9 +18,11 @@ export default {
 	},
 	setup() {
 		const titles = InfoJS().keys
+		const values = InfoJS().values
 
 		return {
-			titles
+			titles,
+			values
 		}
 	},
 	data() {

@@ -37,6 +37,7 @@ export default {
                 income: true,
                 industry: true,
                 search: true,
+                prefer: true,
                 children: null
             }
 		}

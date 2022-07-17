@@ -1,5 +1,5 @@
 <template>
-    <div class="body">
+    <div class="body" :style="'z-index:' + index + ';'">
         <h3>{{ title }}</h3>
         <div class="wrapper" v-click-outside="() => { mode = null }">
             <div v-if="value > 0" class="result" @click="show">{{ list[value] }}</div>
@@ -23,8 +23,8 @@
 
 <script scoped>
 export default {
-	name: "Body",
-	props: ["title", "list", "value", "blank"],
+	name: "Select",
+	props: ["title", "list", "value", "blank", "index"],
 	emits: ["value"],
 	data() {
 		return {
@@ -44,7 +44,6 @@ export default {
 
 <style scoped>
 .body {
-    z-index: 8;
 	position: relative;
     width: 45%;
 	min-width: 175px;

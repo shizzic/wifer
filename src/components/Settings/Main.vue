@@ -16,29 +16,12 @@
 				<City :title="titles[l].city" :id="data.city_id" :country="data.country_id" @value="data.city_id = $event" />
 			</div>
 
-			<div class="block">
-				<Smoke :title="titles[l].smokes" :list="info.smokes" :value="data.smokes" :blank="lang.blank[l]" 
-				@value="data.smokes = $event" />
-				<Drink :title="titles[l].drinks" :list="info.drinks" :value="data.drinks" :blank="lang.blank[l]" 
-				@value="data.drinks = $event" />
+			<div v-for="(row, index) in selects" :key="index" class="block">
+				<Select v-for="(elem, key) in row" :key="key"
+					:title="titles[l][key]" :list="info[key]" :value="data[key]" :blank="lang.blank[l]" :index="elem"
+					@value="data[key] = $event" 
+				/>
 			</div>
-
-			<div class="block">
-				<Body :title="titles[l].body" :list="info.body" :value="data.body" :blank="lang.blank[l]" 
-				@value="data.body = $event" />
-				<Ethnicity :title="titles[l].ethnicity" :list="info.ethnicity" :value="data.ethnicity" :blank="lang.blank[l]" 
-				@value="data.ethnicity = $event" />
-			</div>
-
-			<div class="block">
-				<Income :title="titles[l].income" :list="info.income" :value="data.income" :blank="lang.blank[l]" 
-				@value="data.income = $event" />
-				<Industry :title="titles[l].industry" :list="info.industry" :value="data.industry" :blank="lang.blank[l]" 
-				@value="data.industry = $event" />
-			</div>
-
-			<Search :title="titles[l].search" :list="info.search" :value="data.search" :blank="lang.blank[l]" 
-			@value="data.search = $event" />
 
 			<About :title="titles[l].about" :holder="lang.placeholder[l].about" :value="data.about" @value="data.about = $event" />
 			<Children :title="titles[l].children" :value="data.children" @value="data.children = $event" />
@@ -65,19 +48,10 @@ import Weight from "@/components/Settings/Weight.vue"
 import Country from "@/components/Settings/Country.vue"
 import City from "@/components/Settings/City.vue"
 
-import Smoke from "@/components/Settings/Smoke.vue"
-import Drink from "@/components/Settings/Drink.vue"
-
-import Body from "@/components/Settings/Body.vue"
-import Ethnicity from "@/components/Settings/Ethnicity.vue"
-
-import Income from "@/components/Settings/Income.vue"
-import Industry from "@/components/Settings/Industry.vue"
-
-import Search from "@/components/Settings/Search.vue"
-import Children from "@/components/Settings/Children.vue"
+import Select from "@/components/Settings/Select.vue"
 
 import About from "@/components/Settings/About.vue"
+import Children from "@/components/Settings/Children.vue"
 export default {
 	name: "Settings",
 	props: ["settings", "l", "lang", "titles", "fields", "info"],
@@ -91,19 +65,19 @@ export default {
     Weight,
 	Country,
 	City,
-    Smoke,
-    Drink,
-	Body,
-	Ethnicity,
-	Income,
-	Industry,
-	Search,
-	Children,
-    About
+	Select,
+	About,
+	Children
 },
 	data() {
 		return {
-			data: null
+			data: null,
+			selects: [
+				{ smokes: 8, drinks: 7 },
+				{ body: 6, ethnicity: 5 },
+				{ income: 4, industry: 3 },
+				{ search: 2, prefer: 1 }
+			]
 		}
 	},
 	beforeMount() {
