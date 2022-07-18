@@ -21,6 +21,24 @@ export const SearchJS = defineStore("Search", {
                 en: "Search",
                 ru: "Поиск"
             }
+        },
+        template() {
+            return {
+                en: {
+                    input: "Title",
+                    hold: "New template",
+                    select: "Select template",
+                    count: "U can't have more than 10 templates",
+                    blank: "Template's title can't be blank"
+                },
+                ru: {
+                    input: "Название",
+                    hold: "Новый шаблон",
+                    select: "Выбрать шаблон",
+                    count: "Вы не можете иметь больше 10 шаблонов",
+                    blank: "Название шаблона не может быть пустым"
+                }
+            }
         }
     }
 })

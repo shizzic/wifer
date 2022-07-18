@@ -1,6 +1,7 @@
 <template>
 	<div class="wrap">
-		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" />
+		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :data="data" :templates="templates" 
+		:template="template[l]" @data="data = $event" />
 		<List />
 	</div>
 </template>
@@ -18,23 +19,62 @@ export default {
 		List
 	},
 	setup() {
-		const titles = InfoJS().keys
-		const values = InfoJS().values
-		const text   = SearchJS().text
-		const search = SearchJS().search
+		const titles   = InfoJS().keys
+		const values   = InfoJS().values
+		const text     = SearchJS().text
+		const search   = SearchJS().search
+		const template = SearchJS().template
 
 		return {
 			titles,
 			values,
 			text,
-			search
+			search,
+			template
 		}
 	},
 	data() {
 		return {
+			templates: {
+				active: null,
+				data: {}
+			},
+			data: {
+				expanded: {},
+				age: [18, 80],
+				weight: [35, 220],
+				height: [140, 220],
+				sex: [],
+				body: [],
+				smokes: [],
+				drinks: [],
+				ethnicity: [],
+				income: [],
+				industry: [],
+				search: [],
+				prefer: [],
+				about: {
+					full: false,
+					value: ""
+				}
+			}
 		}
 	},
+	beforeMount() {
+		this.getTemplates()
+	},
 	methods: {
+		getTemplates() {
+			fetch(this.$domain + "templates", {
+				method: "GET",
+				credentials: 'include'
+			})
+				.then(data => { return data.json() })
+				.then(data => { console.log(JSON.parse(data.data))
+					if (data)
+						this.templates = JSON.parse(data.data)
+				})
+		}
 	}
 }
 </script>

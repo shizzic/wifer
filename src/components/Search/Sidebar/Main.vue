@@ -1,20 +1,23 @@
 <template>
 	<div class="wrapper scroll">
-		<button class="accordion" :class="{ active : expanded[0] }" @click="show(0)">{{ titles.locations }}</button>
-		<Locations v-show="expanded[0]" :lang="titles" />
+		<button class="accordion" :class="{ active : data.expanded[2] }" @click="show(2)">{{ titles.templates }}</button>
+		<Templates v-show="data.expanded[2]" :lang="template" :templates="templates" :data="data" @data="$emit('data', $event)" />
+
+		<button class="accordion" :class="{ active : data.expanded[0] }" @click="show(0)">{{ titles.locations }}</button>
+		<Locations v-show="data.expanded[0]" :lang="titles" />
 
 		<template v-for="(options, index) in slider" :key="index">
-			<button class="accordion" :class="{ active : expanded[index] }" @click="show(index)">{{ titles[index] }}</button>
-			<Slider v-show="expanded[index]" :title="titles[index]" :data="data" :index="index" :options="options" />
+			<button class="accordion" :class="{ active : data.expanded[index] }" @click="show(index)">{{ titles[index] }}</button>
+			<Slider v-show="data.expanded[index]" :title="titles[index]" :data="data" :index="index" :options="options" />
 		</template>
 
 		<template v-for="(elem, index) in checkbox" :key="index">
-			<button class="accordion" :class="{ active : expanded[elem] }" @click="show(elem)">{{ titles[elem] }}</button>
-			<Checkbox v-show="expanded[elem]" :lang="values[elem]" :data="data" :title="elem" />
+			<button class="accordion" :class="{ active : data.expanded[elem] }" @click="show(elem)">{{ titles[elem] }}</button>
+			<Checkbox v-show="data.expanded[elem]" :lang="values[elem]" :data="data" :title="elem" />
 		</template>
 
-		<button class="accordion" :class="{ active : expanded[1] }" @click="show(1)">{{ text.title }}</button>
-		<About v-show="expanded[1]" :data="data" :full="data.about.full" :lang="text" />
+		<button class="accordion" :class="{ active : data.expanded[1] }" @click="show(1)">{{ text.title }}</button>
+		<About v-show="data.expanded[1]" :data="data" :full="data.about.full" :lang="text" />
 
 		<div class="button-wrap">
 			<button class="btn">{{ search }}</button>
@@ -23,14 +26,16 @@
 </template>
 
 <script scoped>
+import Templates from "@/components/Search/Sidebar/Templates/Main.vue"
 import Locations from "@/components/Search/Sidebar/Locations/Main.vue"
 import Slider from "@/components/Search/Sidebar/Slider.vue"
 import Checkbox from "@/components/Search/Sidebar/Checkbox.vue"
 import About from "@/components/Search/Sidebar/About.vue"
 export default {
 	name: "Sidebar",
-	props: ["titles", "values", "text", "search"],
+	props: ["titles", "values", "text", "search", "data", "templates", "template"],
 	components: {
+		Templates,
 		Locations,
 		Slider,
 		Checkbox,
@@ -43,34 +48,15 @@ export default {
 				age: { min: 18, max: 80 },
 				weight: { min: 35, max: 220 },
 				height: { min: 140, max: 220 }
-			},
-			expanded: {},
-			data: {
-				age: [18, 80],
-				weight: [35, 220],
-				height: [140, 220],
-				sex: [],
-				body: [],
-				smokes: [],
-				drinks: [],
-				ethnicity: [],
-				income: [],
-				industry: [],
-				search: [],
-				prefer: [],
-				about: {
-					full: false,
-					value: ""
-				}
 			}
 		}
 	},
 	methods: {
 		show(row) {
-			if (row in this.expanded)
-				delete this.expanded[row]
+			if (row in this.data.expanded)
+				delete this.data.expanded[row]
 			else
-				this.expanded[row] = true
+				this.data.expanded[row] = true
 		}
 	}
 }

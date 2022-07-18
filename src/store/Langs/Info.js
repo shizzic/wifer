@@ -5,6 +5,7 @@ export const InfoJS = defineStore("Info", {
         keys() {
             return {
                 en: {
+                    templates: "Templates",
                     locations: "Locations",
                     username: "Username",
                     title: "Your title",
@@ -26,6 +27,7 @@ export const InfoJS = defineStore("Info", {
                     prefer: "Prefer"
                 },
                 ru: {
+                    templates: "Шаблоны",
                     locations: "Местоположения",
                     username: "Ник",
                     title: "Ваша надпись",
