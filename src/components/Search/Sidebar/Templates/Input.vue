@@ -28,10 +28,14 @@ export default {
 				this.templates.data[this.value] = this.data
 				this.value = ""
 
+				let form = new FormData()
+				form.append("text", JSON.stringify(this.templates))
+
 				if (Object.keys(this.templates.data).length < 10)
-					fetch(this.$domain + "templates?text=" + JSON.stringify(this.templates), {
+					fetch(this.$domain + "templates", {
 						method: "POST",
-						credentials: 'include'
+						credentials: 'include',
+						body: form
 					})
 				else
 					this.$toast.error(this.lang.count)

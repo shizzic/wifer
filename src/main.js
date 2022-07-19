@@ -18,7 +18,7 @@ const app = createApp(App)
 app
 .use(router)
 .use(createPinia())
-.use(Toaster, { position: "bottom-left", maxToasts: 3, duration: 5000 })
+.use(Toaster, { position: "bottom-left", maxToasts: 3, duration: 4000 })
 .use(vClickOutside)
 .use(vue3GoogleLogin, { clientId: '151585600074-mlb946h3m89a7o7tbg3kfnu54kbhc46k.apps.googleusercontent.com' })
 

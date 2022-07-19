@@ -1,7 +1,7 @@
 <template>
 	<div class="about">
 		<img src="/translation.webp" @click="translate">
-		<span v-show="mode">{{ original }}</span>
+		<span v-show="mode">{{ about }}</span>
 		<span v-show="!mode">{{ translated }}</span>
 	</div>
 </template>
@@ -21,32 +21,34 @@ export default {
 	},
 	data() {
 		return {
-			original: null,
 			translated: null,
 			mode: true
 		}
 	},
-	beforeMount() {
-		this.original = this.about
-	},
 	methods: {
 		translate() {
-			if (!this.translated && this.original !== "")
-				fetch(this.$domain + "translate?text=" + this.original + "&lang=" + this.l, {
-					method: "GET",
-					credentials: "include"
+			if (!this.translated && this.original !== "") {
+				let form = new FormData()
+				form.append("text", this.about)
+				form.append("lang", this.l)
+
+				fetch(this.$domain + "translate", {
+					method: "PUT",
+					credentials: "include",
+					body: form
 				})
 					.then(data => { return data.json() })
 					.then(data => {
-						if ("error" in data)
-							this.$toast.error(this.errors[this.l])
-						else {
-							this.translated = data.text
-							this.mode = null
-						}
+						if (data)
+							if ("error" in data)
+								this.$toast.error(this.errors[this.l])
+							else {
+								this.translated = data.text
+								this.mode = null
+							}
 					})
 					.catch(() => { this.$toast.error(this.errors[this.l]) })
-			else
+			} else
 				if (this.mode)
 					this.mode = null
 				else

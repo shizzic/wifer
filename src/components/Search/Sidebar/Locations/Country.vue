@@ -10,7 +10,7 @@
 
 					<ul class="ul scroll">
 						<template v-for="(elem, index) in list" :key="index">
-							<li v-if="(!reg || reg && elem.match(reg)) && !(index in has)" 
+							<li v-if="(!reg || reg && elem.match(reg))" 
                                 @click="$emit('value', { id : +index, title : elem }); value = ''; reg = null; mode = null;"
                             >
                                 {{ elem }}
@@ -26,7 +26,7 @@
 <script scoped>
 export default {
 	name: "Country",
-	props: ["title", "has"],
+	props: ["title"],
 	emits: ["value"],
 	data() {
 		return {

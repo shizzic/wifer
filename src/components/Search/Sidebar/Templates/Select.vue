@@ -34,7 +34,7 @@ export default {
 		change(index) {
 			this.templates.active = index
 			this.mode = null
-			this.$emit("data", this.templates.data[this.active])
+			this.$emit("data", this.templates.data[this.templates.active])
 		},
 
 		show() {
