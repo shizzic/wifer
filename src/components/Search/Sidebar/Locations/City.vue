@@ -2,7 +2,7 @@
 	<div v-if="fetched" class="body">
 		<h3>{{ title }}</h3>
 		<div class="wrapper" v-click-outside="() => { mode = null }">
-            <input type="text" class="result" v-model="value" @input="input($event.target.value)" @click="show" />
+            <input type="text" class="result" v-model="value" @input="input($event.target.value)" @click="mode = true" />
 
 			<transition name="slide-fade">
 				<div v-if="mode">
@@ -11,12 +11,7 @@
 					<ul class="ul scroll">
 						<template v-for="(elem, index) in list" :key="index">
 							<li v-if="(!reg || reg && elem.match(reg)) && (!has || !(index in has))" 
-                                @click="
-									$emit('value', { id : +index, title : elem, country : country }); 
-									value = ''; 
-									reg = null; 
-									mode = null;
-								"
+                                @click="set(+index, elem)"
                             >
                                 {{ elem }}
                             </li>
@@ -84,16 +79,15 @@ export default {
 				})
         },
 
-        input(value) {
-            this.reg = new RegExp(value, 'gi')
-        },
+		set(index, elem) {
+			this.$emit('value', { id : index, title : elem, country : this.country })
+			this.value = ''
+			this.reg = null
+		},
 
-		show() {
-			if (this.mode)
-				this.mode = null
-			else
-				this.mode = true
-		}
+        input(value) {
+            this.reg = new RegExp(value, 'giy')
+        }
 	}
 }
 </script>
@@ -159,7 +153,6 @@ li {
 	font-weight: 400;
 	cursor: pointer;
 	font-size: 18px;
-	color: #949494;
 	list-style-type: none;
 	background-color: #fff;
 	word-break: break-all;

@@ -40,6 +40,8 @@ export default {
 				data: {}
 			},
 			data: {
+				countries: {},
+				cities: {},
 				expanded: {},
 				age: [18, 80],
 				weight: [35, 220],
@@ -70,9 +72,11 @@ export default {
 				credentials: 'include'
 			})
 				.then(data => { return data.json() })
-				.then(data => { console.log(JSON.parse(data.data))
-					if (data)
+				.then(data => {
+					if (data) {
 						this.templates = JSON.parse(data.data)
+						this.data      = this.templates.data[this.templates.active]
+					}
 				})
 		}
 	}
@@ -81,7 +85,7 @@ export default {
 
 <style scoped>
 .wrap {
-	background-color: #daa77b;
+	background-color: #FF6F61;
 	word-break: break-all;
 
 	width: 100%;

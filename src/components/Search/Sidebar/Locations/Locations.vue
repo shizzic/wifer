@@ -58,8 +58,8 @@ export default {
 .border {
     width: 100%;
     padding: 0 20px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
 
     display: flex;
     align-items: center;

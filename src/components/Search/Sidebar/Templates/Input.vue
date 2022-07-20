@@ -101,11 +101,11 @@ input:-webkit-autofill:active
 }
 
 .btn {
-	background: #8d6e63;
+	background: #ff6868;
 	font-size: 20px;
 	color: white;
 	border-radius: 7px;
-	box-shadow: 0 7px 0px #6d4c41;
+	box-shadow: 0 7px 0px #de4d4d;
 	display: inline-block;
 	transition: all .2s;
 	position: relative;
@@ -117,7 +117,7 @@ input:-webkit-autofill:active
 
  .btn:active {
 	top: 3px;
-	box-shadow: 0 2px 0px #6d4c41;
+	box-shadow: 0 2px 0px #de4d4d;
 	transition: all .2s;
 }
 </style>

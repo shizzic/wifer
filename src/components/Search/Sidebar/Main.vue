@@ -4,7 +4,7 @@
 		<Templates v-show="data.expanded[2]" :lang="template" :templates="templates" :data="data" @data="$emit('data', $event)" />
 
 		<button class="accordion" :class="{ active : data.expanded[0] }" @click="show(0)">{{ titles.locations }}</button>
-		<Locations v-show="data.expanded[0]" :lang="titles" />
+		<Locations v-show="data.expanded[0]" :lang="titles" :data="data" />
 
 		<template v-for="(options, index) in slider" :key="index">
 			<button class="accordion" :class="{ active : data.expanded[index] }" @click="show(index)">{{ titles[index] }}</button>
@@ -20,7 +20,7 @@
 		<About v-show="data.expanded[1]" :data="data" :full="data.about.full" :lang="text" />
 
 		<div class="button-wrap">
-			<button class="btn">{{ search }}</button>
+			<button class="btn" @click="get">{{ search }}</button>
 		</div>
 	</div>
 </template>
@@ -52,6 +52,21 @@ export default {
 		}
 	},
 	methods: {
+		get() {
+			this.updateTemplate()
+		},
+
+		updateTemplate() {
+			let form = new FormData()
+			form.append("text", JSON.stringify(this.templates))
+
+			fetch(this.$domain + "templates", {
+				method: "POST",
+				credentials: 'include',
+				body: form
+			})
+		},
+
 		show(row) {
 			if (row in this.data.expanded)
 				delete this.data.expanded[row]
@@ -66,7 +81,7 @@ export default {
 .wrapper {
 	background-color: #fff;
 	word-break: break-all;
-    border-radius: 4px;
+    border-radius: 6px;
 
     width: 25%;
 	height: 100%;
@@ -128,7 +143,7 @@ export default {
 }
 
 .button-wrap {
-	background-color: #5d5d5d;
+	background-color: #808080;
 
 	display: flex;
 	justify-content: center;

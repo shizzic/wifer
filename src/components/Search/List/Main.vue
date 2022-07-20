@@ -18,7 +18,7 @@ export default {
 div {
 	background-color: #fff;
 	word-break: break-all;
-    border-radius: 4px;
+    border-radius: 6px;
 
     width: 100%;
 	height: 100%;

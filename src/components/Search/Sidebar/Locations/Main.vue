@@ -1,11 +1,11 @@
 <template>
 	<div class="block">
-		<Locations v-if="Object.keys(countries).length > 0 || Object.keys(cities).length > 0" 
-			:countries="countries" :cities="cities"
-			@country="delete cities[$event]; delete countries[$event];" @city="delete cities[$event.country][$event.city]" 
+		<Locations v-if="Object.keys(data.countries).length > 0 || Object.keys(data.cities).length > 0" 
+			:countries="data.countries" :cities="data.cities"
+			@country="delete data.cities[$event]; delete data.countries[$event];" @city="delete data.cities[$event.country][$event.city]" 
 		/>
-		<Country :title="lang.country" :has="countries" @value="getCountry($event)" />
-		<City v-if="country" :title="lang.city" :country="country" :has="cities[country]" @value="getCity($event)" />
+		<Country :title="lang.country" :has="data.countries" @value="getCountry($event)" />
+		<City v-if="country" :title="lang.city" :country="country" :has="data.cities[country]" @value="getCity($event)" />
 	</div>
 </template>
 
@@ -15,7 +15,7 @@ import Country from "@/components/Search/Sidebar/Locations/Country.vue"
 import City from "@/components/Search/Sidebar/Locations/City.vue"
 export default {
 	name: "Main",
-	props: ["lang"],
+	props: ["lang", "data"],
 	components: {
 		Locations,
 		Country,
@@ -23,21 +23,21 @@ export default {
 	},
 	data() {
 		return {
-			countries: {},
-			cities: {},
 			country: null
 		}
 	},
 	methods: {
 		getCity(data) {
-			if (!this.cities[data.country])
-				this.cities[data.country] = {}
+			this.data.countries[this.country] = this.$country.country[this.country]
 
-			this.cities[data.country][data.id] = data.title
+			if (!this.data.cities[data.country])
+				this.data.cities[data.country] = {}
+
+			this.data.cities[data.country][data.id] = data.title
 		},
 
 		getCountry(data) {
-			this.countries[data.id] = data.title
+			this.data.countries[data.id] = data.title
 			this.country            = data.id
 		}
 	}
@@ -49,8 +49,7 @@ export default {
 	background-color: #fff;
 	word-break: break-all;
 
-    width: 25%;
-	min-width: 300px;
+    width: 100%;
 	padding: 15px;
 }
 </style>
