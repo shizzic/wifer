@@ -35,6 +35,9 @@ export default {
 		}
 	},
 	beforeMount() {
+		if (!this.l)
+			this.language.autoLang(navigator.language)
+
 		if (this.id)
 			this.makeOnline(true)
 

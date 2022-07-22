@@ -2,8 +2,8 @@
 	<div v-if="fetched" class="body">
 		<h3>{{ title }}</h3>
 		<div class="wrapper" v-click-outside="() => { mode = null }">
-            <input type="text" class="result" v-model="value" @input="input($event.target.value)" @click="show" />
-			<div class="arrow" :class="{ closed: !mode, opened: mode }" @click="show" />
+            <input type="text" class="result" v-model="value" @input="input($event.target.value)" @click="mode = true" />
+			<div class="arrow" :class="{ closed: !mode, opened: mode }" @click="mode = true" />
 
 			<transition name="slide-fade">
 				<div v-if="mode">
@@ -70,16 +70,10 @@ export default {
         },
 
         input(value) {
-            this.reg = new RegExp(value, 'gi')
+            this.reg  = new RegExp(value, 'gi')
             this.$emit("value", 0)
-        },
-
-		show() {
-			if (this.mode)
-				this.mode = null
-			else
-				this.mode = true
-		}
+			this.mode = true
+        }
 	}
 }
 </script>

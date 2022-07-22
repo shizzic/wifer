@@ -69,11 +69,12 @@ export default {
 		set(index, elem) {
 			this.$emit('value', { id : index, title : elem })
 			this.value = elem
-			this.reg = null
+			this.reg   = null
 		},
 
         input(value) {
-            this.reg = new RegExp(value, 'giy')
+            this.reg  = new RegExp(value, 'giy')
+			this.mode = true
         }
 	}
 }
