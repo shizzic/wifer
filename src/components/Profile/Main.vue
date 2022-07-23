@@ -4,8 +4,13 @@
 		<Images v-if="data && (data.public > 0 || data.private > 0 || data._id == $user.id)" 
 			:data="data" :lang="cropper" :l="l" :avatar="avatar"
 		/>
-		<Info :data="data" :l="l" />
-		<About v-show="data.about !== ''" :about="data.about" :l="l" />
+
+		<div class="flex">
+			<Info :data="data" :titles="titles[l]" :values="values[l]" />
+			<About :title="titles[l].about" :username="data.username" :about="data.about" :l="l" :blank="about[l]" />
+		</div>
+		
+		<Seeking v-show="data.search.length > 0" :list="values[l].search" :value="data.search" :title="titles[l].search" />
 
 		<Settings v-if="data" :settings="settings" :l="l" :lang="settingsJS" :titles="titles" :fields="data" :info="values[l]"
 		@settings="settings = null" @data="data = $event" />
@@ -18,8 +23,9 @@ import { InfoJS } from "@/store/Langs/Info"
 import { SettingsJS } from "@/store/Langs/Settings"
 import Header from "@/components/Profile/Header/Main.vue"
 import Images from "@/components/Profile/Images/Main.vue"
-import Info from "@/components/Profile/Info/Main.vue"
-import About from "@/components/Profile/About/Main.vue"
+import Info from "@/components/Profile/Info.vue"
+import Seeking from "@/components/Profile/Seeking.vue"
+import About from "@/components/Profile/About.vue"
 import Settings from "@/components/Settings/Main.vue"
 export default {
 	name: "Profile",
@@ -30,6 +36,7 @@ export default {
 		const cropper  	 = ProfileJS().cropper
 		const titles  	 = InfoJS().keys
 		const values  	 = InfoJS().values
+		const about  	 = InfoJS().about
 		const settingsJS = SettingsJS()
 
 		return {
@@ -38,6 +45,7 @@ export default {
 			cropper,
 			titles,
 			values,
+			about,
 			settingsJS
 		}
 	},
@@ -45,6 +53,7 @@ export default {
 		Header,
 		Images,
 		Info,
+		Seeking,
 		About,
 		Settings
 	},
@@ -100,6 +109,16 @@ export default {
 @media screen and (max-width: 768px) {
     .wrap {
         padding: 15px;
+    }
+}
+
+.flex {
+	display: flex;
+}
+
+@media screen and (max-width: 1100px) {
+    .flex {
+        flex-wrap: wrap;
     }
 }
 </style>

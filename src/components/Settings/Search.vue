@@ -1,54 +1,92 @@
 <template>
-    <div class="body" :style="'z-index:' + index + ';'">
-        <h3>{{ title }}</h3>
-        <div class="wrapper" v-click-outside="() => { mode = null }">
-            <div v-if="value > 0" class="result" @click="show">{{ list[value] }}</div>
-            <div v-else class="result" @click="show">{{ blank }}</div>
-            <div class="arrow" :class="{ closed: !mode, opened: mode }" @click="show" />
+    <div class="flex">
+        <div class="body">
+            <h3>{{ title }}</h3>
+            <div class="wrapper" v-click-outside="() => { mode = null }">
+                <div class="result" @click="mode = true">{{ title }}</div>
+                <div class="arrow" :class="{ closed: !mode, opened: mode }" @click="mode = true" />
 
-            <transition name="slide-fade">
-                <div v-if="mode">
-                    <div class="mini" />
+                <transition name="slide-fade">
+                    <div v-if="mode">
+                        <div class="mini" />
 
-                    <ul class="ul scroll">
-                        <template v-for="(elem, index) in list" :key="index">
-                            <li v-if="index != value" @click="$emit('value', +index); mode = null;">{{ elem }}</li>
-                        </template>
-                    </ul>
-                </div>
-            </transition>
+                        <ul class="ul scroll">
+                            <template v-for="(elem, index) in list" :key="index">
+                                <li v-if="!value.includes(+index)" @click="$emit('value', +index);">{{ elem }}</li>
+                            </template>
+                        </ul>
+                    </div>
+                </transition>
+            </div>
+        </div>
+
+        <div class="list">
+            <div v-for="(elem, index) in value" :key="index" class="elem" @click="$emit('clear', index)">
+                {{ list[elem] }}
+            </div>
         </div>
     </div>
 </template>
 
 <script scoped>
 export default {
-	name: "Select",
-	props: ["title", "list", "value", "blank", "index"],
+	name: "Search",
+	props: ["title", "list", "value"],
 	data() {
 		return {
 			mode: null
-		}
-	},
-	methods: {
-		show() {
-			if (this.mode)
-				this.mode = null
-			else
-				this.mode = true
 		}
 	}
 }
 </script>
 
 <style scoped>
+.flex {
+    z-index: 2;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    margin-top: -10px;
+    margin-bottom: 30px;
+}
+
 .body {
 	position: relative;
-    width: 45%;
+
+    width: 100%;
 	min-width: 175px;
     max-width: 225px;
-
+    
 	margin-bottom: 30px;
+}
+
+.list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.elem {
+    cursor: pointer;
+    background-color: #929292;
+    color: #f9f9f9;
+    border-radius: 40px;
+
+    padding: 10px 20px;
+
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    transition: background-color .1s linear;
+}
+
+.elem:hover {
+    background-color: #808080;
 }
 
 h3 {

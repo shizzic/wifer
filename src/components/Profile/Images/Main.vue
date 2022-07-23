@@ -311,7 +311,7 @@ export default {
 .images {
     width: 100%;
     background-color: #FFFFFF;
-    border-radius: 16px;
+    border-radius: 8px;
 
     display: flex;
     flex-wrap: wrap;

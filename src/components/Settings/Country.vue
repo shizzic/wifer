@@ -50,23 +50,28 @@ export default {
     },
 	methods: {
         returnCountry() {
-            fetch(this.$domain + "country", {
-				method: "GET",
-				credentials: "include"
-			})
-				.then(data => { return data.json() })
-				.then(data => {
-                    this.reg = null
-                    let obj = {}
-
-                    for (let index in data)
-                        obj[data[index]._id] = data[index].title
-
-                    this.$country.set(obj)
-                    this.list    = Object.assign({}, this.$country.country)
-                    this.value   = this.list[this.id]
-                    this.fetched = true
+			if (this.id !== 0)
+				fetch(this.$domain + "country", {
+					method: "GET",
+					credentials: "include"
 				})
+					.then(data => { return data.json() })
+					.then(data => {
+						this.reg = null
+						let obj = {}
+
+						for (let index in data)
+							obj[data[index]._id] = data[index].title
+
+						this.$country.set(obj)
+						this.list    = Object.assign({}, this.$country.country)
+						this.value   = this.list[this.id]
+						this.fetched = true
+					})
+			else {
+				this.list    = Object.assign({}, this.$country.country)
+				this.fetched = true
+			}
         },
 
         input(value) {

@@ -1,9 +1,9 @@
 <template>
 	<div class="info">
         <div v-for="(elem, index) in keys" :key="index" class="block">
-            <h3 class="title">{{ titles[l][index] }}</h3>
+            <h3 class="title">{{ titles[index] }}</h3>
             <template v-if="data[index] !== 0">
-                <span v-if="elem">{{ values[l][index][data[index]] }}</span>
+                <span v-if="elem">{{ values[index][data[index]] }}</span>
                 <span v-else>{{ data[index] }}</span>
             </template>
             <span v-else>-</span>
@@ -12,19 +12,9 @@
 </template>
 
 <script scoped>
-import { InfoJS } from "@/store/Langs/Info"
 export default {
 	name: "Info",
-    props: ["data", "l"],
-    setup() {
-		const titles = InfoJS().keys
-        const values = InfoJS().values
-
-		return {
-            titles,
-            values
-		}
-	},
+    props: ["data", "titles", "values"],
     data() {
 		return {
 			keys: {
@@ -36,7 +26,6 @@ export default {
                 ethnicity: true,
                 income: true,
                 industry: true,
-                search: true,
                 prefer: true,
                 children: null
             }
@@ -49,24 +38,26 @@ export default {
 .info {
     width: 100%;
     background-color: #FFFFFF;
-    border-radius: 16px;
+    border-radius: 8px;
 
     display: flex;
     flex-wrap: wrap;
 
     padding: 30px;
-    padding-bottom: 10px;
+    padding-bottom: 0;
+    margin-bottom: 30px;
+    margin-right: 30px;
 }
 
 .block {
     color: #4d4d4d;
-    width: 33%;
+    width: 32%;
 
     display: flex;
     flex-direction: column;
     align-items: left;
-
-    margin-bottom: 20px;
+    
+    margin-bottom: 30px;
 }
 
 .title {
@@ -76,9 +67,21 @@ export default {
     margin-bottom: 10px;
 }
 
+@media screen and (max-width: 1100px) {
+    .info {
+        margin-right: 0;
+    }
+}
+
 @media only screen and (max-width : 644px) {
     .block {
-        width: 50%;
+        width: 48%;
+    }
+}
+
+@media only screen and (min-width : 351px) {
+    .block {
+        margin-right: 1%;
     }
 }
 
@@ -86,6 +89,8 @@ export default {
     .block {
         width: 100%;
         align-items: center;
+
+        margin-right: 0;
     }
 }
 </style>

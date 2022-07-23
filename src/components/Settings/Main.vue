@@ -24,6 +24,13 @@
 			</div>
 
 			<About :title="titles[l].about" :holder="lang.placeholder[l].about" :value="data.about" @value="data.about = $event" />
+
+			<div class="block">
+				<Search :title="titles[l].search" :list="info.search" :value="data.search"
+					@value="data.search.push($event)" @clear="data.search.splice($event, 1)" 
+				/>
+			</div>
+
 			<Children :title="titles[l].children" :value="data.children" @value="data.children = $event" />
 
 			<div class="buttons">
@@ -49,6 +56,7 @@ import Country from "@/components/Settings/Country.vue"
 import City from "@/components/Settings/City.vue"
 
 import Select from "@/components/Settings/Select.vue"
+import Search from "@/components/Settings/Search.vue"
 
 import About from "@/components/Settings/About.vue"
 import Children from "@/components/Settings/Children.vue"
@@ -56,19 +64,20 @@ export default {
 	name: "Settings",
 	props: ["settings", "l", "lang", "titles", "fields", "info"],
 	components: {
-    Form,
-	Username,
-    Title,
-    Sex,
-    Age,
-    Height,
-    Weight,
-	Country,
-	City,
-	Select,
-	About,
-	Children
-},
+		Form,
+		Username,
+		Title,
+		Sex,
+		Age,
+		Height,
+		Weight,
+		Country,
+		City,
+		Select,
+		Search,
+		About,
+		Children
+	},
 	data() {
 		return {
 			data: null,
@@ -76,7 +85,7 @@ export default {
 				{ smokes: 8, drinks: 7 },
 				{ body: 6, ethnicity: 5 },
 				{ income: 4, industry: 3 },
-				{ search: 2, prefer: 1 }
+				{ prefer: 2 }
 			]
 		}
 	},
@@ -85,14 +94,10 @@ export default {
 	},
 	methods: {
 		change() {
-			let form = new FormData()
-			for (let key in this.data)
-				form.append(key, this.data[key])
-
 			fetch(this.$domain + "change", {
 				method: "PUT",
 				credentials: 'include',
-				body: form
+				body: JSON.stringify(this.data)
 			})
 				.then(data => { return data.json() })
 				.then(data => {

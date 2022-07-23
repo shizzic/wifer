@@ -21,9 +21,9 @@ export const InfoJS = defineStore("Info", {
                     ethnicity: "Ethnicity",
                     income: "Annual income $",
                     industry: "Industry",
-                    search: "Search",
+                    search: "Seeking",
                     children: "Children",
-                    about: "About me",
+                    about: "About",
                     prefer: "Prefer"
                 },
                 ru: {
@@ -43,9 +43,9 @@ export const InfoJS = defineStore("Info", {
                     ethnicity: "Этнос",
                     income: "Годовой доход $",
                     industry: "Сфера деятельности",
-                    search: "Ищу",
+                    search: "Ищет",
                     children: "Дети",
-                    about: "Обо мне",
+                    about: "Об",
                     prefer: "Предпочитаю"
                 }
             }
@@ -224,6 +224,13 @@ export const InfoJS = defineStore("Info", {
                         3: "Всех"
                     }
                 }
+            }
+        },
+
+        about() {
+            return {
+                en: "This section han't filled yet",
+                ru: "Это блок пока-что не заполнен"
             }
         }
     }

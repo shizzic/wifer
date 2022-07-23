@@ -1,8 +1,15 @@
 <template>
 	<div class="about">
-		<img src="/translation.webp" @click="translate">
-		<span v-show="mode">{{ about }}</span>
-		<span v-show="!mode">{{ translated }}</span>
+		<div class="header">
+			<h3><span>{{ title }}</span><span>{{ username }}</span></h3>
+			<img v-show="about.length > 0" src="/translation.webp" @click="translate" />
+
+			<template v-if="about.length > 0">
+				<span v-show="mode">{{ about }}</span>
+				<span v-show="!mode">{{ translated }}</span>
+			</template>
+			<span v-else>{{ blank }}</span>
+		</div>
 	</div>
 </template>
 
@@ -11,7 +18,7 @@ import { ImageJS } from "@/store/Langs/Image"
 
 export default {
 	name: "About",
-	props: ["about", "l"],
+	props: ["title", "username", "about", "l", "blank"],
 	setup() {
 		const errors = ImageJS().error
 
@@ -64,13 +71,37 @@ export default {
 
 	width: 100%;
     background-color: #FFFFFF;
-    border-radius: 16px;
+    border-radius: 8px;
 
     display: flex;
     flex-wrap: wrap;
 
-    padding: 30px;
-	margin-top: 30px;
+    padding: 20px 25px;
+	margin-bottom: 30px;
+}
+
+.header {
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 0;
+}
+
+h3 {
+	color: #4d4d4d;
+	font-weight: 600;
+    font-size: 18px;
+    
+    margin-bottom: 10px;
+}
+
+h3 span {
+	display: inline-block;
+}
+
+h3 span:first-of-type {
+	margin-right: 10px;
 }
 
 img {
@@ -86,5 +117,6 @@ img {
 span {
 	font-size: 18px;
 	color: #4d4d4d;
+	word-break: break-all;
 }
 </style>

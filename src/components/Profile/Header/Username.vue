@@ -3,8 +3,8 @@
         <div class="username">
             <span>{{ username }}</span>
             <div class="ring-container">
-                <div v-show="online === true" class="ring green-bor" />
-                <div class="circle" :class="{ 'green-back': online === true, 'red-back': online === false }" />
+                <div v-show="live === true" class="ring green-bor" />
+                <div class="circle" :class="{ 'green-back': live === true, 'red-back': live === false }" />
             </div>
         </div>
         <span class="title">{{ title }}</span>
@@ -15,6 +15,17 @@
 export default {
 	name: "Avatar",
     props: ["username", "title", "online"],
+    data() {
+		return {
+			live: null
+		}
+	},
+    beforeMount() {
+        if (this.$route.params.id == this.$user.id)
+            this.live = true
+        else
+            this.live = this.online
+    }
 }
 </script>
 
