@@ -73,8 +73,9 @@ export default {
 
 .elem {
     cursor: pointer;
-    background-color: #929292;
-    color: #f9f9f9;
+    font-weight: 700;
+    color: #5C5C5C;
+    background-color: #E3E3E3;
     border-radius: 40px;
 
     padding: 10px 20px;
@@ -86,7 +87,7 @@ export default {
 }
 
 .elem:hover {
-    background-color: #808080;
+    background-color: #bcbcbc;
 }
 
 h3 {
