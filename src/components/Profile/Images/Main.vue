@@ -325,7 +325,7 @@ export default {
 
 .image-wrap {
     position: relative;
-    border-radius: 12px;
+    border-radius: 8px;
 
     margin-right: 20px;
     margin-bottom: 20px;
@@ -336,11 +336,11 @@ export default {
     -webkit-tap-highlight-color: transparent;
     object-fit: cover;
 
-    width: 125px;
-    min-width: 125px;
-    height: 150px;
-    min-height: 150px;
-    border-radius: 12px;
+    width: 150px;
+    min-width: 150px;
+    height: 175px;
+    min-height: 175px;
+    border-radius: 8px;
 
     display: flex;
     justify-content: center;

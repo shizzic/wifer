@@ -23,7 +23,7 @@ div {
     align-items: center;
     margin-right: 50px;
 
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
 img {
@@ -46,7 +46,7 @@ img {
     min-height: 100%;
     max-height: 100%;
 
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
 @media screen and (max-width: 600px) {
