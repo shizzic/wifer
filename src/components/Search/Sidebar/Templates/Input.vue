@@ -24,7 +24,15 @@ export default {
 	methods: {
 		create() {
 			if (this.value !== "") {
-				this.data.data[this.value] = Object.assign({}, this.data.data[this.data.active])
+				let obj = {}
+
+				for (let key in this.data.data[this.data.active])
+					if (typeof this.data.data[this.data.active][key] === 'object' && this.data.data[this.data.active][key] !== null && !Array.isArray(this.data.data[this.data.active][key]))
+						obj[key] = Object.assign({}, this.data.data[this.data.active][key])
+					else
+						obj[key] = this.data.data[this.data.active][key]
+
+				this.data.data[this.value] = Object.assign({}, obj)
 				this.data.active 		   = this.value
 				this.value 				   = ""
 
@@ -40,8 +48,6 @@ export default {
 						})
 					} else
 						this.$user.setTemplates(JSON.stringify(this.data))
-					
-					this.$router.go()
 				} else
 					this.$toast.error(this.lang.count)
 			} else
