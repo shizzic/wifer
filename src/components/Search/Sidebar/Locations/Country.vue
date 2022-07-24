@@ -40,7 +40,7 @@ export default {
 		}
 	},
     beforeMount() {
-        if (this.$country.country[0]) {
+        if (Object.keys(this.$country.country).length > 0) {
             this.list    = Object.assign({}, this.$country.country)
             this.fetched = true
         } else
@@ -82,7 +82,7 @@ export default {
 
 <style scoped>
 .body {
-	z-index: 2;
+	z-index: 3;
 	position: relative;
 	width: 100%;
 	max-width: 225px;

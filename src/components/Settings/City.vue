@@ -48,13 +48,14 @@ export default {
                     this.list    = Object.assign({}, this.$city.city[n])
                     this.value   = null
                     this.fetched = true
-					this.$emit("value", 0)
                 } else
                     this.returnCity()
             else {
                 this.fetched = null
                 this.reg     = null
             }
+
+			this.$emit("value", 0)
         }
     },
     beforeMount() {

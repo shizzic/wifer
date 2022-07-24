@@ -1,23 +1,24 @@
 <template>
 	<div class="wrapper scroll">
-		<button class="accordion" :class="{ active : data.expanded[2] }" @click="show(2)">{{ titles.templates }}</button>
-		<Templates v-show="data.expanded[2]" :lang="template" :templates="templates" :data="data" @data="$emit('data', $event)" />
+		<button class="accordion" :class="{ active : data.data[data.active].expanded[2] }" @click="show(2)">{{ titles.templates }}</button>
+		<Templates v-show="data.data[data.active].expanded[2]" :lang="template" :data="data" 
+		@data="$emit('data', $event)" />
 
-		<button class="accordion" :class="{ active : data.expanded[0] }" @click="show(0)">{{ titles.locations }}</button>
-		<Locations v-show="data.expanded[0]" :lang="titles" :data="data" />
+		<button class="accordion" :class="{ active : data.data[data.active].expanded[0] }" @click="show(0)">{{ titles.locations }}</button>
+		<Locations v-show="data.data[data.active].expanded[0]" :lang="titles" :data="data" />
 
 		<template v-for="(options, index) in slider" :key="index">
-			<button class="accordion" :class="{ active : data.expanded[index] }" @click="show(index)">{{ titles[index] }}</button>
-			<Slider v-show="data.expanded[index]" :title="titles[index]" :data="data" :index="index" :options="options" />
+			<button class="accordion" :class="{ active : data.data[data.active].expanded[index] }" @click="show(index)">{{ titles[index] }}</button>
+			<Slider v-show="data.data[data.active].expanded[index]" :title="titles[index]" :data="data" :index="index" :options="options" />
 		</template>
 
 		<template v-for="(elem, index) in checkbox" :key="index">
-			<button class="accordion" :class="{ active : data.expanded[elem] }" @click="show(elem)">{{ titles[elem] }}</button>
-			<Checkbox v-show="data.expanded[elem]" :lang="values[elem]" :data="data" :title="elem" />
+			<button class="accordion" :class="{ active : data.data[data.active].expanded[elem] }" @click="show(elem)">{{ titles[elem] }}</button>
+			<Checkbox v-show="data.data[data.active].expanded[elem]" :lang="values[elem]" :data="data" :title="elem" />
 		</template>
 
-		<button class="accordion" :class="{ active : data.expanded[1] }" @click="show(1)">{{ text.title }}</button>
-		<About v-show="data.expanded[1]" :data="data" :full="data.about.full" :lang="text" />
+		<button class="accordion" :class="{ active : data.data[data.active].expanded[1] }" @click="show(1)">{{ text.title }}</button>
+		<About v-show="data.data[data.active].expanded[1]" :data="data" :full="data.data[data.active].about.full" :lang="text" />
 
 		<div class="button-wrap">
 			<button class="btn" @click="get">{{ search }}</button>
@@ -33,7 +34,7 @@ import Checkbox from "@/components/Search/Sidebar/Checkbox.vue"
 import About from "@/components/Search/Sidebar/About.vue"
 export default {
 	name: "Sidebar",
-	props: ["titles", "values", "text", "search", "data", "templates", "template"],
+	props: ["titles", "values", "text", "search", "data", "template"],
 	components: {
 		Templates,
 		Locations,
@@ -57,21 +58,24 @@ export default {
 		},
 
 		updateTemplate() {
-			let form = new FormData()
-			form.append("text", JSON.stringify(this.templates))
+			if (this.$user.id) {
+				let form = new FormData()
+				form.append("text", JSON.stringify(this.data))
 
-			fetch(this.$domain + "templates", {
-				method: "POST",
-				credentials: 'include',
-				body: form
-			})
+				fetch(this.$domain + "templates", {
+					method: "POST",
+					credentials: 'include',
+					body: form
+				})
+			} else
+				this.$user.setTemplates(JSON.stringify(this.data))
 		},
 
 		show(row) {
-			if (row in this.data.expanded)
-				delete this.data.expanded[row]
+			if (row in this.data.data[this.data.active].expanded)
+				delete this.data.data[this.data.active].expanded[row]
 			else
-				this.data.expanded[row] = true
+				this.data.data[this.data.active].expanded[row] = true
 		}
 	}
 }

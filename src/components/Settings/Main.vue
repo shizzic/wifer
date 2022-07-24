@@ -93,7 +93,7 @@ export default {
 		this.data = Object.assign({}, this.fields)
 	},
 	methods: {
-		change() {
+		change() {			
 			fetch(this.$domain + "change", {
 				method: "PUT",
 				credentials: 'include',

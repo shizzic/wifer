@@ -2,8 +2,8 @@
 	<div class="block">
 		<div v-for="(text, index) in lang" class="box" :key="index">
 			<label :for="title + '_' + index">
-				<div class="checkbox" :class="{ checked : data[title].includes(+index) }" />
-				<input :id="title + '_' + index" type="checkbox" :value="+index" v-model="data[title]">
+				<div class="checkbox" :class="{ checked : data.data[data.active][title].includes(+index) }" />
+				<input :id="title + '_' + index" type="checkbox" :value="+index" v-model="data.data[data.active][title]">
 				{{ text }}
 			</label>
 		</div>

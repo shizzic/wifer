@@ -1,8 +1,9 @@
 <template>
 	<div class="block">
-		<Input :lang="lang" :templates="templates" :data="data" />
-        <Select v-if="Object.keys(templates.data).length > 0" 
-        :lang="lang" :templates="templates" :active="templates.active" @data="$emit('data', $event)" />
+		<Input :lang="lang" :data="data" />
+        <Select v-if="Object.keys(data.data).length > 0" 
+			:lang="lang" :data="data" :active="data.active"
+		/>
 	</div>
 </template>
 
@@ -11,7 +12,7 @@ import Input from "@/components/Search/Sidebar/Templates/Input.vue"
 import Select from "@/components/Search/Sidebar/Templates/Select.vue"
 export default {
 	name: "Main",
-	props: ["lang", "templates", "data"],
+	props: ["lang", "data"],
 	components: {
 		Input,
 		Select

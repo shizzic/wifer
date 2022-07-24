@@ -3,15 +3,15 @@
         <div class="box">
 			<label for="about">
 				<div class="checkbox" :class="{ checked : full }" />
-				<input id="about" type="checkbox" v-model="data.about.full">
+				<input id="about" type="checkbox" v-model="data.data[data.active].about.full">
 				{{ lang.full }}
-                <span v-show="!data.about.full" class="question">?</span>
+                <span v-show="!data.data[data.active].about.full" class="question">?</span>
 			</label>
 		</div>
 
-        <textarea v-model="data.about.value" :placeholder="lang.hold" maxlength="1500" @input="autosize($event)" />
+        <textarea v-model="data.data[data.active].about.value" :placeholder="lang.hold" maxlength="1500" @input="autosize($event)" />
         <div class="count">
-            <span>{{ data.about.value.length }}</span>
+            <span>{{ data.data[data.active].about.value.length }}</span>
             <span> / 1500</span>
         </div>
     </div>
@@ -20,11 +20,9 @@
 <script scoped>
 export default {
 	name: "About",
-	props: ["lang", "data", "full"],
+	props: ["lang", "data", "full", "templates"],
     methods: {
         autosize(e) {
-            this.$emit('value', e.target.value)
-
             let el = e.target
             setTimeout(function() {
                 el.style.height = "5px"

@@ -15,7 +15,7 @@
 <script scoped>
 export default {
 	name: "Input",
-	props: ["lang", "templates", "data"],
+	props: ["lang", "data"],
     data() {
 		return {
 			value: ""
@@ -24,20 +24,25 @@ export default {
 	methods: {
 		create() {
 			if (this.value !== "") {
-				this.templates.active = this.value
-				this.templates.data[this.value] = this.data
-				this.value = ""
+				this.data.data[this.value] = Object.assign({}, this.data.data[this.data.active])
+				this.data.active 		   = this.value
+				this.value 				   = ""
 
-				let form = new FormData()
-				form.append("text", JSON.stringify(this.templates))
+				if (Object.keys(this.data.data).length < 10) {
+					if (this.$user.id) {
+						let form = new FormData()
+						form.append("text", JSON.stringify(this.data))
 
-				if (Object.keys(this.templates.data).length < 10)
-					fetch(this.$domain + "templates", {
-						method: "POST",
-						credentials: 'include',
-						body: form
-					})
-				else
+						fetch(this.$domain + "templates", {
+							method: "POST",
+							credentials: 'include',
+							body: form
+						})
+					} else
+						this.$user.setTemplates(JSON.stringify(this.data))
+					
+					this.$router.go()
+				} else
 					this.$toast.error(this.lang.count)
 			} else
 				this.$toast.error(this.lang.blank)

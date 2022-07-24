@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
-		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :data="data" :templates="templates" 
-		:template="template[l]" @data="data = $event" />
+		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :template="template[l]" :data="data"
+		@data="some($event)" />
 		<List />
 	</div>
 </template>
@@ -35,29 +35,30 @@ export default {
 	},
 	data() {
 		return {
-			templates: {
-				active: null,
-				data: {}
-			},
 			data: {
-				countries: {},
-				cities: {},
-				expanded: {},
-				age: [18, 80],
-				weight: [35, 220],
-				height: [140, 220],
-				sex: [],
-				body: [],
-				smokes: [],
-				drinks: [],
-				ethnicity: [],
-				income: [],
-				industry: [],
-				search: [],
-				prefer: [],
-				about: {
-					full: false,
-					value: ""
+				active: 1,
+				data: {
+					1: {
+						countries: {},
+						cities: {},
+						expanded: {},
+						age: [18, 80],
+						weight: [35, 220],
+						height: [140, 220],
+						sex: [],
+						body: [],
+						smokes: [],
+						drinks: [],
+						ethnicity: [],
+						income: [],
+						industry: [],
+						search: [],
+						prefer: [],
+						about: {
+							full: false,
+							value: ""
+						}
+					}
 				}
 			}
 		}
@@ -67,17 +68,41 @@ export default {
 	},
 	methods: {
 		getTemplates() {
-			fetch(this.$domain + "templates", {
-				method: "GET",
-				credentials: 'include'
-			})
-				.then(data => { return data.json() })
-				.then(data => {
-					if (data) {
-						this.templates = JSON.parse(data.data)
-						this.data      = this.templates.data[this.templates.active]
-					}
+			if (this.$user.id)
+				fetch(this.$domain + "templates", {
+					method: "GET",
+					credentials: 'include'
 				})
+					.then(data => { return data.json() })
+					.then(data => {
+						if (data) {
+							this.data = JSON.parse(data.data)
+							this.$user.setTemplates(data.data)
+						} else {
+							if (this.$user.templates)
+								this.data = Object.assign({}, JSON.parse(this.$user.templates))
+							else
+								this.$user.setTemplates(JSON.stringify(this.data))
+
+							let form = new FormData()
+							form.append("text", JSON.stringify(this.data))
+
+							fetch(this.$domain + "templates", {
+								method: "POST",
+								credentials: 'include',
+								body: form
+							})
+						}
+					})
+			else
+				if (this.$user.templates)
+					this.data = Object.assign({}, JSON.parse(this.$user.templates))
+				else
+					this.$user.setTemplates(JSON.stringify(this.data))
+		},
+
+		some(data) {
+			this.data = data
 		}
 	}
 }

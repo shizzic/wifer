@@ -1,7 +1,7 @@
 <template>
     <div class="block">
         <h3>{{ title }}</h3>
-        <Slider v-model="data[index]" v-bind="options" @change="get" />
+        <Slider v-model="data.data[data.active][index]" v-bind="options" />
     </div>
 </template>
 
@@ -13,15 +13,6 @@ export default {
 	props: ["title", "data", "options", "index"],
     components: {
         Slider
-    },
-    mounted() {
-        if (this.value === 0)
-            this.$emit("value", 18)
-    },
-    methods: {
-        get(value) {
-            this.$emit("value", value)
-        }
     }
 }
 </script>

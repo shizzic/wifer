@@ -51,7 +51,7 @@ export default {
         }
     },
     beforeMount() {
-        if (this.$city.city[this.country]) {
+        if (this.$city.city[this.country] && Object.keys(this.$city.city[this.country]).length > 0) {
             this.list 	 = Object.assign({}, this.$city.city[this.country])
             this.fetched = true
         } else
@@ -67,15 +67,17 @@ export default {
 			})
 				.then(data => { return data.json() })
 				.then(data => {
-                    this.reg = null
-                    let obj = {}
+					if (data) {
+						this.reg = null
+						let obj = {}
 
-                    for (let index in data)
-                        obj[data[index]._id] = data[index].title
+						for (let index in data)
+							obj[data[index]._id] = data[index].title
 
-                    this.$city.set({ "data" : obj, "country_id": this.country })
-                    this.list = Object.assign({}, this.$city.city[this.country])
-                    this.fetched = true
+						this.$city.set({ "data" : obj, "country_id": this.country })
+						this.list = Object.assign({}, this.$city.city[this.country])
+						this.fetched = true
+					}
 				})
         },
 
@@ -95,6 +97,7 @@ export default {
 
 <style scoped>
 .body {
+	z-index: 2;
 	position: relative;
 	width: 100%;
 	max-width: 225px;

@@ -27,32 +27,24 @@ export default {
 		}
     },
 	watch: {
-		id(id) {
-			if (id)
-				this.makeOnline(true)
-			else
-				this.makeOnline(false)
+		id() {
+			this.makeOnline(true)
 		}
 	},
 	beforeMount() {
 		if (!this.l)
 			this.language.autoLang(navigator.language)
-
-		if (this.id)
-			this.makeOnline(true)
-
-		window.addEventListener('beforeunload', (e) => {
-			e.preventDefault()
-			this.makeOnline(false)
-		})
+		
+		this.makeOnline(true)
+		window.addEventListener('beforeunload', () => { this.makeOnline(false) })
 	},
 	methods: {
 		makeOnline(value) {
-			fetch(this.$domain + "online?id=" + this.id + "&online=" + value, {
-				method: "PUT",
-				headers: { "Access-Control-Max-Age": 600 },
-				credentials: "include"
-			})
+			if (this.id)
+				fetch(this.$domain + "online?online=" + value, {
+					method: "POST",
+					credentials: "include"
+				})
 		}
 	}
 }

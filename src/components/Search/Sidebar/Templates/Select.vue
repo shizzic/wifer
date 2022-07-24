@@ -2,29 +2,33 @@
     <div class="body" style="z-index: 20;">
         <h3>{{ lang.select }}</h3>
 
-        <div class="wrapper" v-click-outside="() => { mode = null }">
-            <div class="result" @click="show">{{ active }}</div>
-            <div class="arrow" :class="{ closed: !mode, opened: mode }" @click="show" />
+		<div class="flex">
+			<div class="wrapper" v-click-outside="() => { mode = null }">
+				<div class="result" @click="show">{{ active }}</div>
+				<div class="arrow" :class="{ closed: !mode, opened: mode }" @click="show" />
 
-            <transition name="slide-fade">
-                <div v-if="mode">
-                    <div class="mini" />
+				<transition name="slide-fade">
+					<div v-if="mode">
+						<div class="mini" />
 
-                    <ul class="ul scroll">
-                        <template v-for="(elem, index) in templates.data" :key="index">
-                            <li v-if="index != active" @click="change(index)">{{ index }}</li>
-                        </template>
-                    </ul>
-                </div>
-            </transition>
-        </div>
+						<ul class="ul scroll">
+							<template v-for="(elem, index) in data.data" :key="index">
+								<li v-if="index != active" @click="change(index)">{{ index }}</li>
+							</template>
+						</ul>
+					</div>
+				</transition>
+			</div>
+
+			<div v-show="Object.keys(data.data).length > 1" class="btn" @click="del">&#10006;</div>
+		</div>
     </div>
 </template>
 
 <script scoped>
 export default {
 	name: "Select",
-	props: ["lang", "templates", "active"],
+	props: ["lang", "data", "active"],
 	data() {
 		return {
 			mode: null
@@ -32,9 +36,34 @@ export default {
 	},
 	methods: {
 		change(index) {
-			this.templates.active = index
+			this.data.active = index
 			this.mode = null
-			this.$emit("data", this.templates.data[this.templates.active])
+			this.recreate()
+		},
+
+		del() {
+			let active = this.data.active
+
+			for (let key in this.data.data)
+				if (this.data.data[key] != this.data.active)
+					this.data.active = key
+			
+			delete this.data.data[active]
+			this.recreate()
+		},
+
+		recreate() {
+			if (this.$user.id) {
+				let form = new FormData()
+				form.append("text", JSON.stringify(this.data))
+
+				fetch(this.$domain + "templates", {
+					method: "POST",
+					credentials: 'include',
+					body: form
+				})
+			} else
+				this.$user.setTemplates(JSON.stringify(this.data))
 		},
 
 		show() {
@@ -60,8 +89,14 @@ h3 {
 	margin-bottom: 10px;
 }
 
+.flex {
+	display: flex;
+}
+
 .wrapper {
+	width: 100%;
     position: relative;
+	margin-right: 10px;
 }
 
 .result {
@@ -74,6 +109,28 @@ h3 {
 
 	padding: 11px 22px;
 	padding-right: 45px;
+}
+
+.btn {
+	background: #ff6868;
+	font-size: 20px;
+	color: white;
+	border-radius: 7px;
+	box-shadow: 0 7px 0px #de4d4d;
+	display: inline-block;
+	transition: all .2s;
+	position: relative;
+	padding: 8px 20px;
+	padding-top: 10px;
+	position: relative;
+	top: -4px;
+	cursor: pointer;
+}
+
+ .btn:active {
+	top: 3px;
+	box-shadow: 0 2px 0px #de4d4d;
+	transition: all .2s;
 }
 
 .arrow {
