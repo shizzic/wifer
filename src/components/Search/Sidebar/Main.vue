@@ -1,8 +1,7 @@
 <template>
 	<div class="wrapper scroll">
 		<button class="accordion" :class="{ active : data.data[data.active].expanded[2] }" @click="show(2)">{{ titles.templates }}</button>
-		<Templates v-show="data.data[data.active].expanded[2]" :lang="template" :data="data" 
-		@data="$emit('data', $event)" />
+		<Templates v-show="data.data[data.active].expanded[2]" :lang="template" :data="data" />
 
 		<button class="accordion" :class="{ active : data.data[data.active].expanded[0] }" @click="show(0)">{{ titles.locations }}</button>
 		<Locations v-show="data.data[data.active].expanded[0]" :lang="titles" :data="data" />

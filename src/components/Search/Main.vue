@@ -1,7 +1,6 @@
 <template>
 	<div class="wrap">
-		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :template="template[l]" :data="data"
-		@data="some($event)" />
+		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :template="template[l]" :data="data" />
 		<List />
 	</div>
 </template>
@@ -99,10 +98,6 @@ export default {
 					this.data = Object.assign({}, JSON.parse(this.$user.templates))
 				else
 					this.$user.setTemplates(JSON.stringify(this.data))
-		},
-
-		some(data) {
-			this.data = data
 		}
 	}
 }
