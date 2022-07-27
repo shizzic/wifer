@@ -60,6 +60,7 @@ export default {
     align-items: left;
     
     margin-bottom: 30px;
+    margin-right: 2%;
 }
 
 .title {
@@ -69,9 +70,21 @@ export default {
     margin-bottom: 10px;
 }
 
-@media only screen and (max-width : 1050px) {
+@media only screen and (min-width : 1001px) {
+    .block {
+        width: 31%;
+    }
+}
+
+@media only screen and (min-width : 801px) and (max-width : 1000px) {
     .block {
         width: 48%;
+    }
+}
+
+@media only screen and (max-width : 800px) {
+    .block {
+        width: 31%;
     }
 }
 
@@ -79,21 +92,11 @@ export default {
     .info {
         margin-right: 0;
     }
-
-    .block {
-        width: 31%;
-    }
 }
 
-@media only screen and (max-width : 500px) {
+@media screen and (max-width: 480px) {
     .block {
         width: 48%;
-    }
-}
-
-@media only screen and (min-width : 351px) {
-    .block {
-        margin-right: 2%;
     }
 }
 
