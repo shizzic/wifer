@@ -23,8 +23,7 @@
 <script scoped>
 export default {
 	name: "Locations",
-	props: ["countries", "cities"],
-	emits: ["country", "city"]
+	props: ["countries", "cities"]
 }
 </script>
 

@@ -84,7 +84,7 @@ export default {
 .wrapper {
 	background-color: #fff;
 	word-break: break-all;
-    border-radius: 6px;
+    border-radius: 8px;
 
     width: 25%;
 	height: 100%;
@@ -117,8 +117,8 @@ export default {
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   	-webkit-tap-highlight-color: transparent;
 
-	background-color: #eee;
-	color: #4d4d4d;
+	background-color: #E3E3E3;
+	color: #5C5C5C;;
 	cursor: pointer;
 	padding: 18px;
 	width: 100%;
@@ -126,11 +126,12 @@ export default {
 	text-align: left;
 	outline: none;
 	font-size: 17px;
+	font-weight: 700;
 	transition: 0.4s;
 }
 
 .accordion:hover, .active {
-  background-color: #ccc; 
+  background-color: rgb(188, 188, 188); 
 }
 
 .accordion:after {

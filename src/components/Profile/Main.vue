@@ -12,8 +12,8 @@
 		
 		<Seeking v-show="data.search.length > 0" :list="values[l].search" :value="data.search" :title="titles[l].search" />
 
-		<Settings v-if="data" :settings="settings" :l="l" :lang="settingsJS" :titles="titles" :fields="data" :info="values[l]"
-		@settings="settings = null" @data="data = $event" />
+		<Settings v-if="data && settings" :l="l" :lang="settingsJS" :titles="titles" :fields="data" :info="values[l]"
+		@close="settings = null" @data="data = $event" />
 	</div>
 </template>
 
@@ -116,7 +116,7 @@ export default {
 	display: flex;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 800px) {
     .flex {
         flex-wrap: wrap;
     }

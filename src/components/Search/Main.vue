@@ -105,7 +105,7 @@ export default {
 
 <style scoped>
 .wrap {
-	background-color: #FF6F61;
+	background-color: #2a3d39;
 	word-break: break-all;
 
 	width: 100%;

@@ -5,10 +5,10 @@
 		<div class="flex">
 			<div class="wrapper" v-click-outside="() => { mode = null }">
 				<div class="result" @click="show">{{ active }}</div>
-				<div class="arrow" :class="{ closed: !mode, opened: mode }" @click="show" />
+				<div class="arrow" v-show="Object.keys(data.data).length > 1" :class="{ closed: !mode, opened: mode }" @click="show" />
 
 				<transition name="slide-fade">
-					<div v-if="mode">
+					<div v-if="mode" :class="{ hidden : Object.keys(data.data).length < 2 }">
 						<div class="mini" />
 
 						<ul class="ul scroll">
@@ -45,8 +45,10 @@ export default {
 			let active = this.data.active
 
 			for (let key in this.data.data)
-				if (this.data.data[key] != this.data.active)
+				if (key !==this.data.active) {
 					this.data.active = key
+					break
+				}
 			
 			delete this.data.data[active]
 			this.recreate()
@@ -91,12 +93,12 @@ h3 {
 
 .flex {
 	display: flex;
+	align-items: center;
 }
 
 .wrapper {
 	width: 100%;
     position: relative;
-	margin-right: 10px;
 }
 
 .result {
@@ -125,6 +127,7 @@ h3 {
 	position: relative;
 	top: -4px;
 	cursor: pointer;
+	margin-left: 10px;
 }
 
  .btn:active {
@@ -233,5 +236,10 @@ li:not(:last-child) {
 
 .slide-fade-leave-to, .slide-fade-enter-from {
     transform: translateX(10px);
+}
+
+.hidden {
+	visibility: hidden;
+	opacity: 0;
 }
 </style>

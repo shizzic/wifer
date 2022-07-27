@@ -34,6 +34,8 @@ export default {
 	beforeMount() {
 		if (!this.l)
 			this.language.autoLang(navigator.language)
+		else
+			this.language.correctLang(this.l)
 		
 		this.makeOnline(true)
 		window.addEventListener('beforeunload', () => { this.makeOnline(false) })

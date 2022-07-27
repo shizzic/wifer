@@ -1,7 +1,7 @@
 <template>
 	<div class="block">
 		<Locations v-if="Object.keys(data.data[data.active].countries).length > 0 || Object.keys(data.data[data.active].cities).length > 0" 
-			:countries="data.data[data.active].countries" :cities="data.cities"
+			:countries="data.data[data.active].countries" :cities="data.data[data.active].cities"
 			@country="delete data.data[data.active].cities[$event]; delete data.data[data.active].countries[$event];" @city="delete data.data[data.active].cities[$event.country][$event.city]" 
 		/>
 		<Country :title="lang.country" :has="data.data[data.active].countries" @value="getCountry($event)" />

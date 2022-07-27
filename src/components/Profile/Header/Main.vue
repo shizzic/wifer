@@ -41,6 +41,8 @@ export default {
 
     padding: 30px;
     margin-bottom: 30px;
+
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 1);
 }
 
 .right {

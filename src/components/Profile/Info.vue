@@ -47,6 +47,8 @@ export default {
     padding-bottom: 0;
     margin-bottom: 30px;
     margin-right: 30px;
+
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 1);
 }
 
 .block {
@@ -67,13 +69,23 @@ export default {
     margin-bottom: 10px;
 }
 
-@media screen and (max-width: 1100px) {
-    .info {
-        margin-right: 0;
+@media only screen and (max-width : 1050px) {
+    .block {
+        width: 48%;
     }
 }
 
-@media only screen and (max-width : 644px) {
+@media screen and (max-width: 800px) {
+    .info {
+        margin-right: 0;
+    }
+
+    .block {
+        width: 31%;
+    }
+}
+
+@media only screen and (max-width : 500px) {
     .block {
         width: 48%;
     }
@@ -81,7 +93,7 @@ export default {
 
 @media only screen and (min-width : 351px) {
     .block {
-        margin-right: 1%;
+        margin-right: 2%;
     }
 }
 

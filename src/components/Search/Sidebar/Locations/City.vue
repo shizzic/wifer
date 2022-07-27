@@ -27,7 +27,6 @@
 export default {
 	name: "City",
 	props: ["title", "country", "has"],
-	emits: ["value"],
 	data() {
 		return {
 			mode: null,
@@ -154,7 +153,6 @@ ul {
 }
 
 li {
-	font-weight: 400;
 	cursor: pointer;
 	font-size: 18px;
 	list-style-type: none;

@@ -1,6 +1,6 @@
 <template>
-	<div class="wrapper" :class="{ none: !settings, visible: settings }">
-		<Form class="form scroll" name="settings" @submit="change">
+	<div class="wrapper">
+		<Form class="form scroll" name="settings" @submit="change" v-click-outside="() => { $emit('close') }">
 			<Username :title="titles[l].username" :holder="lang.placeholder[l].username" :lang="lang.username[l]" :value="data.username"
 			@value="data.username = $event" />
 			<Title :title="titles[l].title" :holder="lang.placeholder[l].title" :value="data.title" @value="data.title = $event" />
@@ -34,7 +34,7 @@
 			<Children :title="titles[l].children" :value="data.children" @value="data.children = $event" />
 
 			<div class="buttons">
-				<div @click="data = Object.assign({}, fields); $emit('settings');" class="btn">{{ lang.buttons[l].cancel }}</div>
+				<div @click="data = Object.assign({}, fields); $emit('close');" class="btn">{{ lang.buttons[l].cancel }}</div>
 				<button class="btn">{{ lang.buttons[l].save }}</button>
 			</div>
 		</Form>
@@ -62,7 +62,7 @@ import About from "@/components/Settings/About.vue"
 import Children from "@/components/Settings/Children.vue"
 export default {
 	name: "Settings",
-	props: ["settings", "l", "lang", "titles", "fields", "info"],
+	props: ["l", "lang", "titles", "fields", "info"],
 	components: {
 		Form,
 		Username,
@@ -104,7 +104,7 @@ export default {
 					if ("error" in data)
 						this.$toast.error(this.lang.response[this.l][data.error])
 					else {
-						this.$emit('settings')
+						this.$emit("close")
 						this.$emit("data", this.data)
 						this.$toast.success(this.lang.success[this.l])
 					}
@@ -228,17 +228,6 @@ export default {
 		flex-direction: column;
 		flex-wrap: nowrap;
 	}
-}
-
-
-.visible {
-	visibility: visible;
-  	opacity: 1;
-}
-
-.none {
-	visibility: hidden;
-  	opacity: 0;
 }
 
 button {

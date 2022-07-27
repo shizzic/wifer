@@ -27,7 +27,6 @@
 export default {
 	name: "Country",
 	props: ["title"],
-	emits: ["value"],
 	data() {
 		return {
 			mode: null,

@@ -19,6 +19,11 @@ export const langJS = defineStore("lang", {
                 this.lang = "en"
             else
                 this.lang = lang
+        },
+
+        correctLang(value) {
+            if (!this.languages.includes(value))
+                this.autoLang(navigator.language)
         }
     }
 })

@@ -22,6 +22,8 @@ export default {
 
     padding: 20px;
     padding-bottom: 10px;
+
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 1);
 }
 
 .elem-wrap {
