@@ -1,7 +1,9 @@
 <template>
 	<div class="wrap">
-		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :template="template[l]" :data="data" />
-		<List />
+		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :template="template[l]" :data="data"
+		:filters="filters" @filters="filters = null" />
+		<List v-show="!filters" :l="l" :data="data" :sort="sort[l]" :filters="filter[l]"
+		@filters="filters = true" />
 	</div>
 </template>
 
@@ -22,6 +24,8 @@ export default {
 		const values   = InfoJS().values
 		const text     = SearchJS().text
 		const search   = SearchJS().search
+		const sort     = SearchJS().sort
+		const filter  = SearchJS().filters
 		const template = SearchJS().template
 
 		return {
@@ -29,15 +33,21 @@ export default {
 			values,
 			text,
 			search,
+			sort,
+			filter,
 			template
 		}
 	},
 	data() {
 		return {
+			filters: null,
 			data: {
 				active: 1,
 				data: {
 					1: {
+						limit: 25,
+						skip: 0,
+						sort: "last_time",
 						countries: {},
 						cities: {},
 						expanded: {},

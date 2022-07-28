@@ -11,8 +11,8 @@ export const InfoJS = defineStore("Info", {
                     title: "Your title",
                     sex: "Sex",
                     age: "Age",
-                    height: "Height",
-                    weight: "Weight",
+                    height: "Height (cm)",
+                    weight: "Weight (kg)",
                     country: "Country",
                     city: "City",
                     body: "Body's type",
@@ -33,8 +33,8 @@ export const InfoJS = defineStore("Info", {
                     title: "Ваша надпись",
                     sex: "Пол",
                     age: "Возраст",
-                    height: "Рост",
-                    weight: "Вес",
+                    height: "Рост (см)",
+                    weight: "Вес (кг)",
                     country: "Страна",
                     city: "Город",
                     body: "Тип тела",
@@ -130,7 +130,7 @@ export const InfoJS = defineStore("Info", {
                         7: "Fetish",
                         8: "Platonic love",
                         9: "Dunno",
-                        10: "Other"
+                        10: "Investor"
                     },
                     prefer: {
                         1: "Women",
@@ -216,7 +216,7 @@ export const InfoJS = defineStore("Info", {
                         7: "Фетиш",
                         8: "Платоническая любовь",
                         9: "Не знаю",
-                        10: "Другое"
+                        10: "Ивестора"
                     },
                     prefer: {
                         1: "Женщин",

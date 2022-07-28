@@ -22,6 +22,24 @@ export const SearchJS = defineStore("Search", {
                 ru: "Поиск"
             }
         },
+        filters() {
+            return {
+                en: "Filters",
+                ru: "Параметры"
+            }
+        },
+        sort() {
+            return {
+                en: {
+                    last_time: "Recently active",
+                    created_at: "Newest"
+                },
+                ru: {
+                    last_time: "Последняя активность",
+                    created_at: "Новые"
+                }
+            }
+        },
         template() {
             return {
                 en: {

@@ -1,10 +1,17 @@
 <template>
-	<div />
+	<div class="wrapper">
+		<Hat :l="l" :data="data" :sort="sort" :filters="filters" @filters="$emit('filters')" />
+	</div>
 </template>
 
 <script scoped>
+import Hat from "@/components/Search/List/Hat/Main.vue"
 export default {
 	name: "List",
+	props: ["l", "data", "sort", "filters"],
+	components: {
+		Hat
+	},
 	data() {
 		return {
 		}
@@ -15,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-div {
+.wrapper {
 	background-color: #fff;
 	word-break: break-all;
     border-radius: 8px;

@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper scroll">
+	<div class="wrapper scroll" :class="{ shown : filters }">
 		<button class="accordion" :class="{ active : data.data[data.active].expanded[2] }" @click="show(2)">{{ titles.templates }}</button>
 		<Templates v-show="data.data[data.active].expanded[2]" :lang="template" :data="data" />
 
@@ -33,7 +33,7 @@ import Checkbox from "@/components/Search/Sidebar/Checkbox.vue"
 import About from "@/components/Search/Sidebar/About.vue"
 export default {
 	name: "Sidebar",
-	props: ["titles", "values", "text", "search", "data", "template"],
+	props: ["titles", "values", "text", "search", "data", "template", "filters"],
 	components: {
 		Templates,
 		Locations,
@@ -53,6 +53,7 @@ export default {
 	},
 	methods: {
 		get() {
+			this.$emit("filters")
 			this.updateTemplate()
 		},
 
@@ -82,6 +83,8 @@ export default {
 
 <style scoped>
 .wrapper {
+	z-index: 10;
+
 	background-color: #fff;
 	word-break: break-all;
     border-radius: 8px;
@@ -93,7 +96,7 @@ export default {
 	overflow-x: hidden;
 }
 
-@media screen and (min-width: 730px) {
+@media screen and (min-width: 790px) {
     .wrapper {
 		min-width: 350px;
 
@@ -101,15 +104,15 @@ export default {
     }
 }
 
-@media screen and (max-width: 730px) {
+@media screen and (max-width: 790px) {
     .wrapper {
 		width: 100%;
 		min-width: none;
 
 		margin: 0;
-        /* position: absolute;
-        left: -500px;
-        top: 0; */
+        position: absolute;
+        left: -1000px;
+        top: 0;
     }
 }
 
@@ -177,5 +180,9 @@ export default {
 .btn:active {
     transform: translateY(-1px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.shown {
+	position: static;
 }
 </style>

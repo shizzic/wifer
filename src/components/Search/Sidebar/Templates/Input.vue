@@ -120,9 +120,8 @@ input:-webkit-autofill:active
 	display: inline-block;
 	transition: all .2s;
 	position: relative;
-	padding: 8px 20px;
-	position: relative;
 	top: -6px;
+	padding: 8px 20px;
 	cursor: pointer;
 }
 

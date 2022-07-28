@@ -4,6 +4,7 @@ import router from "@/router"
 
 import { createPinia } from 'pinia'
 import { userJS } from "@/store/user"
+import { langJS } from "@/store/lang"
 import { cityJS } from "@/store/city"
 import { countryJS } from "@/store/country"
 
@@ -25,6 +26,7 @@ app
 app.config.globalProperties.$domain  = "https://wifer-test.ru/"
 app.config.globalProperties.$ip      = "http://213.189.217.231:81/"
 app.config.globalProperties.$user    = userJS()
+app.config.globalProperties.$lang    = langJS()
 app.config.globalProperties.$city    = cityJS()
 app.config.globalProperties.$country = countryJS()
 

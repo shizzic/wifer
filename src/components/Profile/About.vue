@@ -32,6 +32,12 @@ export default {
 			mode: true
 		}
 	},
+	watch: {
+		about() {
+			this.mode       = true
+			this.translated = null
+		}
+	},
 	methods: {
 		translate() {
 			if (!this.translated && this.original !== "") {

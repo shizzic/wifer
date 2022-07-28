@@ -1,6 +1,7 @@
 <template>
 	<div class="wrapper">
-		<Form class="form scroll" name="settings" @submit="change" v-click-outside="() => { $emit('close') }">
+		<Form class="form scroll" name="settings" @submit="change" @mousedown="() => { up = true }" @mouseup="() => { up = null }"
+		v-click-outside="close">
 			<Username :title="titles[l].username" :holder="lang.placeholder[l].username" :lang="lang.username[l]" :value="data.username"
 			@value="data.username = $event" />
 			<Title :title="titles[l].title" :holder="lang.placeholder[l].title" :value="data.title" @value="data.title = $event" />
@@ -86,7 +87,8 @@ export default {
 				{ body: 6, ethnicity: 5 },
 				{ income: 4, industry: 3 },
 				{ prefer: 2 }
-			]
+			],
+			up: null
 		}
 	},
 	beforeMount() {
@@ -109,6 +111,13 @@ export default {
 						this.$toast.success(this.lang.success[this.l])
 					}
 				})
+		},
+
+		close() {
+			if (!this.up)
+				this.$emit('close')
+
+			this.up = null
 		}
 	}
 }
