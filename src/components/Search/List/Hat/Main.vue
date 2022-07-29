@@ -38,7 +38,7 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     
-	padding: 0 10px;
+	padding: 10px 10px;
 }
 
 .filters {
@@ -50,9 +50,8 @@ export default {
 	box-shadow: 0 7px 0px #de4d4d;
 	
     position: relative;
-	top: -5px;
+	top: -3px;
 
-    margin-top: 5px;
     margin-right: 10px;
     padding: 6px 20px;
 
@@ -70,8 +69,7 @@ export default {
     display: flex;
     align-items: center;
 
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 @media screen and (max-width: 790px) {

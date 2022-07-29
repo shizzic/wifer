@@ -23,8 +23,8 @@ export default {
     align-items: center;
     flex-wrap: wrap;
 
-    margin-top: 10px;
     margin-right: 15px;
+    margin-bottom: 5px;
 }
 
 .elem {
