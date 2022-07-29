@@ -31,11 +31,11 @@ export const SearchJS = defineStore("Search", {
         sort() {
             return {
                 en: {
-                    last_time: "Recently active",
+                    last_time: "Recentliest",
                     created_at: "Newest"
                 },
                 ru: {
-                    last_time: "Последняя активность",
+                    last_time: "Последние",
                     created_at: "Новые"
                 }
             }

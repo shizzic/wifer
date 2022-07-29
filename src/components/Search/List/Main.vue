@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper">
-		<Hat :l="l" :data="data" :sort="sort" :filters="filters" @filters="$emit('filters')" />
+		<Hat :l="l" :data="data" :sort="sort" :filters="filters" :create="create" @filters="$emit('filters')" />
 	</div>
 </template>
 
@@ -8,15 +8,9 @@
 import Hat from "@/components/Search/List/Hat/Main.vue"
 export default {
 	name: "List",
-	props: ["l", "data", "sort", "filters"],
+	props: ["l", "data", "sort", "filters", "create"],
 	components: {
 		Hat
-	},
-	data() {
-		return {
-		}
-	},
-	methods: {
 	}
 }
 </script>

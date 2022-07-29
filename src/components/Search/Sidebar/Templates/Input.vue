@@ -2,8 +2,8 @@
 	<div style="margin-bottom: 20px;">
         <h3>{{ lang.input }}</h3>
 		<div class="wrapper">
-			<input name="template" maxlength="150" :placeholder="lang.hold" v-model="value" @keyup.enter="create" />
-			<div class="btn" @click="create">&#10004;</div>
+			<input name="template" maxlength="150" :placeholder="lang.hold" v-model="value" @keyup.enter="set" />
+			<div class="btn" @click="set">&#10004;</div>
 		</div>
 		<div class="count">
 			<span>{{ value.length }}</span>
@@ -15,14 +15,14 @@
 <script scoped>
 export default {
 	name: "Input",
-	props: ["lang", "data"],
+	props: ["lang", "data", "create"],
     data() {
 		return {
 			value: ""
 		}
 	},
 	methods: {
-		create() {
+		set() {
 			if (this.value !== "") {
 				let obj = {}
 
@@ -36,19 +36,9 @@ export default {
 				this.data.active 		   = this.value
 				this.value 				   = ""
 
-				if (Object.keys(this.data.data).length < 10) {
-					if (this.$user.id) {
-						let form = new FormData()
-						form.append("text", JSON.stringify(this.data))
-
-						fetch(this.$domain + "templates", {
-							method: "POST",
-							credentials: 'include',
-							body: form
-						})
-					} else
-						this.$user.setTemplates(JSON.stringify(this.data))
-				} else
+				if (Object.keys(this.data.data).length < 10)
+					this.create()
+				else
 					this.$toast.error(this.lang.count)
 			} else
 				this.$toast.error(this.lang.blank)

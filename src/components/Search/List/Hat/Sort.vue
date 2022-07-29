@@ -6,7 +6,7 @@
             <div v-if="mode">
                 <ul class="ul scroll">
                     <template v-for="(elem, index) in list" :key="index">
-                        <li v-if="elem !== sort" @click="data.data[data.active].sort = elem; mode = null;">{{ lang[elem] }}</li>
+                        <li v-if="elem !== sort" @click="set(elem)">{{ lang[elem] }}</li>
                     </template>
                 </ul>
             </div>
@@ -17,7 +17,7 @@
 <script scoped>
 export default {
 	name: "Sort",
-    props: ["data", "sort", "lang"],
+    props: ["data", "sort", "lang", "create"],
     data() {
 		return {
 			mode: null,
@@ -25,6 +25,12 @@ export default {
 		}
 	},
 	methods: {
+		set(value) {
+			this.data.data[this.data.active].sort = value
+			this.mode 							  = null
+			this.create()
+		},
+
 		show() {
 			if (this.mode)
 				this.mode = null
@@ -39,7 +45,6 @@ export default {
 #sort {
     position: relative;
     margin-left: 10px;
-    margin-bottom: 10px;
 }
 
 .result {

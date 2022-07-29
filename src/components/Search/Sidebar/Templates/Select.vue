@@ -28,7 +28,7 @@
 <script scoped>
 export default {
 	name: "Select",
-	props: ["lang", "data", "active"],
+	props: ["lang", "data", "active", "create"],
 	data() {
 		return {
 			mode: null
@@ -38,7 +38,7 @@ export default {
 		change(index) {
 			this.data.active = index
 			this.mode = null
-			this.recreate()
+			this.create()
 		},
 
 		del() {
@@ -51,21 +51,7 @@ export default {
 				}
 			
 			delete this.data.data[active]
-			this.recreate()
-		},
-
-		recreate() {
-			if (this.$user.id) {
-				let form = new FormData()
-				form.append("text", JSON.stringify(this.data))
-
-				fetch(this.$domain + "templates", {
-					method: "POST",
-					credentials: 'include',
-					body: form
-				})
-			} else
-				this.$user.setTemplates(JSON.stringify(this.data))
+			this.create()
 		},
 
 		show() {

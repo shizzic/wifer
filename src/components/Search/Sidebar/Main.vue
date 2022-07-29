@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper scroll" :class="{ shown : filters }">
 		<button class="accordion" :class="{ active : data.data[data.active].expanded[2] }" @click="show(2)">{{ titles.templates }}</button>
-		<Templates v-show="data.data[data.active].expanded[2]" :lang="template" :data="data" />
+		<Templates v-show="data.data[data.active].expanded[2]" :lang="template" :data="data" :create="create" />
 
 		<button class="accordion" :class="{ active : data.data[data.active].expanded[0] }" @click="show(0)">{{ titles.locations }}</button>
 		<Locations v-show="data.data[data.active].expanded[0]" :lang="titles" :data="data" />
@@ -33,7 +33,7 @@ import Checkbox from "@/components/Search/Sidebar/Checkbox.vue"
 import About from "@/components/Search/Sidebar/About.vue"
 export default {
 	name: "Sidebar",
-	props: ["titles", "values", "text", "search", "data", "template", "filters"],
+	props: ["titles", "values", "text", "search", "data", "template", "filters", "create"],
 	components: {
 		Templates,
 		Locations,

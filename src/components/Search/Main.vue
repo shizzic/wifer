@@ -1,8 +1,8 @@
 <template>
 	<div class="wrap">
 		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :template="template[l]" :data="data"
-		:filters="filters" @filters="filters = null" />
-		<List v-show="!filters" :l="l" :data="data" :sort="sort[l]" :filters="filter[l]"
+		:filters="filters" :create="createTemplate" @filters="filters = null" />
+		<List v-show="!filters" :l="l" :data="data" :sort="sort[l]" :filters="filter[l]" :create="createTemplate"
 		@filters="filters = true" />
 	</div>
 </template>
@@ -45,6 +45,7 @@ export default {
 				active: 1,
 				data: {
 					1: {
+						mode: true,
 						limit: 25,
 						skip: 0,
 						sort: "last_time",
@@ -76,6 +77,20 @@ export default {
 		this.getTemplates()
 	},
 	methods: {
+		createTemplate() {
+			if (this.$user.id) {
+				let form = new FormData()
+				form.append("text", JSON.stringify(this.data))
+
+				fetch(this.$domain + "templates", {
+					method: "POST",
+					credentials: 'include',
+					body: form
+				})
+			} else
+				this.$user.setTemplates(JSON.stringify(this.data))
+		},
+
 		getTemplates() {
 			if (this.$user.id)
 				fetch(this.$domain + "templates", {

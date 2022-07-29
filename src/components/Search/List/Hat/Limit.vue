@@ -6,7 +6,7 @@
             <div v-if="mode">
                 <ul class="ul scroll">
                     <template v-for="(elem, index) in list" :key="index">
-                        <li v-if="elem !== limit" @click="data.data[data.active].limit = elem; mode = null;">{{ elem }}</li>
+                        <li v-if="elem !== limit" @click="set(elem)">{{ elem }}</li>
                     </template>
                 </ul>
             </div>
@@ -17,7 +17,7 @@
 <script scoped>
 export default {
 	name: "Limit",
-    props: ["data", "limit"],
+    props: ["data", "limit", "create"],
     data() {
 		return {
 			mode: null,
@@ -25,6 +25,12 @@ export default {
 		}
 	},
 	methods: {
+		set(value) {
+			this.data.data[this.data.active].limit = value
+			this.mode 							   = null
+			this.create()
+		},
+
 		show() {
 			if (this.mode)
 				this.mode = null
@@ -38,7 +44,6 @@ export default {
 <style scoped>
 #limit {
     position: relative;
-    margin-bottom: 10px;
 }
 
 .result {

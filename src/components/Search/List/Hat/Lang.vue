@@ -19,7 +19,12 @@ export default {
 	word-break: break-all;
     
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
+
+    margin-top: 10px;
+    margin-right: 15px;
 }
 
 .elem {
@@ -32,7 +37,6 @@ export default {
     padding: 5px 20px;
 
     margin-right: 10px;
-    margin-bottom: 10px;
 
     transition: background-color .1s linear;
 }
