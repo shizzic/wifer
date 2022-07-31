@@ -257,6 +257,11 @@ export default {
   background-color: #dadada;
 }
 
+.close span:active {
+  transition-duration: 0.1s;
+  background-color: #c2c2c2;
+}
+
 .column {
 	flex-direction: column;
 }

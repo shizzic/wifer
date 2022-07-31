@@ -94,7 +94,7 @@ export default {
 
     display: flex;
     align-items: center;
-    margin: 5px 0;
+    margin-bottom: 5px;
 
     white-space: nowrap;
     overflow: hidden;
