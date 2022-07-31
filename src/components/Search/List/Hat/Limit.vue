@@ -17,7 +17,7 @@
 <script scoped>
 export default {
 	name: "Limit",
-    props: ["data", "limit", "create"],
+    props: ["data", "limit", "create", "getUsers"],
     data() {
 		return {
 			mode: null,
@@ -29,6 +29,7 @@ export default {
 			this.data.data[this.data.active].limit = value
 			this.mode 							   = null
 			this.create()
+			this.getUsers()
 		},
 
 		show() {
@@ -44,6 +45,7 @@ export default {
 <style scoped>
 #limit {
     position: relative;
+	margin-bottom: 10px;
 }
 
 .result {

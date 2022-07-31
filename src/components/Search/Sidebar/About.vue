@@ -1,9 +1,18 @@
 <template>
     <div class="block">
         <div class="box">
-			<label for="about">
+			<label for="is">
+				<div class="checkbox" :class="{ checked : is }" />
+				<input id="is" type="checkbox" v-model="data.data[data.active].about.is">
+				{{ lang.is }}
+                <span v-show="!data.data[data.active].about.is" class="question">?</span>
+			</label>
+		</div>
+
+        <div class="box">
+			<label for="full">
 				<div class="checkbox" :class="{ checked : full }" />
-				<input id="about" type="checkbox" v-model="data.data[data.active].about.full">
+				<input id="full" type="checkbox" v-model="data.data[data.active].about.full">
 				{{ lang.full }}
                 <span v-show="!data.data[data.active].about.full" class="question">?</span>
 			</label>
@@ -20,7 +29,7 @@
 <script scoped>
 export default {
 	name: "About",
-	props: ["lang", "data", "full", "templates"],
+	props: ["lang", "data", "full", "is", "templates"],
     methods: {
         autosize(e) {
             let el = e.target

@@ -16,15 +16,11 @@ export default {
 
 <style scoped>
 .lang {
-	word-break: break-all;
-    
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 
     margin-right: 15px;
-    margin-bottom: 5px;
 }
 
 .elem {
@@ -35,13 +31,18 @@ export default {
     border-radius: 40px;
 
     padding: 5px 20px;
+    margin-bottom: 10px;
 
-    margin-right: 10px;
+    word-break: normal;
 
     transition: background-color .1s linear;
 }
 
 .elem:hover, .active {
     background-color: #bcbcbc;
+}
+
+.elem:not(:last-of-type) {
+    margin-right: 10px;
 }
 </style>

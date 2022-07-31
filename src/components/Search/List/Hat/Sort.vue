@@ -17,7 +17,7 @@
 <script scoped>
 export default {
 	name: "Sort",
-    props: ["data", "sort", "lang", "create"],
+    props: ["data", "sort", "lang", "create", "getUsers"],
     data() {
 		return {
 			mode: null,
@@ -29,6 +29,7 @@ export default {
 			this.data.data[this.data.active].sort = value
 			this.mode 							  = null
 			this.create()
+			this.getUsers()
 		},
 
 		show() {
@@ -43,8 +44,9 @@ export default {
 
 <style scoped>
 #sort {
+	z-index: 2;
     position: relative;
-    margin-left: 10px;
+	margin-bottom: 10px;
 }
 
 .result {
@@ -53,6 +55,7 @@ export default {
 	color: #fff;
 	background-color: #5c9cd8;
 	border-radius: 3px;
+	word-break: normal;
 
 	padding: 5px 17px;
 }
@@ -62,7 +65,6 @@ export default {
 }
 
 ul {
-	width: 100%;
 	max-height: 300px;
 	border: 1px solid #b5b5b5;
     background-color: #fff;

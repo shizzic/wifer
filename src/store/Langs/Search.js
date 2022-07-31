@@ -7,12 +7,14 @@ export const SearchJS = defineStore("Search", {
                 en: {
                     title: "Profile text",
                     hold: "Text you wanna see from users",
-                    full: "Search whole phrase"
+                    full: "Search whole phrase",
+                    is: "User filled \"About me\""
                 },
                 ru: {
                     title: "Текст профиля",
                     hold: "Текст, который вы бы хотели увидеть",
-                    full: "Искать по фразе целиком"
+                    full: "Искать по фразе целиком",
+                    is: "Юзер заполнил \"Обо мне\""
                 }
             }
         },
@@ -26,6 +28,18 @@ export const SearchJS = defineStore("Search", {
             return {
                 en: "Filters",
                 ru: "Параметры"
+            }
+        },
+        photos() {
+            return {
+                en: "Photo",
+                ru: "Фото"
+            }
+        },
+        founded() {
+            return {
+                en: "Founded",
+                ru: "Найдено"
             }
         },
         sort() {

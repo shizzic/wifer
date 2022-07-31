@@ -17,7 +17,8 @@
 		</template>
 
 		<button class="accordion" :class="{ active : data.data[data.active].expanded[1] }" @click="show(1)">{{ text.title }}</button>
-		<About v-show="data.data[data.active].expanded[1]" :data="data" :full="data.data[data.active].about.full" :lang="text" />
+		<About v-show="data.data[data.active].expanded[1]" :data="data" :full="data.data[data.active].about.full" :is="data.data[data.active].about.is" 
+		:lang="text" />
 
 		<div class="button-wrap">
 			<button class="btn" @click="get">{{ search }}</button>
@@ -33,7 +34,7 @@ import Checkbox from "@/components/Search/Sidebar/Checkbox.vue"
 import About from "@/components/Search/Sidebar/About.vue"
 export default {
 	name: "Sidebar",
-	props: ["titles", "values", "text", "search", "data", "template", "filters", "create"],
+	props: ["titles", "values", "text", "search", "data", "template", "filters", "create", "slider", "checkbox", "getUsers"],
 	components: {
 		Templates,
 		Locations,
@@ -41,20 +42,11 @@ export default {
 		Checkbox,
 		About
 	},
-	data() {
-		return {
-			checkbox: ["sex", "body", "smokes", "drinks", "ethnicity", "income", "industry", "search", "prefer"],
-			slider: {
-				age: { min: 18, max: 80 },
-				weight: { min: 35, max: 220 },
-				height: { min: 140, max: 220 }
-			}
-		}
-	},
 	methods: {
 		get() {
 			this.$emit("filters")
 			this.updateTemplate()
+			this.getUsers()
 		},
 
 		updateTemplate() {
@@ -87,7 +79,7 @@ export default {
 
 	background-color: #fff;
 	word-break: break-all;
-    border-radius: 8px;
+    border-radius: 4px;
 
     width: 25%;
 	height: 100%;

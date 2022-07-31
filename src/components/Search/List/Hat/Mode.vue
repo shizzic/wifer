@@ -1,5 +1,5 @@
 <template>
-	<div class="flex">
+	<div class="pocket">
         <div class="square" :class="{ active : mode }" @click="set(true)">
             <div v-for="(_, line) in 3" :key="line" class="line">
                 <span v-for="(_, index) in 3" :key="index" class="dot" />
@@ -31,6 +31,11 @@ export default {
 </script>
 
 <style scoped>
+.pocket {
+    display: flex;
+    margin-bottom: 10px;
+}
+
 .square {
     cursor: pointer;
     height: 35px;

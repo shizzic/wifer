@@ -1,12 +1,20 @@
 <template>
 	<div id="hat">
-        <Lang :l="l" />
-        <div class="filters" @click="$emit('filters')">{{ filters }}</div>
-        <Mode :data="data" :mode="data.data[data.active].mode" :create="create" />
         <div class="flex">
-            <Limit :data="data" :limit="data.data[data.active].limit" :create="create" />
-            <Sort :data="data" :sort="data.data[data.active].sort" :lang="sort" :create="create" />
+            <Lang :l="l" />
+            <Sort :data="data" :sort="data.data[data.active].sort" :lang="sort" :create="create" :getUsers="getUsers" />
         </div>
+        
+        <div class="flex">
+            <div class="founded">{{ founded }} {{ count }}</div>
+
+            <div class="right">
+                <Mode :data="data" :mode="data.data[data.active].mode" :create="create" />
+                <Limit :data="data" :limit="data.data[data.active].limit" :create="create" :getUsers="getUsers" />
+            </div>
+        </div>
+
+        <div class="flex switch"><div class="filters" @click="$emit('filters')">{{ filters }}</div></div>
     </div>
 </template>
 
@@ -17,7 +25,7 @@ import Limit from "@/components/Search/List/Hat/Limit.vue"
 import Sort from "@/components/Search/List/Hat/Sort.vue"
 export default {
 	name: "Hat",
-    props: ["l", "data", "sort", "filters", "create"],
+    props: ["l", "data", "sort", "filters", "create", "count", "founded", "getUsers"],
     components: {
         Lang,
         Mode,
@@ -31,50 +39,73 @@ export default {
 #hat {
     width: 100%;
 	word-break: break-all;
-    border-bottom: 2px solid #bcbcbc;
     
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.flex {
+    width: 100%;
+    border-bottom: 1.5px solid #bcbcbc;
     
-	padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    padding: 10px;
+    padding-bottom: 0;
+}
+
+.right {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.founded {
+    color: #4d4d4d;
+    font-size: 17px;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 10px;
 }
 
 .filters {
+    height: 35px;
     cursor: pointer;
 	background-color: #ff6868;
 	font-size: 16px;
 	color: white;
-	border-radius: 7px;
-	box-shadow: 0 7px 0px #de4d4d;
-	
-    position: relative;
-	top: -3px;
+	border-radius: 4px;
+    word-break: normal;
+    
+    margin-bottom: 10px;
+    padding: 8px 20px;
+    
+    transition: all .1s linear;
+}
 
-    margin-right: 10px;
-    padding: 6px 20px;
-
-    display: none;
-    transition: all .2s;
+ .filters:hover {
+	background-color: #f34f4f;
 }
 
  .filters:active {
-	top: 3px;
-	box-shadow: 0 2px 0px #de4d4d;
-	transition: all .2s;
+	background-color: #c33232;
 }
 
-.flex {
-    display: flex;
-    align-items: center;
-
-    margin-top: 5px;
+.switch {
+    display: none;
 }
 
 @media screen and (max-width: 790px) {
-    .filters {
-		display: block;
+    .switch {
+		display: flex;
+        justify-content: flex-end;
     }
 }
 </style>

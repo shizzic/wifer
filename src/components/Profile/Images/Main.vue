@@ -1,5 +1,5 @@
 <template>
-	<div class="images" :id="'gallery'">
+	<div class="images" :id="'gallery'" :class="{ expand : data && (data.public > 0 || data.private > 0 || data._id == $user.id) }">
         <div v-show="opened && data['_id'] == $user.id" class="dots" @click="showButtons" v-click-outside="() => { buttons = null }">
             <div v-for="(_, index) in 3" :key="index" class="dot" />
         </div>
@@ -122,7 +122,7 @@ export default {
 		}
 	},
     watch: {
-        avatar() {
+        avatar(n) {
             this.$refs.avatar.click()
         }
     },
@@ -315,14 +315,16 @@ export default {
 
     display: flex;
     flex-wrap: wrap;
-    
+
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 1);
+}
+
+.expand {
     padding-top: 30px;
     padding-left: 30px;
     padding-bottom: 10px;
     padding-right: 10px;
     margin-bottom: 30px;
-
-    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 1);
 }
 
 .image-wrap {

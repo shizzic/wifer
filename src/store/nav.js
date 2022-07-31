@@ -62,7 +62,7 @@ export const navJS = defineStore("nav", {
                         ru: "Премиум",
                         en: "Premium"
                     },
-                    image: "/diamond.webp"
+                    image: "/premium.webp"
                 }
             }
         }

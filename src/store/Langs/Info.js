@@ -5,6 +5,7 @@ export const InfoJS = defineStore("Info", {
         keys() {
             return {
                 en: {
+                    premium: "Premium",
                     templates: "Templates",
                     locations: "Locations",
                     username: "Username",
@@ -27,6 +28,7 @@ export const InfoJS = defineStore("Info", {
                     prefer: "Prefer"
                 },
                 ru: {
+                    premium: "Премиум",
                     templates: "Шаблоны",
                     locations: "Местоположения",
                     username: "Ник",
@@ -53,6 +55,10 @@ export const InfoJS = defineStore("Info", {
         values() {
             return {
                 en: {
+                    premium: {
+                        0: "Doesn't have",
+                        1: "Have"
+                    },
                     sex: {
                         1: "Man",
                         2: "Woman"
@@ -139,6 +145,10 @@ export const InfoJS = defineStore("Info", {
                     }
                 },
                 ru: {
+                    premium: {
+                        0: "Нет",
+                        1: "Есть"
+                    },
                     sex: {
                         1: "Мужчина",
                         2: "Женщина"
