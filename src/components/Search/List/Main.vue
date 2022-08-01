@@ -3,7 +3,11 @@
 		<Hat :l="l" :data="data" :sort="sort" :filters="filters" :create="create" :count="count" :founded="founded" :getUsers="getUsers"
 		@filters="$emit('filters')" />
 		<Users :users="users" :mode="mode" :photos="photos" :titles="titles" :values="values" />
-		<Pagination v-if="users" :users="users" :count="count" :limit="data.data[data.active].limit" />
+		<Pagination v-if="users" 
+			:data="data" :getUsers="getUsers" :count="count" 
+			:limit="data.data[data.active].limit" :skip="data.data[data.active].skip" :sort="data.data[data.active].sort"
+			@moved="$emit('moved')"
+		/>
 	</div>
 </template>
 
@@ -32,5 +36,6 @@ export default {
 	height: 100%;
 	
 	overflow-y: auto;
+	overflow-x: hidden;
 }
 </style>

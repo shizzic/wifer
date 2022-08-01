@@ -27,6 +27,7 @@ export default {
 	methods: {
 		set(value) {
 			this.data.data[this.data.active].limit = value
+			this.data.data[this.data.active].skip  = 0
 			this.mode 							   = null
 			this.create()
 			this.getUsers()
@@ -45,6 +46,8 @@ export default {
 <style scoped>
 #limit {
     position: relative;
+	width: 52px;
+
 	margin-bottom: 10px;
 }
 
@@ -56,7 +59,9 @@ export default {
 	border-radius: 3px;
 	word-break: normal;
 
-	padding: 5px 17px;
+	display: flex;
+	justify-content: center;
+	padding: 5px;
 }
 
 .ul {

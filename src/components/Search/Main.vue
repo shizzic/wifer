@@ -7,7 +7,7 @@
 		<List v-show="!filters" :l="l" :data="data" :sort="sort[l]" :filters="filter[l]" :create="createTemplate" :users="users"
 		:mode="data.data[data.active].mode" :photos="photos[l]" :count="count" :founded="founded[l]" :getUsers="getUsers"
 		:titles="titles[l]" :values="values[l]"
-		@filters="filters = true" />
+		@filters="filters = true" @moved="moved = true" />
 	</div>
 </template>
 
@@ -93,11 +93,17 @@ export default {
 			},
 
 			users: null,
-			count: 0
+			count: 0,
+
+			moved: null
 		}
 	},
 	beforeMount() {
 		this.getTemplates()
+	},
+	beforeUnmount() {
+		if (this.moved)
+			this.createTemplate()
 	},
 	methods: {
 		getUsers(count = false) {
@@ -155,7 +161,7 @@ export default {
 					if ("users" in data)
 						this.users = data.users 
 				})
-	},
+		},
 
 		createTemplate() {
 			if (this.$user.id) {
@@ -169,6 +175,8 @@ export default {
 				})
 			} else
 				this.$user.setTemplates(JSON.stringify(this.data))
+
+			this.moved = null
 		},
 
 		getTemplates() {
@@ -245,11 +253,12 @@ export default {
 }
 
 .close span {
+	font-size: 11px;
 	cursor: pointer;
 	border-radius: 50%;
 	background-color: #fff;
 
-	padding: 10px;
+	padding: 8px;
 }
 
 .close span:hover {

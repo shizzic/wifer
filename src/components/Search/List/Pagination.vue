@@ -11,30 +11,40 @@
 <script scoped>
 export default {
 	name: "Pagination",
-	// props: ["count"],
+	props: ["data", "getUsers", "limit", "sort", "count", "skip"],
+	
 	data() {
 		return {
-			all: 84,
 			max: null,
-
-			limit: 10,
-			skip: 20,
 			page: 1,
 
 			inner: [],
 			init: null
 		}
 	},
-	beforeMount() {		
-		this.max  = Math.ceil(this.all / this.limit)
+	watch: {
+		limit() {
+			this.page = 1
+			this.prepare()
+		},
+		sort() {
+			this.page = 1
+			this.prepare()
+		}
+	},
+	beforeMount() {
+		this.max  = Math.ceil(this.count / this.limit)
 		this.prepare(true)
 		this.init = true
 	},
 	methods: {
 		set(num) {
 			if (num !== this.page) {
+				this.$emit("moved")
 				this.page = num
+				this.data.data[this.data.active].skip = this.limit * this.page - this.limit
 				this.prepare()
+				this.getUsers()
 			}
 		},
 
@@ -97,7 +107,8 @@ export default {
 }
 
 .active {
-	border-color: #000;
+	color: #fff;
+	background-color: #000;
 }
 
 .dots {

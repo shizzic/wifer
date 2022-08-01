@@ -27,6 +27,7 @@ export default {
 	methods: {
 		set(value) {
 			this.data.data[this.data.active].sort = value
+			this.data.data[this.data.active].skip = 0
 			this.mode 							  = null
 			this.create()
 			this.getUsers()
