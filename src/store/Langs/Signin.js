@@ -41,16 +41,18 @@ export const SigninJS = defineStore("Signin", {
         response() {
             return {
                 en: {
-                    "0": "Don't try to hack me bro :)",
-                    "1": "Wrong email",
-                    "2": "Email with link wasn't sent to you 'cause of some reason. Please, try again",
-                    "3": "Some error occured on server. Try again and never give up"
+                    0: "Don't try to hack me bro :)",
+                    1: "Wrong email",
+                    2: "Email with link wasn't sent to you 'cause of some reason. Please, try again",
+                    3: "Some error occured on server. Try again and never give up",
+                    4: "Bro, u have been banned. But don't worry. U can create a new account whenever you like :)" 
                 },
                 ru: {
-                    "0": "Не пытайся хакнуть меня бро :)",
-                    "1": "Это не почта",
-                    "2": "Письмо с сылкой не было отправленно на вашу почту по какой-то причине. Пожалуста, попробуйте снова",
-                    "3": "Че то на сервере бахнуло. Попробуй снова и не здавайся"
+                    0: "Не пытайся хакнуть меня бро :)",
+                    1: "Это не почта",
+                    2: "Письмо с сылкой не было отправленно на вашу почту по какой-то причине. Пожалуста, попробуйте снова",
+                    3: "Че то на сервере бахнуло. Попробуй снова и не здавайся",
+                    4: "Бро, ты был забанен. Но не парься. Я же не запретил тебе заводить новые аккаунты (подмиг, подмиг :D)"
                 }
             }
         },

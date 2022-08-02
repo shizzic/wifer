@@ -137,6 +137,7 @@ export default {
 
 	display: flex;
 	justify-content: center;
+	align-items: center;
 
 	transition: visibility 0s, opacity 0.2s linear;
 }

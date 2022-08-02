@@ -1,6 +1,9 @@
 <template>
 	<div v-if="data" class="wrap scroll">
-		<Header :data="data" :lang="values[l].sex" @avatar="++avatar" @settings="settings = true" />
+		<Header
+			:data="data" :lang="values[l].sex" 
+			@avatar="++avatar" @settings="settings = true" @modal="modal = $event"
+		/>
 		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" />
 
 		<div class="flex">
@@ -10,8 +13,15 @@
 		
 		<Seeking v-show="data.search.length > 0" :list="values[l].search" :value="data.search" :title="titles[l].search" />
 
-		<Settings v-if="data && settings" :l="l" :lang="settingsJS" :titles="titles" :fields="data" :info="values[l]"
-		@close="settings = null" @data="data = $event" />
+		<Settings v-if="data && settings"
+			:l="l" :lang="settingsJS" :titles="titles" :fields="data" :info="values[l]"
+			@close="settings = null" @data="data = $event"
+		/>
+
+		<Modal v-if="modal" 
+			:text="buttonsJS.text[modal][l]" :modal="modal" :save="settingsJS.buttons[l].save" :success="buttonsJS.success[modal][l]"
+			@close="modal = null"
+		/>
 	</div>
 </template>
 
@@ -19,12 +29,14 @@
 import { ProfileJS } from "@/store/Langs/Profile"
 import { InfoJS } from "@/store/Langs/Info"
 import { SettingsJS } from "@/store/Langs/Settings"
+import { ButtonsJS } from "@/store/Langs/Buttons"
 import Header from "@/components/Profile/Header/Main.vue"
 import Images from "@/components/Profile/Images/Main.vue"
 import Info from "@/components/Profile/Info.vue"
 import Seeking from "@/components/Profile/Seeking.vue"
 import About from "@/components/Profile/About.vue"
 import Settings from "@/components/Settings/Main.vue"
+import Modal from "@/components/Modal.vue"
 export default {
 	name: "Profile",
 	props: ["l"],
@@ -36,6 +48,7 @@ export default {
 		const values  	 = InfoJS().values
 		const about  	 = InfoJS().about
 		const settingsJS = SettingsJS()
+		const buttonsJS  = ButtonsJS()
 
 		return {
             errors,
@@ -44,7 +57,8 @@ export default {
 			titles,
 			values,
 			about,
-			settingsJS
+			settingsJS,
+			buttonsJS
 		}
 	},
 	components: {
@@ -53,13 +67,16 @@ export default {
 		Info,
 		Seeking,
 		About,
-		Settings
+		Settings,
+		Modal
 	},
 	data() {
 		return {
 			data: null,
 			avatar: 0,
-			settings: null
+
+			settings: null,
+			modal: null
 		}
 	},
 	beforeMount() {

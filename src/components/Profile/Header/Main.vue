@@ -2,7 +2,7 @@
 	<div class="header">
         <Avatar :avatar="data.avatar" @avatar="$emit('avatar')" />
         <div class="right">
-            <Username :username="data.username" :title="data.title" :online="data.online" />
+            <Username :username="data.username" :title="data.title" :online="data.online" :premium="data.premium" />
             <Icons
                 :lang="lang"
                 :time="{ created_at: data.created_at, last_time: data.last_time }" 
@@ -10,7 +10,10 @@
                 :place="{ country: data.country_id, city: data.city_id }"
             />
         </div>
-        <Buttons @settings="$emit('settings')" />
+        <Buttons 
+            :data="data" 
+            @settings="$emit('settings')" @modal="$emit('modal', $event)"
+        />
     </div>
 </template>
 

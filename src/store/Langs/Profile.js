@@ -46,6 +46,7 @@ export const ProfileJS = defineStore("Profile", {
                     "private": "Private",
                     "cancel": "Cancel",
                     "max_size": "Max size of image is 3 MB",
+                    "max_image": "You can have up to 20 images",
                     "error": "Something occured to the server, try again",
                     "success": "Image was added)"
                 },
@@ -54,6 +55,7 @@ export const ProfileJS = defineStore("Profile", {
                     "public": "Публичная",
                     "private": "Приватная",
                     "cancel": "Отменить",
+                    "max_image": "Вы можете иметь до 20 фоток",
                     "max_size": "Максимальный размер фотки 3 мб",
                     "error": "Что-то случилось с сервером, попробуйте снова",
                     "success": "Фотка добавлена)"

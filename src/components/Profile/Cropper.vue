@@ -51,8 +51,9 @@ export default {
 				if (!this.mode)
 					mode = "private"
 				
-				const form = new FormData();
-				form.append("dir", mode);
+				const form = new FormData()
+				form.append("dir", mode)
+
 				canvas.toBlob(blob => {
 					form.append("file", blob);
 					fetch(this.$domain + "upload", {
@@ -63,13 +64,11 @@ export default {
 						.then(data => { return data.json() })
 						.then(data => { this.$emit("clear")
 							if ("error" in data)
-								this.$toast.error(this.lang[this.l].error)
-							else {
+								this.$toast.error(this.lang[this.l][data.error])
+							else
 								location.reload()
-								// this.$toast.success(this.lang[this.l].success)
-							}
 						})
-				}, 'image/*');
+				}, 'image/*')
 			}
 		},
 

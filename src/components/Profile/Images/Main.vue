@@ -242,22 +242,33 @@ export default {
         },
 
         load(event) {
-			const { files } = event.target
+            let avatar = 0
+            if (this.data.avatar === true)
+                avatar = 1
+
+            let all = this.data.public + this.data.private + avatar
+
+            if (all < 20) {
+                const { files } = event.target
 		
-			if (files && files[0] && files[0].size < 2000001) {
-				const blob = URL.createObjectURL(files[0])
-				const reader = new FileReader()
+                if (files && files[0] && files[0].size < 2000001) {
+                    const blob = URL.createObjectURL(files[0])
+                    const reader = new FileReader()
 
-				reader.onload = (e) => {
-					this.image = {
-						src: blob,
-						type: getMimeType(e.target.result, files[0].type),
-					}
-				}
+                    reader.onload = (e) => {
+                        this.image = {
+                            src: blob,
+                            type: getMimeType(e.target.result, files[0].type),
+                        }
+                    }
 
-				reader.readAsArrayBuffer(files[0])
-			} else
-                this.$toast.error(this.lang[this.l].max_size)
+                    reader.readAsArrayBuffer(files[0])
+                } else
+                    this.$toast.error(this.lang[this.l].max_size)
+            } else {
+                this.clear()
+                this.$toast.error(this.lang[this.l].max_image)
+            }
 		},
 
         clear() {

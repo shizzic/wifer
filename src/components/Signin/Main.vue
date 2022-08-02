@@ -56,7 +56,7 @@ export default {
 				.then(data => { return data.json() })
 				.then(data => {
 					if ("error" in data)
-						this.$toast.error(this.response[this.l][data["error"]])
+						this.$toast.error(this.response[this.l][data.error])
 					else
 						this.$toast.show(this.email[this.l])
 				})

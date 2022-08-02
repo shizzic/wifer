@@ -1,6 +1,8 @@
 <template>
     <div class="wrap">
         <div class="username">
+            <img v-show="premium === 1" src="/premium.webp" />
+            <img v-show="premium === 2" src="/diamond.webp" />
             <span>{{ username }}</span>
             <div class="ring-container">
                 <div v-show="live === true" class="ring green-bor" />
@@ -14,7 +16,7 @@
 <script scoped>
 export default {
 	name: "Avatar",
-    props: ["username", "title", "online"],
+    props: ["username", "title", "online", "premium"],
     data() {
 		return {
 			live: null
@@ -41,6 +43,11 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 8px;
+}
+
+img {
+    width: 26px;
+    margin-right: 10px;
 }
 
 .username span {
@@ -73,7 +80,7 @@ export default {
     width: 25px;
 
     position: absolute;
-    left: -6.25px;
+    left: -5.8px;
     top: -6.2px;
 
     animation: pulsate 1s ease-out;

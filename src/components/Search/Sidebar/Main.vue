@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper scroll" :class="{ shown : filters }">
+	<div class="wrapper hideScroll" :class="{ shown : filters }">
 		<button class="accordion" :class="{ active : data.data[data.active].expanded[2] }" @click="show(2)">{{ titles.templates }}</button>
 		<Templates v-show="data.data[data.active].expanded[2]" :lang="template" :data="data" :create="create" />
 

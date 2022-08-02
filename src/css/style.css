@@ -28,7 +28,7 @@ body {
 
 .scroll::-webkit-scrollbar-thumb {
     background-color: #606060;
-    border-radius: 8px;
+    border-radius: 0;
 }
 
 .scroll::-webkit-scrollbar-thumb:hover {
@@ -39,4 +39,8 @@ body {
     .scroll::-webkit-scrollbar {
         width: 0;
     }
+}
+
+.hideScroll::-webkit-scrollbar {
+    width: 0;
 }

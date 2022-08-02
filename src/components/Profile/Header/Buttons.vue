@@ -1,11 +1,14 @@
 <template>
 	<div class="wrap">
         <div class="wrapper">
-            <div class="btn" @click="$emit('settings')">
+            <div v-show="data._id == $user.id" class="btn" @click="$emit('settings')">
                 <img src="/settings.webp">
             </div>
-            <div class="btn">
+            <div v-show="data._id != $user.id" class="btn">
                 <img src="/favorite.webp">
+            </div>
+            <div v-show="data._id == $user.id" class="btn" @click="$emit('modal', 'deactivate')">
+                <img src="/deactivate.webp">
             </div>
         </div>
     </div>
