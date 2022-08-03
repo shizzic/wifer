@@ -1,9 +1,11 @@
 <template>
-	<div class="wrapper">
+	<div class="modal">
         <div class="block" v-click-outside="close" @mousedown="() => { up = true }" @mouseup="() => { up = null }">
             <div class="close" @click="$emit('close')" />
             <img :src="'/' + modal + '.webp'" />
-            <span>{{ text }}</span>
+            <div class="text">
+                <span v-for="(line, index) in text" :key="index">{{ line }}</span>
+            </div>
             <div class="btn" @click="make">{{ submit }}</div>
         </div>
     </div>
@@ -55,7 +57,7 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
+.modal {
 	background-color: rgba(0, 0, 0, 0.6);
 	
 	width: 100%;
@@ -69,8 +71,6 @@ export default {
 	display: flex;
 	justify-content: center;
     align-items: center;
-
-	transition: visibility 0s, opacity 0.2s linear;
 }
 
 .block {
@@ -88,8 +88,19 @@ export default {
     padding: 25px;
 }
 
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
 span {
+    display: inline-block;
     font-size: 17px;
+}
+
+span:not(:last-of-type) {
+    margin-bottom: 5px;
 }
 
 img {

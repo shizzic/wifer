@@ -137,14 +137,9 @@ export default {
 
 	display: flex;
 	justify-content: center;
-	align-items: center;
-
-	transition: visibility 0s, opacity 0.2s linear;
 }
 
 .form {
-	height: 100%;
-	height: auto;
 	width: 50%;
 	min-width: 500px;
 
