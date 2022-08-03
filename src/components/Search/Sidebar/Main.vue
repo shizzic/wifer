@@ -6,6 +6,9 @@
 		<button class="accordion" :class="{ active : data.data[data.active].expanded[0] }" @click="show(0)">{{ titles.locations }}</button>
 		<Locations v-show="data.data[data.active].expanded[0]" :lang="titles" :data="data" />
 
+		<button class="accordion" :class="{ active : data.data[data.active].expanded[3] }" @click="show(3)">{{ titles.images }}</button>
+		<Images v-show="data.data[data.active].expanded[3]" :data="data" :avatar="data.data[data.active].avatar" :lang="images" :title="titles.images" />
+
 		<template v-for="(options, index) in slider" :key="index">
 			<button class="accordion" :class="{ active : data.data[data.active].expanded[index] }" @click="show(index)">{{ titles[index] }}</button>
 			<Slider v-show="data.data[data.active].expanded[index]" :title="titles[index]" :data="data" :index="index" :options="options" />
@@ -29,15 +32,17 @@
 <script scoped>
 import Templates from "@/components/Search/Sidebar/Templates/Main.vue"
 import Locations from "@/components/Search/Sidebar/Locations/Main.vue"
+import Images from "@/components/Search/Sidebar/Images.vue"
 import Slider from "@/components/Search/Sidebar/Slider.vue"
 import Checkbox from "@/components/Search/Sidebar/Checkbox.vue"
 import About from "@/components/Search/Sidebar/About.vue"
 export default {
 	name: "Sidebar",
-	props: ["titles", "values", "text", "search", "data", "template", "filters", "create", "slider", "checkbox", "getUsers"],
+	props: ["titles", "values", "text", "images", "search", "data", "template", "filters", "create", "slider", "checkbox", "getUsers"],
 	components: {
 		Templates,
 		Locations,
+		Images,
 		Slider,
 		Checkbox,
 		About

@@ -2,7 +2,7 @@
 	<div class="wrap" :class="{ column : filters }">
 		<div v-show="filters" class="close"><span @click="filters = null">&#10060;</span></div>
 		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :template="template[l]" :data="data"
-		:filters="filters" :create="createTemplate" :slider="slider" :checkbox="checkbox" :getUsers="getUsers" 
+		:filters="filters" :create="createTemplate" :slider="slider" :checkbox="checkbox" :getUsers="getUsers" :images="images[l]"
 		@filters="filters = null" />
 		<List v-show="!filters" :l="l" :data="data" :sort="sort[l]" :filters="filter[l]" :create="createTemplate" :users="users"
 		:mode="data.data[data.active].mode" :photos="photos[l]" :count="count" :founded="founded[l]" :getUsers="getUsers"
@@ -27,6 +27,7 @@ export default {
 		const titles   = InfoJS().keys
 		const values   = InfoJS().values
 		const text     = SearchJS().text
+		const images   = SearchJS().images
 		const search   = SearchJS().search
 		const sort     = SearchJS().sort
 		const filter   = SearchJS().filters
@@ -38,6 +39,7 @@ export default {
 			titles,
 			values,
 			text,
+			images,
 			search,
 			sort,
 			filter,
@@ -71,7 +73,7 @@ export default {
 						age: [18, 80],
 						weight: [35, 220],
 						height: [140, 220],
-						height: [140, 220],
+						images: [0, 20],
 						children: [0, 9],
 						premium: [],
 						sex: [],
@@ -87,7 +89,8 @@ export default {
 							is: false,
 							full: false,
 							value: ""
-						}
+						},
+						avatar: false
 					}
 				}
 			},
@@ -121,6 +124,11 @@ export default {
 				data[elem + "Min"] = this.data.data[this.data.active][elem][0]
 				data[elem + "Max"] = this.data.data[this.data.active][elem][1]
 			}
+
+			data["imagesMin"] = this.data.data[this.data.active].images[0]
+			data["imagesMax"] = this.data.data[this.data.active].images[1]
+			data["imagesMin"] = this.data.data[this.data.active].images[0]
+			data["avatar"] 	  = this.data.data[this.data.active].avatar
 
 			for (let elem of this.checkbox)
 				data[elem] = this.data.data[this.data.active][elem]

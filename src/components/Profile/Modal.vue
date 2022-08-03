@@ -4,7 +4,7 @@
             <div class="close" @click="$emit('close')" />
             <img :src="'/' + modal + '.webp'" />
             <span>{{ text }}</span>
-            <div class="btn" @click="make">{{ save }}</div>
+            <div class="btn" @click="make">{{ submit }}</div>
         </div>
     </div>
 </template>
@@ -12,7 +12,7 @@
 <script scoped>
 export default {
 	name: "Modal",
-    props: ["text", "modal", "save", "success"],
+    props: ["text", "modal", "submit", "success"],
     data() {
 		return {
 			up: null
@@ -29,6 +29,13 @@ export default {
 				credentials: 'include'
 			})
 
+            this.$router.push({ name: "search" })
+        },
+
+        logout() {
+            this.$emit("close")
+            this.$toast.success(this.success)
+            this.$user.logout(this.$domain)
             this.$router.push({ name: "search" })
         },
 

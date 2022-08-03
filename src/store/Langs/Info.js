@@ -25,7 +25,8 @@ export const InfoJS = defineStore("Info", {
                     search: "Seeking",
                     children: "Children",
                     about: "About",
-                    prefer: "Prefer"
+                    prefer: "Prefer",
+                    images: "Photos"
                 },
                 ru: {
                     premium: "Премиум",
@@ -48,7 +49,8 @@ export const InfoJS = defineStore("Info", {
                     search: "Ищет",
                     children: "Дети",
                     about: "Об",
-                    prefer: "Предпочитаю"
+                    prefer: "Предпочитаю",
+                    images: "Фотки"
                 }
             }
         },

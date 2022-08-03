@@ -10,6 +10,9 @@
             <div v-show="data._id == $user.id" class="btn" @click="$emit('modal', 'deactivate')">
                 <img src="/deactivate.webp">
             </div>
+            <div v-show="data._id == $user.id" class="btn" @click="$emit('modal', 'logout')">
+                <img src="/logout.webp">
+            </div>
         </div>
     </div>
 </template>

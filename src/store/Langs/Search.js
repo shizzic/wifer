@@ -18,6 +18,12 @@ export const SearchJS = defineStore("Search", {
                 }
             }
         },
+        images() {
+            return {
+                en: "User has avatar",
+                ru: "Юзер добавил аватарку"
+            }
+        },
         search() {
             return {
                 en: "Search",

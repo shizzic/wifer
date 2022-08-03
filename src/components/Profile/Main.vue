@@ -19,7 +19,7 @@
 		/>
 
 		<Modal v-if="modal" 
-			:text="buttonsJS.text[modal][l]" :modal="modal" :save="settingsJS.buttons[l].save" :success="buttonsJS.success[modal][l]"
+			:text="modalJS.text[modal][l]" :modal="modal" :submit="modalJS.submit[l]" :success="modalJS.success[modal][l]"
 			@close="modal = null"
 		/>
 	</div>
@@ -29,14 +29,14 @@
 import { ProfileJS } from "@/store/Langs/Profile"
 import { InfoJS } from "@/store/Langs/Info"
 import { SettingsJS } from "@/store/Langs/Settings"
-import { ButtonsJS } from "@/store/Langs/Buttons"
+import { ModalJS } from "@/store/Langs/Modal"
 import Header from "@/components/Profile/Header/Main.vue"
 import Images from "@/components/Profile/Images/Main.vue"
 import Info from "@/components/Profile/Info.vue"
 import Seeking from "@/components/Profile/Seeking.vue"
 import About from "@/components/Profile/About.vue"
 import Settings from "@/components/Settings/Main.vue"
-import Modal from "@/components/Modal.vue"
+import Modal from "@/components/Profile/Modal.vue"
 export default {
 	name: "Profile",
 	props: ["l"],
@@ -48,7 +48,7 @@ export default {
 		const values  	 = InfoJS().values
 		const about  	 = InfoJS().about
 		const settingsJS = SettingsJS()
-		const buttonsJS  = ButtonsJS()
+		const modalJS    = ModalJS()
 
 		return {
             errors,
@@ -58,7 +58,7 @@ export default {
 			values,
 			about,
 			settingsJS,
-			buttonsJS
+			modalJS
 		}
 	},
 	components: {

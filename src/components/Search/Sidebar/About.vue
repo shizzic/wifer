@@ -5,7 +5,7 @@
 				<div class="checkbox" :class="{ checked : is }" />
 				<input id="is" type="checkbox" v-model="data.data[data.active].about.is">
 				{{ lang.is }}
-                <span v-show="!data.data[data.active].about.is" class="question">?</span>
+                <span v-show="!is" class="question">?</span>
 			</label>
 		</div>
 
@@ -14,7 +14,7 @@
 				<div class="checkbox" :class="{ checked : full }" />
 				<input id="full" type="checkbox" v-model="data.data[data.active].about.full">
 				{{ lang.full }}
-                <span v-show="!data.data[data.active].about.full" class="question">?</span>
+                <span v-show="!full" class="question">?</span>
 			</label>
 		</div>
 
