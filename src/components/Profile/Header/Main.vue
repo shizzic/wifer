@@ -11,7 +11,7 @@
             />
         </div>
         <Buttons 
-            :data="data" 
+            :data="data" :checked="checked" :add="add" :del="del" :l="l"
             @settings="$emit('settings')" @modal="$emit('modal', $event)"
         />
     </div>
@@ -24,7 +24,7 @@ import Icons from "@/components/Profile/Header/Icons.vue"
 import Buttons from "@/components/Profile/Header/Buttons.vue"
 export default {
 	name: "Header",
-    props: ["data", "lang"],
+    props: ["data", "lang", "checked", "add", "del", "l"],
     components: {
         Avatar,
         Username,

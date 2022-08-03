@@ -1,7 +1,7 @@
 <template>
 	<div v-if="data" class="wrap scroll">
 		<Header
-			:data="data" :lang="values[l].sex" 
+			:data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l"
 			@avatar="++avatar" @settings="settings = true" @modal="modal = $event"
 		/>
 		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" />
@@ -76,14 +76,25 @@ export default {
 			avatar: 0,
 
 			settings: null,
-			modal: null
+			modal: null,
+
+			checked: {
+				like: {
+					is: null,
+					text: ""
+				}
+			}
+		}
+	},
+	watch: {
+		'$route.params.id': {
+			handler() {
+				this.firstGet()
+			}
 		}
 	},
 	beforeMount() {
-		if (this.$route.params.id.match(/^\d+$/))
-			this.getProfile()
-		else
-			this.$toast.error(this.errors[this.l].int)
+		this.firstGet()
 	},
 	methods: {
 		getProfile() {
@@ -92,15 +103,41 @@ export default {
 				credentials: "include"
 			})
 				.then(data => { return data.json() })
-				.then(data => {
+				.then(data => { console.log(data)
 					if ("error" in data)
 						this.$toast.error(this.response[this.l])
 					else {
 						this.data = data
-						console.log(data)
+
+						if (data._id != this.$user.id)
+							this.getTarget()
 					}
 				})
 				.catch(() => { this.$toast.error(this.errors[this.l].server) })
+		},
+
+		getTarget() {
+			fetch(this.$domain + "target?target=" + this.$route.params.id, {
+				method: "GET",
+				credentials: "include"
+			})
+				.then(data => { return data.json() })
+				.then(data => {
+					console.log(data)
+
+					if (data)
+						if ("like" in data) {
+							this.checked.is   = true
+							this.checked.text = data.like.text
+						}
+				})
+		},
+
+		firstGet() {
+			if (this.$route.params.id.match(/^\d+$/) && this.$route.params.id > 0)
+				this.getProfile()
+			else
+				this.$toast.error(this.errors[this.l].int)
 		}
 	}
 }

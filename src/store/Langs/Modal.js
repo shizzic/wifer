@@ -6,14 +6,16 @@ export const ModalJS = defineStore("Modal", {
             return {
                 deactivate: {
                     en: [
-                        "1. After deactivateing, your profile won't be showing in public search and profile page as well.",
+                        "1. After deactivateing, your profile won't be showing in public search.",
                         "2. All your data will be saved.",
-                        "3. Just re-login and you'll see all your information again :)"
+                        "3. I won't bother you anymore with emails (until next login :D)",
+                        "4. Just re-login and you'll see all your information again :)"
                     ],
                     ru: [
-                        "После деактивации вы не будете отображаться в поиске и странице профиля у кого либо.",
-                        "Вся ваша инфа будет сохраненна.",
-                        "Просто перелогиньтесь и вы увидите всю вашу информацию снова :)"
+                        "1. После деактивации вы не будете отображаться в общем поиске.",
+                        "2. Вся ваша инфа будет сохраненна.",
+                        "3. Я больше не побеспокою вас имейлами (до следующего логина :D)",
+                        "4. Просто перелогиньтесь и вы увидите всю вашу информацию снова :)"
                     ]
                 },
                 logout: {
@@ -35,6 +37,22 @@ export const ModalJS = defineStore("Modal", {
                 logout: {
                     en: "You've logouted. I hope u got what u wanted :)",
                     ru: "Вы вышли. Надеюсь классно провели время :)"
+                }
+            }
+        },
+        add() {
+            return {
+                like: {
+                    en: "You added this user to your favorites",
+                    ru: "Вы добавили юзера в свой список фаворитов"
+                }
+            }
+        },
+        delete() {
+            return {
+                like: {
+                    en: "You deleted this user from your favorites",
+                    ru: "Вы удалили юзера из списка фаворитов"
                 }
             }
         },
