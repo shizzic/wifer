@@ -45,6 +45,10 @@ export const ModalJS = defineStore("Modal", {
                 like: {
                     en: "You added this user to your favorites",
                     ru: "Вы добавили юзера в свой список фаворитов"
+                },
+                private: {
+                    en: "You gave an access to your private photos",
+                    ru: "Вы дали доступ к свои приватным фоткам"
                 }
             }
         },
@@ -53,6 +57,10 @@ export const ModalJS = defineStore("Modal", {
                 like: {
                     en: "You deleted this user from your favorites",
                     ru: "Вы удалили юзера из списка фаворитов"
+                },
+                private: {
+                    en: "You took away an access for your photos",
+                    ru: "Вы забрали доступ к свои првиатным фоткам"
                 }
             }
         },

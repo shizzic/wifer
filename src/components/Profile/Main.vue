@@ -1,10 +1,10 @@
 <template>
 	<div v-if="data" class="wrap scroll">
 		<Header
-			:data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l"
+			:data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l" :live="live"
 			@avatar="++avatar" @settings="settings = true" @modal="modal = $event"
 		/>
-		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" />
+		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" :priv="checked.private" />
 
 		<div class="flex">
 			<Info :data="data" :titles="titles[l]" :values="values[l]" />
@@ -72,6 +72,7 @@ export default {
 	},
 	data() {
 		return {
+			live: null,
 			data: null,
 			avatar: 0,
 
@@ -82,6 +83,10 @@ export default {
 				like: {
 					is: null,
 					text: ""
+				},
+				private: {
+					is: null,
+					access: null
 				}
 			}
 		}
@@ -107,38 +112,41 @@ export default {
 					if ("error" in data)
 						this.$toast.error(this.response[this.l])
 					else {
-						this.data = data
+						this.data = data.user
+						this.pulse()
 
-						if (data._id != this.$user.id)
-							this.getTarget()
+						if (data.target) {
+							if ("Like" in data.target && data.target.Like) {
+								this.checked.like.is   = true
+								this.checked.like.text = data.target.Like.text
+							}
+
+							if ("Private" in data.target && data.target.Private)
+								for (let elem of data.target.Private)
+									if (elem.user == this.$user.id)
+										this.checked.private.is = true
+									else
+										this.checked.private.access = true
+						}
 					}
 				})
 				.catch(() => { this.$toast.error(this.errors[this.l].server) })
 		},
 
-		getTarget() {
-			fetch(this.$domain + "target?target=" + this.$route.params.id, {
-				method: "GET",
-				credentials: "include"
-			})
-				.then(data => { return data.json() })
-				.then(data => {
-					console.log(data)
-
-					if (data)
-						if ("like" in data) {
-							this.checked.is   = true
-							this.checked.text = data.like.text
-						}
-				})
-		},
-
 		firstGet() {
-			if (this.$route.params.id.match(/^\d+$/) && this.$route.params.id > 0)
-				this.getProfile()
-			else
-				this.$toast.error(this.errors[this.l].int)
-		}
+			if (this.$route.params.id)
+				if (this.$route.params.id.match(/^\d+$/) && this.$route.params.id > 0)
+					this.getProfile()
+				else
+					this.$toast.error(this.errors[this.l].int)
+		},
+		
+		pulse() {
+            if (this.$route.params.id == this.$user.id)
+                this.live = true
+            else
+                this.live = this.data.online
+        }
 	}
 }
 </script>

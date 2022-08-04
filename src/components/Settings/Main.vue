@@ -125,6 +125,7 @@ export default {
 
 <style scoped>
 .wrapper {
+	z-index: 10;
 	background-color: rgba(0, 0, 0, 0.6);
 	
 	width: 100%;

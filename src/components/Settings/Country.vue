@@ -105,6 +105,11 @@ h3 {
     position: relative;
 }
 
+input {
+	opacity: 1;
+	visibility: visible;
+}
+
 .result {
     width: 100%;
 	cursor: pointer;

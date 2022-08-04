@@ -1,5 +1,7 @@
 <template>
-	<div class="images" :id="'gallery'" :class="{ expand : data && (data.public > 0 || data.private > 0 || data._id == $user.id) }">
+	<div class="images" :id="'gallery'" 
+        :class="{ expand : data && (data.public > 0 || (data.private > 0 && $user.id && (data._id == $user.id || data._id != $user.id && priv.access)) || data._id == $user.id) }"
+    >
         <div v-show="opened && data['_id'] == $user.id" class="dots" @click="showButtons" v-click-outside="() => { buttons = null }">
             <div v-for="(_, index) in 3" :key="index" class="dot" />
         </div>
@@ -14,7 +16,7 @@
         <input type="file" style="display: none;" ref="input" @change="load($event)" accept="image/*">
         <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" @clear="clear" />
 
-        <div v-show="data._id == $user.id" class="image" :style="'border: 1px solid; margin-right: 20px; margin-bottom: 20px;'" 
+        <div v-show="$user.id && data._id == $user.id" class="image" :style="'border: 1px solid; margin-right: 20px; margin-bottom: 20px;'" 
             @click="$refs.input.click()"
         >
             <div class="plus" />
@@ -43,7 +45,7 @@
             <img v-show="$user.id == data._id" src="/public.webp" alt="" class="icon" />
         </div>
 
-        <template v-if="true">
+        <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && priv.access)">
             <div v-for="(num, index) in data.private" :key="index" class="image-wrap">
                 <a
                     :href="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()"
@@ -88,7 +90,7 @@ function getMimeType(file, fallback = null) {
 
 export default {
 	name: "Images",
-    props: ["data", "lang", "l", "avatar"],
+    props: ["data", "lang", "l", "avatar", "priv"],
     setup() {
 		const del   = ImageJS()["delete"]
         const error = ImageJS()["error"]

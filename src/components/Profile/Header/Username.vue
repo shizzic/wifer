@@ -16,18 +16,7 @@
 <script scoped>
 export default {
 	name: "Avatar",
-    props: ["username", "title", "online", "premium"],
-    data() {
-		return {
-			live: null
-		}
-	},
-    beforeMount() {
-        if (this.$route.params.id == this.$user.id)
-            this.live = true
-        else
-            this.live = this.online
-    }
+    props: ["username", "title", "online", "premium", "live"]
 }
 </script>
 

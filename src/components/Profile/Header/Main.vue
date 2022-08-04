@@ -2,7 +2,7 @@
 	<div class="header">
         <Avatar :avatar="data.avatar" @avatar="$emit('avatar')" />
         <div class="right">
-            <Username :username="data.username" :title="data.title" :online="data.online" :premium="data.premium" />
+            <Username :username="data.username" :title="data.title" :online="data.online" :premium="data.premium" :live="live" />
             <Icons
                 :lang="lang"
                 :time="{ created_at: data.created_at, last_time: data.last_time }" 
@@ -24,7 +24,7 @@ import Icons from "@/components/Profile/Header/Icons.vue"
 import Buttons from "@/components/Profile/Header/Buttons.vue"
 export default {
 	name: "Header",
-    props: ["data", "lang", "checked", "add", "del", "l"],
+    props: ["data", "lang", "checked", "add", "del", "l", "live"],
     components: {
         Avatar,
         Username,
@@ -62,7 +62,7 @@ export default {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     .header {
         flex-direction: column;
         align-items: center;
