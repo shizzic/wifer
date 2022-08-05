@@ -10,7 +10,7 @@
                 </div>
             </div>
             
-            <div class="elem" v-show="data._id == $user.id">
+            <div v-show="data._id == $user.id" class="elem">
                 <div class="btn" @click="$emit('settings')">
                     <img src="/settings.webp">
                 </div>
@@ -27,8 +27,15 @@
                 </div>
 
                 <div class="btn" @click="privateHandle">
-                    <div class="fill" :class="{ checked : checked.private.is, unchecked : !checked.private.is }" style="background-color: #7E3661;" />
+                    <div class="fill" :class="{ checked : checked.private.is, unchecked : !checked.private.is }" style="background-color: #16A085;" />
                     <img src="/private.webp">
+                </div>
+            </div>
+
+            <div v-show="$user.id && data._id != $user.id" class="elem">
+                <div class="btn" @click="chat">
+                    <div class="fill" :class="{ checked : checked.chat, unchecked : !checked.chat }" style="background-color: #EB9532;" />
+                    <img src="/chat.webp">
                 </div>
             </div>
         </div>
@@ -75,6 +82,19 @@ export default {
 				method: method,
 				credentials: "include"
 			})
+        },
+
+        chat() {
+            let method = "POST"
+
+            if (this.checked.chat) {
+                this.checked.chat = null
+                method = "DELETE"
+                this.$toast.show(this.del.chat[this.l])
+            } else {
+                this.checked.chat = true
+                this.$toast.success(this.add.chat[this.l])
+            }
         }
     }
 }   
@@ -100,27 +120,23 @@ export default {
 
     display: flex;
     align-items: center;
-}
 
-.elem:first-of-type {
-    margin-bottom: 50px;
+    margin: 20px 0;
 }
 
 .btn {
     position: relative;
     cursor: pointer;
-    background-color: #989898;
+    background-color: #6a6161;
     border-radius: 50%;
 
     display: flex;
     align-items: center;
+
     padding: 12px;
+    margin: 0 20px;
 
     overflow: hidden;
-}
-
-.btn:not(:last-of-type) {
-    margin-right: 50px;
 }
 
 img {
@@ -149,19 +165,16 @@ img {
 @media screen and (max-width: 700px) {
     .wrapper {
         flex-direction: row;
+        justify-content: center;
+    }
+
+    .elem {
+        margin: 0;
     }
 
     .btn {
+        margin: 0 5px;
         margin-top: 30px;
-    }
-
-    .elem:first-of-type {
-        margin-right: 10px;
-        margin-bottom: 0;
-    }
-
-    .btn:not(:last-of-type) {
-        margin-right: 10px;
     }
 }
 </style>

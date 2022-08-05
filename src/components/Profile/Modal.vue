@@ -28,7 +28,7 @@ export default {
 
             fetch(this.$domain + "deactivate", {
 				method: "PUT",
-				credentials: 'include'
+				credentials: "include"
 			})
 
             this.$router.push({ name: "search" })

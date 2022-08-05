@@ -22,6 +22,10 @@
 			:text="modalJS.text[modal][l]" :modal="modal" :submit="modalJS.submit[l]" :success="modalJS.success[modal][l]"
 			@close="modal = null"
 		/>
+
+		<Note v-if="$user.id && data._id != $user.id"
+			:checked="checked" :text="checked.like" :note="note" :target="data._id" :lang="modalJS" :l="l" @note="note = $event"
+		/>
 	</div>
 </template>
 
@@ -37,6 +41,7 @@ import Seeking from "@/components/Profile/Seeking.vue"
 import About from "@/components/Profile/About.vue"
 import Settings from "@/components/Settings/Main.vue"
 import Modal from "@/components/Profile/Modal.vue"
+import Note from "@/components/Profile/Note.vue"
 export default {
 	name: "Profile",
 	props: ["l"],
@@ -68,7 +73,8 @@ export default {
 		Seeking,
 		About,
 		Settings,
-		Modal
+		Modal,
+		Note
 	},
 	data() {
 		return {
@@ -78,6 +84,7 @@ export default {
 
 			settings: null,
 			modal: null,
+			note: null,
 
 			checked: {
 				like: {
@@ -87,7 +94,8 @@ export default {
 				private: {
 					is: null,
 					access: null
-				}
+				},
+				chat: null
 			}
 		}
 	},
@@ -153,6 +161,7 @@ export default {
 
 <style scoped>
 .wrap {
+	position: relative;
 	width: 100%;
 	height: 100%;
 

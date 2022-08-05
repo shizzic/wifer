@@ -49,6 +49,10 @@ export const ModalJS = defineStore("Modal", {
                 private: {
                     en: "You gave an access to your private photos",
                     ru: "Вы дали доступ к свои приватным фоткам"
+                },
+                chat: {
+                    en: "You gave an access to text you for this user",
+                    ru: "Вы дали доступ на переписку с Вами"
                 }
             }
         },
@@ -61,6 +65,10 @@ export const ModalJS = defineStore("Modal", {
                 private: {
                     en: "You took away an access for your photos",
                     ru: "Вы забрали доступ к свои првиатным фоткам"
+                },
+                chat: {
+                    en: "Now, this user can't text you",
+                    ru: "Теперь этот юзер не может вам писать"
                 }
             }
         },
@@ -68,6 +76,18 @@ export const ModalJS = defineStore("Modal", {
             return {
                 en: "Submit",
                 ru: "Подтвердить"
+            }
+        },
+        cancel() {
+            return {
+                en: "Cancel",
+                ru: "Отменить"
+            }
+        },
+        save() {
+            return {
+                en: "Save",
+                ru: "Сохранить"
             }
         }
     }

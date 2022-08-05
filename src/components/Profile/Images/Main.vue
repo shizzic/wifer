@@ -475,7 +475,7 @@ export default {
 }
 
 .icon {
-    width: 20px;
+    width: 23px;
 
     position: absolute;
     left: 5px;
