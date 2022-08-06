@@ -5,6 +5,8 @@
 			@click="checked = key">
 				<div class="elem">
 					<div class="circle" />
+					<div v-if="elem.image === '/heart.webp' && $nav.hearts" class="notification"><span>{{ $nav.hearts }}</span></div>
+					<div v-if="elem.image === '/chat.webp' && $nav.messages" class="notification"><span>{{ $nav.messages }}</span></div>
 
 					<div class="link">
 						<img :src="elem.image"  />
@@ -18,30 +20,69 @@
 </template>
 
 <script scoped>
-import { navJS } from "@/store/nav.js"
 export default {
 	name: 'Nav',
 	props: ["l"],
-	setup() {
-		const inner = navJS()["inner"]
-		const outer = navJS()["outer"]
-
-		return {
-			inner,
-			outer
-		}
-	},
 	computed: {
 		id() {
 			return this.$user.id
 		},
 		list() {
-			return this.id ? this.inner : this.outer
+			return this.id ? this.$nav.inner : this.$nav.outer
 		}
 	},
 	data() {
 		return {
-			checked: 0
+			checked: 0,
+			interval: null
+		}
+	},
+	watch: {
+		id(n) {
+			if (n && n > 0)
+				if (!this.interval)
+					this.interval = setInterval(this.getHearts, 1000 * 120)
+			else {
+				this.hearts   = null
+				this.messages = null
+				clearInterval(this.interval)
+			}
+		}
+	},
+	beforeMount() {
+		if (this.id) {
+			this.getHearts()
+			this.interval = setInterval(this.getHearts, 1000 * 120)
+		}
+	},
+	methods: {
+		getHearts() {
+			fetch(this.$domain + "notifications", {
+				method: "GET",
+				credentials: "include"
+			})
+				.then(data => { return data.json() })
+				.then(data => {
+					let hearts   = 0
+					let messages = 0
+
+					for (let key in data)
+						if (data[key] > 0)
+							if (key !== "messages")
+								hearts   += data[key]
+							else
+								messages += data[key]
+
+					if (hearts > 0)
+						this.$nav.setHearts(hearts)
+					else
+						this.$nav.setHearts(null)
+
+					if (messages > 0)
+						this.$nav.setMessages(hearts)
+					else
+						this.$nav.setMessages(null)
+				})
 		}
 	}
 }
@@ -49,7 +90,7 @@ export default {
 
 <style scoped>
 nav {
-	z-index: 2147483646;
+	z-index: 2147483640;
 	background-color: #FFFFFF;
 
 	width: 100%;
@@ -66,27 +107,6 @@ nav {
 	display: flex;
 }
 
-@media screen and (min-width: 529px) {
-	.link {
-		padding: 0 40px;
-	}
-}
-
-@media screen and (max-width: 529px) {
-	#links {
-		width: 100%;
-	}
-
-	.wrap {
-		flex: 1;
-	}
-
-	.elem {
-		flex: 1;
-		padding: 0 0;
-	}
-}
-
 .wrap {
 	cursor: pointer;
 	height: 100%;
@@ -95,16 +115,17 @@ nav {
 }
 
 .elem {
+	position: relative;
 	flex: 1;
 	cursor: pointer;
 	height: 95%;
-	border-radius: 12px;
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 
-	position: relative;
   	overflow: hidden;
 }
 
@@ -153,10 +174,56 @@ img {
     height: 5%;
     background-color: #000;
 
-    transition: width .2s;
+    transition: width .3s;
 }
 
 .checked {
 	width: 100%;
+}
+
+.notification {
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+
+	position: absolute;
+	left: 0;
+	top: 0;
+
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+
+.notification span {
+	font-size: 12px;
+	color: #fff;
+	background-color: #000;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+
+	display: inline-block;
+	padding: 1px 5px;
+}
+
+@media screen and (min-width: 529px) {
+	.link {
+		padding: 0 40px;
+	}
+}
+
+@media screen and (max-width: 529px) {
+	#links {
+		width: 100%;
+	}
+
+	.wrap {
+		flex: 1;
+	}
+
+	.elem {
+		flex: 1;
+		padding: 0 0;
+	}
 }
 </style>

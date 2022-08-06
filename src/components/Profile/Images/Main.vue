@@ -2,7 +2,7 @@
 	<div class="images" :id="'gallery'" 
         :class="{ expand : data && (data.public > 0 || (data.private > 0 && $user.id && (data._id == $user.id || data._id != $user.id && priv.access)) || data._id == $user.id) }"
     >
-        <div v-show="opened && data['_id'] == $user.id" class="dots" @click="showButtons" v-click-outside="() => { buttons = null }">
+        <div v-show="opened && data._id == $user.id" class="dots" @click="showButtons" v-click-outside="() => { buttons = null }">
             <div v-for="(_, index) in 3" :key="index" class="dot" />
         </div>
 
@@ -124,7 +124,7 @@ export default {
 		}
 	},
     watch: {
-        avatar(n) {
+        avatar() {
             this.$refs.avatar.click()
         }
     },
@@ -199,6 +199,7 @@ export default {
         if (this.lightbox) {
             this.lightbox.destroy()
             this.lightbox = null
+            this.close()
         }
     },
     methods: {
@@ -236,10 +237,7 @@ export default {
 				credentials: "include"
             })
                 .then(data => { return data.json() })
-                .then(() => {
-                    location.reload()
-                    // this.$toast.success(this.del[this.l])
-                })
+                .then(() => { location.reload() })
                 .catch(() => { this.$toast.error(this.error[this.l]) })
         },
 
@@ -413,7 +411,6 @@ export default {
     z-index: 2147483647;
     cursor: pointer;
     width: 25px;
-    -webkit-tap-highlight-color: transparent;
 
     position: absolute;
     top: -29px;
@@ -487,6 +484,6 @@ export default {
 
 <style>
 .pswp {
-    z-index: 2147483646;
+    z-index: 2147483645;
 }
 </style>

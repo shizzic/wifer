@@ -1,6 +1,10 @@
 import { defineStore } from "pinia"
 
 export const navJS = defineStore("nav", {
+    state: () =>({
+        hearts: null,
+        messages: null
+    }),
     getters: {
         inner() {
             return {
@@ -65,6 +69,14 @@ export const navJS = defineStore("nav", {
                     image: "/premium.webp"
                 }
             }
+        }
+    },
+    actions:{
+        setHearts(value) {
+            this.hearts   = value
+        },
+        setMessages(value) {
+            this.messages = value
         }
     }
 })

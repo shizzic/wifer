@@ -160,7 +160,6 @@ export default {
 
 <style scoped>
 .wrap {
-	position: relative;
 	width: 100%;
 	height: 100%;
 
