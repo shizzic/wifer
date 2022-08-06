@@ -22,12 +22,12 @@
 
             <div v-show="$user.id && data._id != $user.id" class="elem">
                 <div class="btn" @click="like">
-                    <div class="fill" :class="{ checked : checked.like.is, unchecked : !checked.like.is }" style="background-color: #C82647;" />
+                    <div class="fill" :class="{ checked : checked.like.is, unchecked : !checked.like.is }" style="background-color: #DD2647;" />
                     <img src="/like.webp">
                 </div>
 
                 <div class="btn" @click="privateHandle">
-                    <div class="fill" :class="{ checked : checked.private.is, unchecked : !checked.private.is }" style="background-color: #16A085;" />
+                    <div class="fill" :class="{ checked : checked.private.is, unchecked : !checked.private.is }" style="background-color: #16AE85;" />
                     <img src="/private.webp">
                 </div>
             </div>

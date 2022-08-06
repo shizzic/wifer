@@ -1,8 +1,8 @@
 <template>
-	<div id="note" :class="{ shown: note, closed: !note }" v-click-outside="() => { $emit('note', null) }">
-        <textarea maxlength="150" v-model="checked.like.text" @click="$emit('note', true)" @input="autosize($event)" />
+	<div id="note" :class="{ shown: show, closed: !show }"  v-click-outside="close" @mousedown="() => { up = true }" @mouseup="() => { up = null }">
+        <textarea maxlength="150" v-model="checked.like.text" @click="show = true" @input="autosize($event)" />
         <div class="buttons">
-            <button @click="$emit('note', null)">{{ lang.cancel[l] }}</button>
+            <button @click="show = null">{{ lang.cancel[l] }}</button>
             <button @click="save">{{ lang.save[l] }}</button>
         </div>
     </div>
@@ -11,7 +11,13 @@
 <script scoped>
 export default {
 	name: "Note",
-    props: ["checked", "text", "note", "target", "lang", "l"],
+    props: ["checked", "text", "target", "lang", "l"],
+    data() {
+		return {
+            show: null,
+			up: null
+		}
+	},
     methods: {
         save() {
             this.$emit('note', null)
@@ -34,7 +40,14 @@ export default {
                 el.style.height = "5px"
                 el.style.height = (el.scrollHeight) + "px"
             }, 0)
-        }
+        },
+
+        close() {
+			if (!this.up)
+				this.show = null
+
+			this.up = null
+		}
     }
 }
 </script>

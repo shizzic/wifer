@@ -24,7 +24,7 @@
 		/>
 
 		<Note v-if="$user.id && data._id != $user.id"
-			:checked="checked" :text="checked.like" :note="note" :target="data._id" :lang="modalJS" :l="l" @note="note = $event"
+			:checked="checked" :text="checked.like" :target="data._id" :lang="modalJS" :l="l" @note="note = $event"
 		/>
 	</div>
 </template>
@@ -84,7 +84,6 @@ export default {
 
 			settings: null,
 			modal: null,
-			note: null,
 
 			checked: {
 				like: {
