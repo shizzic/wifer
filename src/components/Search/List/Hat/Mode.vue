@@ -6,7 +6,7 @@
             </div>
         </div>
 
-        <div class="square" :class="{ active : !data.data[data.active].mode }" @click="set(null)">
+        <div class="square" :class="{ active : !mode }" @click="set(null)">
             <div v-for="(_, line) in 3" :key="line" class="line">
                 <span class="dot" />
                 <span class="long" />

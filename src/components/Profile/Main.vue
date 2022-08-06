@@ -168,11 +168,6 @@ export default {
 	overflow-y: auto;
 }
 
-.wrap::before, .wrap::after {
-  content: '';
-  margin: auto;
-}
-
 @media screen and (max-width: 768px) {
     .wrap {
         padding: 15px;
