@@ -5,7 +5,7 @@
 			@click="checked = key">
 				<div class="elem">
 					<div class="circle" />
-					<div v-if="elem.image === '/heart.webp' && $nav.hearts" class="notification"><span>{{ $nav.hearts }}</span></div>
+					<div v-if="elem.image === '/heart.webp' && $nav.hearts" class="notification"><span>{{ hearts }}</span></div>
 					<div v-if="elem.image === '/chat.webp' && $nav.messages" class="notification"><span>{{ $nav.messages }}</span></div>
 
 					<div class="link">
@@ -29,6 +29,9 @@ export default {
 		},
 		list() {
 			return this.id ? this.$nav.inner : this.$nav.outer
+		},
+		hearts() {
+			return this.$nav.hearts
 		}
 	},
 	data() {
@@ -73,15 +76,8 @@ export default {
 							else
 								messages += data[key]
 
-					if (hearts > 0)
-						this.$nav.setHearts(hearts)
-					else
-						this.$nav.setHearts(null)
-
-					if (messages > 0)
-						this.$nav.setMessages(hearts)
-					else
-						this.$nav.setMessages(null)
+					this.$nav.setHearts(hearts)
+					this.$nav.setMessages(messages)
 				})
 		}
 	}

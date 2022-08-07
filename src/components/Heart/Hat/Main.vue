@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper">
         <Which :what="what" :which="which" @set="$emit('set', $event)" />
-        <Mode :limit="limit" :get="get" :founded="founded" :mode="mode" 
+        <Mode :limit="limit" :founded="founded" :mode="mode" :all="all"
         @limit="$emit('limit', $event)" @mode="$emit('mode', $event)" />
     </div>
 </template>
@@ -11,7 +11,7 @@ import Which from "@/components/Heart/Hat/Which.vue"
 import Mode from "@/components/Heart/Hat/Mode.vue"
 export default {
 	name: "Hat",
-    props: ["what", "which", "limit", "get", "founded", "mode"],
+    props: ["what", "which", "limit", "founded", "mode", "all"],
     components: {
         Which,
         Mode

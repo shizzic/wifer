@@ -158,7 +158,7 @@ export default {
 
 			fetch(this.$domain + "getUsers", {
 				method: "POST",
-				credentials: 'include',
+				credentials: "include",
 				body: JSON.stringify(data)
 			})
 				.then(data => { return data.json() })

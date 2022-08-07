@@ -205,4 +205,9 @@ li:not(:last-child) {
 .slide-fade-leave-to, .slide-fade-enter-from {
     transform: translateX(10px);
 }
+
+input {
+	opacity: 1;
+	visibility: visible;
+}
 </style>

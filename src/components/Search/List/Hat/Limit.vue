@@ -1,5 +1,5 @@
 <template>
-	<div id="limit" v-click-outside="() => { mode = null }">
+	<div class="limit" v-click-outside="() => { mode = null }">
         <div class="result" @click="show">{{ limit }}</div>
 
         <transition name="slide-fade">
@@ -44,7 +44,8 @@ export default {
 </script>
 
 <style scoped>
-#limit {
+.limit {
+	z-index: 2;
     position: relative;
 	width: 52px;
 

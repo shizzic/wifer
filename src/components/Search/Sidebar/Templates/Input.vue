@@ -56,6 +56,8 @@ h3 {
 }
 
 input {
+	opacity: 1;
+	visibility: visible;
 	color: #000;
 	font-size: 20px;
 	letter-spacing: 1px;

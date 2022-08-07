@@ -73,10 +73,30 @@ export const navJS = defineStore("nav", {
     },
     actions:{
         setHearts(value) {
-            this.hearts   = value
+            if (value > 0)
+                this.hearts = value
+            else
+                this.hearts = null
         },
         setMessages(value) {
-            this.messages = value
+            if (value > 0)
+                this.messages = value
+            else
+                this.messages = null
+        },
+        takeHearts(value) {
+            let res = this.hearts - value
+            if (res > 0)
+                this.hearts = res
+            else
+                this.hearts = null
+        },
+        takeMessages(value) {
+            let res = this.messages - value
+            if (res > 0)
+                this.messages = res
+            else
+                this.messages = null
         }
     }
 })

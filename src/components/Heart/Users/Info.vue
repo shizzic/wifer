@@ -80,7 +80,6 @@ export default {
 .block {
     position: relative;
     width: 100%;
-    min-width: 200px;
 
     display: flex;
     flex-direction: column;
@@ -157,9 +156,15 @@ img {
 }
 
 .premium {
-    width: 20px;
+    width: 22px;
     object-fit: cover;
 
     margin-left: 5px;
+}
+
+@media screen and (max-width: 450px) {
+	.block {
+        padding: 0 5px;
+    }
 }
 </style>

@@ -8,8 +8,6 @@
                 <Info :user="user" :photos="photos" />
                 <Params :user="user" :titles="titles" :values="values" />
             </div>
-
-            <img v-if="user.premium > 0" src="/premium.webp" class="premium" />
 		</router-link>
 	</div>
 </template>
@@ -59,19 +57,19 @@ export default {
 }
 
 .avatar {
-	width: 125px;
-    min-width: 125px;
-    height: 165px;
-    min-height: 165px;
+	width: 150px;
+    min-width: 150px;
+    height: 190px;
+    min-height: 190px;
 	border-radius: 8px;
 	object-fit: cover;
 }
 
 .no {
-    width: 125px;
-    min-width: 125px;
-    height: 165px;
-    min-height: 165px;
+    width: 150px;
+    min-width: 150px;
+    height: 190px;
+    min-height: 190px;
 	background-color: #556080;
     border-radius: 8px;
 
@@ -85,19 +83,14 @@ export default {
 	object-fit: cover;
 }
 
-.premium {
-    width: 28px;
+@media screen and (max-width: 450px) {
+	.user {
+        align-items: center;
+        flex-direction: column;
+    }
 
-    position: absolute;
-    right: 10px;
-    top: -2px;
-
-    object-fit: cover;
-}
-
-@media screen and (max-width: 400px) {
-	.premium {
-        width: 22px;
+    .avatar, .no {
+        margin-bottom: 10px;
     }
 }
 </style>

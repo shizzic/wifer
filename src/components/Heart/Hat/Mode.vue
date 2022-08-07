@@ -1,6 +1,6 @@
 <template>
 	<div class="mode">
-        <span class="founded">{{ founded }} 1</span>
+        <span class="founded">{{ founded }} {{ all }}</span>
 
         <div class="flex">
             <div class="flex">
@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <Limit :limit="limit" :get="get" @limit="$emit('limit', $event)" />
+            <Limit :limit="limit" @limit="$emit('limit', $event)" />
         </div>
     </div>
 </template>
@@ -22,7 +22,7 @@
 import Limit from "@/components/Heart/Hat/Limit.vue"
 export default {
 	name: "Mode",
-    props: ["limit", "get", "founded", "mode"],
+    props: ["limit", "founded", "mode", "all"],
     components: {
         Limit
     },
