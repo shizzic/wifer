@@ -98,7 +98,7 @@ export default {
 		change() {			
 			fetch(this.$domain + "change", {
 				method: "PUT",
-				credentials: 'include',
+				credentials: "include",
 				body: JSON.stringify(this.data)
 			})
 				.then(data => { return data.json() })

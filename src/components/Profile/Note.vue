@@ -54,7 +54,6 @@ export default {
 
 <style scoped>
 #note {
-    background-color: #fff;
     border-radius: 8px;
 
     display: flex;
@@ -76,6 +75,9 @@ textarea {
 	line-height: 40px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    border-left: 3px solid #654321;
+    border-right: 3px solid #654321;
+    border-top: 3px solid #654321;
 
 	background-image: 
     url("/line.webp"), 
@@ -88,6 +90,8 @@ textarea {
 }
 
 .buttons {
+    height: 100%;
+    width: 100%;
     background-color: #333;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;

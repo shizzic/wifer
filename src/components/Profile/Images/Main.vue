@@ -58,6 +58,13 @@
                 <img v-show="$user.id == data._id" src="/private.webp" alt="" class="icon" />
             </div>
         </template>
+
+        <div v-else-if="data.private > 0" class="image" :style="'border: 1px solid; margin-right: 20px; margin-bottom: 20px;'">
+            <div class="private">
+                <span>{{ data.private }}</span>
+                <img src="/private.webp" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -271,13 +278,6 @@ export default {
             }
 		},
 
-        clear() {
-            this.image = { src : null, type : null }
-
-            if (this.$refs.avatar)
-                this.$refs.avatar.value = ""
-        },
-
         resize() {
             let length = this.lightbox.pswp.options.dataSource.items.length - 1
 
@@ -313,6 +313,14 @@ export default {
             this.opened  = null
             this.first   = true
             this.last    = true
+        },
+
+        clear() {
+            this.image = { src : null, type : null }
+            this.$refs.input.value = ''
+
+            if (this.$refs.avatar)
+                this.$refs.avatar.value = ""
         }
     }
 }
@@ -459,6 +467,25 @@ export default {
 
 .button:hover {
     background-color: #b2b2b2;
+}
+
+.private {
+    background-color: #b2b2b2;
+    border-radius: 50%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 10px 30px;
+}
+
+.private span {
+    font-weight: 700;
+}
+
+.private img {
+    width: 22px;
 }
 
 @media screen and (max-width: 529px) {

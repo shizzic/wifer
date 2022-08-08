@@ -100,8 +100,9 @@ export default {
 	},
 	watch: {
 		'$route.params.id': {
-			handler() {
-				this.firstGet()
+			handler(n) {
+				if (n && n > 0)
+					this.firstGet()
 			}
 		}
 	},

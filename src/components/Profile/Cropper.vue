@@ -16,7 +16,7 @@
 					<div class="button" @click="rotate(90)">
 						<img src="/rotate.webp" />
 					</div>
-					<div class="button" @click="$emit('clear'); mode = true">{{ lang[l].cancel }}</div>
+					<div class="button" @click="$emit('clear'); mode = true;">{{ lang[l].cancel }}</div>
 				</div>
 			</div>
 		</div>
@@ -158,6 +158,7 @@ export default {
 	justify-content: center;
 	padding: 7px;
 	margin-bottom: 10px;
+	border: 1px solid transparent;
 }
 
 .button:last-child {
@@ -165,11 +166,11 @@ export default {
 }
 
 .active {
-	background-color: #1CCC4D;;
+	background-color: #3dc464;
 }
 
 .inactive {
-	background-color: #EB3636;;
+	background-color: #ce5050;
 }
 
 img {
