@@ -34,7 +34,6 @@ export default {
     width: 100%;
 
 	padding: 15px 20px;
-    margin-bottom: 10px;
 }
 
 h3 {

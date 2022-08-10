@@ -44,6 +44,7 @@ export default {
 
 <style scoped>
 .block {
+    background-color: #fff;
     width: 100%;
     padding: 10px 20px;
 }

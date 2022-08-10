@@ -26,6 +26,8 @@ export default {
 
     width: 100%;
 	min-width: 300px;
+
+	padding: 0;
 }
 
 .box {
