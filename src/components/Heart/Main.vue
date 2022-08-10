@@ -100,11 +100,11 @@ export default {
 						this.all = data.count
 
 					if (data.data.users && data.data.users.length > 0) {
-						let users   = this.sort(data.data.users)
-						this.users  = users
-						this.time   = {}
 						this.viewed = {}
 						this.notes  = {}
+						this.time   = {}
+						let users   = this.sort(data.data.users)
+						this.users  = users
 
 						let hearts   = 0
 						let key = "target"

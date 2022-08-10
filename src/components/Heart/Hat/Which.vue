@@ -3,7 +3,7 @@
         <div v-for="(elem, index) in what" :key="index" class="elem" :class="{ active : which == index }"
         @click="set(index)">
             <span>{{ elem }}</span>
-            <span v-show="quantity(index) > 0" class="i">{{ quantity(index) + 10 }}</span>
+            <span v-show="quantity(index) > 0" class="i">{{ quantity(index) }}</span>
         </div>
     </div>
 </template>
@@ -76,7 +76,7 @@ export default {
 }
 
 .i {
-    height: 100%;
+    height: 20px;
     color: #E3E3E3;
     background-color: #5C5C5C;
     border-radius: 2px;
