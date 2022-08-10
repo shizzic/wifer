@@ -1,6 +1,6 @@
 <template>
 	<div class="wrap">
-		<div class="wrapper scroll">
+		<div class="wrapper scroll" v-click-outside="close" @mousedown="() => { up = true }" @mouseup="() => { up = null }">
 			<cropper
 				ref="cropper"
 				class="cropper"
@@ -13,9 +13,8 @@
 					<div class="button" @click="upload">{{ lang[l].upload }}</div>
 					<div class="button" :class="{ 'active' : mode, 'inactive' : !mode }" @click="mode = true">{{ lang[l].public }}</div>
 					<div class="button" :class="{ 'active' : !mode, 'inactive' : mode }" @click="mode = null">{{ lang[l].private }}</div>
-					<div class="button" @click="rotate(90)">
-						<img src="/rotate.webp" />
-					</div>
+					<div class="button" @click="rotate"><img src="/rotate.webp" /></div>
+					<div class="button" @click="flip"><img src="/flip.webp" /></div>
 					<div class="button" @click="$emit('clear'); mode = true;">{{ lang[l].cancel }}</div>
 				</div>
 			</div>
@@ -39,7 +38,8 @@ export default {
 				coordinates: null,
 				image: null
 			},
-			mode: true
+			mode: true,
+			up: null
 		};
 	},
 	methods: {
@@ -72,8 +72,19 @@ export default {
 			}
 		},
 
-		rotate(angle) {
-			this.$refs.cropper.rotate(angle)
+		rotate() {
+			this.$refs.cropper.rotate(90)
+		},
+
+		flip() {
+			this.$refs.cropper.flip(true, false)
+		},
+
+		close() {
+			if (!this.up)
+				this.$emit("clear")
+
+			this.up = null
 		}
 	}
 }
@@ -150,6 +161,7 @@ export default {
 	color: #fff;
 	background-color: #6d7b88;
 	border-radius: 4px;
+	border: 2px solid transparent;
 
 	width: 100%;
 	max-width: 150px;
@@ -158,7 +170,6 @@ export default {
 	justify-content: center;
 	padding: 7px;
 	margin-bottom: 10px;
-	border: 1px solid transparent;
 }
 
 .button:last-child {
@@ -167,10 +178,12 @@ export default {
 
 .active {
 	background-color: #3dc464;
+	border-color: #fff;
 }
 
 .inactive {
 	background-color: #ce5050;
+	opacity: 0.5;
 }
 
 img {

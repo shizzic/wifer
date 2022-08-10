@@ -17,7 +17,7 @@ import Users from "@/components/Search/List/Users/Main.vue"
 import Pagination from "@/components/Search/List/Pagination.vue"
 export default {
 	name: "List",
-	props: ["l", "data", "sort", "filters", "create", "users", "mode", "photos", "count", "founded", "getUsers", "titles", "values"],
+	props: ["l", "data", "sort", "create", "users", "mode", "photos", "count", "founded", "getUsers", "titles", "values"],
 	components: {
 		Hat,
 		Users,

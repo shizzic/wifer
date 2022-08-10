@@ -20,7 +20,7 @@ export default {
 	},
     methods: {
         save() {
-            this.$emit('note', null)
+            this.close()
 
             let form = new FormData()
             form.append("text", this.checked.like.text)

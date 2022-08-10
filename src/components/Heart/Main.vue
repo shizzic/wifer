@@ -59,7 +59,7 @@ export default {
 		return {
 			which: 0,
 			mode: null,
-			limit: 25,
+			limit: 1,
 			skip: 0,
 			count: true,
 

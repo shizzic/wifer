@@ -66,6 +66,7 @@ export default {
 
 <style scoped>
 .body {
+	max-width: 465px;
 	position: relative;
 	margin-top: 30px;
 }

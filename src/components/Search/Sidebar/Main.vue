@@ -1,29 +1,55 @@
 <template>
-	<div class="wrapper hideScroll" :class="{ shown : filters }">
+	<div class="wrapper hideScroll">
 		<button class="accordion" :class="{ active : data.data[data.active].expanded[2] }" @click="show(2)">{{ titles.templates }}</button>
 		<Templates v-show="data.data[data.active].expanded[2]" :lang="template" :data="data" :create="create" />
 
-		<button class="accordion" :class="{ active : data.data[data.active].expanded[0] }" @click="show(0)">{{ titles.locations }}</button>
+		<button class="accordion" :class="{ active : data.data[data.active].expanded[0] }" @click="show(0)">
+			{{ titles.locations }}
+			<span v-show="
+				Object.keys(data.data[data.active].countries).length > 0 || 
+				Object.keys(data.data[data.active].cities).length > 0
+			">*</span>
+		</button>
 		<Locations v-show="data.data[data.active].expanded[0]" :lang="titles" :data="data" />
 
-		<button class="accordion" :class="{ active : data.data[data.active].expanded[3] }" @click="show(3)">{{ titles.images }}</button>
+		<button class="accordion" :class="{ active : data.data[data.active].expanded[3] }" @click="show(3)">
+			{{ titles.images }}
+			<span v-show="
+				data.data[data.active].images[0] > 0 || 
+				data.data[data.active].images[1] < 20 ||
+				data.data[data.active].avatar === true
+			">*</span>
+		</button>
 		<Images v-show="data.data[data.active].expanded[3]" :data="data" :avatar="data.data[data.active].avatar" :lang="images" :title="titles.images" />
 
 		<template v-for="(options, index) in slider" :key="index">
-			<button class="accordion" :class="{ active : data.data[data.active].expanded[index] }" @click="show(index)">{{ titles[index] }}</button>
+			<button class="accordion" :class="{ active : data.data[data.active].expanded[index] }" @click="show(index)">
+				{{ titles[index] }}
+				<span v-show="data.data[data.active][index][0] > options.min || data.data[data.active][index][1] < options.max">*</span>
+			</button>
 			<Slider v-show="data.data[data.active].expanded[index]" :title="titles[index]" :data="data" :index="index" :options="options" />
 		</template>
 
 		<template v-for="(elem, index) in checkbox" :key="index">
-			<button class="accordion" :class="{ active : data.data[data.active].expanded[elem] }" @click="show(elem)">{{ titles[elem] }}</button>
+			<button class="accordion" :class="{ active : data.data[data.active].expanded[elem] }" @click="show(elem)">
+				{{ titles[elem] }} <span v-show="data.data[data.active][elem].length > 0">*</span>
+			</button>
 			<Checkbox v-show="data.data[data.active].expanded[elem]" :lang="values[elem]" :data="data" :title="elem" />
 		</template>
 
-		<button class="accordion" :class="{ active : data.data[data.active].expanded[1] }" @click="show(1)">{{ text.title }}</button>
+		<button class="accordion" :class="{ active : data.data[data.active].expanded[1] }" @click="show(1)">
+			{{ text.title }}
+			<span v-show="
+				data.data[data.active].about.is === true || 
+				data.data[data.active].about.full === true || 
+				data.data[data.active].about.value.length > 0"
+			>*</span>
+		</button>
 		<About v-show="data.data[data.active].expanded[1]" :data="data" :full="data.data[data.active].about.full" :is="data.data[data.active].about.is" 
 		:lang="text" />
 
 		<div class="button-wrap">
+			<button class="btn" @click="clearFilters">{{ clear }}</button>
 			<button class="btn" @click="get">{{ search }}</button>
 		</div>
 	</div>
@@ -38,7 +64,7 @@ import Checkbox from "@/components/Search/Sidebar/Checkbox.vue"
 import About from "@/components/Search/Sidebar/About.vue"
 export default {
 	name: "Sidebar",
-	props: ["titles", "values", "text", "images", "search", "data", "template", "filters", "create", "slider", "checkbox", "getUsers"],
+	props: ["titles", "values", "text", "images", "search", "data", "template", "filters", "create", "slider", "checkbox", "getUsers", "clear"],
 	components: {
 		Templates,
 		Locations,
@@ -47,11 +73,41 @@ export default {
 		Checkbox,
 		About
 	},
+	data() {
+		return {
+			clearness: {
+				countries: {},
+				cities: {},
+				expanded: {},
+				age: [18, 80],
+				weight: [35, 220],
+				height: [140, 220],
+				images: [0, 20],
+				children: [0, 9],
+				premium: [],
+				sex: [],
+				body: [],
+				smokes: [],
+				drinks: [],
+				ethnicity: [],
+				income: [],
+				industry: [],
+				search: [],
+				prefer: [],
+				about: {
+					is: false,
+					full: false,
+					value: ""
+				},
+				avatar: false
+			}
+		}
+	},
 	methods: {
 		get() {
 			this.$emit("filters")
 			this.updateTemplate()
-			this.getUsers()
+			this.getUsers(true)
 		},
 
 		updateTemplate() {
@@ -73,6 +129,13 @@ export default {
 				delete this.data.data[this.data.active].expanded[row]
 			else
 				this.data.data[this.data.active].expanded[row] = true
+		},
+
+		clearFilters() {
+			for (let key in this.clearness)
+				this.data.data[this.data.active][key] = this.clearness[key]
+
+			this.get()
 		}
 	}
 }
@@ -80,37 +143,13 @@ export default {
 
 <style scoped>
 .wrapper {
-	z-index: 10;
-
-	background-color: #fff;
 	word-break: break-all;
-    border-radius: 4px;
-
-    width: 25%;
+    width: 100%;
 	height: 100%;
-	
-	overflow-y: auto;
+	border-radius: 4px;
+
 	overflow-x: hidden;
-}
-
-@media screen and (min-width: 790px) {
-    .wrapper {
-		min-width: 350px;
-
-		margin-right: 25px;
-    }
-}
-
-@media screen and (max-width: 790px) {
-    .wrapper {
-		width: 100%;
-		min-width: none;
-
-		margin: 0;
-        position: absolute;
-        left: -1000px;
-        top: 0;
-    }
+	overflow-y: auto;
 }
 
 .accordion {
@@ -166,7 +205,11 @@ export default {
 	cursor: pointer;
 	color: #4d4d4d;
 
-	padding: 15px 30px;
+	padding: 12px 25px;
+}
+
+.btn:first-of-type {
+	margin-right: 20px;
 }
 
 .btn:hover {
@@ -177,9 +220,5 @@ export default {
 .btn:active {
     transform: translateY(-1px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.shown {
-	position: static;
 }
 </style>

@@ -2,7 +2,11 @@
 	<div id="hat">
         <div class="flex">
             <Lang :l="l" />
-            <Sort :data="data" :sort="data.data[data.active].sort" :lang="sort" :create="create" :getUsers="getUsers" />
+
+            <div class="filter-sort">
+                <div class="filters-wrap switch"><img src="/filters.webp" class="filters" @click="$emit('filters')" /></div>
+                <Sort :data="data" :sort="data.data[data.active].sort" :lang="sort" :create="create" :getUsers="getUsers" />
+            </div>
         </div>
         
         <div class="flex">
@@ -13,8 +17,6 @@
                 <Limit :data="data" :limit="data.data[data.active].limit" :create="create" :getUsers="getUsers" />
             </div>
         </div>
-
-        <div class="flex switch"><div class="filters" @click="$emit('filters')">{{ filters }}</div></div>
     </div>
 </template>
 
@@ -25,7 +27,7 @@ import Limit from "@/components/Search/List/Hat/Limit.vue"
 import Sort from "@/components/Search/List/Hat/Sort.vue"
 export default {
 	name: "Hat",
-    props: ["l", "data", "sort", "filters", "create", "count", "founded", "getUsers"],
+    props: ["l", "data", "sort", "create", "count", "founded", "getUsers"],
     components: {
         Lang,
         Mode,
@@ -73,28 +75,43 @@ export default {
     align-items: center;
 
     margin-bottom: 10px;
+    margin-right: 15px;
+}
+
+.filter-sort {
+    display: flex;
+}
+
+.filters-wrap {
+    height: 35px;
+    background-color: #ff6868;
+    border-radius: 3px;
+
+    display: flex;
+    justify-content: center;
+
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-right: 15px;
 }
 
 .filters {
-    height: 35px;
+    filter: invert(100%) sepia(98%) saturate(0%) hue-rotate(290deg) brightness(104%) contrast(104%);
+    height: 100%;
     cursor: pointer;
-	background-color: #ff6868;
 	font-size: 16px;
 	color: white;
 	border-radius: 4px;
     word-break: normal;
     
     margin-bottom: 10px;
-    padding: 8px 20px;
-    
-    transition: all .1s linear;
 }
 
- .filters:hover {
+.filters-wrap:hover {
 	background-color: #f34f4f;
 }
 
- .filters:active {
+.filters-wrap:active {
 	background-color: #c33232;
 }
 

@@ -30,10 +30,10 @@ export const SearchJS = defineStore("Search", {
                 ru: "Поиск"
             }
         },
-        filters() {
+        clear() {
             return {
-                en: "Filters",
-                ru: "Параметры"
+                en: "Clear",
+                ru: "Отчистить"
             }
         },
         photos() {

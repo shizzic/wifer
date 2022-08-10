@@ -49,7 +49,7 @@ img {
     border-radius: 8px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     div {
         margin: 0 auto;
         margin-bottom: 25px;

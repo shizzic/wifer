@@ -1,13 +1,20 @@
 <template>
 	<div class="wrap" :class="{ column : filters }">
-		<div v-show="filters" class="close"><span @click="filters = null">&#10060;</span></div>
-		<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :template="template[l]" :data="data"
-		:filters="filters" :create="createTemplate" :slider="slider" :checkbox="checkbox" :getUsers="getUsers" :images="images[l]"
-		@filters="filters = null" />
-		<List v-show="!filters" :l="l" :data="data" :sort="sort[l]" :filters="filter[l]" :create="createTemplate" :users="users"
-		:mode="data.data[data.active].mode" :photos="photos[l]" :count="count" :founded="founded[l]" :getUsers="getUsers"
-		:titles="titles[l]" :values="values[l]"
-		@filters="filters = true" @moved="moved = true" />
+		<div class="side-wrap" :class="{ shown : filters }">
+			<div v-show="filters" class="close"><span @click="filters = null">&#10060;</span></div>
+			<Sidebar 
+				:titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :template="template[l]" :data="data"
+				:filters="filters" :create="createTemplate" :slider="slider" :checkbox="checkbox" :getUsers="getUsers" 
+				:images="images[l]" :clear="clear[l]"
+				@filters="filters = null" 
+			/>
+		</div>
+
+		<List v-show="!filters"
+			:l="l" :data="data" :sort="sort[l]" :create="createTemplate" :users="users" :mode="data.data[data.active].mode" 
+			:photos="photos[l]" :count="count" :founded="founded[l]" :getUsers="getUsers" :titles="titles[l]" :values="values[l]"
+			@filters="filters = true" @moved="moved = true"
+		/>
 	</div>
 </template>
 
@@ -29,8 +36,8 @@ export default {
 		const text     = SearchJS().text
 		const images   = SearchJS().images
 		const search   = SearchJS().search
+		const clear    = SearchJS().clear
 		const sort     = SearchJS().sort
-		const filter   = SearchJS().filters
 		const template = SearchJS().template
 		const photos   = SearchJS().photos
 		const founded  = SearchJS().founded
@@ -41,8 +48,8 @@ export default {
 			text,
 			images,
 			search,
+			clear,
 			sort,
-			filter,
 			template,
 			photos,
 			founded
@@ -146,15 +153,20 @@ export default {
 			data.country = []
 			data.city    = []
 
-			for (let country in this.data.data[this.data.active].cities)
-				if (Object.keys(this.data.data[this.data.active].cities[country]).length === 0)
-					data.country.push(country)
-				else
-					for (let city in this.data.data[this.data.active].cities[country])
-						data.city.push(+city)
+			for (let country in this.data.data[this.data.active].countries)
+				data.country.push(+country)
 
-			if (count === true)
-				data.count = true
+			for (let country in this.data.data[this.data.active].cities) {
+				if (Object.keys(this.data.data[this.data.active].cities[country]).length > 0) {
+					let index = data.country.indexOf(+country)
+					data.country.splice(index, 1)
+				}
+				
+				for (let city in this.data.data[this.data.active].cities[country])
+					data.city.push(+city)
+			}
+			
+			data.count = count
 
 			fetch(this.$domain + "getUsers", {
 				method: "POST",
@@ -231,19 +243,28 @@ export default {
 
 <style scoped>
 .wrap {
+	z-index: 10;
+	position: relative;
 	background-color: #2a3d39;
 	word-break: break-all;
 
 	width: 100%;
 	height: 100%;
-	padding: 25px;
 
 	display: flex;
+	padding: 25px;
 }
 
-.wrap::before, .wrap::after {
-  content: '';
-  margin: auto;
+.side-wrap {
+	width: 25%;
+	border-radius: 4px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	overflow: hidden;
 }
 
 @media screen and (max-width: 730px) {
@@ -252,7 +273,29 @@ export default {
     }
 }
 
+@media screen and (min-width: 790px) {
+    .side-wrap {
+		min-width: 350px;
+		margin-right: 25px;
+    }
+}
+
+@media screen and (max-width: 790px) {
+    .side-wrap {
+		width: 100%;
+		min-width: none;
+
+		margin: 0;
+        position: absolute;
+        left: 0;
+        top: -3000px;
+    }
+}
+
 .close {
+	width: 100%;
+	background-color: #2a3d39;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -281,5 +324,10 @@ export default {
 
 .column {
 	flex-direction: column;
+}
+
+.shown {
+	position: static;
+	height: 100%;
 }
 </style>

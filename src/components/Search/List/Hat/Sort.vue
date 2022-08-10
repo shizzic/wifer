@@ -45,7 +45,7 @@ export default {
 
 <style scoped>
 #sort {
-	z-index: 2;
+	z-index: 3;
     position: relative;
 	margin-bottom: 10px;
 }

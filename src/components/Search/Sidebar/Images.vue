@@ -33,7 +33,7 @@ export default {
 
     width: 100%;
 
-	padding: 15px 25px;
+	padding: 15px 20px;
     margin-bottom: 10px;
 }
 
@@ -43,20 +43,16 @@ h3 {
 
 	margin-bottom: 50px;
 }
-</style>
-
-<style>
-/* :root {
-  --slider-connect-bg: #5c9cd8;
-  --slider-tooltip-bg: #5c9cd8;
-} */
 
 .box {
     display: flex;
     align-items: center;
     user-select: none;
 
-    margin-bottom: 20px;
+	padding: 0;
+	margin: 0;
+
+    margin-bottom: 10px;
 }
 
 input {
@@ -73,7 +69,7 @@ label {
 	display: flex;
 	align-items: center;
 	
-	padding: 10px 20px 10px 5px;
+	padding: 10px 0;
 }
 
 .checkbox {
@@ -93,4 +89,11 @@ label {
     display: inline-block;
     padding-left: 3px;
 }
+</style>
+
+<style>
+/* :root {
+  --slider-connect-bg: #5c9cd8;
+  --slider-tooltip-bg: #5c9cd8;
+} */
 </style>

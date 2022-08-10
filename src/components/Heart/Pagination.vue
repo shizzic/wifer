@@ -37,8 +37,8 @@ export default {
 		set(num) {
 			if (num !== this.page) {
 				this.page = num
-				this.skip = this.limit * this.page - this.limit
-				this.$emit("skip", this.skip)
+				let skip = this.limit * this.page - this.limit
+				this.$emit("skip", skip)
 				this.prepare()
 			}
 		},

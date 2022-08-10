@@ -111,11 +111,6 @@ img {
 @media screen and (max-width: 800px) {
     .wrap {
         margin-bottom: 25px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .wrap {
         align-items: center;
     }
 }

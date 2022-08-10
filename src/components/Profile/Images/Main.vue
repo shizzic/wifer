@@ -42,7 +42,7 @@
                 <img :src="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()" alt="" class="image" />
             </a>
             
-            <img v-show="$user.id == data._id" src="/public.webp" alt="" class="icon" />
+            <div class="icon-wrap"><img v-show="$user.id == data._id" src="/public.webp" alt="" class="icon" /></div>
         </div>
 
         <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && priv.access)">
@@ -55,16 +55,21 @@
                     <img :src="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()" alt="" class="image" />
                 </a>
 
-                <img v-show="$user.id == data._id" src="/private.webp" alt="" class="icon" />
+                <div class="icon-wrap"><img v-show="$user.id == data._id" src="/private.webp" alt="" class="icon" /></div>
             </div>
         </template>
 
-        <div v-else-if="data.private > 0" class="image" :style="'border: 1px solid; margin-right: 20px; margin-bottom: 20px;'">
-            <div class="private">
-                <span>{{ data.private }}</span>
-                <img src="/private.webp" />
-            </div>
-        </div>
+        <template v-else-if="data.private > 0">
+            <router-link v-if="!$user.id || $user.id && $user.id < 1" 
+                class="image" style="border: 1px solid; margin-right: 20px; margin-bottom: 20px; border: 1px solid #000;"
+                :to="{ name: 'signin' }"
+            >
+                <div class="private">
+                    <span>{{ data.private }}</span>
+                    <img src="/private.webp" />
+                </div>
+            </router-link>
+        </template>
     </div>
 </template>
 
@@ -355,6 +360,7 @@ export default {
 }
 
 .image {
+    text-decoration: none;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     object-fit: cover;
@@ -470,6 +476,7 @@ export default {
 }
 
 .private {
+    color: #000;
     background-color: #b2b2b2;
     border-radius: 50%;
     
@@ -477,7 +484,7 @@ export default {
     flex-direction: column;
     align-items: center;
 
-    padding: 10px 30px;
+    padding: 20px 30px;
 }
 
 .private span {
@@ -498,13 +505,21 @@ export default {
     }
 }
 
-.icon {
-    width: 20px;
+.icon-wrap {
+    background-color: #686868;
+    border-radius: 50%;
 
     position: absolute;
-    left: 5px;
-    bottom: 2.5px;
+    left: 3px;
+    bottom: 3px;
 
+    display: flex;
+    align-items: center;
+    padding: 4px 5px;
+}
+
+.icon {
+    width: 20px;
     filter: invert(100%) sepia(3%) saturate(7472%) hue-rotate(50deg) brightness(108%) contrast(108%);
 }
 </style>

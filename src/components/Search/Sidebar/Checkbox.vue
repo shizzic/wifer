@@ -32,6 +32,8 @@ export default {
     display: flex;
     align-items: center;
     user-select: none;
+
+	margin: 0;
 }
 
 .box:not(:last-of-type) {

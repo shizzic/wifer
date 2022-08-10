@@ -7,7 +7,7 @@
         </div>
 
         <div v-if="Object.keys(countries).length > 0" class="border">
-            <div /><span>&#9587;</span><div />
+            <div class="line" /><div class="circle" /><div class="line" />
         </div>
 
         <div class="flex">
@@ -56,7 +56,7 @@ export default {
 
 .border {
     width: 100%;
-    padding: 0 20px;
+    padding: 0 15px;
     margin-top: 5px;
     margin-bottom: 15px;
 
@@ -65,13 +65,17 @@ export default {
     justify-content: center;
 }
 
-.border div {
+.line {
     height: 2px;
     width: 100%;
     background-color: #b5b5b5;
 }
 
-.border span {
-    padding: 0 10px;
+.circle {
+    border: 2px solid #b5b5b5;
+    border-radius: 50%;
+
+    padding: 5px;
+    margin: 0 10px;
 }
 </style>
