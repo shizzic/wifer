@@ -25,7 +25,9 @@ export default {
             let form = new FormData()
             form.append("text", this.checked.like.text)
             form.append("target", this.target)
-            fetch(this.$domain + "note", {
+            this.checked.like.is = true
+
+            fetch(this.$domain + "like", {
 				method: "POST",
 				credentials: "include",
                 body: form

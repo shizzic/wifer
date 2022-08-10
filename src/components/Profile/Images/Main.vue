@@ -42,7 +42,7 @@
                 <img :src="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()" alt="" class="image" />
             </a>
             
-            <div class="icon-wrap"><img v-show="$user.id == data._id" src="/public.webp" alt="" class="icon" /></div>
+            <div class="icon-wrap"><img src="/public.webp" alt="" class="icon" /></div>
         </div>
 
         <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && priv.access)">
@@ -55,12 +55,12 @@
                     <img :src="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()" alt="" class="image" />
                 </a>
 
-                <div class="icon-wrap"><img v-show="$user.id == data._id" src="/private.webp" alt="" class="icon" /></div>
+                <div class="icon-wrap"><img src="/private.webp" alt="" class="icon" /></div>
             </div>
         </template>
 
-        <template v-else-if="data.private > 0">
-            <router-link v-if="!$user.id || $user.id && $user.id < 1" 
+        <template v-else>
+            <router-link v-if="data.private > 0 && (!$user.id || $user.id && $user.id < 1)" 
                 class="image" style="border: 1px solid; margin-right: 20px; margin-bottom: 20px; border: 1px solid #000;"
                 :to="{ name: 'signin' }"
             >
@@ -69,6 +69,15 @@
                     <img src="/private.webp" />
                 </div>
             </router-link>
+
+            <div v-else-if="data.private > 0 && ($user.id && $user.id > 0 && !priv.access)"
+                class="image" style="border: 1px solid; margin-right: 20px; margin-bottom: 20px; border: 1px solid #000;"
+            >
+                <div class="private">
+                    <span>{{ data.private }}</span>
+                    <img src="/private.webp" />
+                </div>
+            </div>
         </template>
     </div>
 </template>
