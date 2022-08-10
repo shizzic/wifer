@@ -4,7 +4,7 @@ export const HeartJS = defineStore("Heart", {
     getters: {
         what() {
             return {
-                en: [ "Views", "Likes", "Privates", "Messages"],
+                en: [ "Views", "Likes", "Privates", "Chats"],
                 ru: [ "Просмотры", "Лайки", "Приватки", "Переписки"]
             }
         },

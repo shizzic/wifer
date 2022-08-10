@@ -2,7 +2,8 @@
 	<div class="hat">
         <div v-for="(elem, index) in what" :key="index" class="elem" :class="{ active : which == index }"
         @click="set(index)">
-            {{ elem }}
+            <span>{{ elem }}</span>
+            <span v-show="quantity(index) > 0" class="i">{{ quantity(index) + 10 }}</span>
         </div>
     </div>
 </template>
@@ -11,10 +12,28 @@
 export default {
 	name: "Which",
     props: ["what", "which"],
+    computed: {
+		views() {
+			return this.$nav.views
+		},
+		likes() {
+			return this.$nav.likes
+		},
+		privates() {
+			return this.$nav.privates
+		},
+		chats() {
+			return this.$nav.chats
+		}
+	},
     methods: {
         set(which) {
             if (which != this.which)
                 this.$emit("which", +which)
+        },
+
+        quantity(field) {
+            return this[this.$nav.fields[field]]
         }
     }
 }
@@ -37,11 +56,13 @@ export default {
     color: #5C5C5C;
     background-color: #E3E3E3;
     border-radius: 40px;
+    word-break: normal;
+
+    display: flex;
+    align-items: center;
 
     padding: 5px 20px;
     margin-bottom: 10px;
-
-    word-break: normal;
 
     transition: background-color .1s linear;
 }
@@ -52,5 +73,16 @@ export default {
 
 .elem:not(:last-of-type) {
     margin-right: 10px;
+}
+
+.i {
+    height: 100%;
+    color: #E3E3E3;
+    background-color: #5C5C5C;
+    border-radius: 2px;
+
+    display: inline-block;
+    padding: 0 3px;
+    margin-left: 15px;
 }
 </style>

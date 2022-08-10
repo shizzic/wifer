@@ -107,23 +107,22 @@ export default {
 						this.notes  = {}
 
 						let hearts   = 0
-						let messages = 0
 						let key = "target"
 						if (!this.mode)
 							key = "user"
 
 						for (let elem in data.data.targets) {
-							this.time[data.data.targets[elem][key]] = data.data.targets[elem].created_at
-							this.viewed[data.data.targets[elem][key]] = data.data.targets[elem].viewed
-
 							if (!this.mode && data.data.targets[elem].viewed === false)
 								hearts += 1
+								
+							this.time[data.data.targets[elem][key]]   = data.data.targets[elem].created_at
+							this.viewed[data.data.targets[elem][key]] = data.data.targets[elem].viewed
 
 							if ("text" in data.data.targets[elem])
 								this.notes[data.data.targets[elem][key]] = data.data.targets[elem].text
 						}
 						
-						this.$nav.takeHearts(hearts)
+						this.$nav.takeHearts(hearts, this.$nav.fields[this.which])
 					} else {
 						this.users  = {}
 						this.time   = {}

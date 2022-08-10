@@ -5,8 +5,13 @@
 			@click="checked = key">
 				<div class="elem">
 					<div class="circle" />
-					<div v-if="elem.image === '/heart.webp' && $nav.hearts" class="notification"><span>{{ hearts }}</span></div>
-					<div v-if="elem.image === '/chat.webp' && $nav.messages" class="notification"><span>{{ $nav.messages }}</span></div>
+					<div v-if="elem.image === '/heart.webp' && all > 0" class="notification">
+						<span :class="{ 
+							important : likes > 0 || privates > 0 || chats > 0, 
+							useless: likes === 0 && privates === 0 && chats === 0 
+						}">{{ all }}</span>
+					</div>
+					<!-- <div v-if="elem.image === '/chat.webp' && $nav.messages" class="notification"><span>{{ messages }}</span></div> -->
 
 					<div class="link">
 						<img :src="elem.image"  />
@@ -30,8 +35,20 @@ export default {
 		list() {
 			return this.id ? this.$nav.inner : this.$nav.outer
 		},
-		hearts() {
-			return this.$nav.hearts
+		views() {
+			return this.$nav.views
+		},
+		likes() {
+			return this.$nav.likes
+		},
+		privates() {
+			return this.$nav.privates
+		},
+		chats() {
+			return this.$nav.chats
+		},
+		all() {
+			return this.views + this.likes + this.privates + this.chats
 		}
 	},
 	data() {
@@ -43,11 +60,14 @@ export default {
 	watch: {
 		id(n) {
 			if (n && n > 0)
-				if (!this.interval)
+				if (!this.interval) {
+					this.getHearts()
 					this.interval = setInterval(this.getHearts, 1000 * 120)
+				}
 			else {
-				this.hearts   = null
-				this.messages = null
+				for (let field of this.$nav.fields)
+					this.$nav.setHearts(0, field)
+
 				clearInterval(this.interval)
 			}
 		}
@@ -66,18 +86,14 @@ export default {
 			})
 				.then(data => { return data.json() })
 				.then(data => {
-					let hearts   = 0
-					let messages = 0
+					for (let key in data) {
+						let hearts = 0
 
-					for (let key in data)
-						if (data[key] > 0)
-							if (key !== "messages")
-								hearts   += data[key]
-							else
-								messages += data[key]
-
-					this.$nav.setHearts(hearts)
-					this.$nav.setMessages(messages)
+						if (data[key] > 0) {
+							hearts += data[key]
+							this.$nav.setHearts(hearts, key)
+						}
+					}
 				})
 		}
 	}
@@ -194,12 +210,19 @@ img {
 .notification span {
 	font-size: 12px;
 	color: #fff;
-	background-color: #000;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
 
 	display: inline-block;
 	padding: 1px 5px;
+}
+
+.useless {
+	background-color: #000;
+}
+
+.important {
+	background-color: #f34338;
 }
 
 @media screen and (min-width: 529px) {

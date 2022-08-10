@@ -2,8 +2,12 @@ import { defineStore } from "pinia"
 
 export const navJS = defineStore("nav", {
     state: () =>({
-        hearts: null,
-        messages: null
+        views: 0,
+        likes: 0,
+        privates: 0,
+        chats: 0,
+
+        fields: ["views", "likes", "privates", "chats"]
     }),
     getters: {
         inner() {
@@ -72,31 +76,18 @@ export const navJS = defineStore("nav", {
         }
     },
     actions:{
-        setHearts(value) {
+        setHearts(value, field) {
             if (value > 0)
-                this.hearts = value
+                this[field] = value
             else
-                this.hearts = null
+                this[field] = null
         },
-        setMessages(value) {
-            if (value > 0)
-                this.messages = value
-            else
-                this.messages = null
-        },
-        takeHearts(value) {
-            let res = this.hearts - value
+        takeHearts(value, field) {
+            let res = this[field] - value
             if (res > 0)
-                this.hearts = res
+                this[field] = res
             else
-                this.hearts = null
-        },
-        takeMessages(value) {
-            let res = this.messages - value
-            if (res > 0)
-                this.messages = res
-            else
-                this.messages = null
+                this[field] = null
         }
     }
 })
