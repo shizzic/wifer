@@ -1,10 +1,8 @@
 <template>
 	<div class="wrap">
 		<div v-if="users" class="content scroll">
-			<Hat
-				:what="what[l]" :which="which" :limit="limit" :founded="founded[l]" :mode="mode" :all="all"
-				@set="mode = $event.mode; which = $event.which; count = true; get();" 
-				@limit="limit = $event; get();" @mode="mode = $event; count = true; get();" 
+			<Hat :what="what[l]" :which="which" :limit="limit" :founded="founded[l]" :mode="mode" :all="all"
+				@which="which = $event; count = true; get();" @limit="limit = $event; get();" @mode="mode = $event; count = true; get();" 
 			/>
 			<Users v-if="users" 
 				:users="users" :time="time" :viewed="viewed" :notes="notes" :photos="photos[l]" :titles="titles[l]" 
@@ -59,7 +57,7 @@ export default {
 		return {
 			which: 0,
 			mode: null,
-			limit: 1,
+			limit: 25,
 			skip: 0,
 			count: true,
 
@@ -102,7 +100,8 @@ export default {
 						this.all = data.count
 
 					if (data.data.users && data.data.users.length > 0) {
-						this.users  = data.data.users
+						let users   = this.sort(data.data.users)
+						this.users  = users
 						this.time   = {}
 						this.viewed = {}
 						this.notes  = {}
@@ -135,6 +134,15 @@ export default {
 				})
 			
 			this.count = null
+		},
+
+		sort(users) {
+			let data = []
+
+			for (let i = users.length - 1; i > -1; i--)
+				data.push(users[i])
+
+			return data
 		}
 	}
 }

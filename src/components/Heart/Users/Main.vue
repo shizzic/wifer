@@ -1,11 +1,11 @@
 <template>
 	<div class="wrapper">
 		<div v-for="(user, index) in users" :key="index" class="user" :class="{ fresh : !mode && !viewed[user._id] }">
-			<img v-if="user.avatar" 
+            <img v-if="user.avatar" 
                 :src="$ip + user._id + '/avatar.webp?' + Date.now()" class="avatar" 
                 @click="$router.push({ name : 'profile', params : { id : user._id }})" 
             />
-			<div v-else class="no" @click="$router.push({ name : 'profile', params : { id : user._id }})">
+            <div v-else class="no" @click="$router.push({ name : 'profile', params : { id : user._id }})">
                 <img src="/avatar.webp" />
             </div>
 
@@ -57,7 +57,6 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
-
     padding: 10px;
     
     overflow: hidden;
@@ -67,7 +66,6 @@ export default {
     position: relative;
     width: 100%;
 	text-decoration: none;
-    /* border-radius: 8px; */
 
 	display: flex;
     padding: 10px;
@@ -137,7 +135,8 @@ export default {
 }
 
 .fresh {
-    background-color: #f2f0e6;
+    background-color: #eaeaea;
+    border-radius: 8px;
 }
 
 .btn-wrap {

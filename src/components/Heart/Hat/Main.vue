@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper">
-        <Which :what="what" :which="which" @set="$emit('set', $event)" />
+        <Which :what="what" :which="which" @which="$emit('which', $event)" />
         <Mode :limit="limit" :founded="founded" :mode="mode" :all="all"
         @limit="$emit('limit', $event)" @mode="$emit('mode', $event)" />
     </div>

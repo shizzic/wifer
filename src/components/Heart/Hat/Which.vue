@@ -1,8 +1,8 @@
 <template>
 	<div class="hat">
         <div v-for="(elem, index) in what" :key="index" class="elem" :class="{ active : which == index }"
-        @click="set(index, elem.mode)">
-            {{ elem.title }}
+        @click="set(index)">
+            {{ elem }}
         </div>
     </div>
 </template>
@@ -12,9 +12,9 @@ export default {
 	name: "Which",
     props: ["what", "which"],
     methods: {
-        set(which, mode) {
+        set(which) {
             if (which != this.which)
-                this.$emit("set", { which : which, mode : mode })
+                this.$emit("which", +which)
         }
     }
 }
