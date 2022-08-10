@@ -120,12 +120,7 @@ export default {
 			let data   	   = {}
 			data.skip  	   = this.data.data[this.data.active].skip
 			data.limit 	   = this.data.data[this.data.active].limit
-			data.sortField = this.data.data[this.data.active].sort
-
-			if (data.sortField === "created_at")
-				data.sortValue = 1
-			else
-				data.sortValue = -1
+			data.sort      = this.data.data[this.data.active].sort
 
 			for (let elem in this.slider) {
 				data[elem + "Min"] = this.data.data[this.data.active][elem][0]
