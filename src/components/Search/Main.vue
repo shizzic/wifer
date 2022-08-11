@@ -174,7 +174,7 @@ export default {
 						this.count = data.count
 
 					if ("users" in data)
-						this.users = data.users 
+						this.users = data.users
 				})
 		},
 

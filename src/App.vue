@@ -6,6 +6,7 @@
 <script scoped>
 import { langJS } from "@/store/lang"
 import Nav from "@/components/Nav.vue"
+
 export default {
 	name: 'App',
 	components: {
@@ -15,7 +16,9 @@ export default {
 		const language = langJS()
 
 		return {
-			language
+			language,
+			scroll_positions: {},
+      		remember: []
 		}
 	},
 	computed: {

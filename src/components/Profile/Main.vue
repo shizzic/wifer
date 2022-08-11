@@ -116,7 +116,7 @@ export default {
 				credentials: "include"
 			})
 				.then(data => { return data.json() })
-				.then(data => { console.log(data)
+				.then(data => {
 					if ("error" in data)
 						this.$toast.error(this.response[this.l])
 					else {
