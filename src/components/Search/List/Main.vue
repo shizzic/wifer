@@ -1,12 +1,12 @@
 <template>
-	<div class="wrapper scroll">
+	<div class="wrapper scroll" ref="search" @touchend="saveScroll">
 		<Hat :l="l" :data="data" :sort="sort" :filters="filters" :create="create" :count="count" :founded="founded" :getUsers="getUsers"
 		@filters="$emit('filters')" />
 		<Users :users="users" :mode="mode" :photos="photos" :titles="titles" :values="values" @scroll="scroll" />
 		<Pagination v-if="users" 
 			:data="data" :getUsers="getUsers" :count="count" 
 			:limit="data.data[data.active].limit" :skip="data.data[data.active].skip" :sort="data.data[data.active].sort"
-			@moved="$emit('moved')"
+			@moved="$emit('moved'); $refs.search.scrollTop = 0; $scroll.set({ field: 'search', value: 0 });"
 		/>
 	</div>
 </template>
@@ -17,11 +17,46 @@ import Users from "@/components/Search/List/Users/Main.vue"
 import Pagination from "@/components/Search/List/Pagination.vue"
 export default {
 	name: "List",
-	props: ["l", "data", "sort", "create", "users", "mode", "photos", "count", "founded", "getUsers", "titles", "values"],
+	props: ["l", "data", "sort", "create", "users", "mode", "photos", "count", "founded", "getUsers", "titles", "values", "first"],
 	components: {
 		Hat,
 		Users,
 		Pagination
+	},
+	watch: {
+		first() {
+			setTimeout(this.scroll, 25)
+		}
+	},
+	mounted() {
+		function createWheelStopListener(element, callback, timeout) {
+			var handle = null
+			var onScroll = function() {
+				if (handle)
+					clearTimeout(handle)
+
+				handle = setTimeout(callback, timeout || 200)
+			}
+
+			element.addEventListener("wheel", onScroll)
+			return function() {
+				element.removeEventListener("wheel", onScroll)
+			}
+		}
+
+		createWheelStopListener(window, function() {
+			this.saveScroll()
+		}.bind(this))
+	},
+	methods: {
+		saveScroll() {
+			if (this.$refs.search)
+				this.$scroll.set({ field: "search", value: this.$refs.search.scrollTop })
+		},
+		
+		scroll() {
+			this.$refs.search.scrollTop = this.$scroll.search
+		}
 	}
 }
 </script>

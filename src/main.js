@@ -8,11 +8,13 @@ import { userJS } from "@/store/user"
 import { navJS } from "@/store/nav"
 import { cityJS } from "@/store/city"
 import { countryJS } from "@/store/country"
+import { scrollJS } from "@/store/scroll"
 
 import vue3GoogleLogin from 'vue3-google-login'
 
 import vClickOutside from "click-outside-vue3"
 import Toaster from "@meforma/vue-toaster"
+
 import "./style"
 
 const app = createApp(App)
@@ -31,5 +33,6 @@ app.config.globalProperties.$user    = userJS()
 app.config.globalProperties.$nav     = navJS()
 app.config.globalProperties.$city    = cityJS()
 app.config.globalProperties.$country = countryJS()
+app.config.globalProperties.$scroll  = scrollJS()
 
 app.mount('#app')

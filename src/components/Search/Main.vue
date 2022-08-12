@@ -11,7 +11,7 @@
 		</div>
 
 		<List v-show="!filters"
-			:l="l" :data="data" :sort="sort[l]" :create="createTemplate" :users="users" :mode="data.data[data.active].mode" 
+			:l="l" :data="data" :sort="sort[l]" :create="createTemplate" :users="users" :mode="data.data[data.active].mode" :first="first"
 			:photos="photos[l]" :count="count" :founded="founded[l]" :getUsers="getUsers" :titles="titles[l]" :values="values[l]"
 			@filters="filters = true" @moved="moved = true"
 		/>
@@ -102,6 +102,7 @@ export default {
 				}
 			},
 
+			first: true,
 			users: null,
 			count: 0,
 
@@ -175,6 +176,8 @@ export default {
 
 					if ("users" in data)
 						this.users = data.users
+
+					this.first = null
 				})
 		},
 

@@ -86,14 +86,15 @@ export default {
 			})
 				.then(data => { return data.json() })
 				.then(data => {
-					for (let key in data) {
-						let hearts = 0
+					if (data)
+						for (let key in data) {
+							let hearts = 0
 
-						if (data[key] > 0) {
-							hearts += data[key]
-							this.$nav.setHearts(hearts, key)
+							if (data[key] > 0) {
+								hearts += data[key]
+								this.$nav.setHearts(hearts, key)
+							}
 						}
-					}
 				})
 		}
 	}

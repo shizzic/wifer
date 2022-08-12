@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper hideScroll">
+	<div class="wrapper hideScroll" ref="sidebar" @touchend="saveScroll">
 		<button class="accordion" :class="{ active : data.data[data.active].expanded[2] }" @click="show(2)">{{ titles.templates }}</button>
 		<Templates v-show="data.data[data.active].expanded[2]" :lang="template" :data="data" :create="create" />
 
@@ -103,6 +103,28 @@ export default {
 			}
 		}
 	},
+	mounted() {
+		setTimeout(this.scroll, 25)
+		
+		function createWheelStopListener(element, callback, timeout) {
+			var handle = null
+			var onScroll = function() {
+				if (handle)
+					clearTimeout(handle)
+
+				handle = setTimeout(callback, timeout || 200)
+			}
+
+			element.addEventListener("wheel", onScroll)
+			return function() {
+				element.removeEventListener("wheel", onScroll)
+			}
+		}
+
+		createWheelStopListener(window, function() {
+			this.saveScroll()
+		}.bind(this))
+	},
 	methods: {
 		get() {
 			this.$emit("filters")
@@ -136,6 +158,15 @@ export default {
 				this.data.data[this.data.active][key] = this.clearness[key]
 
 			this.get()
+		},
+
+		saveScroll() {
+			if (this.$refs.sidebar)
+				this.$scroll.set({ field: "sidebar", value: this.$refs.sidebar.scrollTop })
+		},
+		
+		scroll() {
+			this.$refs.sidebar.scrollTop = this.$scroll.sidebar
 		}
 	}
 }
