@@ -366,17 +366,20 @@ export default {
 
     margin-right: 20px;
     margin-bottom: 20px;
+
+    display: flex;
+    align-items: center;
 }
 
 .image {
     text-decoration: none;
     cursor: pointer;
-    object-fit: cover;
+    /* object-fit: cover; */
 
     width: 150px;
     min-width: 150px;
-    height: 175px;
-    min-height: 175px;
+    /* height: 175px;
+    min-height: 175px; */
     border-radius: 8px;
 
     display: flex;

@@ -16,8 +16,8 @@ export default {
 div {
     width: 168.75px;
     min-width: 168.75px;
-    height: 225px;
-    min-height: 225px;
+    /* height: 225px;
+    min-height: 225px; */
 
     display: flex;
     align-items: center;
@@ -27,7 +27,6 @@ div {
 }
 
 img {
-    -webkit-tap-highlight-color: transparent;
     object-fit: cover;
 }
 
