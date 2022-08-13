@@ -61,7 +61,7 @@
 
         <template v-else>
             <router-link v-if="data.private > 0 && (!$user.id || $user.id && $user.id < 1)" 
-                class="image" style="border: 1px solid; margin-right: 20px; margin-bottom: 20px; border: 1px solid #000;"
+                class="image" style="margin-right: 20px; margin-bottom: 20px;"
                 :to="{ name: 'signin' }"
             >
                 <div class="private">
@@ -71,7 +71,7 @@
             </router-link>
 
             <div v-else-if="data.private > 0 && ($user.id && $user.id > 0 && !priv.access)"
-                class="image" style="border: 1px solid; margin-right: 20px; margin-bottom: 20px; border: 1px solid #000;"
+                class="image" style="margin-right: 20px; margin-bottom: 20px;"
             >
                 <div class="private">
                     <span>{{ data.private }}</span>
@@ -366,20 +366,17 @@ export default {
 
     margin-right: 20px;
     margin-bottom: 20px;
-
-    display: flex;
-    align-items: center;
 }
 
 .image {
     text-decoration: none;
     cursor: pointer;
-    /* object-fit: cover; */
+    object-fit: cover;
 
     width: 150px;
     min-width: 150px;
-    /* height: 175px;
-    min-height: 175px; */
+    height: 175px;
+    min-height: 175px;
     border-radius: 8px;
 
     display: flex;

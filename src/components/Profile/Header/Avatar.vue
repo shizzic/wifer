@@ -16,14 +16,13 @@ export default {
 div {
     width: 168.75px;
     min-width: 168.75px;
-    /* height: 225px;
-    min-height: 225px; */
+    height: 225px;
+    min-height: 225px;
+    border-radius: 8px;
 
     display: flex;
     align-items: center;
     margin-right: 50px;
-
-    border-radius: 8px;
 }
 
 img {

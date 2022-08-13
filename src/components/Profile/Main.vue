@@ -4,7 +4,7 @@
 			:data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l" :live="live"
 			@avatar="++avatar" @settings="settings = true" @modal="modal = $event"
 		/>
-		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" :priv="checked.private" />
+		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" :priv="checked.private" :user="user" />
 
 		<div class="flex">
 			<Info :data="data" :titles="titles[l]" :values="values[l]" />
@@ -13,7 +13,7 @@
 		
 		<Seeking v-show="data.search.length > 0" :list="values[l].search" :value="data.search" :title="titles[l].search" />
 
-		<Settings v-if="data && settings"
+		<Settings v-if="settings"
 			:l="l" :lang="settingsJS" :titles="titles" :fields="data" :info="values[l]"
 			@close="settings = null" @data="data = $event"
 		/>
@@ -111,6 +111,7 @@ export default {
 	},
 	methods: {
 		getProfile() {
+			this.data = null
 			fetch(this.$domain + "profile?id=" + this.$route.params.id, {
 				method: "GET",
 				credentials: "include"
