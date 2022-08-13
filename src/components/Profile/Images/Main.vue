@@ -371,7 +371,6 @@ export default {
 .image {
     text-decoration: none;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
     object-fit: cover;
 
     width: 150px;

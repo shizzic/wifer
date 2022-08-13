@@ -1,6 +1,6 @@
 <template>
 	<div class="wrap">
-		<div class="wrapper scroll" v-click-outside="close" @mousedown="() => { up = true }" @mouseup="() => { up = null }">
+		<div class="wrapper scroll">
 			<cropper
 				ref="cropper"
 				class="cropper"
@@ -38,9 +38,8 @@ export default {
 				coordinates: null,
 				image: null
 			},
-			mode: true,
-			up: null
-		};
+			mode: true
+		}
 	},
 	methods: {
 		upload() {
@@ -78,13 +77,6 @@ export default {
 
 		flip() {
 			this.$refs.cropper.flip(true, false)
-		},
-
-		close() {
-			if (!this.up)
-				this.$emit("clear")
-
-			this.up = null
 		}
 	}
 }

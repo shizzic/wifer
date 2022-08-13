@@ -1,14 +1,16 @@
 <template>
 	<div class="wrap">
-		<div v-if="users" class="content scroll">
+		<div v-if="users" class="content scroll" ref="heart" @touchend="saveScroll">
 			<Hat :what="what[l]" :which="which" :limit="limit" :founded="founded[l]" :mode="mode" :all="all"
 				@which="which = $event; count = true; get();" @limit="limit = $event; get();" @mode="mode = $event; count = true; get();" 
 			/>
-			<Users v-if="users" 
+			<Users
 				:users="users" :time="time" :viewed="viewed" :notes="notes" :photos="photos[l]" :titles="titles[l]" 
 				:values="values[l]" :mode="mode" :which="which" @modal="modal = $event.modal; index = $event.index; id = $event.id"
 			/>
-			<Pagination :count="all" :limit="limit" :skip="skip" @skip="skip = $event; get();" />
+			<Pagination :count="all" :limit="limit" :skip="skip" 
+				@skip="skip = $event; get(); $refs.heart.scrollTop = 0; $scroll.set({ field: 'heart', value: 0 });" 
+			/>
 			<Modal v-if="modal" 
 				:users="users" :modal="modal" :text="text[modal][l]" :submit="submit[l]" :index="index" :id="id"
 				@users="users = $event" @close="modal = null; index = null; id = null;"
@@ -78,6 +80,26 @@ export default {
 		else
 			this.get()
 	},
+	mounted() {
+		function createWheelStopListener(element, callback, timeout) {
+			var handle = null
+			var onScroll = function() {
+				if (handle)
+					clearTimeout(handle)
+
+				handle = setTimeout(callback, timeout || 200)
+			}
+
+			element.addEventListener("wheel", onScroll)
+			return function() {
+				element.removeEventListener("wheel", onScroll)
+			}
+		}
+
+		createWheelStopListener(window, function() {
+			this.saveScroll()
+		}.bind(this))
+	},
 	methods: {
 		get() {
 			let data = {}
@@ -133,6 +155,7 @@ export default {
 				})
 			
 			this.count = null
+			setTimeout(this.scroll, 100)
 		},
 
 		sort(users) {
@@ -142,6 +165,15 @@ export default {
 				data.push(users[i])
 
 			return data
+		},
+
+		saveScroll() {
+			if (this.$refs.heart)
+				this.$scroll.set({ field: "heart", value: this.$refs.heart.scrollTop })
+		},
+		
+		scroll() {
+			this.$refs.heart.scrollTop = this.$scroll.heart
 		}
 	}
 }

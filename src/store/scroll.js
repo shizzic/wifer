@@ -4,7 +4,8 @@ import { useStorage } from "@vueuse/core"
 export const scrollJS = defineStore("scroll", {
     state: () =>({
         search: useStorage("search", 0),
-        sidebar: useStorage("sidebar", 0)
+        sidebar: useStorage("sidebar", 0),
+        heart: 0
     }),
     actions:{
         set(data) {
