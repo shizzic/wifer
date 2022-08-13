@@ -2,7 +2,7 @@
 	<nav>
 		<div id="links">
 			<router-link v-for="(elem, key) in list" :key="key" :to="{ name: key, params: { id: id } }" class="wrap" :title="elem.title[l]" 
-			@click="checked = key">
+			@click="set(key)">
 				<div class="elem">
 					<div class="circle" />
 					<div v-if="elem.image === '/heart.webp' && all > 0" class="notification">
@@ -79,6 +79,12 @@ export default {
 		}
 	},
 	methods: {
+		set(component) {
+			this.checked = component
+
+			if (component !== "heart")
+				this.$scroll.set({ field: "heart", value: 0 });
+		},
 		getHearts() {
 			fetch(this.$domain + "notifications", {
 				method: "GET",
