@@ -41,8 +41,12 @@ export default {
     methods: {
         modal(index, id) {
             let modal = "like"
+            
             if (this.which == 2)
                 modal = "private"
+
+            if (this.which == 3)
+                modal = "access"
 
             this.$emit("modal", {modal: modal, index: index, id: id})
         }

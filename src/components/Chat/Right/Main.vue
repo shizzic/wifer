@@ -1,23 +1,23 @@
 <template>
-	<div>Chat</div>
+	<div class="right">
+		
+	</div>
 </template>
 
 <script scoped>
 export default {
-	name: "Chat",
+	name: "Right",
 	data() {
 		return {
 		}
-	},
-	methods: {
 	}
 }
 </script>
 
 <style scoped>
-div {
-	background-color: #B37D4E;
-	word-break: break-all;
+.right {
+	width: 75%;
+	min-width: 300px;
 	height: 100%;
 	
 	overflow-y: auto;

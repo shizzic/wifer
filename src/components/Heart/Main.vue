@@ -8,12 +8,12 @@
 				:users="users" :time="time" :viewed="viewed" :notes="notes" :photos="photos[l]" :titles="titles[l]" 
 				:values="values[l]" :mode="mode" :which="which" @modal="modal = $event.modal; index = $event.index; id = $event.id"
 			/>
-			<Pagination :count="all" :limit="limit" :skip="skip" 
+			<Pagination v-show="all > 0" :count="all" :limit="limit" :skip="skip" 
 				@skip="skip = $event; get(); $refs.heart.scrollTop = 0; $scroll.set({ field: 'heart', value: 0 });" 
 			/>
 			<Modal v-if="modal" 
 				:users="users" :modal="modal" :text="text[modal][l]" :submit="submit[l]" :index="index" :id="id"
-				@users="users = $event" @close="modal = null; index = null; id = null;"
+				@users="users = $event" @close="modal = null; index = null; id = null;" @all="--all"
 			/>
 		</div>
 	</div>

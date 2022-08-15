@@ -5,9 +5,9 @@ export const navJS = defineStore("nav", {
         views: 0,
         likes: 0,
         privates: 0,
-        chats: 0,
+        access: 0,
 
-        fields: ["views", "likes", "privates", "chats"]
+        fields: ["views", "likes", "privates", "accesses"]
     }),
     getters: {
         inner() {

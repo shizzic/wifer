@@ -22,8 +22,8 @@ export default {
 		privates() {
 			return this.$nav.privates
 		},
-		chats() {
-			return this.$nav.chats
+		accesses() {
+			return this.$nav.accesses
 		}
 	},
     methods: {

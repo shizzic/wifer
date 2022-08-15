@@ -33,8 +33,12 @@
             </div>
 
             <div v-show="$user.id && data._id != $user.id" class="elem">
+                <div class="btn" @click="access">
+                    <div class="fill" :class="{ checked : checked.access.is, unchecked : !checked.access.is }" style="background-color: #EB9532;" />
+                    <img src="/access.webp">
+                </div>
+
                 <div class="btn" @click="chat">
-                    <div class="fill" :class="{ checked : checked.chat, unchecked : !checked.chat }" style="background-color: #EB9532;" />
                     <img src="/chat.webp">
                 </div>
             </div>
@@ -84,17 +88,27 @@ export default {
 			})
         },
 
-        chat() {
+        access() {
             let method = "POST"
 
-            if (this.checked.chat) {
-                this.checked.chat = null
+            if (this.checked.access.is) {
+                this.checked.access.is = null
                 method = "DELETE"
-                this.$toast.show(this.del.chat[this.l])
+                this.$toast.show(this.del.access[this.l])
             } else {
-                this.checked.chat = true
-                this.$toast.success(this.add.chat[this.l])
+                this.checked.access.is = true
+                this.$toast.success(this.add.access[this.l])
             }
+
+            fetch(this.$domain + "access?target=" + this.$route.params.id, {
+				method: method,
+				credentials: "include"
+			})
+        },
+
+        chat() {
+            if (!this.checked.access.access)
+                this.$emit("modal", "chat")
         }
     }
 }   

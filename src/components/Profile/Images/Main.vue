@@ -72,6 +72,7 @@
 
             <div v-else-if="data.private > 0 && ($user.id && $user.id > 0 && !priv.access)"
                 class="image" style="margin-right: 20px; margin-bottom: 20px;"
+                @click="$emit('modal', 'private')"
             >
                 <div class="private">
                     <span>{{ data.private }}</span>

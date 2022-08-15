@@ -33,6 +33,7 @@ export default {
 
             let users = Object.assign({}, this.users)
             delete users[this.index]
+            this.$emit("all")
             this.$emit("users", users)
             this.$emit("close")
         },
@@ -49,6 +50,7 @@ export default {
 
 <style scoped>
 .modal {
+    z-index: 20;
 	background-color: rgba(0, 0, 0, 0.6);
 	
 	width: 100%;

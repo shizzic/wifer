@@ -14,7 +14,7 @@
 <script scoped>
 export default {
 	name: "Modal",
-    props: ["text", "modal", "submit", "success"],
+    props: ["text", "modal", "submit", "success", "l"],
     data() {
 		return {
 			up: null
@@ -22,8 +22,7 @@ export default {
 	},
     methods: {
         deactivate() {
-            this.$emit("close")
-            this.$toast.success(this.success)
+            this.$toast.success(this.success[this.modal][this.l])
             this.$user.setID(null)
 
             fetch(this.$domain + "deactivate", {
@@ -35,15 +34,17 @@ export default {
         },
 
         logout() {
-            this.$emit("close")
-            this.$toast.success(this.success)
+            this.$toast.success(this.success[this.modal][this.l])
             this.$user.logout(this.$domain)
             this.$router.push({ name: "search" })
         },
 
         // trigger specific function
         make() {
-            this[this.modal]()
+            this.$emit("close")
+
+            if (typeof this[this.modal] === "function")
+                this[this.modal]()
         },
 
         close() {
@@ -80,7 +81,7 @@ export default {
 
     width: 100%;
     min-width: 250px;
-    max-width: 400px;
+    max-width: 450px;
 
     display: flex;
     flex-direction: column;

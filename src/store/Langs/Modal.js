@@ -21,11 +21,31 @@ export const ModalJS = defineStore("Modal", {
                 logout: {
                     en: ["Are you sure you wanna logout?"],
                     ru: ["Уверенны, что хотите выйти?"]
+                },
+                chat: {
+                    en: [
+                        "1. You need to buy premium for chatting with users",
+                        "2. Or maybe you have an access from this user directly",
+                        "3. You ask me, how will i get an access if i can't write it to her/him?",
+                        "4. Just give an access from you to her/him and than, you'll get attention :)"
+                    ],
+                    ru: [
+                        "1. Тебе нужно купить премиум, чтобы чатится",
+                        "2. Или доступ на переписку от этого юзера напрямую",
+                        "3. Ты спросишь, как я получу доступ от нее/его, если я не могу написать ей/ему?",
+                        "4. Просто дай доступ на чат от самого себя и тогда (может быть), ты привлечешь внимание :)"
+                    ]
+                },
+                private: {
+                    en: [
+                        "1. You need an access for private photos from this user",
+                        "2. You can ask for this access directly in chat"
+                    ],
+                    ru: [
+                        "1. Тебе нужен доступ на просмотр приватных фоток от этого юзера",
+                        "2. Ты можешь попросить доступ напрямую в чате"
+                    ]
                 }
-            }
-        },
-        response() {
-            return {
             }
         },
         success() {
@@ -50,9 +70,9 @@ export const ModalJS = defineStore("Modal", {
                     en: "You gave an access to your private photos",
                     ru: "Вы дали доступ к свои приватным фоткам"
                 },
-                chat: {
-                    en: "You gave an access to text you for this user",
-                    ru: "Вы дали доступ на переписку с Вами"
+                access: {
+                    en: "You gave an access to text you and see last messages for this user",
+                    ru: "Вы дали доступ на переписку с Вами этому юзеру"
                 }
             }
         },
@@ -66,9 +86,9 @@ export const ModalJS = defineStore("Modal", {
                     en: "You took away an access for your photos",
                     ru: "Вы забрали доступ к свои првиатным фоткам"
                 },
-                chat: {
-                    en: "Now, this user can't text you",
-                    ru: "Теперь этот юзер не может вам писать"
+                access: {
+                    en: "Now, this user can't text you and see your last messages",
+                    ru: "Теперь этот юзер не может вам писать и видеть все что было написанно"
                 }
             }
         },

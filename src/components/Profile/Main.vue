@@ -4,7 +4,7 @@
 			:data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l" :live="live"
 			@avatar="++avatar" @settings="settings = true" @modal="modal = $event"
 		/>
-		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" :priv="checked.private" :user="user" />
+		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" :priv="checked.private" @modal="modal = $event" />
 
 		<div class="flex">
 			<Info :data="data" :titles="titles[l]" :values="values[l]" />
@@ -19,7 +19,7 @@
 		/>
 
 		<Modal v-if="modal" 
-			:text="modalJS.text[modal][l]" :modal="modal" :submit="modalJS.submit[l]" :success="modalJS.success[modal][l]"
+			:text="modalJS.text[modal][l]" :modal="modal" :submit="modalJS.submit[l]" :success="modalJS.success" :l="l"
 			@close="modal = null"
 		/>
 
@@ -94,7 +94,10 @@ export default {
 					is: null,
 					access: null
 				},
-				chat: null
+				access: {
+					is: null,
+					access: null
+				}
 			}
 		}
 	},
@@ -133,9 +136,16 @@ export default {
 							if ("Private" in data.target && data.target.Private)
 								for (let elem of data.target.Private)
 									if (elem.user == this.$user.id)
-										this.checked.private.is = true
+										this.checked.private.is 	= true
 									else
 										this.checked.private.access = true
+
+							if ("Access" in data.target && data.target.Access)
+								for (let elem of data.target.Access)
+									if (elem.user == this.$user.id)
+										this.checked.access.is 	= true
+									else
+										this.checked.access.access = true
 						}
 					}
 				})

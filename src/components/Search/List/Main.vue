@@ -1,9 +1,9 @@
 <template>
 	<div class="wrapper scroll" ref="search" @touchend="saveScroll">
-		<Hat :l="l" :data="data" :sort="sort" :filters="filters" :create="create" :count="count" :founded="founded" :getUsers="getUsers"
+		<Hat :l="l" :data="data" :sort="sort" :create="create" :count="count" :founded="founded" :getUsers="getUsers"
 		@filters="$emit('filters')" />
 		<Users :users="users" :mode="mode" :photos="photos" :titles="titles" :values="values" @scroll="scroll" />
-		<Pagination v-if="users" 
+		<Pagination v-if="users && count > 0" 
 			:data="data" :getUsers="getUsers" :count="count" 
 			:limit="data.data[data.active].limit" :skip="data.data[data.active].skip" :sort="data.data[data.active].sort"
 			@moved="$emit('moved'); $refs.search.scrollTop = 0; $scroll.set({ field: 'search', value: 0 });"
