@@ -117,7 +117,7 @@ export default {
 				body: JSON.stringify(data)
 			})
 				.then(data => { return data.json() })
-				.then(data => {
+				.then(data => { console.log(data)
 					if (data.count && data.count > -1)
 						this.all = data.count
 

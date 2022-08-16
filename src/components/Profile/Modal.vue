@@ -23,7 +23,7 @@ export default {
     methods: {
         deactivate() {
             this.$toast.success(this.success[this.modal][this.l])
-            this.$user.setID(null)
+            this.$user.set({ field: "id", value: null })
 
             fetch(this.$domain + "deactivate", {
 				method: "PUT",

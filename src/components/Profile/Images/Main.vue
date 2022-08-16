@@ -231,7 +231,10 @@ export default {
 				credentials: "include"
             })
                 .then(data => { return data.json() })
-                .then(() => { location.reload() })
+                .then(() => {
+                    this.$user.set({ field: "avatar", value: null })
+                    location.reload()
+                })
                 .catch(() => { this.$toast.error(this.error[this.l]) })
         },
 
@@ -245,7 +248,10 @@ export default {
 				credentials: "include"
             })
                 .then(data => { return data.json() })
-                .then(() => { location.reload() })
+                .then(() => {
+                    this.$user.set({ field: "avatar", value: null })
+                    location.reload()
+                })
                 .catch(() => { this.$toast.error(this.error[this.l]) })
         },
 
@@ -259,7 +265,10 @@ export default {
 				credentials: "include"
             })
                 .then(data => { return data.json() })
-                .then(() => { location.reload() })
+                .then(() => {
+                    this.$user.set({ field: "avatar", value: null })
+                    location.reload() 
+                })
                 .catch(() => { this.$toast.error(this.error[this.l]) })
         },
 

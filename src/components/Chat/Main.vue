@@ -39,7 +39,9 @@ export default {
 			work: null,
 			socket: null,
 
-			target: null
+			target: null,
+			rooms: null,
+			messages: {}
 		}
 	},
 	beforeMount() {
@@ -81,7 +83,7 @@ export default {
 	background-color: #8f8585;
 
 	padding: 25px;
-	overflow-y: auto;
+	overflow: hidden;
 }
 
 #chat {
@@ -91,7 +93,6 @@ export default {
 	border-radius: 4px;
 
 	display: flex;
-
-	overflow-y: auto;
+	overflow: hidden;
 }
 </style>

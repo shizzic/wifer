@@ -1,6 +1,6 @@
 <template>
 	<div class="footer">
-		<textarea class="hideScroll" v-model="text" maxlength="1500" :placeholder="input" @input="autosize($event)" />
+		<textarea class="hideScroll" v-model="text" maxlength="1500" :placeholder="input" @input="autosize($event)" @keypress.enter="enter" />
         <img src="/send.webp" :class="{ active : text.length > 0 }" />
 	</div>
 </template>
@@ -15,6 +15,11 @@ export default {
 		}
 	},
     methods: {
+        enter(e) {
+            if (e.keyCode == 13 && !e.shiftKey)
+                e.preventDefault()
+        },
+
         autosize(e) {
             let el = e.target
             setTimeout(function() {
@@ -32,7 +37,7 @@ export default {
     background-color: #e5f3f6;
 
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     padding: 0 20px;
 }
 
@@ -61,6 +66,7 @@ img {
     filter: invert(75%) sepia(5%) saturate(220%) hue-rotate(159deg) brightness(95%) contrast(92%);
 
     margin-left: 20px;
+    margin-bottom: 12px;
 }
 
 .active {

@@ -4,11 +4,20 @@ import { useStorage } from "@vueuse/core"
 export const userJS = defineStore("user", {
     state: () =>({
         id: useStorage("id", null),
+        avatar: useStorage("avatar", null),
         templates: useStorage("templates", null)
     }),
     actions:{
-        setID(value) {
-            this.id = value
+        set(data) {
+            this[data.field] = data.value
+        },
+        checkAvatar(domain) {
+            fetch(domain + "checkAvatar", {
+				method: "GET",
+				credentials: "include"
+			})
+                .then(data => { return data.json() })
+                .then(bool => { this.avatar = bool })
         },
         logout(domain) {
             this.id = null

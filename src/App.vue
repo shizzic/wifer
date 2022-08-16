@@ -16,9 +16,7 @@ export default {
 		const language = langJS()
 
 		return {
-			language,
-			scroll_positions: {},
-      		remember: []
+			language
 		}
 	},
 	computed: {
@@ -39,6 +37,13 @@ export default {
 			this.language.autoLang(navigator.language)
 		else
 			this.language.correctLang(this.l)
+
+		if (this.id) {
+			this.$nav.checkMessages(this.$domain)
+
+			if (this.$user.avatar === null)
+				this.$user.checkAvatar(this.$domain)
+		}
 		
 		this.makeOnline(true)
 		window.addEventListener('beforeunload', () => { this.makeOnline(false) })

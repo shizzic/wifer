@@ -13,14 +13,13 @@ export default {
 
 <style scoped>
 .none {
-	width: 75%;
-	min-width: 300px;
+	width: 100%;
 	height: 100%;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
 	
 	overflow: hidden;
 }

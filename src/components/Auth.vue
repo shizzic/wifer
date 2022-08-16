@@ -42,7 +42,7 @@ export default {
 					if ("error" in data)
 						this.$toast.error(this.response[this.l][data["error"]])
 					else {
-						this.$user.setID(data["id"])
+						this.$user.set({ field: "id", value: data.id })
 						this.$router.push({ name: "profile", params: { id: this.id } })
 						this.$toast.success(this.success[this.l])
 					}

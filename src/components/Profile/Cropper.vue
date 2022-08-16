@@ -61,7 +61,10 @@ export default {
 						body: form,
 					})
 						.then(data => { return data.json() })
-						.then(data => { this.$emit("clear")
+						.then(data => {
+							this.$user.set({ field: "avatar", value: null })
+							this.$emit("clear")
+							
 							if ("error" in data)
 								this.$toast.error(this.lang[this.l][data.error])
 							else

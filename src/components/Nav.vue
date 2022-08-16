@@ -5,13 +5,17 @@
 			@click="set(key)">
 				<div class="elem">
 					<div class="circle" />
-					<div v-if="elem.image === '/heart.webp' && all > 0" class="notification">
+
+					<div v-if="key === 'heart' && all > 0" class="notification">
 						<span :class="{ 
-							important : likes > 0 || privates > 0 || chats > 0, 
-							useless: likes === 0 && privates === 0 && chats === 0 
+							important : likes > 0 || privates > 0 || accesses > 0, 
+							useless: likes === 0 && privates === 0 && accesses === 0 
 						}">{{ all }}</span>
 					</div>
-					<!-- <div v-if="elem.image === '/chat.webp' && $nav.messages" class="notification"><span>{{ messages }}</span></div> -->
+
+					<div v-if="key === 'chat' && messages > 0" class="notification">
+						<span class="useless">{{ messages }}</span>
+					</div>
 
 					<div class="link">
 						<img :src="elem.image"  />
@@ -44,11 +48,14 @@ export default {
 		privates() {
 			return this.$nav.privates
 		},
-		chats() {
-			return this.$nav.chats
+		accesses() {
+			return this.$nav.accesses
 		},
 		all() {
-			return this.views + this.likes + this.privates + this.chats
+			return this.views + this.likes + this.privates + this.accesses
+		},
+		messages() {
+			return this.$nav.messages
 		}
 	},
 	data() {
@@ -101,6 +108,8 @@ export default {
 								this.$nav.setHearts(hearts, key)
 							}
 						}
+
+					// this.$nav.setHearts(data.messages.length, "messages")
 				})
 		}
 	}

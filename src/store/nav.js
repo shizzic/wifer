@@ -6,6 +6,7 @@ export const navJS = defineStore("nav", {
         likes: 0,
         privates: 0,
         access: 0,
+        messages: 0,
 
         fields: ["views", "likes", "privates", "accesses"]
     }),
@@ -88,6 +89,14 @@ export const navJS = defineStore("nav", {
                 this[field] = res
             else
                 this[field] = null
+        },
+        checkMessages(domain) {
+            fetch(domain + "checkMessages", {
+				method: "GET",
+				credentials: "include"
+			})
+                .then(data => { return data.json() })
+                .then(data => { this.messages = data.length })
         }
     }
 })
