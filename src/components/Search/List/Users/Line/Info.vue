@@ -116,9 +116,15 @@ export default {
 }
 
 .title {
+    max-width: 200px;
+
     color: #4d4d4d;
     letter-spacing: 0.5px;
     font-size: 18px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     display: block;
     margin-bottom: 10px;
