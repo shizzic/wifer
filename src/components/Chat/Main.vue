@@ -1,8 +1,9 @@
 <template>
 	<div class="wrap">
 		<div v-if="work" id="chat">
-			<Left />
-			<Right />
+			<Left :search="search[l]" :chats="chats[l]" />
+			<Right v-if="target" :target="target" :input="input[l]" />
+			<None v-else :lang="none[l]" />
 		</div>
 	</div>
 </template>
@@ -10,19 +11,43 @@
 <script scoped>
 import Left from "@/components/Chat/Left/Main.vue"
 import Right from "@/components/Chat/Right/Main.vue"
+import None from "@/components/Chat/Right/None.vue"
+import { chatJS } from "@/store/chat"
 export default {
 	name: "Chat",
+	props: ["l"],
 	components: {
 		Left,
-		Right
+		Right,
+		None
+	},
+	setup() {
+		const none   = chatJS().none
+		const search = chatJS().search
+		const input  = chatJS().input
+		const chats  = chatJS().chats
+
+		return {
+			none,
+			search,
+			input,
+			chats
+		}
 	},
 	data() {
 		return {
 			work: null,
-			socket: null
+			socket: null,
+
+			target: null
 		}
 	},
-	mounted() {
+	beforeMount() {
+		if (this.$chat.target)
+			this.target = this.$chat.target
+
+		this.$chat.set({ field: "target", value: null })
+		
 		this.socket = new WebSocket("wss://" + this.$domainName + "ws")
 
 		this.socket.onopen = () => {

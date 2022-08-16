@@ -2,7 +2,7 @@
 	<div class="hat">
 		<div class="search">
             <img src="/search.webp" />
-            <input />
+            <input :placeholder="search" />
         </div>
 	</div>
 </template>
@@ -10,6 +10,7 @@
 <script scoped>
 export default {
 	name: "Hat",
+    props: ["search"],
 	data() {
 		return {
 		}
@@ -41,6 +42,7 @@ img {
 }
 
 input {
+    color: #5C5C5C;
     font-size: 16px;
     letter-spacing: 1.1px;
     outline: none;

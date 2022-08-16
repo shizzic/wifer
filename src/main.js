@@ -9,6 +9,7 @@ import { navJS } from "@/store/nav"
 import { cityJS } from "@/store/city"
 import { countryJS } from "@/store/country"
 import { scrollJS } from "@/store/scroll"
+import { chatJS } from "@/store/chat"
 
 import vue3GoogleLogin from 'vue3-google-login'
 
@@ -26,14 +27,15 @@ app
 .use(vClickOutside)
 .use(vue3GoogleLogin, { clientId: '151585600074-mlb946h3m89a7o7tbg3kfnu54kbhc46k.apps.googleusercontent.com' })
 
-app.config.globalProperties.$domain      = "https://wifer-test.ru/"
-app.config.globalProperties.$domainName  = "wifer-test.ru/"
-app.config.globalProperties.$ip          = "http://213.189.217.231:81/"
-app.config.globalProperties.$lang        = langJS()
-app.config.globalProperties.$user        = userJS()
-app.config.globalProperties.$nav         = navJS()
-app.config.globalProperties.$city        = cityJS()
-app.config.globalProperties.$country     = countryJS()
-app.config.globalProperties.$scroll      = scrollJS()
+app.config.globalProperties.$domain     = "https://wifer-test.ru/"
+app.config.globalProperties.$domainName = "wifer-test.ru/"
+app.config.globalProperties.$ip         = "http://213.189.217.231:81/"
+app.config.globalProperties.$lang       = langJS()
+app.config.globalProperties.$user       = userJS()
+app.config.globalProperties.$nav        = navJS()
+app.config.globalProperties.$city       = cityJS()
+app.config.globalProperties.$country    = countryJS()
+app.config.globalProperties.$scroll     = scrollJS()
+app.config.globalProperties.$chat       = chatJS()
 
 app.mount('#app')

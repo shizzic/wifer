@@ -173,7 +173,8 @@ export default {
 		},
 		
 		scroll() {
-			this.$refs.heart.scrollTop = this.$scroll.heart
+			if (this.$refs.heart)
+				this.$refs.heart.scrollTop = this.$scroll.heart
 		}
 	}
 }

@@ -107,7 +107,10 @@ export default {
         },
 
         chat() {
-            if (!this.checked.access.access)
+            if (!this.checked.access.access) {
+                this.$chat.set({ field: "target", value: { id: this.data._id, avatar: this.data.avatar, username: this.data.username } })
+                this.$router.push({ name: "chat" })
+            } else
                 this.$emit("modal", "chat")
         }
     }

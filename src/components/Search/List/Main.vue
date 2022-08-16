@@ -55,7 +55,8 @@ export default {
 		},
 		
 		scroll() {
-			this.$refs.search.scrollTop = this.$scroll.search
+			if (this.$refs.search)
+				this.$refs.search.scrollTop = this.$scroll.search
 		}
 	}
 }

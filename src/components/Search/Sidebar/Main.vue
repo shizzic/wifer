@@ -166,7 +166,8 @@ export default {
 		},
 		
 		scroll() {
-			this.$refs.sidebar.scrollTop = this.$scroll.sidebar
+			if (this.$refs.sidebar)
+				this.$refs.sidebar.scrollTop = this.$scroll.sidebar
 		}
 	}
 }
@@ -188,7 +189,7 @@ export default {
   	-webkit-tap-highlight-color: transparent;
 
 	background-color: #E3E3E3;
-	color: #5C5C5C;;
+	color: #5C5C5C;
 	cursor: pointer;
 	padding: 18px;
 	width: 100%;

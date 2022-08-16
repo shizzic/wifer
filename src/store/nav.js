@@ -26,19 +26,19 @@ export const navJS = defineStore("nav", {
                     },
                     image: "/heart.webp"
                 },
-                chat: { 
-                    title: {
-                        ru: "Чат",
-                        en: "Chat"
-                    },
-                    image: "/chat.webp"
-                },
                 premium: { 
                     title: {
                         ru: "Премиум",
                         en: "Premium"
                     },
                     image: "/premium.webp"
+                },
+                chat: { 
+                    title: {
+                        ru: "Чат",
+                        en: "Chat"
+                    },
+                    image: "/chat.webp"
                 },
                 profile: {
                     title: {
