@@ -117,7 +117,7 @@ export default {
 				body: JSON.stringify(data)
 			})
 				.then(data => { return data.json() })
-				.then(data => { console.log(data)
+				.then(data => {
 					if (data.count && data.count > -1)
 						this.all = data.count
 
@@ -125,8 +125,7 @@ export default {
 						this.viewed = {}
 						this.notes  = {}
 						this.time   = {}
-						let users   = this.sort(data.data.users)
-						this.users  = users
+						this.users  = data.data.users
 
 						let hearts   = 0
 						let key = "target"
@@ -156,15 +155,6 @@ export default {
 			
 			this.count = null
 			setTimeout(this.scroll, 100)
-		},
-
-		sort(users) {
-			let data = []
-
-			for (let i = users.length - 1; i > -1; i--)
-				data.push(users[i])
-
-			return data
 		},
 
 		saveScroll() {

@@ -1,26 +1,27 @@
 <template>
 	<div class="right">
 		<Header :target="target" />
-		<Messages />
-		<Footer :input="input" />
+		<template v-if="messages.access.target">
+			<Messages :messages="messages" :getMessages="getMessages" />
+			<Footer :input="input" />
+		</template>
+		<Blur v-else :lang="blur" />
 	</div>
 </template>
 
 <script scoped>
 import Header from "@/components/Chat/Right/Header.vue"
 import Messages from "@/components/Chat/Right/Messages.vue"
+import Blur from "@/components/Chat/Right/Blur.vue"
 import Footer from "@/components/Chat/Right/Footer.vue"
 export default {
 	name: "Right",
-	props: ["target", "input"],
+	props: ["target", "input", "messages", "blur", "getMessages"],
 	components: {
 		Header,
 		Messages,
+		Blur,
 		Footer
-	},
-	data() {
-		return {
-		}
 	}
 }
 </script>

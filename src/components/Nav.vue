@@ -108,8 +108,6 @@ export default {
 								this.$nav.setHearts(hearts, key)
 							}
 						}
-
-					// this.$nav.setHearts(data.messages.length, "messages")
 				})
 		}
 	}

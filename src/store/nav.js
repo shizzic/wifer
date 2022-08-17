@@ -25,7 +25,7 @@ export const navJS = defineStore("nav", {
                         ru: "Интересы",
                         en: "Interests"
                     },
-                    image: "/heart.webp"
+                    image: "/like.webp"
                 },
                 premium: { 
                     title: {

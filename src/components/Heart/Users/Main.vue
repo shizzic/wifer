@@ -59,8 +59,7 @@ export default {
     width: 100%;
 
 	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
+    flex-direction: column-reverse;
     padding: 10px;
     
     overflow: hidden;
@@ -75,7 +74,7 @@ export default {
     padding: 10px;
 }
 
-.user:not(:last-of-type) {
+.user:not(:first-of-type) {
     border-bottom: 1.5px solid #bcbcbc;
     margin-bottom: 5px;
 }

@@ -1,6 +1,9 @@
 <template>
 	<div class="footer">
-		<textarea class="hideScroll" v-model="text" maxlength="1500" :placeholder="input" @input="autosize($event)" @keypress.enter="enter" />
+		<textarea
+            class="hideScroll" v-model="text" maxlength="1500" :placeholder="input" 
+            @input="autosize($event)" @keypress.enter="enter"
+        />
         <img src="/send.webp" :class="{ active : text.length > 0 }" />
 	</div>
 </template>
@@ -44,7 +47,6 @@ export default {
 textarea {
     color: #5C5C5C;
     font-size: 18px;
-    letter-spacing: 1.1px;
     width: 100%;
     min-height: 40px;
     height: 40px;
