@@ -24,6 +24,7 @@ export default {
         deactivate() {
             this.$toast.success(this.success[this.modal][this.l])
             this.$user.set({ field: "id", value: null })
+            this.$user.set({ field: "avatar", value: null })
 
             fetch(this.$domain + "deactivate", {
 				method: "PUT",

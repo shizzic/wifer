@@ -87,16 +87,16 @@ export default {
 
 			checked: {
 				like: {
-					is: null,
+					is: false,
 					text: ""
 				},
 				private: {
-					is: null,
-					access: null
+					is: false,
+					access: false
 				},
 				access: {
-					is: null,
-					access: null
+					is: false,
+					access: false
 				}
 			}
 		}

@@ -1,7 +1,7 @@
 <template>
 	<div class="right">
-		<Header :target="target" />
-		<template v-if="messages.access.target">
+		<Header :target="target" :access="messages.access" />
+		<template v-if="'access' in messages && messages.access.target">
 			<Messages :messages="messages" :getMessages="getMessages" />
 			<Footer :input="input" />
 		</template>

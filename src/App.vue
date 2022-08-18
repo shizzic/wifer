@@ -4,23 +4,15 @@
 </template>
 
 <script scoped>
-import { langJS } from "@/store/lang"
 import Nav from "@/components/Nav.vue"
 export default {
 	name: 'App',
 	components: {
 		Nav
 	},
-	setup() {
-		const language = langJS()
-
-		return {
-			language
-		}
-	},
 	computed: {
         l() {
-            return this.language["lang"]
+            return this.$lang.lang
         },
 		id() {
 			return this.$user.id
@@ -29,21 +21,16 @@ export default {
 	watch: {
 		id() {
 			this.makeOnline(true)
+			this.start()
 		}
 	},
 	beforeMount() {
 		if (!this.l)
-			this.language.autoLang(navigator.language)
+			this.$lang.autoLang(navigator.language)
 		else
-			this.language.correctLang(this.l)
+			this.$lang.correctLang(this.l)
 
-		if (this.id) {
-			this.$nav.checkMessages(this.$domain)
-
-			if (this.$user.avatar === null)
-				this.$user.checkAvatar(this.$domain)
-		}
-		
+		this.start()
 		this.makeOnline(true)
 		window.addEventListener('beforeunload', () => { this.makeOnline(false) })
 	},
@@ -54,6 +41,13 @@ export default {
 					method: "POST",
 					credentials: "include"
 				})
+		},
+		start() {
+			if (this.id && this.id > 0) {
+				this.$nav.checkMessages(this.$domain)
+				this.$chat.startSocket(this.$domainName)
+				this.$user.checkAvatar(this.$domain)
+			}
 		}
 	}
 }

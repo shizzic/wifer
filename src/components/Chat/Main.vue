@@ -1,6 +1,6 @@
 <template>
 	<div class="wrap">
-		<div v-if="work" id="chat">
+		<div v-if="$chat.socket" id="chat">
 			<Left :search="search[l]" :chats="chats[l]" />
 			<Right v-if="target && target.id in messages" :target="target" :input="input[l]" :messages="messages[target.id]" :blur="blur[l]"
 			:getMessages="getMessages" />
@@ -38,10 +38,7 @@ export default {
 		}
 	},
 	data() {
-		return {
-			work: null,
-			socket: null,
-			
+		return {			
 			target: null,
 			rooms: null,
 			messages: chatJS().messages
@@ -52,43 +49,23 @@ export default {
 			this.target = this.$chat.target
 			this.getMessages()
 		}
-
-		this.$chat.set({ field: "target", value: null })
-		
-		this.socket = new WebSocket("wss://" + this.$domainName + "ws")
-
-		this.socket.onopen = () => {
-			this.work = true
-		}
-
-		// this.socket.onmessage = (e) => {
-		// 	this.acceptMsg(e.data)
-		// }
-
-		// this.socket.onclose = () => {
-		// 	this.work = null
-		// }
 	},
 	methods: {
-		// sendMessage(text) {
-		// 	this.socket.send(JSON.stringify({ message: text }))
-		// },
-		// acceptMsg(data) {
-		// 	// this.response.push(JSON.parse(data).message)
-		// },
-
 		getMessages(scroll = null) {
 			let have = this.target.id in this.messages
 
-			if (have === false || scroll && this.messages[this.target.id].left || have === true && this.$chat.first && this.messages[this.target.id].left) {
-				this.$chat.setLeft({ target: this.target.id, value: null })
-				this.$chat.set({ field: "first", value: null })
+			if (have === false || scroll && this.messages[this.target.id].left || 
+				have === true && this.messages[this.target.id].left && this.messages[this.target.id].first
+			) {
+				this.$chat.setMessages({ id: this.target.id, left: null })
 
 				let access = true
 				let skip = 0
 				if (this.target.id in this.messages) {
 					skip   = this.messages[this.target.id].skip
-					access = false
+
+					if ("access" in this.messages[this.target.id])
+						access = false
 				}
 
 				fetch(this.$domain + "getMessages?target=" + this.target.id + "&skip=" + skip + "&access=" + access, {
@@ -107,15 +84,15 @@ export default {
 									else
 										obj.target = true
 
-								this.$chat.setAccess({ target: this.target.id, access: obj })
+								this.$chat.setMessages({ id: this.target.id, access: obj })
 							}
 
 							if (data.messages) {
-								let left = null
+								let left = false
 								if (data.messages.length === 25)
 									left = true
 								
-								this.$chat.setMessages({ target: this.target.id, messages: data.messages, left: left  })
+								this.$chat.setMessages({ id: this.target.id, messages: data.messages, left: left  })
 							}
 						}
 					})

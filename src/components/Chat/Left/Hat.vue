@@ -44,7 +44,7 @@ img {
 input {
     color: #5C5C5C;
     font-size: 16px;
-    letter-spacing: 1.1px;
+    letter-spacing: 1px;
     outline: none;
     border: none;
     border-radius: 20px;

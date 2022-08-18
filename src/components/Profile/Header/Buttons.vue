@@ -55,7 +55,7 @@ export default {
             let method = "POST"
 
             if (this.checked.like.is) {
-                this.checked.like.is   = null
+                this.checked.like.is   = false
                 this.checked.like.text = ""
                 method = "DELETE"
                 this.$toast.show(this.del.like[this.l])
@@ -74,7 +74,7 @@ export default {
             let method = "POST"
 
             if (this.checked.private.is) {
-                this.checked.private.is = null
+                this.checked.private.is = false
                 method = "DELETE"
                 this.$toast.show(this.del.private[this.l])
             } else {
@@ -92,7 +92,7 @@ export default {
             let method = "POST"
 
             if (this.checked.access.is) {
-                this.checked.access.is = null
+                this.checked.access.is = false
                 method = "DELETE"
                 this.$toast.show(this.del.access[this.l])
             } else {
@@ -104,10 +104,19 @@ export default {
 				method: method,
 				credentials: "include"
 			})
+
+            if (this.$chat.socket)
+                this.$chat.sendMessage({ target: this.data._id, user: +this.$user.id, api: "access", access: this.checked.access.is  })
         },
 
         chat() {
-            if (!this.checked.access.access) {
+            if (this.checked.access.access 
+                && (
+                    !(this.data._id in this.$chat.messages) || 
+                    this.data._id in this.$chat.messages && "access" in this.$chat.messages[this.data._id] 
+                    && this.$chat.messages[this.data._id].access.target
+                )
+            ) {
                 this.$chat.set({ field: "target", value: { id: this.data._id, avatar: this.data.avatar, username: this.data.username } })
                 this.$router.push({ name: "chat" })
             } else

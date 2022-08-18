@@ -20,7 +20,8 @@ export const userJS = defineStore("user", {
                 .then(bool => { this.avatar = bool })
         },
         logout(domain) {
-            this.id = null
+            this.id     = null
+            this.avatar = null
 
             fetch(domain + "logout", {
 				method: "PUT",
