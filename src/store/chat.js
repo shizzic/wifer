@@ -30,10 +30,10 @@ export const chatJS = defineStore("chat", {
         onMessage(data) {
             data = JSON.parse(data)
             this.addTarget(data.user)
-            console.log(data)
 
             switch (data.api) {
                 case "message":
+                    this.messages[data.user].typing = false
                     if (!this.messages[data.user].first) {
                         data.viewed = false
                         this.messages[data.user].messages.unshift(data)
@@ -48,12 +48,14 @@ export const chatJS = defineStore("chat", {
                             this.messages[data.user].messages[message].viewed = true
                     }
                     break
+                case "typing":
+                    this.messages[data.user].typing = data.typing
+                    break
                 case "access":
                     if ("access" in this.messages[data.user])
                         this.messages[data.user].access.target = data.access
                     else
-                        this.messages[data.user].access = { target: data.access, user: null }
-
+                        this.messages[data.user].access = { target: data.access, user: false }
                     break
             }
 		},
@@ -81,6 +83,9 @@ export const chatJS = defineStore("chat", {
                 this.messages[data.id].skip = this.messages[data.id].messages.length
             }
 
+            if ("accessed" in data)
+                this.messages[data.id].accessed = data.accessed
+
             if ("access" in data)
                 this.messages[data.id].access = data.access
         },
@@ -97,6 +102,8 @@ export const chatJS = defineStore("chat", {
                 this.messages[id].skip     = 0
                 this.messages[id].left     = true
                 this.messages[id].first    = true
+                this.messages[id].typing   = false
+                this.messages[id].accessed = false
             }
         },
 

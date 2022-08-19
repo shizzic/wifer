@@ -1,6 +1,10 @@
 <template>
 	<div class="some">
 		<div class="messages scroll" ref="messages" @scroll="scroll">
+			<div v-show="messages.typing" class="snippet">
+				<div class="pulse-wrapper"><div class="dot-pulse" /></div>
+			</div>
+
 			<div v-for="(message, index) in messages.messages" :key="index" class="message-wrapper">
 				<div class="message" :class="{ me: message.user == $user.id, target: message.user != $user.id, }">
 					<span class="text">{{ message.text }}</span>
@@ -12,7 +16,10 @@
 			</div>
 		</div>
 		
-		<div v-show="button" class="toBottom" @click="$refs.messages.scrollTop = 0"><img src="/toBottom.webp" /></div>
+		<div v-show="button" class="toBottom" @click="$refs.messages.scrollTop = 0">
+			<img src="/toBottom.webp" />
+			<span v-show="count > 0" class="count">{{ count }}</span>
+		</div>
 	</div>
 </template>
 
@@ -24,7 +31,8 @@ export default {
 		return {
 			button: null,
 			scrollTop: 0,
-			timeout: null
+			timeout: null,
+			count: 0
 		}
 	},
 	watch: {
@@ -32,6 +40,8 @@ export default {
 			handler() {
 				if (Math.floor(this.$refs.messages.scrollTop) == 0)
 					this.read()
+				else
+					this.countNewMessages()
 			},
 			deep: true
 		}
@@ -74,8 +84,24 @@ export default {
 				}
 			}
 
-			if (target)
+			if (target && this.$chat.socket)
 				this.$chat.sendMessage({ user: +this.$user.id, target: +target, api: "view" })
+			
+			this.count = 0
+		},
+
+		countNewMessages() {
+			let count = 0
+
+			for (let message in this.messages.messages) {
+				if (this.messages.messages[message].user != this.$user.id && this.messages.messages[message].viewed)
+					break
+
+				if (this.messages.messages[message].user != this.$user.id && !this.messages.messages[message].viewed)
+					++count
+			}
+
+			this.count = count
 		},
 
 		get() {
@@ -185,11 +211,29 @@ export default {
 }
 
 .toBottom:hover {
-	background-color: rgb(228, 225, 225);
+	background-color: rgb(242, 242, 242);
+}
+
+.toBottom:active {
+	background-color: rgb(198, 198, 198);
 }
 
 .toBottom img {
-	width: 36px;
+	width: 40px;
+}
+
+.count {
+	color: #fff;
+	background-color: rgb(93, 97, 212);
+	border-radius: 2px;
+
+	position: absolute;
+	right: -7px;
+	bottom: 0;
+
+	display: flex;
+	align-items: center;
+	padding: 0px 4px;
 }
 
 .me {
@@ -207,10 +251,91 @@ export default {
 	}
 }
 
-/*
-#dae4e2
-back for typing
 
-#b1bbbb
-color for typing */
+.snippet {
+    position: relative;
+    box-shadow: 0 .4rem .8rem -.1rem rgba(0, 32, 128, .1), 0 0 0 1px #f0f2f7;
+    border-radius: .25rem;
+}
+
+.pulse-wrapper {
+	background-color: #dae4e2;
+	border-radius: 20px;
+
+	display: inline-block;
+	padding: 10px 4%;
+}
+
+.dot-pulse {
+	position: relative;
+	left: -9999px;
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: #b1bbbb;
+	color: #b1bbbb;
+	box-shadow: 9999px 0 0 -5px #b1bbbb;
+	animation: dotPulse 1.5s infinite linear;
+	animation-delay: .25s;
+}
+
+.dot-pulse::before, .dot-pulse::after {
+	content: '';
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: #b1bbbb;
+	color: #b1bbbb;
+}
+
+.dot-pulse::before {
+	box-shadow: 9984px 0 0 -5px #b1bbbb;
+	animation: dotPulseBefore 1.5s infinite linear;
+	animation-delay: 0s;
+}
+
+.dot-pulse::after {
+	box-shadow: 10014px 0 0 -5px #b1bbbb;
+	animation: dotPulseAfter 1.5s infinite linear;
+	animation-delay: .5s;
+}
+
+@keyframes dotPulseBefore {
+	0% {
+		box-shadow: 9984px 0 0 -5px #b1bbbb;
+	}
+	30% {
+		box-shadow: 9984px 0 0 2px #b1bbbb;
+	}
+	60%, 100% {
+		box-shadow: 9984px 0 0 -5px #b1bbbb;
+	}
+}
+
+@keyframes dotPulse {
+	0% {
+		box-shadow: 9999px 0 0 -5px #b1bbbb;
+	}
+	30% {
+		box-shadow: 9999px 0 0 2px #b1bbbb;
+	}
+	60%, 100% {
+		box-shadow: 9999px 0 0 -5px #b1bbbb;
+	}
+}
+
+@keyframes dotPulseAfter {
+	0% {
+		box-shadow: 10014px 0 0 -5px #b1bbbb;
+	}
+	30% {
+		box-shadow: 10014px 0 0 2px #b1bbbb;
+	}
+	60%, 100% {
+		box-shadow: 10014px 0 0 -5px #b1bbbb;
+	}
+}
 </style>

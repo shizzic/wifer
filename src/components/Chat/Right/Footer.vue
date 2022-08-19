@@ -1,8 +1,8 @@
 <template>
 	<div class="footer">
 		<textarea
-            class="hideScroll" v-model="text" maxlength="1500" :placeholder="input" 
-            @input="autosize($event)" @keypress.enter="enter"
+            class="hideScroll" v-model="text" maxlength="1500" :placeholder="input" ref="write"
+            @input="autosize($event.target); type($event.target.value);" @keypress.enter="enter"
         />
         <img src="/send.webp" :class="{ active : text.length > 0 }" @click="send" />
 	</div>
@@ -14,22 +14,73 @@ export default {
     props: ["input", "target"],
 	data() {
 		return {
-            text: ""
+            text: "",
+            timeout: null,
+            typing: null
 		}
 	},
     watch: {
-        target() {
-            this.text = ""
+        target(_, old) {
+            if (old && old > 0)
+                this.sendTyping(false, +old)
+
+            this.clearTrash()
+            this.text   = ""
+            this.typing = null
         }
     },
+    mounted() {
+        this.$refs.write.focus()
+    },
+    beforeUnmount() {
+        this.clearTrash()
+        this.sendTyping()
+    },
     methods: {
+        type(value) {
+            if (!this.typing && value.length > 0) {
+                this.typing = true
+                this.sendTyping(true)
+            }
+
+            if (this.timeout)
+                this.clearTrash()
+
+            if (this.typing)
+                this.timeout = setTimeout(this.sendTyping, 5000)
+        },
+
+        sendTyping(typing = false, tar = null) {
+            let target = +this.target
+            if (tar)
+                target = tar
+            
+            if (this.$chat.socket)
+                this.$chat.sendMessage({ user: +this.$user.id, target: target, api: "typing", typing: typing })
+
+            if (!typing)
+                this.typing = null
+        },
+
+        clearTrash() {
+            clearTimeout(this.timeout)
+            this.timeout = null
+        },
+
         send() {
             if (this.text.length > 0) {
+                if (this.timeout)
+                    this.clearTrash()
+
                 let text = this.text.trim()
                 let time = Math.floor(Date.now() / 1000)
-                this.$chat.sendMessage({ user: +this.$user.id, target: this.target, api: "message", text: text, created_at: time})
-                this.$chat.addMessage({ id: this.target, message: { user: +this.$user.id, text: text, created_at: time }})
+
+                if (this.$chat.socket)
+                    this.$chat.sendMessage({ user: +this.$user.id, target: +this.target, api: "message", text: text, created_at: time})
+
+                this.$chat.addMessage({ id: +this.target, message: { user: +this.$user.id, text: text, created_at: time }})
                 this.text = ""
+                this.$refs.write.style.height = "40px"
             }
         },
 
@@ -41,10 +92,9 @@ export default {
         },
 
         autosize(e) {
-            let el = e.target
             setTimeout(function() {
-                el.style.height = "5px"
-                el.style.height = (el.scrollHeight) + "px"
+                e.style.height = "5px"
+                e.style.height = (e.scrollHeight) + "px"
             }, 0)
         }
     }

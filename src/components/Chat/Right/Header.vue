@@ -1,6 +1,6 @@
 <template>
 	<div class="header">
-        <div class="elem pointer" @click="$router.push({ name: 'profile', params: { id : target.id } })">
+        <div class="elem pointer" @click="$router.push({ name: 'profile', params: { id : target.id } })" style="width: 100%;">
             <img v-if="target.avatar" :src="$ip + target.id + '/avatar.webp?' + Date.now()" class="avatar" />
             <img v-else src="/avatar.webp" class="avatar" />
             <span>{{ target.username }}</span>
@@ -32,7 +32,7 @@ export default {
             else
                 access.user = true
             
-            this.$chat.setMessages({ id: this.target.id, access: access })
+            this.$chat.setMessages({ id: +this.target.id, access: access })
 
             if (this.$chat.socket)
                 this.$chat.sendMessage({ target: +this.target.id, user: +this.$user.id, api: "access", access: access.user  })

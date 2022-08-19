@@ -39,30 +39,28 @@ export default {
 	},
 	data() {
 		return {			
-			target: null,
+			target: chatJS().target,
 			rooms: null,
 			messages: chatJS().messages
 		}
 	},
 	beforeMount() {
-		if (this.$chat.target) {
-			this.target = this.$chat.target
+		if (this.target)
 			this.getMessages()
-		}
 	},
 	methods: {
 		getMessages(scroll = null) {
 			let have = this.target.id in this.messages
 
 			if (!have || this.messages[this.target.id].left && (scroll || this.messages[this.target.id].first)) {
-				this.$chat.setMessages({ id: this.target.id, left: null })
+				this.$chat.setMessages({ id: +this.target.id, left: null })
 
 				let access = true
 				let skip = 0
 				if (this.target.id in this.messages) {
 					skip   = this.messages[this.target.id].skip
 
-					if ("access" in this.messages[this.target.id])
+					if (this.messages[this.target.id].accessed)
 						access = false
 				}
 
@@ -82,7 +80,7 @@ export default {
 									else
 										obj.target = true
 
-								this.$chat.setMessages({ id: this.target.id, access: obj })
+								this.$chat.setMessages({ id: +this.target.id, access: obj, accessed: true })
 							}
 
 							if (data.messages) {
@@ -102,11 +100,11 @@ export default {
 										}
 									}
 									
-									if (need)
+									if (need && this.$chat.socket)
 										this.$chat.sendMessage({ user: +this.$user.id, target: +this.target.id, api: "view" })
 								}
 								
-								this.$chat.setMessages({ id: this.target.id, messages: data.messages, left: left  })
+								this.$chat.setMessages({ id: +this.target.id, messages: data.messages, left: left  })
 							}
 						}
 					})
