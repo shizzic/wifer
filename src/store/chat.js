@@ -30,26 +30,41 @@ export const chatJS = defineStore("chat", {
         onMessage(data) {
             data = JSON.parse(data)
             this.addTarget(data.user)
-
-            // console.log(data)
+            console.log(data)
 
             switch (data.api) {
+                case "message":
+                    if (!this.messages[data.user].first) {
+                        data.viewed = false
+                        this.messages[data.user].messages.unshift(data)
+                    }
+                    break
+                case "view":
+                    for (let message in this.messages[data.user].messages) {
+                        if (this.messages[data.user].messages[message].user == data.target && this.messages[data.user].messages[message].viewed)
+                            break
+
+                        if (this.messages[data.user].messages[message].user == data.target)
+                            this.messages[data.user].messages[message].viewed = true
+                    }
+                    break
                 case "access":
                     if ("access" in this.messages[data.user])
                         this.messages[data.user].access.target = data.access
                     else
                         this.messages[data.user].access = { target: data.access, user: null }
+
+                    break
             }
 		},
 
         sendMessage(data) {
-            // console.log(data)
 			this.socket.send(JSON.stringify(data))
 		},
 
         setMessages(data) {
             this.addTarget(data.id)
-            this.messages[data.id].first = true
+            this.messages[data.id].first = null
 
             if ("left" in data)
                 this.messages[data.id].left = data.left
@@ -70,12 +85,18 @@ export const chatJS = defineStore("chat", {
                 this.messages[data.id].access = data.access
         },
 
+        addMessage(data) {
+            this.addTarget(data.id)
+            this.messages[data.id].messages.unshift(data.message)
+        },
+
         addTarget(id) {
             if (!(id in this.messages)) {
                 this.messages[id]          = {}
                 this.messages[id].messages = []
                 this.messages[id].skip     = 0
                 this.messages[id].left     = true
+                this.messages[id].first    = true
             }
         },
 

@@ -113,8 +113,8 @@ export default {
             if (this.checked.access.access 
                 && (
                     !(this.data._id in this.$chat.messages) || 
-                    this.data._id in this.$chat.messages && "access" in this.$chat.messages[this.data._id] 
-                    && this.$chat.messages[this.data._id].access.target
+                    this.data._id in this.$chat.messages && (!("access" in this.$chat.messages[this.data._id]) ||
+                    "access" in this.$chat.messages[this.data._id] && this.$chat.messages[this.data._id].access.target)
                 )
             ) {
                 this.$chat.set({ field: "target", value: { id: this.data._id, avatar: this.data.avatar, username: this.data.username } })

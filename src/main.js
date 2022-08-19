@@ -14,7 +14,6 @@ import { chatJS } from "@/store/chat"
 import vue3GoogleLogin from 'vue3-google-login'
 
 import vClickOutside from "click-outside-vue3"
-import Vue3TouchEvents from "vue3-touch-events"
 import Toaster from "@meforma/vue-toaster"
 
 import "./style"
@@ -26,7 +25,6 @@ app
 .use(createPinia())
 .use(Toaster, { position: "bottom-left", maxToasts: 3, duration: 4000 })
 .use(vClickOutside)
-.use(Vue3TouchEvents)
 .use(vue3GoogleLogin, { clientId: '151585600074-mlb946h3m89a7o7tbg3kfnu54kbhc46k.apps.googleusercontent.com' })
 
 app.config.globalProperties.$domain     = "https://wifer-test.ru/"

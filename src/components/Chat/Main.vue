@@ -54,9 +54,7 @@ export default {
 		getMessages(scroll = null) {
 			let have = this.target.id in this.messages
 
-			if (have === false || scroll && this.messages[this.target.id].left || 
-				have === true && this.messages[this.target.id].left && this.messages[this.target.id].first
-			) {
+			if (!have || this.messages[this.target.id].left && (scroll || this.messages[this.target.id].first)) {
 				this.$chat.setMessages({ id: this.target.id, left: null })
 
 				let access = true
@@ -91,6 +89,22 @@ export default {
 								let left = false
 								if (data.messages.length === 25)
 									left = true
+
+								if (!data.messages[0].viewed) {
+									let need = null
+									for (let message of data.messages) {
+										if (message.user != this.$user.id && message.viewed)
+											break
+
+										if (message.user != this.$user.id && !message.viewed) {
+											message.viewed = true
+											need = true
+										}
+									}
+									
+									if (need)
+										this.$chat.sendMessage({ user: +this.$user.id, target: +this.target.id, api: "view" })
+								}
 								
 								this.$chat.setMessages({ id: this.target.id, messages: data.messages, left: left  })
 							}

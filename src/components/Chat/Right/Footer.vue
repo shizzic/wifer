@@ -4,23 +4,40 @@
             class="hideScroll" v-model="text" maxlength="1500" :placeholder="input" 
             @input="autosize($event)" @keypress.enter="enter"
         />
-        <img src="/send.webp" :class="{ active : text.length > 0 }" />
+        <img src="/send.webp" :class="{ active : text.length > 0 }" @click="send" />
 	</div>
 </template>
 
 <script scoped>
 export default {
 	name: "Footer",
-    props: ["input"],
+    props: ["input", "target"],
 	data() {
 		return {
             text: ""
 		}
 	},
+    watch: {
+        target() {
+            this.text = ""
+        }
+    },
     methods: {
+        send() {
+            if (this.text.length > 0) {
+                let text = this.text.trim()
+                let time = Math.floor(Date.now() / 1000)
+                this.$chat.sendMessage({ user: +this.$user.id, target: this.target, api: "message", text: text, created_at: time})
+                this.$chat.addMessage({ id: this.target, message: { user: +this.$user.id, text: text, created_at: time }})
+                this.text = ""
+            }
+        },
+
         enter(e) {
-            if (e.keyCode == 13 && !e.shiftKey)
+            if (e.keyCode == 13 && !e.shiftKey) {
                 e.preventDefault()
+                this.send()
+            }
         },
 
         autosize(e) {

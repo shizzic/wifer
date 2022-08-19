@@ -3,7 +3,7 @@
 		<Header :target="target" :access="messages.access" />
 		<template v-if="'access' in messages && messages.access.target">
 			<Messages :messages="messages" :getMessages="getMessages" />
-			<Footer :input="input" />
+			<Footer :input="input" :target="target.id" />
 		</template>
 		<Blur v-else :lang="blur" />
 	</div>
