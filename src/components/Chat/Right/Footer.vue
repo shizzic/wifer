@@ -72,6 +72,8 @@ export default {
                 if (this.timeout)
                     this.clearTrash()
 
+                this.typing = false
+
                 let text = this.text.trim()
                 let time = Math.floor(Date.now() / 1000)
 
