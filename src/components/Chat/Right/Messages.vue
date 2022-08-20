@@ -18,7 +18,7 @@
 		
 		<div v-show="button" class="toBottom" @click="$refs.messages.scrollTop = 0">
 			<img src="/toBottom.webp" />
-			<span v-show="count > 0" class="count">{{ count }}</span>
+			<span v-show="count > 0" class="count"><span>{{ count }}</span></span>
 		</div>
 	</div>
 </template>
@@ -223,17 +223,23 @@ export default {
 }
 
 .count {
+	width: 100%;
 	color: #fff;
+
+	position: absolute;
+	top: -15px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.count span {
 	background-color: rgb(93, 97, 212);
 	border-radius: 2px;
 
-	position: absolute;
-	right: -7px;
-	bottom: 0;
-
 	display: flex;
-	align-items: center;
-	padding: 0px 4px;
+	padding: 0 4px;
 }
 
 .me {

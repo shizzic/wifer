@@ -40,8 +40,12 @@ export default {
 	data() {
 		return {			
 			target: chatJS().target,
-			rooms: null,
-			messages: chatJS().messages
+			rooms: null
+		}
+	},
+	computed: {
+		messages() {
+			return chatJS().messages
 		}
 	},
 	beforeMount() {
@@ -72,7 +76,7 @@ export default {
 					.then(data => {
 						if (data) {
 							if (data.accesses) {
-								let obj = { user: null, target: null }
+								let obj = { user: false, target: false }
 
 								for (let elem of data.accesses)
 									if (elem.user == this.$user.id)
