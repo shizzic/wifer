@@ -1,23 +1,24 @@
 <template>
 	<div class="left">
-		<Hat :search="search" />
-		<None :lang="chats" />
+		<template v-if="order.length > 0">
+			<Hat :search="search" />
+			<Rooms :order="order" :rooms="rooms" :target="target" />
+		</template>
+		<None v-else :lang="chats" />
 	</div>
 </template>
 
 <script scoped>
 import Hat from "@/components/Chat/Left/Hat.vue"
+import Rooms from "@/components/Chat/Left/Rooms.vue"
 import None from "@/components/Chat/Left/None.vue"
 export default {
 	name: "Left",
-	props: ["search", "chats"],
+	props: ["search", "chats", "order", "rooms", "target"],
 	components: {
 		Hat,
+		Rooms,
 		None
-	},
-	data() {
-		return {
-		}
 	}
 }
 </script>

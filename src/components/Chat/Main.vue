@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
 		<div v-if="$chat.socket" id="chat">
-			<Left :search="search[l]" :chats="chats[l]" />
+			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" />
 			<Right v-if="target && target.id in messages" :target="target" :input="input[l]" :messages="messages[target.id]" :blur="blur[l]"
 			:getMessages="getMessages" />
 			<None v-else :lang="none[l]" />
@@ -37,22 +37,42 @@ export default {
 			blur
 		}
 	},
-	data() {
-		return {			
-			target: chatJS().target,
-			rooms: null
-		}
-	},
 	computed: {
-		messages() {
-			return chatJS().messages
-		}
+		target() { return this.$chat.target },
+		order() { return this.$chat.order },
+		rooms() { return this.$chat.rooms },
+		messages() { return this.$chat.messages }
 	},
 	beforeMount() {
 		if (this.target)
 			this.getMessages()
+
+		this.getRooms()
 	},
 	methods: {
+		getRooms() {
+			fetch(this.$domain + "getRooms", {
+				method: "POST",
+				credentials: "include",
+				body: JSON.stringify({
+					nin: []
+				})
+			})
+				.then(data => { return data.json() })
+				.then(data => {
+					let rooms = this.rooms
+
+					for (let user of data.users)
+						rooms[user._id] = user
+
+					for (let index in data.rooms)
+						rooms[data.ids[index]] = Object.assign({}, rooms[data.ids[index]], data.rooms[index])
+
+					this.$chat.set({ field: "rooms", value: rooms })
+					this.$chat.set({ field: "order", value: data.ids })
+				})
+		},
+
 		getMessages(scroll = null) {
 			let have = this.target.id in this.messages
 

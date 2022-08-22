@@ -5,7 +5,10 @@ export const chatJS = defineStore("chat", {
     state: () =>({
         socket: null,
         target: null,
-        messages: {}
+        messages: {},
+
+        order: [],
+        rooms: {}
     }),
     actions:{
         startSocket(domainName) {
