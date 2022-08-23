@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
 		<div v-if="$chat.socket" id="chat">
-			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" />
+			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" />
 			<Right v-if="target && target.id in messages" :target="target" :input="input[l]" :messages="messages[target.id]" :blur="blur[l]"
 			:getMessages="getMessages" />
 			<None v-else :lang="none[l]" />
@@ -41,6 +41,7 @@ export default {
 		target() { return this.$chat.target },
 		order() { return this.$chat.order },
 		rooms() { return this.$chat.rooms },
+		roomsLeft() { return this.$chat.roomsLeft },
 		messages() { return this.$chat.messages }
 	},
 	beforeMount() {
@@ -51,26 +52,57 @@ export default {
 	},
 	methods: {
 		getRooms() {
-			fetch(this.$domain + "getRooms", {
-				method: "POST",
-				credentials: "include",
-				body: JSON.stringify({
-					nin: []
+			if (this.roomsLeft) {
+				this.$chat.set({ field: "roomsLeft", value: null })
+
+				fetch(this.$domain + "getRooms", {
+					method: "POST",
+					credentials: "include",
+					body: JSON.stringify({
+						nin: this.order
+					})
 				})
-			})
-				.then(data => { return data.json() })
-				.then(data => {
-					let rooms = this.rooms
+					.then(data => { return data.json() })
+					.then(data => {
+						if (data) {
+							if (data.ids.length === 25)
+								this.$chat.set({ field: "roomsLeft", value: true })
 
-					for (let user of data.users)
-						rooms[user._id] = user
+							let order = this.order
+							let news  = []
 
-					for (let index in data.rooms)
-						rooms[data.ids[index]] = Object.assign({}, rooms[data.ids[index]], data.rooms[index])
+							for (let id of data.ids) {
+								let index = order.indexOf(id)
 
-					this.$chat.set({ field: "rooms", value: rooms })
-					this.$chat.set({ field: "order", value: data.ids })
+								if (index === -1) {
+									order.push(id)
+									news.push(id)
+								} else
+									delete data.rooms.splice(index, 1)
+							}
+
+							let rooms = this.rooms
+
+							if (data.rooms && data.users) {
+								for (let user of data.users)
+									if (news.includes(user._id))
+										rooms[user._id] = user
+
+								for (let room of data.rooms) {
+									if (room.user in rooms) {
+										rooms[room.user] = Object.assign({}, rooms[room.user], room)
+										continue
+									}
+
+									rooms[room.target] = Object.assign({}, rooms[room.target], room)
+								}
+							}
+
+							this.$chat.set({ field: "rooms", value: rooms })
+							this.$chat.set({ field: "order", value: order })
+						}
 				})
+			}
 		},
 
 		getMessages(scroll = null) {

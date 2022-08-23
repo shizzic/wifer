@@ -2,7 +2,7 @@
 	<div class="left">
 		<template v-if="order.length > 0">
 			<Hat :search="search" />
-			<Rooms :order="order" :rooms="rooms" :target="target" />
+			<Rooms :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" />
 		</template>
 		<None v-else :lang="chats" />
 	</div>
@@ -14,7 +14,7 @@ import Rooms from "@/components/Chat/Left/Rooms.vue"
 import None from "@/components/Chat/Left/None.vue"
 export default {
 	name: "Left",
-	props: ["search", "chats", "order", "rooms", "target"],
+	props: ["search", "chats", "order", "rooms", "target", "getRooms"],
 	components: {
 		Hat,
 		Rooms,

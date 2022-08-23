@@ -1,10 +1,15 @@
 <template>
-	<div class="rooms">
+	<div class="rooms hideScroll" ref="rooms" @scroll="scroll">
 		<div v-for="(user_id, index) in order" :key="index" class="room" 
             :class="{ active: target && target.id == user_id, inactive: !target || target && target.id != user_id }"
         >
-            <img v-if="rooms[user_id].avatar" :src="$ip + user_id + '/avatar.webp?' + Date.now()" class="icon" />
-            <img v-else src="/avatar.webp" class="icon">
+            <div class="icon-wrapper">
+                <img v-if="rooms[user_id].avatar" :src="$ip + user_id + '/avatar.webp?' + Date.now()" class="icon" />
+                <img v-else src="/avatar.webp" class="icon">
+
+                <div v-show="rooms[user_id].online" class="online" />
+            </div>
+
             <div class="right-wrapper">
                 <div class="top-wrapper">
                     <span class="username">{{ rooms[user_id].username }}</span>
@@ -22,10 +27,29 @@
 <script scoped>
 export default {
 	name: "Rooms",
-	props: ["order", "rooms", "target"],
+	props: ["order", "rooms", "target", "getRooms"],
+    data() {
+		return {
+			timeout: null
+		}
+	},
     methods: {
+        scroll() {
+			let sum = Math.abs(this.$refs.rooms.scrollTop) + this.$refs.rooms.offsetHeight
+			let scrolled = this.$refs.rooms.scrollHeight - sum
+
+			if (scrolled < 300) {
+				if (this.timeout) {
+					clearTimeout(this.timeout)
+					this.timeout = null
+				}
+				
+				this.timeout = setTimeout(this.getRooms, 50)
+			}
+		},
+
         getDate(time) {
-            let today = new Date(time * 1000).getDate()
+            let today = new Date().getDate()
             let date = new Date(time * 1000)
             let dateDay = date.getDate()
 
@@ -62,7 +86,16 @@ export default {
     padding: 10px;
     margin-bottom: 5px;
 
-    transition: background-color .2s linear;
+    transition: background-color .1s linear;
+}
+
+.icon-wrapper {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    margin-right: 12px;
 }
 
 .icon {
@@ -72,8 +105,6 @@ export default {
     min-height: 50px;
     border-radius: 50%;
     object-fit: cover;
-
-    margin-right: 12px;
 }
 
 .right-wrapper {
@@ -143,5 +174,17 @@ export default {
 
 .inactive:hover {
     background-color: #f0f2f3;
+}
+
+.online {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background-color: rgb(75, 179, 75);
+
+    padding: 4px;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 </style>

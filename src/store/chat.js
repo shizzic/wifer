@@ -7,6 +7,7 @@ export const chatJS = defineStore("chat", {
         target: null,
         messages: {},
 
+        roomsLeft: true,
         order: [],
         rooms: {}
     }),
