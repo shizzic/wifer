@@ -10,7 +10,7 @@
 					<span class="text">{{ message.text }}</span>
 					<span class="date">
 						{{ getDate(message.created_at) }}
-						<img src="/readed.webp" class="view" :class="{ unseen: !message.viewed, seen: message.viewed }" />
+						<img v-show="message.user == $user.id" src="/readed.webp" class="view" :class="{ unseen: !message.viewed, seen: message.viewed }" />
 					</span>
 				</div>
 			</div>
@@ -26,7 +26,7 @@
 <script scoped>
 export default {
 	name: "Messages",
-	props: ["messages", "getMessages"],
+	props: ["target", "messages", "getMessages"],
 	data() {
 		return {
 			button: null,
@@ -36,9 +36,13 @@ export default {
 		}
 	},
 	watch: {
+		target() {
+			this.$refs.messages.scrollTop = 0
+		},
+
 		'messages.messages': {
 			handler() {
-				if (Math.floor(this.$refs.messages.scrollTop) == 0)
+				if (Math.floor(this.$refs.messages.scrollTop) === 0)
 					this.read()
 				else
 					this.countNewMessages()
@@ -84,8 +88,10 @@ export default {
 				}
 			}
 
-			if (target && this.$chat.socket)
+			if (target) {
+				this.$chat.setRooms({ id: +target, viewed: true })
 				this.$chat.sendMessage({ user: +this.$user.id, target: +target, api: "view" })
+			}
 			
 			this.count = 0
 		},
@@ -162,7 +168,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 
-	padding: 8px 18px;
+	padding: 3px 15px 7px;
 }
 
 .text {
@@ -171,22 +177,20 @@ export default {
 }
 
 .date {
-	font-size: 12px;
+	font-size: 10px;
+	width: 100%;
 
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
 
 	margin-top: 8px;
 	margin-left: auto;
-	margin-right: 8px;
 }
 
 .view {
 	width: 12px;
 
-	position: absolute;
-	right: 6px;
-	bottom: 9px;
+	margin-left: 8px;
 }
 
 .unseen {
@@ -256,7 +260,6 @@ export default {
 		max-width: 80%;
 	}
 }
-
 
 .snippet {
     position: relative;

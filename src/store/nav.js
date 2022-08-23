@@ -5,7 +5,7 @@ export const navJS = defineStore("nav", {
         views: 0,
         likes: 0,
         privates: 0,
-        access: 0,
+        accesses: 0,
         messages: 0,
 
         fields: ["views", "likes", "privates", "accesses"]

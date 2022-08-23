@@ -1,6 +1,6 @@
 <template>
 	<div class="wrap">
-		<div v-if="$chat.socket" id="chat">
+		<div v-if="socket" id="chat">
 			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" />
 			<Right v-if="target && target.id in messages" :target="target" :input="input[l]" :messages="messages[target.id]" :blur="blur[l]"
 			:getMessages="getMessages" />
@@ -38,6 +38,7 @@ export default {
 		}
 	},
 	computed: {
+		socket() { return this.$chat.socket },
 		target() { return this.$chat.target },
 		order() { return this.$chat.order },
 		rooms() { return this.$chat.rooms },
@@ -131,14 +132,15 @@ export default {
 					.then(data => { return data.json() })
 					.then(data => {
 						if (data) {
-							if (data.accesses) {
+							if ("accesses" in data) {
 								let obj = { user: false, target: false }
 
-								for (let elem of data.accesses)
-									if (elem.user == this.$user.id)
-										obj.user   = true
-									else
-										obj.target = true
+								if (data.accesses)
+									for (let elem of data.accesses)
+										if (elem.user == this.$user.id)
+											obj.user   = true
+										else
+											obj.target = true
 
 								this.$chat.setMessages({ id: +this.target.id, access: obj, accessed: true })
 							}
@@ -160,8 +162,10 @@ export default {
 										}
 									}
 									
-									if (need && this.$chat.socket)
+									if (need) {
+										this.$chat.setRooms({ id: +this.target.id, viewed: true })
 										this.$chat.sendMessage({ user: +this.$user.id, target: +this.target.id, api: "view" })
+									}
 								}
 								
 								this.$chat.setMessages({ id: +this.target.id, messages: data.messages, left: left  })

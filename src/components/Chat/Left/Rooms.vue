@@ -17,8 +17,20 @@
                     <span class="date">{{ getDate(rooms[user_id].created_at) }}</span>
                 </div>
                 <div class="message">
-                    <img src="/readed.webp" class="view" :class="{ unseen: !rooms[user_id].viewed, seen: rooms[user_id].viewed }" />
-                    {{ rooms[user_id].text }}
+                    <template v-if="rooms[user_id].user == $user.id && !rooms[user_id].typing">
+                        <div class="view-wrapper">
+                            <img v-show="!rooms[user_id].viewed" src="/unreed.webp" class="view unseen" />
+                            <img v-show="rooms[user_id].viewed" src="/readed.webp" class="view seen" />
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div v-show="rooms[user_id].typing" class="snippet">
+                            <div class="pulse-wrapper"><div class="dot-pulse" /></div>
+                        </div>
+                    </template>
+
+                    <span v-show="!rooms[user_id].typing" class="text">{{ rooms[user_id].text }}</span>
+                    <div v-show="rooms[user_id].user != $user.id && !rooms[user_id].viewed" class="new" />
                 </div>
             </div>
         </div>
@@ -148,26 +160,38 @@ export default {
 
 .message {
     position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+.text {
     color: #67717a;
     font-size: 12px;
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
 
-    padding-left: 18px;
+.view-wrapper {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    margin-right: 20px;
 }
 
 .view {
 	width: 12px;
 
     position: absolute;
-    left: 0;
-    top: 3px;
+    bottom: -7px;
 }
 
 .unseen {
-	filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(160deg) brightness(100%) contrast(102%);
+	filter: invert(62%) sepia(7%) saturate(20%) hue-rotate(347deg) brightness(94%) contrast(92%);
 }
 
 .seen {
@@ -192,5 +216,101 @@ export default {
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+.new {
+    border-radius: 50%;
+    background-color: #5181b8;
+
+    padding: 5px;
+    margin-left: auto;
+}
+
+.snippet {
+    border-radius: .25rem;
+
+    position: absolute;
+    left: 15px;
+    bottom: -14px;
+}
+
+.pulse-wrapper {
+	border-radius: 20px;
+
+	display: inline-block;
+	padding: 10px 4%;
+}
+
+.dot-pulse {
+	position: relative;
+	left: -9999px;
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: #b1bbbb;
+	color: #b1bbbb;
+	box-shadow: 9999px 0 0 -5px #b1bbbb;
+	animation: dotPulse 1.5s infinite linear;
+	animation-delay: .25s;
+}
+
+.dot-pulse::before, .dot-pulse::after {
+	content: '';
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: #b1bbbb;
+	color: #b1bbbb;
+}
+
+.dot-pulse::before {
+	box-shadow: 9984px 0 0 -5px #b1bbbb;
+	animation: dotPulseBefore 1.5s infinite linear;
+	animation-delay: 0s;
+}
+
+.dot-pulse::after {
+	box-shadow: 10014px 0 0 -5px #b1bbbb;
+	animation: dotPulseAfter 1.5s infinite linear;
+	animation-delay: .5s;
+}
+
+@keyframes dotPulseBefore {
+	0% {
+		box-shadow: 9984px 0 0 -5px #b1bbbb;
+	}
+	30% {
+		box-shadow: 9984px 0 0 2px #b1bbbb;
+	}
+	60%, 100% {
+		box-shadow: 9984px 0 0 -5px #b1bbbb;
+	}
+}
+
+@keyframes dotPulse {
+	0% {
+		box-shadow: 9999px 0 0 -5px #b1bbbb;
+	}
+	30% {
+		box-shadow: 9999px 0 0 2px #b1bbbb;
+	}
+	60%, 100% {
+		box-shadow: 9999px 0 0 -5px #b1bbbb;
+	}
+}
+
+@keyframes dotPulseAfter {
+	0% {
+		box-shadow: 10014px 0 0 -5px #b1bbbb;
+	}
+	30% {
+		box-shadow: 10014px 0 0 2px #b1bbbb;
+	}
+	60%, 100% {
+		box-shadow: 10014px 0 0 -5px #b1bbbb;
+	}
 }
 </style>

@@ -21,12 +21,13 @@ export default {
 	},
     watch: {
         target(_, old) {
-            if (old && old > 0)
+            if (old && old > 0 && this.typing)
                 this.sendTyping(false, +old)
 
             this.clearTrash()
             this.text   = ""
             this.typing = null
+            this.$refs.write.focus()
         }
     },
     mounted() {
@@ -55,8 +56,7 @@ export default {
             if (tar)
                 target = tar
             
-            if (this.$chat.socket)
-                this.$chat.sendMessage({ user: +this.$user.id, target: target, api: "typing", typing: typing })
+            this.$chat.sendMessage({ user: +this.$user.id, target: target, api: "typing", typing: typing })
 
             if (!typing)
                 this.typing = null
@@ -73,14 +73,12 @@ export default {
                     this.clearTrash()
 
                 this.typing = false
-
-                let text = this.text.trim()
-                let time = Math.floor(Date.now() / 1000)
-
-                if (this.$chat.socket)
-                    this.$chat.sendMessage({ user: +this.$user.id, target: +this.target, api: "message", text: text, created_at: time})
-
-                this.$chat.addMessage({ id: +this.target, message: { user: +this.$user.id, text: text, created_at: time }})
+                let text    = this.text.trim()
+                let time    = Math.floor(Date.now() / 1000)
+                
+                this.$chat.addMessage({ id: +this.target, message: { user: +this.$user.id, target: +this.target, text: text, created_at: time, avatar: this.$user.avatar, username: this.$user.username }})
+                this.$chat.sendMessage({ user: +this.$user.id, target: +this.target, api: "message", text: text, created_at: time, avatar: this.$user.avatar, username: this.$user.username })
+                
                 this.text = ""
                 this.$refs.write.style.height = "40px"
             }

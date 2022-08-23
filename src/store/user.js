@@ -4,8 +4,10 @@ import { useStorage } from "@vueuse/core"
 export const userJS = defineStore("user", {
     state: () =>({
         id: useStorage("id", null),
-        avatar: useStorage("avatar", null),
-        templates: useStorage("templates", null)
+        templates: useStorage("templates", null),
+
+        avatar: false,
+        username: ""
     }),
     actions:{
         set(data) {
@@ -17,11 +19,15 @@ export const userJS = defineStore("user", {
 				credentials: "include"
 			})
                 .then(data => { return data.json() })
-                .then(bool => { this.avatar = bool })
+                .then(data => {
+                    this.avatar   = data.avatar 
+                    this.username = data.username 
+                })
         },
         logout(domain) {
-            this.id     = null
-            this.avatar = null
+            this.id       = null
+            this.avatar   = false
+            this.username = ""
 
             fetch(domain + "logout", {
 				method: "PUT",

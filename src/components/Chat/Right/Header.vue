@@ -19,10 +19,6 @@
 export default {
 	name: "Header",
     props: ["target", "access"],
-	data() {
-		return {
-		}
-	},
     methods: {
         accessHandle() {
             let access = Object.assign({}, this.access)

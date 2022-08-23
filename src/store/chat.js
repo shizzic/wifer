@@ -42,6 +42,13 @@ export const chatJS = defineStore("chat", {
                         data.viewed = false
                         this.messages[data.user].messages.unshift(data)
                     }
+                    this.addRoom(data)
+                    this.rooms[data.user].typing = false
+                    let order = this.order
+                    let index = order.indexOf(data.user)
+                    order.splice(index, 1)
+                    order.unshift(data.user)
+                    this.order = order
                     break
                 case "view":
                     for (let message in this.messages[data.user].messages) {
@@ -51,9 +58,14 @@ export const chatJS = defineStore("chat", {
                         if (this.messages[data.user].messages[message].user == data.target)
                             this.messages[data.user].messages[message].viewed = true
                     }
+                    if (data.user in this.rooms) {
+                        this.rooms[data.user].online = true
+                        this.rooms[data.user].viewed = true
+                    }
                     break
                 case "typing":
                     this.messages[data.user].typing = data.typing
+                    this.rooms[data.user].typing    = data.typing
                     break
                 case "access":
                     if ("access" in this.messages[data.user])
@@ -65,8 +77,20 @@ export const chatJS = defineStore("chat", {
 		},
 
         sendMessage(data) {
-			this.socket.send(JSON.stringify(data))
+            if (this.socket)
+			    this.socket.send(JSON.stringify(data))
 		},
+
+        setRooms(data) {
+            if ("viewed" in data)
+                this.rooms[data.id].viewed = data.viewed
+        },
+
+        addRoom(data) {
+            data._id    = data.user
+            data.online = true
+            this.rooms[data.user] = data
+        },
 
         setMessages(data) {
             this.addTarget(data.id)
@@ -97,6 +121,14 @@ export const chatJS = defineStore("chat", {
         addMessage(data) {
             this.addTarget(data.id)
             this.messages[data.id].messages.unshift(data.message)
+
+            let obj = Object.assign({}, this.rooms[data.message.target])
+            obj.user       = data.message.user
+            obj.viewed     = false
+            obj.text       = data.message.text
+            obj.created_at = data.message.created_at
+
+            this.rooms[data.message.target] = obj
         },
 
         addTarget(id) {
