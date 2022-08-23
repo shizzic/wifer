@@ -2,6 +2,7 @@
 	<div class="rooms hideScroll" ref="rooms" @scroll="scroll">
 		<div v-for="(user_id, index) in order" :key="index" class="room" 
             :class="{ active: target && target.id == user_id, inactive: !target || target && target.id != user_id }"
+            @click="set(rooms[user_id])"
         >
             <div class="icon-wrapper">
                 <img v-if="rooms[user_id].avatar" :src="$ip + user_id + '/avatar.webp?' + Date.now()" class="icon" />
@@ -34,6 +35,11 @@ export default {
 		}
 	},
     methods: {
+        set(user) {
+            if (!this.target || this.target && user._id != this.target.id)
+                this.$chat.set({ field: "target", value: { id: +user._id, avatar: user.avatar, username: user.username } })
+        },
+
         scroll() {
 			let sum = Math.abs(this.$refs.rooms.scrollTop) + this.$refs.rooms.offsetHeight
 			let scrolled = this.$refs.rooms.scrollHeight - sum

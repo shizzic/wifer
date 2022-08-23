@@ -44,6 +44,12 @@ export default {
 		roomsLeft() { return this.$chat.roomsLeft },
 		messages() { return this.$chat.messages }
 	},
+	watch: {
+		target(target) {
+			if (target)
+				this.getMessages()
+		}
+	},
 	beforeMount() {
 		if (this.target)
 			this.getMessages()
@@ -69,32 +75,30 @@ export default {
 								this.$chat.set({ field: "roomsLeft", value: true })
 
 							let order = this.order
-							let news  = []
 
 							for (let id of data.ids) {
 								let index = order.indexOf(id)
 
-								if (index === -1) {
+								if (index === -1)
 									order.push(id)
-									news.push(id)
-								} else
-									delete data.rooms.splice(index, 1)
 							}
 
 							let rooms = this.rooms
 
 							if (data.rooms && data.users) {
 								for (let user of data.users)
-									if (news.includes(user._id))
-										rooms[user._id] = user
+									rooms[user._id] = user
 
 								for (let room of data.rooms) {
+									delete room._id
+
 									if (room.user in rooms) {
 										rooms[room.user] = Object.assign({}, rooms[room.user], room)
 										continue
 									}
 
-									rooms[room.target] = Object.assign({}, rooms[room.target], room)
+									if (room.target in rooms)
+										rooms[room.target] = Object.assign({}, rooms[room.target], room)
 								}
 							}
 
