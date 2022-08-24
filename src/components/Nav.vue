@@ -1,29 +1,42 @@
 <template>
 	<nav>
 		<div id="links">
-			<router-link v-for="(elem, key) in list" :key="key" :to="{ name: key, params: { id: id } }" class="wrap" :title="elem.title[l]" 
-			@click="set(key)">
-				<div class="elem">
-					<div class="circle" />
+			<template v-for="(elem, key) in list" :key="key">
+				<router-link v-if="key === 'profile'" :to="{ name: key, params: { id: id } }" class="wrap" :title="elem.title[l]" @click="set(key)">
+					<div class="elem">
+						<div class="circle" />
 
-					<div v-if="key === 'heart' && all > 0" class="notification">
-						<span :class="{ 
-							important : likes > 0 || privates > 0 || accesses > 0, 
-							useless: likes === 0 && privates === 0 && accesses === 0 
-						}">{{ all }}</span>
+						<div class="link">
+							<img :src="elem.image"  />
+						</div>
 					</div>
 
-					<div v-if="key === 'chat' && messages > 0" class="notification">
-						<span class="useless">{{ messages }}</span>
+					<div class="border" :class="{ 'checked': $route.name === key }" />
+				</router-link>
+
+				<router-link v-else :to="{ name: key }" class="wrap" :title="elem.title[l]" @click="set(key)">
+					<div class="elem">
+						<div class="circle" />
+
+						<div v-if="key === 'heart' && all > 0" class="notification">
+							<span :class="{ 
+								important : likes > 0 || privates > 0 || accesses > 0, 
+								useless: likes === 0 && privates === 0 && accesses === 0 
+							}">{{ all }}</span>
+						</div>
+
+						<div v-if="key === 'chat' && messages > 0" class="notification">
+							<span class="useless">{{ messages }}</span>
+						</div>
+
+						<div class="link">
+							<img :src="elem.image"  />
+						</div>
 					</div>
 
-					<div class="link">
-						<img :src="elem.image"  />
-					</div>
-				</div>
-
-				<div class="border" :class="{ 'checked': $route.name === key }" />
-			</router-link>
+					<div class="border" :class="{ 'checked': $route.name === key }" />
+				</router-link>
+			</template>
 		</div>
 	</nav>
 </template>

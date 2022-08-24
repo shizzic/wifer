@@ -31,13 +31,14 @@ export default {
         }
     },
     mounted() {
+        window.addEventListener('beforeunload', () => { this.sendTyping() })
         this.$refs.write.focus()
     },
     beforeUnmount() {
         this.clearTrash()
 
         if (this.target && this.target > 0 && this.typing)
-            this.sendTyping(false)
+            this.sendTyping()
     },
     methods: {
         type(value) {
@@ -117,6 +118,7 @@ textarea {
     color: #5C5C5C;
     font-size: 18px;
     width: 100%;
+    letter-spacing: normal;
     min-height: 40px;
     height: 40px;
     max-height: 150px;

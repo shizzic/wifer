@@ -5,7 +5,11 @@
 				<div class="pulse-wrapper"><div class="dot-pulse" /></div>
 			</div>
 
-			<div v-for="(message, index) in messages.messages" :key="index" class="message-wrapper" @mouseover="getDate(message.created_at)">
+			<div v-for="(message, index) in messages.messages" :key="index" class="message-wrapper">
+				<div v-show="date[message.created_at]" class="date-wrapper">
+					<div class="date">{{ date[message.created_at] }}</div>
+				</div>
+
 				<div class="message" :class="{ me: message.user == $user.id, target: message.user != $user.id, }">
 					<div class="text-wrapper">
 						<span class="text">{{ message.text }}</span>
@@ -16,11 +20,11 @@
 							<img v-show="message.user == $user.id && message.viewed" src="/readed.webp" class="view seen" />
 						</span>
 					</div>
+
+					<div class="new-wrapper" v-show="message.user != $user.id && !message.viewed"><div class="new" /></div>
 				</div>
 			</div>
 		</div>
-
-		<div v-show="date.date" class="date-wrapper"><div class="date">{{ date.date }}</div></div>
 		
 		<div v-show="button" class="toBottom" @click="$refs.messages.scrollTop = 0">
 			<img src="/toBottom.webp" />
@@ -39,11 +43,8 @@ export default {
 			scrollTop: 0,
 			timeout: null,
 			count: 0,
-			date: {
-				id: null,
-				date: null
-			},
-			dateTimer: null
+			keys: {},
+			date: {}
 		}
 	},
 	watch: {
@@ -54,22 +55,23 @@ export default {
 		'messages.messages': {
 			handler() {
 				if (Math.floor(this.$refs.messages.scrollTop) === 0)
-					this.read()
+					setTimeout(this.read, 700)
 				else
 					this.countNewMessages()
+
+				this.setDates()
 			},
 			deep: true
 		}
+	},
+	beforeMount() {
+		setTimeout(this.read, 700)
+		this.setDates()
 	},
 	beforeUnmount() {
 		if (this.timeout) {
 			clearTimeout(this.timeout)
 			this.timeout = null
-		}
-
-		if (this.dateTimer) {
-			clearTimeout(this.dateTimer)
-			this.dateTimer = null
 		}
 	},
 	methods: {
@@ -94,7 +96,7 @@ export default {
 			this.scrollTop = this.$refs.messages.scrollTop
 
 			if (Math.floor(this.$refs.messages.scrollTop) === 0)
-				this.read()
+				setTimeout(this.read, 700)
 		},
 
 		read() {
@@ -143,22 +145,21 @@ export default {
         },
 
 		getDate(time) {
-			if (this.date.id != time) {
-				let date  	   = new Date(time * 1000)
-				this.date.id   = time
-				this.date.date = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear()
+			let date = new Date(time * 1000)
+			let key  = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear()
 
-				if (this.dateTimer) {
-					clearTimeout(this.dateTimer)
-					this.dateTimer = null
-				}
-				
-				this.dateTimer = setTimeout(this.clearDate, 5000)
+			if (!this.keys[key]) {
+				this.date[time] = key
+				this.keys[key]  = time
 			}
         },
 
-		clearDate() {
-            this.date.date = null
+		setDates() {
+			this.date = {}
+			this.keys = {}
+
+			for (let i = this.messages.messages.length - 1; i > -1; i--)
+				this.getDate(this.messages.messages[i].created_at)
 		}
 	}
 }
@@ -191,6 +192,7 @@ export default {
 	width: 100%;
 
 	display: flex;
+	flex-direction: column;
 }
 
 .message-wrapper:not(:first-of-type) {
@@ -205,8 +207,7 @@ export default {
 	border-radius: 24px;
 
 	display: flex;
-
-	padding: 7px 18px;
+	padding: 8px 18px;
 }
 
 .text {
@@ -230,18 +231,17 @@ export default {
 .date-wrapper {
 	width: 100%;
 
-	position: absolute;
-	top: 10px;
-	left: 0;
-
 	display: flex;
 	justify-content: center;
+
+	margin: 20px 0;
 }
 
 .date {
-	color: #5C5C5C;
-	background-color: #fff;
+	color: #fff;
+	background-color: #1d1d1d9e;
 	border-radius: 20px;
+	font-weight: 700;
 
 	padding: 5px 10px;
 }
@@ -249,7 +249,7 @@ export default {
 .view {
 	width: 12px;
 
-	margin-left: 8px;
+	margin-left: 4px;
 	margin-bottom: -2px;
 }
 
@@ -317,6 +317,28 @@ export default {
 	background-color: #a8b3b5;
 }
 
+.new-wrapper {
+	width: 100%;
+	height: 100%;
+	
+	position: absolute;
+	right: 0;
+	top: 0;
+
+	display: flex;
+	align-items: center;
+}
+
+.new {
+	border-radius: 50%;
+    background-color: #5181b8;
+
+	position: absolute;
+	right: -17px;
+
+    padding: 4px;
+}
+
 @media screen and (max-width: 763px) {
     .message {
 		max-width: 80%;
@@ -331,7 +353,7 @@ export default {
 
 .pulse-wrapper {
 	background-color: #dae4e2;
-	border-radius: 20px;
+	border-radius: 24px;
 
 	display: inline-block;
 	padding: 10px 4%;

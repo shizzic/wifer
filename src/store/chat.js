@@ -45,6 +45,7 @@ export const chatJS = defineStore("chat", {
                     this.addRoom(data, true, "text")
                     this.rooms[data.user].typing = false
                     this.rooms[data.user].viewed = false
+                    this.rooms[data.user].user   = data.user
                     this.changeOrder(data.user)
                     break
                 case "view":
@@ -78,11 +79,10 @@ export const chatJS = defineStore("chat", {
         addRoom(data, newMessage, field = null) {
             if (newMessage && (!this.rooms[data.user] || this.rooms[data.user].viewed))
                 navJS().setHearts(navJS().messages + 1, "messages")
-            data.online = true
 
             if (!this.rooms[data.user]) {
+                data._id              = data.user
                 this.rooms[data.user] = data
-                data._id    = data.user
             } else {
                 if (field) {
                     if (field in data)
@@ -98,7 +98,8 @@ export const chatJS = defineStore("chat", {
         changeOrder(user_id) {
             let order = this.order
             let index = order.indexOf(user_id)
-            order.splice(index, 1)
+            if (index > -1)
+                order.splice(index, 1)
             order.unshift(user_id)
             this.order = order
         },
@@ -132,12 +133,23 @@ export const chatJS = defineStore("chat", {
         addMessage(data) {
             this.addTarget(data.id)
             this.messages[data.id].messages.unshift(data.message)
+            let obj = Object.assign({}, this.rooms[data.message.target])
 
-            let obj        = Object.assign({}, this.rooms[data.message.target])
-            obj.user       = data.message.user
-            obj.viewed     = false
-            obj.text       = data.message.text
-            obj.created_at = data.message.created_at
+            if (this.rooms[data.message.target]) {
+                obj.user       = data.message.user
+                obj.viewed     = false
+                obj.text       = data.message.text
+                obj.created_at = data.message.created_at
+            } else {
+                obj._id        = this.target.id
+                obj.user       = data.message.user
+                obj.target     = this.target.id
+                obj.viewed     = true
+                obj.text       = data.message.text
+                obj.avatar     = this.target.avatar
+                obj.username   = this.target.username
+                obj.created_at = data.message.created_at
+            }
 
             this.rooms[data.message.target] = obj
             this.changeOrder(+data.message.target)

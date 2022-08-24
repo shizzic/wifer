@@ -17,12 +17,10 @@
                     <span class="date">{{ getDate(rooms[user_id].created_at) }}</span>
                 </div>
                 <div class="message">
-                    <template v-if="rooms[user_id].user == $user.id && !rooms[user_id].typing">
-                        <div class="view-wrapper">
-                            <img v-show="!rooms[user_id].viewed" src="/unreed.webp" class="view unseen" />
-                            <img v-show="rooms[user_id].viewed" src="/readed.webp" class="view seen" />
-                        </div>
-                    </template>
+                    <div v-if="rooms[user_id].user == $user.id && !rooms[user_id].typing" class="view-wrapper">
+                        <img v-show="!rooms[user_id].viewed" src="/unreed.webp" class="view unseen" />
+                        <img v-show="rooms[user_id].viewed" src="/readed.webp" class="view seen" />
+                    </div>
                     <template v-else>
                         <div v-show="rooms[user_id].typing" class="snippet">
                             <div class="pulse-wrapper"><div class="dot-pulse" /></div>
@@ -30,7 +28,9 @@
                     </template>
 
                     <span v-show="!rooms[user_id].typing" class="text">{{ rooms[user_id].text }}</span>
-                    <div v-show="rooms[user_id].user != $user.id && !rooms[user_id].viewed" class="new" />
+                    <div class="new-wrapper">
+                        <div v-show="rooms[user_id].user != $user.id && !rooms[user_id].viewed" class="new" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -219,10 +219,13 @@ export default {
     bottom: 0;
 }
 
+.new-wrapper {
+    margin-left: auto;
+}
+
 .new {
     border-radius: 50%;
     background-color: #5181b8;
-    float: right;
 
     padding: 5px;
     margin-left: 10px;

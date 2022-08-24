@@ -149,25 +149,6 @@ export default {
 								let left = false
 								if (data.messages.length === 25)
 									left = true
-
-								if (!data.messages[0].viewed) {
-									let need = null
-									for (let message of data.messages) {
-										if (message.user != this.$user.id && message.viewed)
-											break
-
-										if (message.user != this.$user.id && !message.viewed) {
-											message.viewed = true
-											need = true
-										}
-									}
-									
-									if (need) {
-										this.$chat.addRoom({ user: +this.target.id, viewed: true }, false, "viewed")
-										this.$chat.sendMessage({ user: +this.$user.id, target: +this.target.id, api: "view", avatar: this.$user.avatar, username: this.$user.username })
-										this.$nav.takeHearts(1, "messages")
-									}
-								}
 								
 								this.$chat.setMessages({ id: +this.target.id, messages: data.messages, left: left  })
 							}
