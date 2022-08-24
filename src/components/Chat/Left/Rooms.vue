@@ -160,6 +160,7 @@ export default {
 
 .message {
     position: relative;
+    min-height: 17.2px;
 
     display: flex;
     align-items: center;
@@ -221,9 +222,10 @@ export default {
 .new {
     border-radius: 50%;
     background-color: #5181b8;
+    float: right;
 
     padding: 5px;
-    margin-left: auto;
+    margin-left: 10px;
 }
 
 .snippet {

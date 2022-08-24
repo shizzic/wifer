@@ -42,13 +42,10 @@ export const chatJS = defineStore("chat", {
                         data.viewed = false
                         this.messages[data.user].messages.unshift(data)
                     }
-                    this.addRoom(data)
+                    this.addRoom(data, true, "text")
                     this.rooms[data.user].typing = false
-                    let order = this.order
-                    let index = order.indexOf(data.user)
-                    order.splice(index, 1)
-                    order.unshift(data.user)
-                    this.order = order
+                    this.rooms[data.user].viewed = false
+                    this.changeOrder(data.user)
                     break
                 case "view":
                     for (let message in this.messages[data.user].messages) {
@@ -58,14 +55,11 @@ export const chatJS = defineStore("chat", {
                         if (this.messages[data.user].messages[message].user == data.target)
                             this.messages[data.user].messages[message].viewed = true
                     }
-                    if (data.user in this.rooms) {
-                        this.rooms[data.user].online = true
-                        this.rooms[data.user].viewed = true
-                    }
+                    this.addRoom(data, false, "viewed")
                     break
                 case "typing":
                     this.messages[data.user].typing = data.typing
-                    this.rooms[data.user].typing    = data.typing
+                    this.addRoom(data, false, "typing")
                     break
                 case "access":
                     if ("access" in this.messages[data.user])
@@ -76,20 +70,37 @@ export const chatJS = defineStore("chat", {
             }
 		},
 
-        sendMessage(data) {
+        sendMessage(data) {            
             if (this.socket)
 			    this.socket.send(JSON.stringify(data))
 		},
 
-        setRooms(data) {
-            if ("viewed" in data)
-                this.rooms[data.id].viewed = data.viewed
+        addRoom(data, newMessage, field = null) {
+            if (newMessage && (!this.rooms[data.user] || this.rooms[data.user].viewed))
+                navJS().setHearts(navJS().messages + 1, "messages")
+            data.online = true
+
+            if (!this.rooms[data.user]) {
+                this.rooms[data.user] = data
+                data._id    = data.user
+            } else {
+                if (field) {
+                    if (field in data)
+                        this.rooms[data.user][field] = data[field]
+                    else
+                        this.rooms[data.user][field] = true
+                }
+            }
+
+            this.rooms[data.user].online = true
         },
 
-        addRoom(data) {
-            data._id    = data.user
-            data.online = true
-            this.rooms[data.user] = data
+        changeOrder(user_id) {
+            let order = this.order
+            let index = order.indexOf(user_id)
+            order.splice(index, 1)
+            order.unshift(user_id)
+            this.order = order
         },
 
         setMessages(data) {
@@ -122,13 +133,14 @@ export const chatJS = defineStore("chat", {
             this.addTarget(data.id)
             this.messages[data.id].messages.unshift(data.message)
 
-            let obj = Object.assign({}, this.rooms[data.message.target])
+            let obj        = Object.assign({}, this.rooms[data.message.target])
             obj.user       = data.message.user
             obj.viewed     = false
             obj.text       = data.message.text
             obj.created_at = data.message.created_at
 
             this.rooms[data.message.target] = obj
+            this.changeOrder(+data.message.target)
         },
 
         addTarget(id) {

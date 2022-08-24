@@ -16,7 +16,7 @@ export default {
 		return {
             text: "",
             timeout: null,
-            typing: null
+            typing: false
 		}
 	},
     watch: {
@@ -26,7 +26,7 @@ export default {
 
             this.clearTrash()
             this.text   = ""
-            this.typing = null
+            this.typing = false
             this.$refs.write.focus()
         }
     },
@@ -35,7 +35,9 @@ export default {
     },
     beforeUnmount() {
         this.clearTrash()
-        this.sendTyping()
+
+        if (this.target && this.target > 0 && this.typing)
+            this.sendTyping(false)
     },
     methods: {
         type(value) {
@@ -56,10 +58,10 @@ export default {
             if (tar)
                 target = tar
             
-            this.$chat.sendMessage({ user: +this.$user.id, target: target, api: "typing", typing: typing })
+            this.$chat.sendMessage({ user: +this.$user.id, target: target, api: "typing", typing: typing, avatar: this.$user.avatar, username: this.$user.username})
 
             if (!typing)
-                this.typing = null
+                this.typing = false
         },
 
         clearTrash() {

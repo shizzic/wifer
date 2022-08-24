@@ -1,20 +1,26 @@
 <template>
-	<div class="some">
+	<div class="wrapper">
 		<div class="messages scroll" ref="messages" @scroll="scroll">
 			<div v-show="messages.typing" class="snippet">
 				<div class="pulse-wrapper"><div class="dot-pulse" /></div>
 			</div>
 
-			<div v-for="(message, index) in messages.messages" :key="index" class="message-wrapper">
+			<div v-for="(message, index) in messages.messages" :key="index" class="message-wrapper" @mouseover="getDate(message.created_at)">
 				<div class="message" :class="{ me: message.user == $user.id, target: message.user != $user.id, }">
-					<span class="text">{{ message.text }}</span>
-					<span class="date">
-						{{ getDate(message.created_at) }}
-						<img v-show="message.user == $user.id" src="/readed.webp" class="view" :class="{ unseen: !message.viewed, seen: message.viewed }" />
-					</span>
+					<div class="text-wrapper">
+						<span class="text">{{ message.text }}</span>
+
+						<span class="time">
+							{{ getTime(message.created_at) }}
+							<img v-show="message.user == $user.id && !message.viewed" src="/unreed.webp" class="view unseen" />
+							<img v-show="message.user == $user.id && message.viewed" src="/readed.webp" class="view seen" />
+						</span>
+					</div>
 				</div>
 			</div>
 		</div>
+
+		<div v-show="date.date" class="date-wrapper"><div class="date">{{ date.date }}</div></div>
 		
 		<div v-show="button" class="toBottom" @click="$refs.messages.scrollTop = 0">
 			<img src="/toBottom.webp" />
@@ -32,7 +38,12 @@ export default {
 			button: null,
 			scrollTop: 0,
 			timeout: null,
-			count: 0
+			count: 0,
+			date: {
+				id: null,
+				date: null
+			},
+			dateTimer: null
 		}
 	},
 	watch: {
@@ -48,6 +59,17 @@ export default {
 					this.countNewMessages()
 			},
 			deep: true
+		}
+	},
+	beforeUnmount() {
+		if (this.timeout) {
+			clearTimeout(this.timeout)
+			this.timeout = null
+		}
+
+		if (this.dateTimer) {
+			clearTimeout(this.dateTimer)
+			this.dateTimer = null
 		}
 	},
 	methods: {
@@ -89,8 +111,9 @@ export default {
 			}
 
 			if (target) {
-				this.$chat.setRooms({ id: +target, viewed: true })
-				this.$chat.sendMessage({ user: +this.$user.id, target: +target, api: "view" })
+				this.$chat.addRoom({ user: +target, viewed: true }, false, "viewed")
+				this.$chat.sendMessage({ user: +this.$user.id, target: +target, api: "view", avatar: this.$user.avatar, username: this.$user.username })
+				this.$nav.takeHearts(1, "messages")
 			}
 			
 			this.count = 0
@@ -114,19 +137,35 @@ export default {
 			this.getMessages(true)
 		},
 
-		getDate(time) {
+		getTime(time) {
             let date = new Date(time * 1000)
-            let hours = date.getHours()
-            let minutes = "0" + date.getMinutes()
-            let formattedTime = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear() + " " + hours + ':' + minutes.substr(-2)
-            return formattedTime
-        }
+            return date.getHours() + ':' + ("0" + date.getMinutes()).substr(-2)
+        },
+
+		getDate(time) {
+			if (this.date.id != time) {
+				let date  	   = new Date(time * 1000)
+				this.date.id   = time
+				this.date.date = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear()
+
+				if (this.dateTimer) {
+					clearTimeout(this.dateTimer)
+					this.dateTimer = null
+				}
+				
+				this.dateTimer = setTimeout(this.clearDate, 5000)
+			}
+        },
+
+		clearDate() {
+            this.date.date = null
+		}
 	}
 }
 </script>
 
 <style scoped>
-.some {
+.wrapper {
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -163,42 +202,65 @@ export default {
 	align-self: start;
 	color: #fff;
 	max-width: 70%;
-	border-radius: 6px;
+	border-radius: 24px;
 
 	display: flex;
-	flex-direction: column;
 
-	padding: 3px 15px 7px;
+	padding: 7px 18px;
 }
 
 .text {
+	display: inline;
 	font-size: 18px;
 	word-break: break-all;
+	vertical-align: middle;
+}
+
+.time {
+	font-size: 10px;
+	float: right;
+
+	position: relative;
+	right: -2px;
+	bottom: -10px;
+
+	padding-left: 10px;
+}
+
+.date-wrapper {
+	width: 100%;
+
+	position: absolute;
+	top: 10px;
+	left: 0;
+
+	display: flex;
+	justify-content: center;
 }
 
 .date {
-	font-size: 10px;
-	width: 100%;
+	color: #5C5C5C;
+	background-color: #fff;
+	border-radius: 20px;
 
-	display: flex;
-	align-items: flex-end;
-
-	margin-top: 8px;
-	margin-left: auto;
+	padding: 5px 10px;
 }
 
 .view {
 	width: 12px;
 
 	margin-left: 8px;
+	margin-bottom: -2px;
 }
 
 .unseen {
+	width: 9px;
 	filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(160deg) brightness(100%) contrast(102%);
 }
 
 .seen {
 	filter: invert(34%) sepia(59%) saturate(1893%) hue-rotate(219deg) brightness(99%) contrast(99%);
+	margin-bottom: -4px;
 }
 
 .toBottom {

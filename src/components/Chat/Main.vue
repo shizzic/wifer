@@ -2,8 +2,8 @@
 	<div class="wrap">
 		<div v-if="socket" id="chat">
 			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" />
-			<Right v-if="target && target.id in messages" :target="target" :input="input[l]" :messages="messages[target.id]" :blur="blur[l]"
-			:getMessages="getMessages" />
+			<Right v-if="target && target.id in messages" :target="target" :input="input[l]" :messages="messages[target.id]" 
+			:blur="blur[l]" :getMessages="getMessages" :rooms="rooms" />
 			<None v-else :lang="none[l]" />
 		</div>
 	</div>
@@ -163,8 +163,9 @@ export default {
 									}
 									
 									if (need) {
-										this.$chat.setRooms({ id: +this.target.id, viewed: true })
-										this.$chat.sendMessage({ user: +this.$user.id, target: +this.target.id, api: "view" })
+										this.$chat.addRoom({ user: +this.target.id, viewed: true }, false, "viewed")
+										this.$chat.sendMessage({ user: +this.$user.id, target: +this.target.id, api: "view", avatar: this.$user.avatar, username: this.$user.username })
+										this.$nav.takeHearts(1, "messages")
 									}
 								}
 								

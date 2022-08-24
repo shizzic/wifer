@@ -1,8 +1,12 @@
 <template>
 	<div class="header">
         <div class="elem pointer" @click="$router.push({ name: 'profile', params: { id : target.id } })" style="width: 100%;">
-            <img v-if="target.avatar" :src="$ip + target.id + '/avatar.webp?' + Date.now()" class="avatar" />
-            <img v-else src="/avatar.webp" class="avatar" />
+            <div class="avatar-wrapper">
+                <img v-if="target.avatar" :src="$ip + target.id + '/avatar.webp?' + Date.now()" class="avatar" />
+                <img v-else src="/avatar.webp" class="avatar" />
+                <div v-show="rooms[target.id] && rooms[target.id].online" class="online" />
+            </div>
+            
             <span>{{ target.username }}</span>
         </div>
 
@@ -18,7 +22,7 @@
 <script scoped>
 export default {
 	name: "Header",
-    props: ["target", "access"],
+    props: ["target", "access", "rooms"],
     methods: {
         accessHandle() {
             let access = Object.assign({}, this.access)
@@ -57,14 +61,33 @@ export default {
     align-items: center;
 }
 
-.avatar {
+.avatar-wrapper {
+    position: relative;
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    object-fit: cover;
 
     margin-right: 15px;
     margin-left: 20px;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.online {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background-color: rgb(75, 179, 75);
+
+    padding: 4px;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 span {

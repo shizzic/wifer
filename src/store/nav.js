@@ -78,17 +78,18 @@ export const navJS = defineStore("nav", {
     },
     actions:{
         setHearts(value, field) {
-            if (value > 0)
+            if (value > -1)
                 this[field] = value
             else
-                this[field] = null
+                this[field] = 0
         },
         takeHearts(value, field) {
             let res = this[field] - value
-            if (res > 0)
+
+            if (res > -1)
                 this[field] = res
             else
-                this[field] = null
+                this[field] = 0
         },
         checkMessages(domain) {
             fetch(domain + "checkMessages", {
