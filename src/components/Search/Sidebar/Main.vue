@@ -175,7 +175,6 @@ export default {
 
 <style scoped>
 .wrapper {
-	word-break: break-all;
     width: 100%;
 	height: 100%;
 	border-radius: 4px;

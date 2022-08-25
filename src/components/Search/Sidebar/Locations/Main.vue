@@ -47,7 +47,6 @@ export default {
 <style scoped>
 .block {
 	background-color: #fff;
-	word-break: break-all;
 
     width: 100%;
 	padding: 15px;

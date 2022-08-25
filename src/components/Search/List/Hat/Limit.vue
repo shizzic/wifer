@@ -58,7 +58,6 @@ export default {
 	color: #fff;
 	background-color: #5c9cd8;
 	border-radius: 3px;
-	word-break: normal;
 
 	display: flex;
 	justify-content: center;
@@ -90,7 +89,6 @@ li {
 	color: #949494;
 	list-style-type: none;
 	background-color: #fff;
-	word-break: break-all;
 
 	padding: 5px 10px;
 }

@@ -55,7 +55,7 @@ export default {
 		'messages.messages': {
 			handler() {
 				if (Math.floor(this.$refs.messages.scrollTop) === 0)
-					setTimeout(this.read, 700)
+					this.read()
 				else
 					this.countNewMessages()
 
@@ -65,8 +65,12 @@ export default {
 		}
 	},
 	beforeMount() {
-		setTimeout(this.read, 700)
+		this.read()
 		this.setDates()
+	},
+	mounted() {
+		if (this.$refs.messages)
+			this.$refs.messages.scrollTop = this.$scroll.messages
 	},
 	beforeUnmount() {
 		if (this.timeout) {
@@ -94,9 +98,10 @@ export default {
 				this.button = null
 
 			this.scrollTop = this.$refs.messages.scrollTop
+			this.$scroll.set({ field: "messages", value: this.scrollTop })
 
 			if (Math.floor(this.$refs.messages.scrollTop) === 0)
-				setTimeout(this.read, 700)
+				this.read()
 		},
 
 		read() {
@@ -106,19 +111,28 @@ export default {
 				if (this.messages.messages[message].user != this.$user.id && this.messages.messages[message].viewed)
 					break
 
-				if (this.messages.messages[message].user != this.$user.id && !this.messages.messages[message].viewed) {
-					this.messages.messages[message].viewed = true
+				if (this.messages.messages[message].user != this.$user.id && !this.messages.messages[message].viewed)
 					target = this.messages.messages[message].user
-				}
 			}
 
 			if (target) {
+				setTimeout(this.removeBlueDots, 800)
 				this.$chat.addRoom({ user: +target, viewed: true }, false, "viewed")
 				this.$chat.sendMessage({ user: +this.$user.id, target: +target, api: "view", avatar: this.$user.avatar, username: this.$user.username })
 				this.$nav.takeHearts(1, "messages")
 			}
 			
 			this.count = 0
+		},
+
+		removeBlueDots() {
+			for (let message in this.messages.messages) {
+				if (this.messages.messages[message].user != this.$user.id && this.messages.messages[message].viewed)
+					break
+
+				if (this.messages.messages[message].user != this.$user.id && !this.messages.messages[message].viewed)
+					this.messages.messages[message].viewed = true
+			}
 		},
 
 		countNewMessages() {
@@ -210,11 +224,14 @@ export default {
 	padding: 8px 18px;
 }
 
+.text-wrapper {
+	width: 100%;
+	line-height: 20px;
+}
+
 .text {
 	display: inline;
 	font-size: 18px;
-	word-break: break-all;
-	vertical-align: middle;
 }
 
 .time {
@@ -222,8 +239,8 @@ export default {
 	float: right;
 
 	position: relative;
-	right: -2px;
-	bottom: -10px;
+	right: 0;
+	bottom: -8px;
 
 	padding-left: 10px;
 }
@@ -339,12 +356,6 @@ export default {
     padding: 4px;
 }
 
-@media screen and (max-width: 763px) {
-    .message {
-		max-width: 80%;
-	}
-}
-
 .snippet {
     position: relative;
     box-shadow: 0 .4rem .8rem -.1rem rgba(0, 32, 128, .1), 0 0 0 1px #f0f2f7;
@@ -429,6 +440,12 @@ export default {
 	}
 	60%, 100% {
 		box-shadow: 10014px 0 0 -5px #b1bbbb;
+	}
+}
+
+@media screen and (max-width: 768px) {
+    .message {
+		max-width: 85%;
 	}
 }
 </style>

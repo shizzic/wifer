@@ -244,7 +244,6 @@ export default {
 	z-index: 10;
 	position: relative;
 	background-color: #2a3d39;
-	word-break: break-all;
 
 	width: 100%;
 	height: 100%;

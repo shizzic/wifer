@@ -40,7 +40,6 @@ export default {
 <style scoped>
 #hat {
     width: 100%;
-	word-break: break-all;
     
     display: flex;
     align-items: center;
@@ -102,7 +101,6 @@ export default {
 	font-size: 16px;
 	color: white;
 	border-radius: 4px;
-    word-break: normal;
     
     margin-bottom: 10px;
 }

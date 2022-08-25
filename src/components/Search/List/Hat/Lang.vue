@@ -33,8 +33,6 @@ export default {
     padding: 5px 20px;
     margin-bottom: 10px;
 
-    word-break: normal;
-
     transition: background-color .1s linear;
 }
 

@@ -141,7 +141,6 @@ li {
 	font-size: 18px;
 	list-style-type: none;
 	background-color: #fff;
-	word-break: break-all;
 
 	padding: 10px 20px;
 }

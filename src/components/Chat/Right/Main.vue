@@ -1,5 +1,5 @@
 <template>
-	<div class="right">
+	<div class="right" :class="{ show: show, hide: !show }">
 		<Header :target="target" :access="messages.access" :rooms="rooms" />
 		<template v-if="'access' in messages && messages.access.target">
 			<Messages :target="target.id" :messages="messages" :getMessages="getMessages" />
@@ -16,7 +16,7 @@ import Blur from "@/components/Chat/Right/Blur.vue"
 import Footer from "@/components/Chat/Right/Footer.vue"
 export default {
 	name: "Right",
-	props: ["target", "input", "messages", "blur", "getMessages", "rooms"],
+	props: ["target", "input", "messages", "blur", "getMessages", "rooms", "show"],
 	components: {
 		Header,
 		Messages,
@@ -36,5 +36,16 @@ export default {
 	flex-direction: column;
 	
 	overflow: hidden;
+}
+
+@media screen and (max-width: 700px) {
+    .show {
+		width: 100%;
+		min-width: 0;
+	}
+
+	.hide {
+		display: none;
+	}
 }
 </style>

@@ -122,6 +122,7 @@ export default {
                     && this.$chat.messages[this.data._id].access.target
                 )
             ) {
+                this.$chat.set({ field: "show", value: true})
                 this.$chat.set({ field: "target", value: { id: this.data._id, avatar: this.data.avatar, username: this.data.username } })
                 this.$router.push({ name: "chat" })
             } else

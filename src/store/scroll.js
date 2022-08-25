@@ -5,7 +5,9 @@ export const scrollJS = defineStore("scroll", {
     state: () =>({
         search: useStorage("search", 0),
         sidebar: useStorage("sidebar", 0),
-        heart: 0
+        heart: 0,
+        rooms: 0,
+        messages: 0
     }),
     actions:{
         set(data) {

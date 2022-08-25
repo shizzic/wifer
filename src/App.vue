@@ -47,7 +47,8 @@ export default {
 				this.$nav.checkMessages(this.$domain)
 				this.$chat.startSocket(this.$domainName)
 				this.$user.checkAvatar(this.$domain)
-			}
+			} else
+				this.$chat.closeSocket()
 		}
 	}
 }
@@ -76,7 +77,6 @@ export default {
 	
 #app {
 	position: relative;
-	word-break: break-word;
 }
 
 #wrap {

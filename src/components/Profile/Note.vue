@@ -1,9 +1,9 @@
 <template>
 	<div id="note" :class="{ shown: show, closed: !show }"  v-click-outside="close" @mousedown="() => { up = true }" @mouseup="() => { up = null }">
-        <textarea maxlength="150" v-model="checked.like.text" @click="show = true" @input="autosize($event)" />
+        <textarea class="scroll" maxlength="150" v-model="checked.like.text" @click="show = true" @input="autosize($event)" />
         <div class="buttons">
-            <button @click="show = null">{{ lang.cancel[l] }}</button>
-            <button @click="save">{{ lang.save[l] }}</button>
+            <button @click="show = null"><img src="/cancel.webp" /></button>
+            <button @click="save"><img src="/save.webp" /></button>
         </div>
     </div>
 </template>
@@ -11,7 +11,7 @@
 <script scoped>
 export default {
 	name: "Note",
-    props: ["checked", "text", "target", "lang", "l"],
+    props: ["checked", "text", "target"],
     data() {
 		return {
             show: null,
@@ -57,12 +57,13 @@ export default {
 <style scoped>
 #note {
     border-radius: 8px;
-
-    display: flex;
-    flex-direction: column;
+    width: 400px;
 
     position: absolute;
     top: 200px;
+
+    display: flex;
+    flex-direction: column;
 
     transition: left .2s linear;
 }
@@ -72,8 +73,9 @@ textarea {
     border: none;
     color: #222;
 	font-size: 24px;
-	width: 400px;
+    width: 100%;
     min-height: 200px;
+    max-height: 350px;
 	line-height: 40px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -88,7 +90,8 @@ textarea {
 
     padding: 5px 20px;
     resize: none;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .buttons {
@@ -114,15 +117,16 @@ span {
 
 button {
 	cursor: pointer;
-	font-weight: 700;
-	font-size: 20px;
-	color: #fff;
 	text-shadow: 0px -1px 0px #000000;
-	border-radius: 8px;
+	border-radius: 6px;
 	background-color: #62add6;
 
-    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+
+    padding: 4px 15px;
 }
+
 button:active, button:focus {
 	zoom: 1;
 	filter: alpha(opacity=80);
@@ -130,7 +134,12 @@ button:active, button:focus {
 }
 
 button:first-of-type {
-    margin-right: 25px;
+    margin-right: 20px;
+}
+
+img {
+    width: 24px;
+    filter: invert(100%) sepia(0%) saturate(7475%) hue-rotate(91deg) brightness(94%) contrast(107%);
 }
 
 .shown {
@@ -149,15 +158,12 @@ button:first-of-type {
 
 @media screen and (max-width: 420px) {
     #note {
+        width: 230px;
         top: 125px;
     }
 
     .closed {
-        left: -260px;
-    }
-
-    textarea {
-        width: 270px;
+        left: -220px;
     }
 }
 </style>

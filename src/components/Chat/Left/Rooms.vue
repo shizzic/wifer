@@ -46,13 +46,21 @@ export default {
 			timeout: null
 		}
 	},
+    mounted() {
+        if (this.$refs.rooms)
+			this.$refs.rooms.scrollTop = this.$scroll.rooms
+    },
     methods: {
         set(user) {
+            this.$scroll.set({ field: "messages", value: 0 })
+            this.$chat.set({ field: "show", value: true})
+            
             if (!this.target || this.target && user._id != this.target.id)
                 this.$chat.set({ field: "target", value: { id: +user._id, avatar: user.avatar, username: user.username } })
         },
 
         scroll() {
+            this.$scroll.set({ field: "rooms", value: this.$refs.rooms.scrollTop })
 			let sum = Math.abs(this.$refs.rooms.scrollTop) + this.$refs.rooms.offsetHeight
 			let scrolled = this.$refs.rooms.scrollHeight - sum
 
@@ -227,7 +235,7 @@ export default {
     border-radius: 50%;
     background-color: #5181b8;
 
-    padding: 5px;
+    padding: 4px;
     margin-left: 10px;
 }
 

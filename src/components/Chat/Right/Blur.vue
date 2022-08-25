@@ -7,7 +7,7 @@
 <script scoped>
 export default {
 	name: "Blur",
-    props: ["lang"]
+    props: ["lang", "show"]
 }
 </script>
 

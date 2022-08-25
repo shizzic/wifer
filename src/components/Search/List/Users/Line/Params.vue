@@ -44,7 +44,6 @@ export default {
 span {
     font-size: 18px;
     color: #000;
-    word-break: normal;
 
     display: inline-block;
 }

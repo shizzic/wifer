@@ -42,6 +42,8 @@ export default {
     },
     methods: {
         type(value) {
+            this.text = value
+
             if (!this.typing && value.length > 0) {
                 this.typing = true
                 this.sendTyping(true)
@@ -88,16 +90,21 @@ export default {
         },
 
         enter(e) {
-            if (e.keyCode == 13 && !e.shiftKey) {
+            if (e.view.outerWidth > 992 && e.keyCode == 13 && !e.shiftKey) {
                 e.preventDefault()
                 this.send()
             }
+
         },
 
         autosize(e) {
             setTimeout(function() {
-                e.style.height = "5px"
-                e.style.height = (e.scrollHeight) + "px"
+                if (e.value === "")
+                    e.style.height = "40px"
+                else {
+                    e.style.height = "5px"
+                    e.style.height = (e.scrollHeight -1) + "px"
+                }
             }, 0)
         }
     }
@@ -115,23 +122,30 @@ export default {
 }
 
 textarea {
-    color: #5C5C5C;
+    font-family: 'PT Sans';
+    font-weight: 400;
     font-size: 18px;
     width: 100%;
-    letter-spacing: normal;
-    min-height: 40px;
-    height: 40px;
+    letter-spacing: 1px;
+    min-height: 42px;
+    height: 42px;
     max-height: 150px;
     outline: none;
     border: 1px solid #b0b5b8;
     border-radius: 20px;
     resize: none;
 
-    padding: 8px 20px 10px;
+    padding: 10px 20px;
     margin: 10px 0;
     
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+textarea::placeholder {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 img {

@@ -3,6 +3,7 @@ import { navJS } from "@/store/nav"
 
 export const chatJS = defineStore("chat", {
     state: () =>({
+        show: null,
         socket: null,
         target: null,
         messages: {},
@@ -29,6 +30,13 @@ export const chatJS = defineStore("chat", {
                     console.log("closed")
                 }
             }
+        },
+
+        closeSocket() {
+            if (this.socket)
+                this.socket.close()
+
+            this.socket = null
         },
 
         onMessage(data) {

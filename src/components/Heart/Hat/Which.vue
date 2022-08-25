@@ -56,7 +56,6 @@ export default {
     color: #5C5C5C;
     background-color: #E3E3E3;
     border-radius: 40px;
-    word-break: normal;
 
     display: flex;
     align-items: center;

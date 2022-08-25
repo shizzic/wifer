@@ -2,84 +2,86 @@
 	<div class="images" :id="'gallery'" 
         :class="{ expand : data && (data.public > 0 || (data.private > 0 && $user.id && (data._id == $user.id || data._id != $user.id && priv.access)) || data._id == $user.id) }"
     >
-        <div v-show="opened && data._id == $user.id" class="dots" @click="showButtons" v-click-outside="() => { buttons = null }">
-            <div v-for="(_, index) in 3" :key="index" class="dot" />
-        </div>
+        <div class="images-wrapper">
+            <div v-show="opened && data._id == $user.id" class="dots" @click="showButtons" v-click-outside="() => { buttons = null }">
+                <div v-for="(_, index) in 3" :key="index" class="dot" />
+            </div>
 
-        <div v-show="buttons" class="buttons">
-            <img v-show="params.mode !== null" class="button" src="/profile.webp" @click="makeProfile" />
-            <img v-show="params.mode !== true && params.mode !== null" class="button" src="/public.webp" @click="dir('public')" />
-            <img v-show="params.mode !== false" class="button" src="/private.webp" @click="dir('private')" />
-            <img class="button" src="/delete.webp" @click="deleteImg" />
-        </div>
+            <div v-show="buttons" class="buttons">
+                <img v-show="params.mode !== null" class="button" src="/profile.webp" @click="makeProfile" />
+                <img v-show="params.mode !== true && params.mode !== null" class="button" src="/public.webp" @click="dir('public')" />
+                <img v-show="params.mode !== false" class="button" src="/private.webp" @click="dir('private')" />
+                <img class="button" src="/delete.webp" @click="deleteImg" />
+            </div>
 
-        <input type="file" style="display: none;" ref="input" @change="load($event)" accept="image/*">
-        <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" @clear="clear" />
+            <input type="file" style="display: none;" ref="input" @change="load($event)" accept="image/*">
+            <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" @clear="clear" />
 
-        <div v-show="$user.id && data._id == $user.id" class="image" :style="'border: 1px solid; margin-right: 20px; margin-bottom: 20px;'" 
-            @click="$refs.input.click()"
-        >
-            <div class="plus" />
-        </div>
-
-        <div v-if="data.avatar === true" class="image" style="display: none;">
-            <a
-                ref="avatar"
-                :href="$ip + $route.params.id + '/avatar.webp?' + Date.now()"
-                target="_blank"
-                rel="noreferrer"
+            <div v-show="$user.id && data._id == $user.id" class="image file" style="border: 1px solid;" 
+                @click="$refs.input.click()"
             >
-                <img :src="$ip + $route.params.id + '/avatar.webp?' + Date.now()" alt="" />
-            </a>
-        </div>
-        
-        <div v-for="(num, index) in data.public" :key="index" class="image-wrap">
-            <a
-                :href="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()"
-                target="_blank"
-                rel="noreferrer"
-            >
-                <img :src="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()" alt="" class="image" />
-            </a>
-            
-            <div class="icon-wrap"><img src="/public.webp" alt="" class="icon" /></div>
-        </div>
+                <div class="plus" />
+            </div>
 
-        <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && priv.access)">
-            <div v-for="(num, index) in data.private" :key="index" class="image-wrap">
+            <div v-if="data.avatar === true" class="image" style="display: none;">
                 <a
-                    :href="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()"
+                    ref="avatar"
+                    :href="$ip + $route.params.id + '/avatar.webp?' + Date.now()"
                     target="_blank"
                     rel="noreferrer"
                 >
-                    <img :src="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()" alt="" class="image" />
+                    <img :src="$ip + $route.params.id + '/avatar.webp?' + Date.now()" alt="" />
                 </a>
-
-                <div class="icon-wrap"><img src="/private.webp" alt="" class="icon" /></div>
             </div>
-        </template>
-
-        <template v-else>
-            <router-link v-if="data.private > 0 && (!$user.id || $user.id && $user.id < 1)" 
-                class="image" style="margin-right: 20px; margin-bottom: 20px;"
-                :to="{ name: 'signin' }"
-            >
-                <div class="private">
-                    <span>{{ data.private }}</span>
-                    <img src="/private.webp" />
-                </div>
-            </router-link>
-
-            <div v-else-if="data.private > 0 && ($user.id && $user.id > 0 && !priv.access)"
-                class="image" style="margin-right: 20px; margin-bottom: 20px;"
-                @click="$emit('modal', 'private')"
-            >
-                <div class="private">
-                    <span>{{ data.private }}</span>
-                    <img src="/private.webp" />
-                </div>
+            
+            <div v-for="(num, index) in data.public" :key="index" class="image-wrap">
+                <a
+                    :href="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <img :src="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()" alt="" class="image" />
+                </a>
+                
+                <div class="icon-wrap"><img src="/public.webp" alt="" class="icon" /></div>
             </div>
-        </template>
+
+            <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && priv.access)">
+                <div v-for="(num, index) in data.private" :key="index" class="image-wrap">
+                    <a
+                        :href="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <img :src="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()" alt="" class="image" />
+                    </a>
+
+                    <div class="icon-wrap"><img src="/private.webp" alt="" class="icon" /></div>
+                </div>
+            </template>
+
+            <template v-else>
+                <router-link v-if="data.private > 0 && (!$user.id || $user.id && $user.id < 1)" 
+                    class="image" style="margin-right: 20px; margin-bottom: 20px;"
+                    :to="{ name: 'signin' }"
+                >
+                    <div class="private">
+                        <span>{{ data.private }}</span>
+                        <img src="/private.webp" />
+                    </div>
+                </router-link>
+
+                <div v-else-if="data.private > 0 && ($user.id && $user.id > 0 && !priv.access)"
+                    class="image" style="margin-right: 20px; margin-bottom: 20px;"
+                    @click="$emit('modal', 'private')"
+                >
+                    <div class="private">
+                        <span>{{ data.private }}</span>
+                        <img src="/private.webp" />
+                    </div>
+                </div>
+            </template>
+        </div>
     </div>
 </template>
 
@@ -362,6 +364,14 @@ export default {
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 1);
 }
 
+.images-wrapper {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .expand {
     padding-top: 30px;
     padding-left: 30px;
@@ -374,6 +384,11 @@ export default {
     position: relative;
     border-radius: 8px;
 
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.file {
     margin-right: 20px;
     margin-bottom: 20px;
 }
@@ -394,9 +409,74 @@ export default {
     align-items: center;
 }
 
-@media only screen and (max-width : 644px) {
-    .images {
-        justify-content: center;
+@media only screen and (max-width : 584px) {
+    .image {
+        width: 130px;
+        min-width: 130px;
+        height: 150px;
+        min-height: 150px;
+    }
+}
+
+@media only screen and (max-width : 520px) {
+    .image {
+        width: 175px;
+        min-width: 175px;
+        height: 200px;
+        min-height: 200px;
+    }
+}
+
+@media only screen and (max-width : 460px) {
+    .image {
+        width: 150px;
+        min-width: 150px;
+        height: 175px;
+        min-height: 175px;
+    }
+}
+
+@media only screen and (max-width : 410px) {
+    .image {
+        width: 130px;
+        min-width: 130px;
+        height: 150px;
+        min-height: 150px;
+    }
+}
+
+@media only screen and (max-width : 370px) {
+    .expand {
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-bottom: 0;
+        padding-right: 0;
+    }
+
+    .image-wrap {
+        margin-right: 15px;
+        margin-bottom: 15px;
+    }
+
+    .file {
+        margin-right: 15px;
+        margin-bottom: 15px;
+    }
+
+    .image {
+        width: 110px;
+        min-width: 110px;
+        height: 140px;
+        min-height: 140px;
+    }
+}
+
+@media only screen and (max-width : 295px) {    
+    .image {
+        width: 150px;
+        min-width: 150px;
+        height: 175px;
+        min-height: 175px;
     }
 }
 

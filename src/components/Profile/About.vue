@@ -125,6 +125,5 @@ img {
 span {
 	font-size: 18px;
 	color: #4d4d4d;
-	word-break: break-all;
 }
 </style>

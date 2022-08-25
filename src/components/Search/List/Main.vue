@@ -65,9 +65,7 @@ export default {
 <style scoped>
 .wrapper {
 	background-color: #fff;
-	word-break: break-all;
     border-radius: 4px;
-
     width: 100%;
 	height: 100%;
 	

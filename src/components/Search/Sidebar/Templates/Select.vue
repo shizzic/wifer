@@ -94,7 +94,6 @@ h3 {
 	color: #fff;
 	background-color: #5c9cd8;
 	border-radius: 4px;
-	word-break: break-all;
 
 	padding: 11px 22px;
 	padding-right: 45px;
@@ -176,7 +175,6 @@ li {
 	color: #949494;
 	list-style-type: none;
 	background-color: #fff;
-	word-break: break-all;
 
 	padding: 10px 20px;
 }

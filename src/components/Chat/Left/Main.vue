@@ -1,24 +1,19 @@
 <template>
-	<div class="left">
-		<template v-if="order.length > 0">
-			<Hat :search="search" />
-			<Rooms :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" />
-		</template>
-		<None v-else :lang="chats" />
+	<div class="left" :class="{ show: !show, hide: show }">
+		<Hat :search="search" />
+		<Rooms :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" />
 	</div>
 </template>
 
 <script scoped>
 import Hat from "@/components/Chat/Left/Hat.vue"
 import Rooms from "@/components/Chat/Left/Rooms.vue"
-import None from "@/components/Chat/Left/None.vue"
 export default {
 	name: "Left",
-	props: ["search", "chats", "order", "rooms", "target", "getRooms"],
+	props: ["search", "order", "rooms", "target", "getRooms", "show"],
 	components: {
 		Hat,
-		Rooms,
-		None
+		Rooms
 	}
 }
 </script>
@@ -34,5 +29,16 @@ export default {
 	flex-direction: column;
 	
 	overflow: hidden;
+}
+
+@media screen and (max-width: 700px) {
+    .show {
+		width: 100%;
+		min-width: 0;
+	}
+
+	.hide {
+		display: none;
+	}
 }
 </style>

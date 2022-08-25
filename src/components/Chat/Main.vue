@@ -1,10 +1,13 @@
 <template>
 	<div class="wrap">
 		<div v-if="socket" id="chat">
-			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" />
+			<Left v-if="order.length > 0" :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms"
+			:show="show" />
+			<NoneRooms v-else :lang="chats[l]" :show="show" />
+
 			<Right v-if="target && target.id in messages" :target="target" :input="input[l]" :messages="messages[target.id]" 
-			:blur="blur[l]" :getMessages="getMessages" :rooms="rooms" />
-			<None v-else :lang="none[l]" />
+			:blur="blur[l]" :getMessages="getMessages" :rooms="rooms" :show="show" />
+			<NoneMessages v-else :lang="none[l]" :show="show" />
 		</div>
 	</div>
 </template>
@@ -12,7 +15,8 @@
 <script scoped>
 import Left from "@/components/Chat/Left/Main.vue"
 import Right from "@/components/Chat/Right/Main.vue"
-import None from "@/components/Chat/Right/None.vue"
+import NoneRooms from "@/components/Chat/Left/None.vue"
+import NoneMessages from "@/components/Chat/Right/None.vue"
 import { chatJS } from "@/store/chat"
 export default {
 	name: "Chat",
@@ -20,7 +24,8 @@ export default {
 	components: {
 		Left,
 		Right,
-		None
+		NoneRooms,
+		NoneMessages
 	},
 	setup() {
 		const none   = chatJS().none
@@ -37,7 +42,13 @@ export default {
 			blur
 		}
 	},
+	data() {
+		return {
+			interval: null
+		}
+	},
 	computed: {
+		show() { return this.$chat.show },
 		socket() { return this.$chat.socket },
 		target() { return this.$chat.target },
 		order() { return this.$chat.order },
@@ -56,6 +67,11 @@ export default {
 			this.getMessages()
 
 		this.getRooms()
+		this.interval = setInterval(this.checkUsersOnline, 1000 * 60 * 3)
+	},
+	beforeUnmount() {
+		clearInterval(this.interval)
+		this.interval = null
 	},
 	methods: {
 		getRooms() {
@@ -155,7 +171,24 @@ export default {
 						}
 					})
 			}
-		}
+		},
+
+		checkUsersOnline() {
+			fetch(this.$domain + "checkOnlineInChat", {
+				method: "POST",
+				credentials: "include",
+				body: JSON.stringify({
+					nin: this.order
+				})
+			})
+				.then(data => { return data.json() })
+				.then(data => {
+					if (data)
+						for (let user of data)
+							if (user._id in this.rooms)
+								this.rooms[user._id].online = user.online
+				})
+	}
 	}
 }
 </script>
@@ -178,5 +211,17 @@ export default {
 
 	display: flex;
 	overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    .wrap {
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .wrap {
+        padding: 10px;
+    }
 }
 </style>

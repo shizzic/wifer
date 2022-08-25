@@ -19,11 +19,7 @@ export default {
 
 <style scoped>
 .block {
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  	-webkit-tap-highlight-color: transparent;
 	background-color: #fff;
-	word-break: break-all;
-
     width: 100%;
 	min-width: 300px;
 

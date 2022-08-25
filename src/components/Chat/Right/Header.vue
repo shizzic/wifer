@@ -1,5 +1,6 @@
 <template>
 	<div class="header">
+        <img src="/back.webp" class="back" @click="$chat.set({ field: 'show', value: null })" />
         <div class="elem pointer" @click="$router.push({ name: 'profile', params: { id : target.id } })" style="width: 100%;">
             <div class="avatar-wrapper">
                 <img v-if="target.avatar" :src="$ip + target.id + '/avatar.webp?' + Date.now()" class="avatar" />
@@ -137,5 +138,19 @@ span {
 
 .pointer {
     cursor: pointer;
+}
+
+.back {
+    cursor: pointer;
+    width: 34px;
+
+    display: none;
+    margin-left: 15px;
+}
+
+@media screen and (max-width: 700px) {
+    .back {
+        display: block;
+    }
 }
 </style>

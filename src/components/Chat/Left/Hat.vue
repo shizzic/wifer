@@ -1,20 +1,17 @@
 <template>
 	<div class="hat">
 		<div class="search">
-            <img src="/search.webp" />
+            <img src="/search.webp" class="icon" />
             <input :placeholder="search" />
         </div>
+        <img src="/back.webp" class="back" @click="$chat.set({ field: 'show', value: true })" />
 	</div>
 </template>
 
 <script scoped>
 export default {
 	name: "Hat",
-    props: ["search"],
-	data() {
-		return {
-		}
-	}
+    props: ["search"]
 }
 </script>
 
@@ -22,11 +19,15 @@ export default {
 .hat {
 	width: 100%;
 
-    padding: 15px;
+    display: flex;
+    align-items: center;
+    padding: 15px 15px 10px;
+
 	overflow: hidden;
 }
 
 .search {
+    width: 100%;
     border: 1px solid #b0b5b8;
     border-radius: 20px;
 
@@ -36,7 +37,7 @@ export default {
     padding-left: 10px;
 }
 
-img {
+.icon {
     width: 16px;
     filter: invert(86%) sepia(10%) saturate(117%) hue-rotate(159deg) brightness(85%) contrast(84%);
 }
@@ -51,5 +52,20 @@ input {
     width: 100%;
 
     padding: 10px;
+}
+
+.back {
+    cursor: pointer;
+    width: 34px;
+    transform: rotate(180deg);
+
+    display: none;
+    margin-left: 15px;
+}
+
+@media screen and (max-width: 700px) {
+    .back {
+        display: block;
+    }
 }
 </style>
