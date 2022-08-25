@@ -2,7 +2,7 @@
 	<div class="hat">
 		<div class="search">
             <img src="/search.webp" class="icon" />
-            <input :placeholder="search" />
+            <input maxlength="20" v-model="username" :placeholder="search" @input="input($event.target.value)" />
         </div>
         <img src="/back.webp" class="back" @click="$chat.set({ field: 'show', value: true })" />
 	</div>
@@ -11,7 +11,47 @@
 <script scoped>
 export default {
 	name: "Hat",
-    props: ["search"]
+    props: ["search", "getRooms"],
+    data() {
+		return {
+			username: "",
+            timer: null
+		}
+	},
+    mounted() {
+        this.username = this.$chat.lastUsername
+    },
+    beforeUnmount() {
+        this.clearTimer()
+    },
+    methods: {
+        input(value) {
+            this.clearTimer()
+
+            if (value === "")
+                this.timer = setTimeout(this.getByOrder, 1000)
+            else
+                if (value != this.$chat.lastUsername)
+                    this.timer = setTimeout(this.getByUsername, 1000)
+        },
+
+        getByOrder() {
+            this.$emit("top")
+            this.$chat.set({ field: "roomsLeft", value: true })
+            this.getRooms()
+        },
+
+        getByUsername() {
+            this.$emit("top")
+            this.$chat.set({ field: "roomsLeft", value: true })
+            this.getRooms(true, this.username)
+        },
+
+        clearTimer() {
+            clearTimeout(this.timer)
+            this.timer = null
+        }
+    }
 }
 </script>
 

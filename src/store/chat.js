@@ -8,6 +8,8 @@ export const chatJS = defineStore("chat", {
         target: null,
         messages: {},
 
+        lastUsername: "",
+        lastSearch: false,
         roomsLeft: true,
         order: [],
         rooms: {}

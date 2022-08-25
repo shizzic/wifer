@@ -1,13 +1,14 @@
 <template>
 	<div class="wrap">
 		<div v-if="socket" id="chat">
-			<Left v-if="order.length > 0" :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms"
+			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" 
 			:show="show" />
-			<NoneRooms v-else :lang="chats[l]" :show="show" />
 
-			<Right v-if="target && target.id in messages" :target="target" :input="input[l]" :messages="messages[target.id]" 
-			:blur="blur[l]" :getMessages="getMessages" :rooms="rooms" :show="show" />
-			<NoneMessages v-else :lang="none[l]" :show="show" />
+			<Right v-if="target && target.id in messages"
+				:target="target" :input="input[l]" :messages="messages[target.id]" 
+				:blur="blur[l]" :getMessages="getMessages" :rooms="rooms" :show="show"
+			/>
+			<None v-else :lang="none[l]" :show="show" />
 		</div>
 	</div>
 </template>
@@ -15,8 +16,7 @@
 <script scoped>
 import Left from "@/components/Chat/Left/Main.vue"
 import Right from "@/components/Chat/Right/Main.vue"
-import NoneRooms from "@/components/Chat/Left/None.vue"
-import NoneMessages from "@/components/Chat/Right/None.vue"
+import None from "@/components/Chat/Right/None.vue"
 import { chatJS } from "@/store/chat"
 export default {
 	name: "Chat",
@@ -24,8 +24,7 @@ export default {
 	components: {
 		Left,
 		Right,
-		NoneRooms,
-		NoneMessages
+		None
 	},
 	setup() {
 		const none   = chatJS().none
@@ -66,7 +65,7 @@ export default {
 		if (this.target)
 			this.getMessages()
 
-		this.getRooms()
+		this.getRooms(this.$chat.lastSearch, this.$chat.lastUsername)
 		this.interval = setInterval(this.checkUsersOnline, 1000 * 60 * 3)
 	},
 	beforeUnmount() {
@@ -74,7 +73,18 @@ export default {
 		this.interval = null
 	},
 	methods: {
-		getRooms() {
+		getRooms(byUsername = false, username = "") {
+			let order = this.order
+
+			if (byUsername !== this.$chat.lastSearch) {
+				this.$chat.set({ field: "lastSearch", value: byUsername })
+				order = []
+			} else
+				if (username != this.$chat.lastUsername)
+					order = []
+
+			this.$chat.set({ field: "lastUsername", value: username })
+
 			if (this.roomsLeft) {
 				this.$chat.set({ field: "roomsLeft", value: null })
 
@@ -82,27 +92,42 @@ export default {
 					method: "POST",
 					credentials: "include",
 					body: JSON.stringify({
-						nin: this.order
+						nin: order,
+						byUsername: byUsername,
+						username: username
 					})
 				})
 					.then(data => { return data.json() })
 					.then(data => {
 						if (data) {
-							if (data.ids.length === 25)
+							if (data.rooms && data.rooms.length === 25)
 								this.$chat.set({ field: "roomsLeft", value: true })
-
-							let order = this.order
-
-							for (let id of data.ids) {
-								let index = order.indexOf(id)
-
-								if (index === -1)
-									order.push(id)
-							}
-
-							let rooms = this.rooms
-
+							
 							if (data.rooms && data.users) {
+								let rooms = this.rooms
+
+								if (byUsername)
+									for (let room of data.rooms) {
+										let id
+
+										if (room.user != this.$user.id)
+											id = room.user
+										else
+											id = room.target
+										
+										let index = order.indexOf(id)
+
+										if (index === -1)
+											order.push(id)
+									}
+								else
+									for (let id of data.ids) {
+										let index = order.indexOf(id)
+
+										if (index === -1)
+											order.push(id)
+									}
+
 								for (let user of data.users)
 									rooms[user._id] = user
 
@@ -117,10 +142,10 @@ export default {
 									if (room.target in rooms)
 										rooms[room.target] = Object.assign({}, rooms[room.target], room)
 								}
-							}
 
-							this.$chat.set({ field: "rooms", value: rooms })
-							this.$chat.set({ field: "order", value: order })
+								this.$chat.set({ field: "rooms", value: rooms })
+								this.$chat.set({ field: "order", value: order })
+							}
 						}
 				})
 			}

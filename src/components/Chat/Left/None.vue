@@ -1,6 +1,5 @@
 <template>
-	<div class="none" :class="{ show: !show, hide: show }">
-        <img src="/back.webp" class="back" @click="$chat.set({ field: 'show', value: true })" />
+	<div class="none">
         <span>{{ lang }}</span>
 	</div>
 </template>
@@ -8,17 +7,14 @@
 <script scoped>
 export default {
 	name: "None",
-    props: ["lang", "show"]
+    props: ["lang"]
 }
 </script>
 
 <style scoped>
 .none {
-    position: relative;
-	width: 25%;
-	min-width: 300px;
+	width: 100%;
 	height: 100%;
-    border-right: 1px solid #b0b5b8;
 
     display: flex;
     justify-content: center;
@@ -34,32 +30,5 @@ span {
     font-size: 18px;
     font-weight: 700;
     text-align: center;
-}
-
-img {
-    cursor: pointer;
-    width: 38.4px;
-    transform: rotate(180deg);
-
-    position: absolute;
-    right: 15px;
-    top: 15px;
-
-    display: none;
-}
-
-@media screen and (max-width: 700px) {
-    .show {
-		width: 100%;
-		min-width: 0;
-	}
-
-	.hide {
-		display: none;
-	}
-
-    .back {
-        display: block;
-    }
 }
 </style>

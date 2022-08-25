@@ -40,12 +40,18 @@
 <script scoped>
 export default {
 	name: "Rooms",
-	props: ["order", "rooms", "target", "getRooms"],
+	props: ["order", "rooms", "target", "getRooms", "changeTop"],
     data() {
 		return {
 			timeout: null
 		}
 	},
+    watch: {
+        changeTop() {
+			if (this.$refs.rooms)
+                this.$refs.rooms.scrollTop = 0
+		}
+    },
     mounted() {
         if (this.$refs.rooms)
 			this.$refs.rooms.scrollTop = this.$scroll.rooms
@@ -70,7 +76,7 @@ export default {
 					this.timeout = null
 				}
 				
-				this.timeout = setTimeout(this.getRooms, 50)
+				this.timeout = setTimeout(this.getRooms(this.$chat.lastSearch, this.$chat.lastUsername), 50)
 			}
 		},
 
