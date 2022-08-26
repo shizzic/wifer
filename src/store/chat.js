@@ -56,7 +56,16 @@ export const chatJS = defineStore("chat", {
                     this.rooms[data.user].typing = false
                     this.rooms[data.user].viewed = false
                     this.rooms[data.user].user   = data.user
-                    this.changeOrder(data.user)
+                    
+                    if (!this.lastSearch)
+                        this.changeOrder(data.user)
+                    else {
+                        let reg = new RegExp(this.lastUsername, "gi")
+
+                        if (data.username.match(reg))
+                            this.changeOrder(data.user)
+                    }
+
                     break
                 case "view":
                     for (let message in this.messages[data.user].messages) {
