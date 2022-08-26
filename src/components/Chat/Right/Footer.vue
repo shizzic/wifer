@@ -4,14 +4,20 @@
             class="hideScroll" v-model="text" maxlength="1500" :placeholder="input" ref="write"
             @input="autosize($event.target); type($event.target.value);" @keypress.enter="enter"
         />
+        <V3Emoji size="small" @click-emoji="text += $event" />
         <img src="/send.webp" :class="{ active : text.length > 0 }" @click="send" />
 	</div>
 </template>
 
 <script scoped>
+import V3Emoji from "vue3-emoji"
+import "vue3-emoji/dist/style.css"
 export default {
 	name: "Footer",
     props: ["input", "target"],
+    components: {
+        V3Emoji
+    },
 	data() {
 		return {
             text: "",
@@ -113,6 +119,48 @@ export default {
 }
 </script>
 
+<style>
+#EmojiItem {
+    width: 40px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    padding-bottom: 12px;
+    margin-left: 10px;
+}
+
+.pollup {
+    position: absolute;
+    right: -65px;
+    bottom: 50px;
+    z-index: 5;
+    transition: all ease .5s;
+    color: var(--V3Emoji-fontColor);
+    background-color: var(--V3Emoji-backgroundColor);
+    box-shadow: 3px 3px 10px var(--V3Emoji-shadowColor);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.emoji-container-open-btn {
+    font-size: 30px;
+}
+
+.pollup .emoji-container-item {
+    padding: 7px 0;
+
+    font-size: 18px;
+}
+
+@media screen and (max-width: 312px) {
+    .pollup {
+        left: -150px;
+    }
+}
+</style>
+
 <style scoped>
 .footer {
 	width: 100%;
@@ -154,7 +202,7 @@ img {
     width: 36px;
     filter: invert(75%) sepia(5%) saturate(220%) hue-rotate(159deg) brightness(95%) contrast(92%);
 
-    margin-left: 20px;
+    margin-left: 12px;
     margin-bottom: 12px;
 }
 

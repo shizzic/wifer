@@ -23,8 +23,12 @@ export default {
 		}
     },
 	beforeMount() {
-		if (this.$route.params.code.length === 6)
+		if (Number.isInteger(this.$route.params.code) && this.$route.params.code.length === 6)
 			this.check()
+		else {
+			this.$toast.error(this.response[this.l][0])
+			this.$router.push({ name: "search" })
+		}
 	},
 	methods: {
 		check() {
