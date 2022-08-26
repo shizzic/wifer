@@ -4,7 +4,7 @@
             class="hideScroll" v-model="text" maxlength="1500" :placeholder="input" ref="write"
             @input="autosize($event.target); type($event.target.value);" @keypress.enter="enter"
         />
-        <V3Emoji size="small" @click-emoji="text += $event" />
+        <V3Emoji size="small" :recent="true" @click-emoji="text += $event" />
         <img src="/send.webp" :class="{ active : text.length > 0 }" @click="send" />
 	</div>
 </template>
@@ -142,6 +142,15 @@ export default {
     box-shadow: 3px 3px 10px var(--V3Emoji-shadowColor);
     border-radius: 15px;
     overflow: hidden;
+}
+
+.pollup .tab-name {
+    display: none;
+}
+
+.pollup .emoji-container {
+    height: auto;
+    max-height: 150px;
 }
 
 .emoji-container-open-btn {
