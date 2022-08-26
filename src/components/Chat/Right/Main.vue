@@ -2,7 +2,7 @@
 	<div class="right" :class="{ show: show, hide: !show }">
 		<Header :target="target" :access="messages.access" :rooms="rooms" />
 		<template v-if="'access' in messages && messages.access.target">
-			<Messages :target="target.id" :messages="messages" :getMessages="getMessages" />
+			<Messages :target="target.id" :messages="messages" :getMessages="getMessages" :show="show" />
 			<Footer :input="input" :target="target.id" />
 		</template>
 		<Blur v-else :lang="blur" />

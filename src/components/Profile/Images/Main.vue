@@ -365,9 +365,6 @@ export default {
 }
 
 .images-wrapper {
-    width: 100%;
-    height: 100%;
-
     display: flex;
     flex-wrap: wrap;
 }
@@ -410,6 +407,10 @@ export default {
 }
 
 @media only screen and (max-width : 584px) {
+    .images {
+        justify-content: center;
+    }
+
     .image {
         width: 130px;
         min-width: 130px;

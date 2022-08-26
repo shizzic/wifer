@@ -36,7 +36,7 @@
 <script scoped>
 export default {
 	name: "Messages",
-	props: ["target", "messages", "getMessages"],
+	props: ["target", "messages", "getMessages", "show"],
 	data() {
 		return {
 			button: null,
@@ -52,12 +52,24 @@ export default {
 			this.$refs.messages.scrollTop = 0
 		},
 
-		'messages.messages': {
-			handler() {
+		show(n) {
+			if (n) {
+				setTimeout(this.getScroll, 10)
+
 				if (Math.floor(this.$refs.messages.scrollTop) === 0)
 					this.read()
 				else
 					this.countNewMessages()
+			}
+		},
+
+		'messages.messages': {
+			handler() {
+				if (window.innerWidth > 700 || window.innerWidth < 701 && this.show)
+					if (Math.floor(this.$refs.messages.scrollTop) === 0)
+						this.read()
+					else
+						this.countNewMessages()
 
 				this.setDates()
 			},
@@ -69,8 +81,7 @@ export default {
 		this.setDates()
 	},
 	mounted() {
-		if (this.$refs.messages)
-			this.$refs.messages.scrollTop = this.$scroll.messages
+		this.getScroll()
 	},
 	beforeUnmount() {
 		if (this.timeout) {
@@ -102,6 +113,11 @@ export default {
 
 			if (Math.floor(this.$refs.messages.scrollTop) === 0)
 				this.read()
+		},
+
+		getScroll() {
+			if (this.$refs.messages)
+				this.$refs.messages.scrollTop = this.$scroll.messages
 		},
 
 		read() {

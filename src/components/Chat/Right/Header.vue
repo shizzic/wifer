@@ -145,12 +145,16 @@ span {
     width: 34px;
 
     display: none;
-    margin-left: 15px;
+    margin: 0 15px;
 }
 
 @media screen and (max-width: 700px) {
     .back {
         display: block;
+    }
+
+    .avatar-wrapper {
+        margin-left: 0;
     }
 }
 </style>

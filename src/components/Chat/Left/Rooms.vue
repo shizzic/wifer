@@ -58,11 +58,12 @@ export default {
     },
     methods: {
         set(user) {
-            this.$scroll.set({ field: "messages", value: 0 })
             this.$chat.set({ field: "show", value: true})
             
-            if (!this.target || this.target && user._id != this.target.id)
+            if (!this.target || this.target && user._id != this.target.id) {
+                this.$scroll.set({ field: "messages", value: 0 })
                 this.$chat.set({ field: "target", value: { id: +user._id, avatar: user.avatar, username: user.username } })
+            }
         },
 
         scroll() {
