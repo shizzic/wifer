@@ -289,6 +289,12 @@ export default {
     }
 }
 
+@media screen and (max-width: 450px) {
+    .wrap {
+        padding: 10px;
+    }
+}
+
 .close {
 	width: 100%;
 	background-color: #2a3d39;

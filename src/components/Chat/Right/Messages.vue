@@ -248,6 +248,7 @@ export default {
 .text {
 	display: inline;
 	font-size: 18px;
+	white-space: pre-wrap;
 }
 
 .time {
@@ -383,7 +384,7 @@ export default {
 	border-radius: 24px;
 
 	display: inline-block;
-	padding: 10px 4%;
+	padding: 10px 25px;
 }
 
 .dot-pulse {

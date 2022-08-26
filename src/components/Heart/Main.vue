@@ -195,4 +195,10 @@ export default {
         padding: 15px;
     }
 }
+
+@media screen and (max-width: 450px) {
+    .wrap {
+        padding: 10px;
+    }
+}
 </style>

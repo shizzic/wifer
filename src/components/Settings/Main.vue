@@ -95,7 +95,10 @@ export default {
 		this.data = Object.assign({}, this.fields)
 	},
 	methods: {
-		change() {			
+		change() {
+			this.data.about = this.data.about.trim()
+			this.data.about = this.data.about.replaceAll(/(\n\n)+/g, "\n\n")
+			
 			fetch(this.$domain + "change", {
 				method: "PUT",
 				credentials: "include",

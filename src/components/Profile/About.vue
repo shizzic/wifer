@@ -51,7 +51,7 @@ export default {
 					body: form
 				})
 					.then(data => { return data.json() })
-					.then(data => {
+					.then(data => { console.log(data)
 						if (data)
 							if ("error" in data)
 								this.$toast.error(this.errors[this.l])
@@ -125,5 +125,6 @@ img {
 span {
 	font-size: 18px;
 	color: #4d4d4d;
+	white-space: pre-wrap;
 }
 </style>
