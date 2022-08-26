@@ -45,10 +45,12 @@ textarea {
     
     width: 100%;
     min-height: 150px;
+    max-height: 400px;
 
     padding: 12px 20px;
 
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .count {

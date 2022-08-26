@@ -97,7 +97,7 @@ export default {
 	methods: {
 		change() {
 			this.data.about = this.data.about.trim()
-			this.data.about = this.data.about.replaceAll(/(\n\n)+/g, "\n\n")
+			this.data.about = this.data.about.replaceAll(/(\n\n)\n*/g, "\n\n")
 			
 			fetch(this.$domain + "change", {
 				method: "PUT",

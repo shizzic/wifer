@@ -86,7 +86,7 @@ export default {
                     this.clearTrash()
 
                 this.typing = false
-                text        = text.replaceAll(/(\n\n)+/g, "\n\n")
+                text        = text.replaceAll(/(\n\n)\n*/g, "\n\n")
                 let time    = Math.floor(Date.now() / 1000)
                 
                 this.$chat.addMessage({ id: +this.target, message: { user: +this.$user.id, target: +this.target, text: text, created_at: time, avatar: this.$user.avatar, username: this.$user.username }})

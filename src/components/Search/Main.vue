@@ -141,10 +141,15 @@ export default {
 			else
 				data.is_about = false
 
-			if (this.data.data[this.data.active].about.full && this.data.data[this.data.active].about.value.length > 0)
-				data.text = "\"" + this.data.data[this.data.active].about.value + "\""
-			else
-				data.text = this.data.data[this.data.active].about.value
+			if (this.data.data[this.data.active].about.value.length > 0) {
+				let text = this.data.data[this.data.active].about.value.trim()
+				text     = text.replaceAll(/(\n\n)\n*/g, "\n\n")
+
+				if (this.data.data[this.data.active].about.full)
+					data.text = "\"" + text + "\""
+				else
+					data.text = text
+			}
 
 			data.country = []
 			data.city    = []
