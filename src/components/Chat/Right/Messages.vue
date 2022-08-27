@@ -215,7 +215,6 @@ export default {
 	padding-top: 10px;
 
 	overflow-x: hidden;
-	overflow-y: auto;
 }
 
 .message-wrapper {

@@ -24,8 +24,16 @@ body {
     /* overflow: hidden; */
 }
 
+.scroll {
+    overflow-y: auto;
+}
+
 .scroll::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: transparent !important;
 }
 
 .scroll::-webkit-scrollbar-thumb {

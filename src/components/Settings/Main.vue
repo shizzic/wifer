@@ -155,8 +155,6 @@ export default {
 	align-items: flex-start;
 	
 	padding: 30px;
-
-	overflow-y: auto;
 }
 
 .block {

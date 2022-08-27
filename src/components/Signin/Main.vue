@@ -77,7 +77,7 @@ export default {
 	margin: 0 auto;
 	padding: 50px 20px;
 
-	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .wrap::before, .wrap::after {

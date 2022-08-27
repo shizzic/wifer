@@ -178,7 +178,6 @@ export default {
 	padding: 25px;
 
 	overflow-x: hidden;
-	overflow-y: auto;
 }
 
 @media screen and (max-width: 768px) {

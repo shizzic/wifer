@@ -187,7 +187,7 @@ export default {
 	background-color: #fff;
 	border-radius: 4px;
 
-	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 @media screen and (max-width: 768px) {
