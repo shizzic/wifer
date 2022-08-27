@@ -21,7 +21,7 @@ html, body, #app {
 
 body {
     font-family: 'PT Sans';
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .scroll::-webkit-scrollbar {
