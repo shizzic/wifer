@@ -2,10 +2,10 @@
 	<div class="wrap">
 		<div v-if="socket" id="chat">
 			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" 
-			:show="show" />
+			:show="show" :newMessages="newMessages" />
 
 			<Right v-if="target && target.id in messages"
-				:target="target" :input="input[l]" :messages="messages[target.id]" 
+				:target="target" :input="input[l]" :messages="messages[target.id]" :newMessages="newMessages[target.id]"
 				:blur="blur[l]" :getMessages="getMessages" :rooms="rooms" :show="show"
 			/>
 			<None v-else :lang="none[l]" :show="show" />
@@ -53,7 +53,8 @@ export default {
 		order() { return this.$chat.order },
 		rooms() { return this.$chat.rooms },
 		roomsLeft() { return this.$chat.roomsLeft },
-		messages() { return this.$chat.messages }
+		messages() { return this.$chat.messages },
+		newMessages() { return this.$chat.newMessages }
 	},
 	watch: {
 		target(target) {

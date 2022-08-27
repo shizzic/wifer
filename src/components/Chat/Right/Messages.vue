@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper">
 		<div class="messages scroll" ref="messages" @scroll="scroll">
-			<div v-show="messages.typing" class="snippet">
+			<div v-show="(!$refs.messages || $refs.messages && $refs.messages.scrollTop === 0) && messages.typing" class="snippet">
 				<div class="pulse-wrapper"><div class="dot-pulse" /></div>
 			</div>
 
@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		
-		<div v-show="button" class="toBottom" @click="$refs.messages.scrollTop = 0">
+		<div v-show="button" class="toBottom" @click="scrollToBottom">
 			<img src="/toBottom.webp" />
 			<span v-show="count > 0" class="count"><span>{{ count }}</span></span>
 		</div>
@@ -36,7 +36,7 @@
 <script scoped>
 export default {
 	name: "Messages",
-	props: ["target", "messages", "getMessages", "show"],
+	props: ["target", "messages", "getMessages", "newMessages", "show"],
 	data() {
 		return {
 			button: null,
@@ -58,18 +58,23 @@ export default {
 
 				if (Math.floor(this.$refs.messages.scrollTop) === 0)
 					this.read()
-				else
-					this.countNewMessages()
 			}
+		},
+
+		'newMessages': {
+			handler(n) {
+				this.countNewMessages()
+
+				if (n.length > 0 && Math.floor(this.$refs.messages.scrollTop) === 0)
+					this.$chat.addNewMessages(this.target)
+			},
+			deep: true
 		},
 
 		'messages.messages': {
 			handler() {
-				if (window.innerWidth > 700 || window.innerWidth < 701 && this.show)
-					if (Math.floor(this.$refs.messages.scrollTop) === 0)
-						this.read()
-					else
-						this.countNewMessages()
+				if ((window.innerWidth > 700 || window.innerWidth < 701 && this.show) && Math.floor(this.$refs.messages.scrollTop) === 0)
+					this.read()
 
 				this.setDates()
 			},
@@ -94,7 +99,7 @@ export default {
 			let sum = Math.abs(this.$refs.messages.scrollTop) + this.$refs.messages.offsetHeight
 			let scrolled = this.$refs.messages.scrollHeight - sum
 
-			if (scrolled < 300) {
+			if (scrolled < 301) {
 				if (this.timeout) {
 					clearTimeout(this.timeout)
 					this.timeout = null
@@ -111,13 +116,8 @@ export default {
 			this.scrollTop = this.$refs.messages.scrollTop
 			this.$scroll.set({ field: "messages", value: this.scrollTop })
 
-			if (Math.floor(this.$refs.messages.scrollTop) === 0)
-				this.read()
-		},
-
-		getScroll() {
-			if (this.$refs.messages)
-				this.$refs.messages.scrollTop = this.$scroll.messages
+			if (this.newMessages.length > 0 && Math.floor(this.$refs.messages.scrollTop) === 0)
+				this.$chat.addNewMessages(this.target)
 		},
 
 		read() {
@@ -141,16 +141,22 @@ export default {
 			this.count = 0
 		},
 
+		scrollToBottom() {
+			this.$chat.addNewMessages(this.target)
+			this.$refs.messages.scrollTop = 0
+		},
+
+		getScroll() {
+			if (this.$refs.messages)
+				this.$refs.messages.scrollTop = this.$scroll.messages
+		},
+
 		countNewMessages() {
 			let count = 0
 
-			for (let message in this.messages.messages) {
-				if (this.messages.messages[message].user != this.$user.id && this.messages.messages[message].viewed)
-					break
-
-				if (this.messages.messages[message].user != this.$user.id && !this.messages.messages[message].viewed)
+			for (let message of this.newMessages)
+				if (message.user != this.$user.id && !message.viewed)
 					++count
-			}
 
 			this.count = count
 		},
@@ -163,10 +169,6 @@ export default {
 				if (this.messages.messages[message].user != this.$user.id && !this.messages.messages[message].viewed)
 					this.messages.messages[message].viewed = true
 			}
-		},
-
-		get() {
-			this.getMessages(true)
 		},
 
 		getTime(time) {
@@ -190,6 +192,10 @@ export default {
 
 			for (let i = this.messages.messages.length - 1; i > -1; i--)
 				this.getDate(this.messages.messages[i].created_at)
+		},
+
+		get() {
+			this.getMessages(true)
 		}
 	}
 }

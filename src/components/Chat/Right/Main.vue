@@ -2,7 +2,7 @@
 	<div class="right" :class="{ show: show, hide: !show }">
 		<Header :target="target" :access="messages.access" :rooms="rooms" />
 		<template v-if="'access' in messages && messages.access.target">
-			<Messages :target="target.id" :messages="messages" :getMessages="getMessages" :show="show" />
+			<Messages :target="target.id" :messages="messages" :getMessages="getMessages" :newMessages="newMessages" :show="show" />
 			<Footer :input="input" :target="target.id" />
 		</template>
 		<Blur v-else :lang="blur" />
@@ -16,7 +16,7 @@ import Blur from "@/components/Chat/Right/Blur.vue"
 import Footer from "@/components/Chat/Right/Footer.vue"
 export default {
 	name: "Right",
-	props: ["target", "input", "messages", "blur", "getMessages", "rooms", "show"],
+	props: ["target", "input", "messages", "blur", "getMessages", "rooms", "show", "newMessages"],
 	components: {
 		Header,
 		Messages,

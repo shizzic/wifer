@@ -29,7 +29,9 @@
 
                     <span v-show="!rooms[user_id].typing" class="text">{{ rooms[user_id].text }}</span>
                     <div class="new-wrapper">
-                        <div v-show="rooms[user_id].user != $user.id && !rooms[user_id].viewed" class="new" />
+                        <div v-if="user_id in newMessages && newMessages[user_id].length > 0 && !rooms[user_id].viewed" class="new">
+                            {{ newMessages[user_id].length }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -40,7 +42,7 @@
 <script scoped>
 export default {
 	name: "Rooms",
-	props: ["order", "rooms", "target", "getRooms", "changeTop"],
+	props: ["order", "rooms", "target", "getRooms", "changeTop", "newMessages"],
     data() {
 		return {
 			timeout: null
@@ -239,10 +241,12 @@ export default {
 }
 
 .new {
-    border-radius: 50%;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 20px;
     background-color: #5181b8;
 
-    padding: 4px;
+    padding: 0 5px;
     margin-left: 10px;
 }
 

@@ -7,6 +7,7 @@ export const chatJS = defineStore("chat", {
         socket: null,
         target: null,
         messages: {},
+        newMessages: {},
 
         lastUsername: "",
         lastSearch: false,
@@ -48,10 +49,10 @@ export const chatJS = defineStore("chat", {
             switch (data.api) {
                 case "message":
                     this.messages[data.user].typing = false
-                    if (!this.messages[data.user].first) {
+                    // if (!this.messages[data.user].first) {
                         data.viewed = false
-                        this.messages[data.user].messages.unshift(data)
-                    }
+                        this.newMessages[data.user].unshift(data)
+                    // }
                     this.addRoom(data, true, "text")
                     this.rooms[data.user].typing = false
                     this.rooms[data.user].viewed = false
@@ -65,16 +66,24 @@ export const chatJS = defineStore("chat", {
                         if (data.username.match(reg))
                             this.changeOrder(data.user)
                     }
-
                     break
                 case "view":
-                    for (let message in this.messages[data.user].messages) {
-                        if (this.messages[data.user].messages[message].user == data.target && this.messages[data.user].messages[message].viewed)
-                            break
+                    if (this.newMessages[data.user].length > 0)
+                        for (let message in this.newMessages[data.user]) {
+                            if (this.newMessages[data.user][message].user == data.target && this.newMessages[data.user][message].viewed)
+                                break
 
-                        if (this.messages[data.user].messages[message].user == data.target)
-                            this.messages[data.user].messages[message].viewed = true
-                    }
+                            if (this.newMessages[data.user][message].user == data.target)
+                                this.newMessages[data.user][message].viewed = true
+                        }
+                    else
+                        for (let message in this.messages[data.user].messages) {
+                            if (this.messages[data.user].messages[message].user == data.target && this.messages[data.user].messages[message].viewed)
+                                break
+
+                            if (this.messages[data.user].messages[message].user == data.target)
+                                this.messages[data.user].messages[message].viewed = true
+                        }
                     this.addRoom(data, false, "viewed")
                     break
                 case "typing":
@@ -151,7 +160,7 @@ export const chatJS = defineStore("chat", {
 
         addMessage(data) {
             this.addTarget(data.id)
-            this.messages[data.id].messages.unshift(data.message)
+            this.newMessages[data.id].unshift(data.message)
             let obj = Object.assign({}, this.rooms[data.message.target])
 
             if (this.rooms[data.message.target]) {
@@ -174,7 +183,19 @@ export const chatJS = defineStore("chat", {
             this.changeOrder(+data.message.target)
         },
 
+        addNewMessages(id) {
+            let messages = this.messages[id].messages
+            for (let message of this.newMessages[id])
+                messages.unshift(message)
+            
+            this.newMessages[id]       = []
+            this.messages[id].messages = messages
+        },
+
         addTarget(id) {
+            if (!(id in this.newMessages))
+                this.newMessages[id] = []
+
             if (!(id in this.messages)) {
                 this.messages[id]          = {}
                 this.messages[id].messages = []
