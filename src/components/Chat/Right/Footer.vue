@@ -37,7 +37,10 @@ export default {
         }
     },
     mounted() {
-        window.addEventListener('beforeunload', () => { this.sendTyping() })
+        document.addEventListener("visibilitychange", () => {
+			if (document.visibilityState === "hidden" && this.typing)
+				this.sendTyping()
+		})
         this.$refs.write.focus()
     },
     beforeUnmount() {

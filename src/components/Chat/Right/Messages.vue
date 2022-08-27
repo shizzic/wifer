@@ -141,16 +141,6 @@ export default {
 			this.count = 0
 		},
 
-		removeBlueDots() {
-			for (let message in this.messages.messages) {
-				if (this.messages.messages[message].user != this.$user.id && this.messages.messages[message].viewed)
-					break
-
-				if (this.messages.messages[message].user != this.$user.id && !this.messages.messages[message].viewed)
-					this.messages.messages[message].viewed = true
-			}
-		},
-
 		countNewMessages() {
 			let count = 0
 
@@ -163,6 +153,16 @@ export default {
 			}
 
 			this.count = count
+		},
+
+		removeBlueDots() {
+			for (let message in this.messages.messages) {
+				if (this.messages.messages[message].user != this.$user.id && this.messages.messages[message].viewed)
+					break
+
+				if (this.messages.messages[message].user != this.$user.id && !this.messages.messages[message].viewed)
+					this.messages.messages[message].viewed = true
+			}
 		},
 
 		get() {

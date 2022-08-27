@@ -32,13 +32,19 @@ export default {
 
 		this.start()
 		this.makeOnline(true)
-		window.addEventListener('beforeunload', () => { this.makeOnline(false) })
+		
+		document.addEventListener("visibilitychange", () => {
+			if (document.visibilityState === "hidden")
+				this.makeOnline(false)
+			else
+				this.makeOnline(true)
+		})
 	},
 	methods: {
 		makeOnline(value) {
 			if (this.id)
 				fetch(this.$domain + "online?online=" + value, {
-					method: "POST",
+					method: "GET",
 					credentials: "include"
 				})
 		},
