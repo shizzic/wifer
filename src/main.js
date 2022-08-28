@@ -10,6 +10,7 @@ import { cityJS } from "@/store/city"
 import { countryJS } from "@/store/country"
 import { scrollJS } from "@/store/scroll"
 import { chatJS } from "@/store/chat"
+import { heartJS } from "@/store/heart"
 
 import vue3GoogleLogin from 'vue3-google-login'
 
@@ -37,5 +38,6 @@ app.config.globalProperties.$city       = cityJS()
 app.config.globalProperties.$country    = countryJS()
 app.config.globalProperties.$scroll     = scrollJS()
 app.config.globalProperties.$chat       = chatJS()
+app.config.globalProperties.$heart      = heartJS()
 
 app.mount('#app')

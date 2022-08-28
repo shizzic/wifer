@@ -1,8 +1,7 @@
 <template>
 	<div class="left" :class="{ show: !show, hide: show }">
 		<Hat :search="search" :getRooms="getRooms" @top="++changeTop" />
-		<Rooms v-if="order.length > 0" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" :changeTop="changeTop"
-		:newMessages="newMessages" />
+		<Rooms v-if="order.length > 0" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" :changeTop="changeTop" />
 		<None v-else :lang="chats" />
 	</div>
 </template>
@@ -13,7 +12,7 @@ import Rooms from "@/components/Chat/Left/Rooms.vue"
 import None from "@/components/Chat/Left/None.vue"
 export default {
 	name: "Left",
-	props: ["search", "order", "rooms", "target", "getRooms", "chats", "show", "newMessages"],
+	props: ["search", "order", "rooms", "target", "getRooms", "chats", "show"],
 	components: {
 		Hat,
 		Rooms,

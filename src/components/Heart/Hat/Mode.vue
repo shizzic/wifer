@@ -28,7 +28,7 @@ export default {
     },
     methods: {
         set(value) {
-            if (this.mode !== value)
+            if (this.mode != value)
                 this.$emit("mode", value)
         }
     }

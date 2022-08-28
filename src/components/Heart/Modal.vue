@@ -31,8 +31,9 @@ export default {
                 body: form
 			})
 
-            let users = Object.assign({}, this.users)
-            delete users[this.index]
+            let users = this.users
+            users.splice(this.index, 1)
+
             this.$emit("all")
             this.$emit("users", users)
             this.$emit("close")

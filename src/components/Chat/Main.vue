@@ -2,7 +2,7 @@
 	<div class="wrap">
 		<div v-if="socket" id="chat">
 			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" 
-			:show="show" :newMessages="newMessages" />
+			:show="show" />
 
 			<Right v-if="target && target.id in messages"
 				:target="target" :input="input[l]" :messages="messages[target.id]" :newMessages="newMessages[target.id]"

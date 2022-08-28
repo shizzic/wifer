@@ -1,8 +1,11 @@
 <template>
 	<div class="wrap">
 		<div v-if="users" class="content scroll" ref="heart" @touchend="saveScroll">
-			<Hat :what="what[l]" :which="which" :limit="limit" :founded="founded[l]" :mode="mode" :all="all"
-				@which="which = $event; count = true; get();" @limit="limit = $event; get();" @mode="mode = $event; count = true; get();" 
+			<Hat
+				:what="what[l]" :which="which" :limit="limit" :founded="founded[l]" :mode="mode" :all="all"
+				@which="$heart.set({ field: 'which', value: $event }); count = true; get();"
+				@mode="$heart.set({ field: 'mode', value: $event }); count = true; get();"
+				@limit="limit = $event; get();"
 			/>
 			<Users
 				:users="users" :time="time" :viewed="viewed" :notes="notes" :photos="photos[l]" :titles="titles[l]" 
@@ -57,8 +60,6 @@ export default {
 	},
 	data() {
 		return {
-			which: 0,
-			mode: null,
 			limit: 25,
 			skip: 0,
 			count: true,
@@ -72,6 +73,14 @@ export default {
 			modal: null,
 			index: null,
 			id:    null
+		}
+	},
+	computed: {
+		which() {
+			return this.$heart.which
+		},
+		mode() {
+			return JSON.parse(this.$heart.mode)
 		}
 	},
 	beforeMount() {
@@ -121,31 +130,38 @@ export default {
 					if (data.count && data.count > -1)
 						this.all = data.count
 
-					if (data.data.users && data.data.users.length > 0) {
+					if (data.data.targets && data.data.targets.length > 0 && data.data.users && data.data.users.length > 0) {
 						this.viewed = {}
 						this.notes  = {}
 						this.time   = {}
-						this.users  = data.data.users
+						let users   = []
 
 						let hearts   = 0
 						let key = "target"
 						if (!this.mode)
 							key = "user"
 
-						for (let elem in data.data.targets) {
-							if (!this.mode && data.data.targets[elem].viewed === false)
+						for (let target of data.data.targets) {
+							if (!this.mode && target.viewed === false)
 								hearts += 1
 								
-							this.time[data.data.targets[elem][key]]   = data.data.targets[elem].created_at
-							this.viewed[data.data.targets[elem][key]] = data.data.targets[elem].viewed
+							this.time[target[key]]   = target.created_at
+							this.viewed[target[key]] = target.viewed
 
-							if ("text" in data.data.targets[elem])
-								this.notes[data.data.targets[elem][key]] = data.data.targets[elem].text
+							if ("text" in target)
+								this.notes[target[key]] = target.text
+
+							for (let user of data.data.users)
+								if (user._id === target[key]) {
+									users.push(user)
+									break
+								}
 						}
-						
+
+						this.users = users
 						this.$nav.takeHearts(hearts, this.$nav.fields[this.which])
 					} else {
-						this.users  = {}
+						this.users  = []
 						this.time   = {}
 						this.viewed = {}
 						this.notes  = {}

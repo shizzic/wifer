@@ -59,7 +59,7 @@ export default {
     width: 100%;
 
 	display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     padding: 10px;
     
     overflow: hidden;

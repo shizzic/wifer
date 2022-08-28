@@ -19,10 +19,6 @@ export const chatJS = defineStore("chat", {
         startSocket(domainName) {
             if (!this.socket) {
                 this.socket = new WebSocket("wss://" + domainName + "chat")
-
-                this.socket.onopen = () => {
-                    console.log("opened")
-                }
         
                 this.socket.onmessage = (e) => {
                     this.onMessage(e.data)
@@ -30,7 +26,6 @@ export const chatJS = defineStore("chat", {
         
                 this.socket.onclose = () => {
                     this.socket = null
-                    console.log("closed")
                 }
             }
         },
@@ -56,6 +51,7 @@ export const chatJS = defineStore("chat", {
                     this.addRoom(data, true, "text")
                     this.rooms[data.user].typing = false
                     this.rooms[data.user].viewed = false
+                    this.rooms[data.user].news  += 1
                     this.rooms[data.user].user   = data.user
                     
                     if (!this.lastSearch)
