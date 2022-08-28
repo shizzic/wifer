@@ -43,16 +43,17 @@ export const chatJS = defineStore("chat", {
 
             switch (data.api) {
                 case "message":
-                    this.messages[data.user].typing = false
                     // if (!this.messages[data.user].first) {
-                        data.viewed = false
-                        this.newMessages[data.user].unshift(data)
                     // }
+                    data.viewed = false
                     this.addRoom(data, true, "text")
                     this.rooms[data.user].typing = false
                     this.rooms[data.user].viewed = false
                     this.rooms[data.user].news  += 1
                     this.rooms[data.user].user   = data.user
+
+                    this.messages[data.user].typing = false
+                    this.newMessages[data.user].unshift(data)
                     
                     if (!this.lastSearch)
                         this.changeOrder(data.user)

@@ -243,10 +243,10 @@ export default {
 .new {
     color: #fff;
     font-size: 14px;
-    border-radius: 20px;
+    border-radius: 28px;
     background-color: #5181b8;
 
-    padding: 0 5px;
+    padding: 1px 5.5px;
     margin-left: 10px;
 }
 

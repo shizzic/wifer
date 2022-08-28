@@ -134,6 +134,7 @@ export default {
 			if (target) {
 				setTimeout(this.removeBlueDots, 800)
 				this.$chat.addRoom({ user: +target, viewed: true }, false, "viewed")
+				this.$chat.addRoom({ user: +target, news: 0 }, false, "news")
 				this.$chat.sendMessage({ user: +this.$user.id, target: +target, api: "view", avatar: this.$user.avatar, username: this.$user.username })
 				this.$nav.takeHearts(1, "messages")
 			}
@@ -341,10 +342,9 @@ export default {
 
 .count span {
 	background-color: rgb(93, 97, 212);
-	border-radius: 2px;
+	border-radius: 30px;
 
-	display: flex;
-	padding: 0 4px;
+	padding: 0.5px 5.5px;
 }
 
 .me {
