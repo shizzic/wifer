@@ -74,7 +74,7 @@ export default {
     padding: 10px;
 }
 
-.user:not(:first-of-type) {
+.user:not(:last-of-type) {
     border-bottom: 1.5px solid #bcbcbc;
     margin-bottom: 5px;
 }
