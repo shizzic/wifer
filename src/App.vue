@@ -50,9 +50,8 @@ export default {
 		},
 		start() {
 			if (this.id && this.id > 0) {
-				this.$nav.checkMessages(this.$domain)
+				this.$user.getParamsAfterLogin(this.$domain)
 				this.$chat.startSocket(this.$domainName)
-				this.$user.checkAvatar(this.$domain)
 			} else
 				this.$chat.closeSocket()
 		}

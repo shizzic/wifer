@@ -90,14 +90,6 @@ export const navJS = defineStore("nav", {
                 this[field] = res
             else
                 this[field] = 0
-        },
-        checkMessages(domain) {
-            fetch(domain + "checkMessages", {
-				method: "GET",
-				credentials: "include"
-			})
-                .then(data => { return data.json() })
-                .then(data => { this.messages = data.length })
         }
     }
 })
