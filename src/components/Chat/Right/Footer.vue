@@ -33,7 +33,9 @@ export default {
             this.clearTrash()
             this.text   = ""
             this.typing = false
-            this.$refs.write.focus()
+
+            if (window.screen.width > 992)
+                this.$refs.write.focus()
         }
     },
     mounted() {
@@ -41,7 +43,9 @@ export default {
 			if (document.visibilityState === "hidden" && this.typing)
 				this.sendTyping()
 		})
-        this.$refs.write.focus()
+        
+        if (window.screen.width > 992)
+            this.$refs.write.focus()
     },
     beforeUnmount() {
         this.clearTrash()
