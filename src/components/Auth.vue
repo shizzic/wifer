@@ -23,7 +23,7 @@ export default {
 		}
     },
 	beforeMount() {
-		if (Number.isInteger(this.$route.params.code) && this.$route.params.code.length === 6)
+		if (/^[0-9]+$/.test(this.$route.params.code) && this.$route.params.code.length === 6)
 			this.check()
 		else {
 			this.$toast.error(this.response[this.l][0])
@@ -43,9 +43,10 @@ export default {
 			})
 				.then(data => { return data.json() })
 				.then(data => {
-					if ("error" in data)
+					if ("error" in data) {
 						this.$toast.error(this.response[this.l][data["error"]])
-					else {
+						this.$router.push({ name: "search" })
+					} else {
 						this.$user.set({ field: "id", value: data.id })
 						this.$router.push({ name: "profile", params: { id: this.id } })
 						this.$toast.success(this.success[this.l])

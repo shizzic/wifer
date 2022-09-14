@@ -69,6 +69,9 @@ export default {
 		},
 		messages() {
 			return this.$nav.messages
+		},
+		allWithMessages() {
+			return this.views + this.likes + this.privates + this.accesses + this.$nav.messages
 		}
 	},
 	data() {
@@ -90,6 +93,13 @@ export default {
 
 				clearInterval(this.interval)
 			}
+		},
+
+		allWithMessages(n) {
+			if (n > 0)
+				document.title = "luckriza (" + n + ")"
+			else
+				document.title = "luckriza"
 		}
 	},
 	beforeMount() {
