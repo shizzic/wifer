@@ -104,7 +104,13 @@ export default {
 				credentials: "include",
 				body: JSON.stringify(this.data)
 			})
-				.then(data => { return data.json() })
+				.then(data => {
+					if (data.status === 401) {
+						this.$user.logout(this.$domain)
+						this.$router.push({ name: "search" })
+					} else
+						return data.json() 
+				})
 				.then(data => {
 					if ("error" in data)
 						this.$toast.error(this.lang.response[this.l][data.error])

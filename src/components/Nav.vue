@@ -120,7 +120,13 @@ export default {
 				method: "GET",
 				credentials: "include"
 			})
-				.then(data => { return data.json() })
+				.then(data => {
+					if (data.status === 401) {
+						this.$user.logout(this.$domain)
+						this.$router.push({ name: "search" })
+					} else
+						return data.json()
+				})
 				.then(data => {
 					if (data)
 						for (let key in data) {

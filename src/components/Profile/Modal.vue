@@ -30,6 +30,12 @@ export default {
 				method: "PUT",
 				credentials: "include"
 			})
+                .then(data => {
+                    if (data.status === 401) {
+                        this.$user.logout(this.$domain)
+                        this.$router.push({ name: "search" })
+                    }
+                })
 
             this.$router.push({ name: "search" })
         },

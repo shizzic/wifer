@@ -47,6 +47,12 @@ export default {
 					method: "GET",
 					credentials: "include"
 				})
+					.then(data => {
+						if (data.status === 401) {
+							this.$user.logout(this.$domain)
+							this.$router.push({ name: "search" })
+						}
+					})
 		},
 		start() {
 			if (this.id && this.id > 0) {

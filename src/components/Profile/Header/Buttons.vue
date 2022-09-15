@@ -68,6 +68,12 @@ export default {
 				method: method,
 				credentials: "include"
 			})
+                .then(data => {
+                    if (data.status === 401) {
+                        this.$user.logout(this.$domain)
+                        this.$router.push({ name: "search" })
+                    }
+                })
         },
 
         privateHandle() {
@@ -86,6 +92,12 @@ export default {
 				method: method,
 				credentials: "include"
 			})
+                .then(data => {
+                    if (data.status === 401) {
+                        this.$user.logout(this.$domain)
+                        this.$router.push({ name: "search" })
+                    }
+                })
         },
 
         access() {
@@ -104,6 +116,12 @@ export default {
 				method: method,
 				credentials: "include"
 			})
+                .then(data => {
+                    if (data.status === 401) {
+                        this.$user.logout(this.$domain)
+                        this.$router.push({ name: "search" })
+                    }
+                })
 
             if (this.$chat.socket)
                 this.$chat.sendMessage({ target: this.data._id, user: +this.$user.id, api: "access", access: this.checked.access.is  })

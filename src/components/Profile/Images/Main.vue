@@ -232,7 +232,13 @@ export default {
                 method: "PUT",
 				credentials: "include"
             })
-                .then(data => { return data.json() })
+                .then(data => {
+                    if (data.status === 401) {
+                        this.$user.logout(this.$domain)
+                        this.$router.push({ name: "search" })
+                    } else
+                        return data.json()
+                })
                 .then(() => {
                     this.$user.set({ field: "avatar", value: null })
                     location.reload()
@@ -249,7 +255,13 @@ export default {
                 method: "PUT",
 				credentials: "include"
             })
-                .then(data => { return data.json() })
+                .then(data => {
+                    if (data.status === 401) {
+                        this.$user.logout(this.$domain)
+                        this.$router.push({ name: "search" })
+                    } else
+                        return data.json()
+                })
                 .then(() => {
                     this.$user.set({ field: "avatar", value: null })
                     location.reload()
@@ -266,7 +278,13 @@ export default {
                 method: "DELETE",
 				credentials: "include"
             })
-                .then(data => { return data.json() })
+                .then(data => {
+                    if (data.status === 401) {
+                        this.$user.logout(this.$domain)
+                        this.$router.push({ name: "search" })
+                    } else
+                        return data.json()
+                })
                 .then(() => {
                     this.$user.set({ field: "avatar", value: null })
                     location.reload() 
