@@ -1,0 +1,12 @@
+import { defineStore } from "pinia"
+
+export const CookiesJS = defineStore("Cookies", {
+    getters: {
+        text() {
+            return {
+                en: "I use cookies to improve your experience :)",
+                ru: "Я использую cookie для вашего комфорта :)"
+            }
+        }
+    }
+})

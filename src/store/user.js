@@ -6,6 +6,7 @@ export const userJS = defineStore("user", {
     state: () =>({
         id: useStorage("id", null),
         templates: useStorage("templates", null),
+        cookies: useStorage("cookies", null),
 
         avatar: false,
         username: ""

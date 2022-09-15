@@ -1,22 +1,22 @@
 <template>
 	<Nav id="menu" :l="l" />
-	<main id="wrap"><router-view :l="l" /></main>
+	<div id="wrap"><router-view :l="l" /></div>
+	<Cookie v-if="!cookies" :l="l" />
 </template>
 
 <script scoped>
 import Nav from "@/components/Nav.vue"
+import Cookie from "@/components/Cookie.vue"
 export default {
 	name: 'App',
 	components: {
-		Nav
+		Nav,
+		Cookie
 	},
 	computed: {
-        l() {
-            return this.$lang.lang
-        },
-		id() {
-			return this.$user.id
-		}
+        l() { return this.$lang.lang },
+		id() { return this.$user.id },
+		cookies() { return this.$user.cookies },
     },
 	watch: {
 		id() {
