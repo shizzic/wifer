@@ -1,8 +1,8 @@
 <template>
     <div class="wrap">
         <div class="username">
-            <img v-show="premium === 1" src="/premium.webp" />
-            <img v-show="premium === 2" src="/diamond.webp" />
+            <img v-show="premium > 0" src="/premium.webp" />
+            <!-- <img v-show="premium === 2" src="/diamond.webp" /> -->
             <span>{{ username }}</span>
             <div class="ring-container">
                 <div v-show="live === true" class="ring green-bor" />

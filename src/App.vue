@@ -1,6 +1,6 @@
 <template>
 	<Nav id="menu" :l="l" />
-	<div id="wrap"><router-view :l="l" /></div>
+	<div id="wrap" v-if="!id || id && first"><router-view :l="l" /></div>
 	<Cookie v-if="!cookies" :l="l" />
 </template>
 
@@ -17,11 +17,17 @@ export default {
         l() { return this.$lang.lang },
 		id() { return this.$user.id },
 		cookies() { return this.$user.cookies },
+		first() { return this.$user.first }
     },
 	watch: {
 		id() {
 			this.makeOnline(true)
 			this.start()
+		}
+	},
+	data() {
+		return {
+			interval: null
 		}
 	},
 	beforeMount() {
@@ -58,8 +64,15 @@ export default {
 			if (this.id && this.id > 0) {
 				this.$user.getParamsAfterLogin(this.$domain)
 				this.$chat.startSocket(this.$domainName)
-			} else
+				this.interval = setInterval(this.checkPremium, 60000 * 20)
+			} else {
 				this.$chat.closeSocket()
+				clearInterval(this.interval)
+				this.interval = null
+			}
+		},
+		checkPremium() {
+			this.$user.checkPremium(this.$domain)
 		}
 	}
 }

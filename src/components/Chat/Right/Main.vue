@@ -1,7 +1,7 @@
 <template>
 	<div class="right" :class="{ show: show, hide: !show }">
 		<Header :target="target" :access="messages.access" :rooms="rooms" />
-		<template v-if="'access' in messages && messages.access.target">
+		<template v-if="premium > 0 || 'access' in messages && messages.access.target">
 			<Messages :target="target.id" :messages="messages" :getMessages="getMessages" :newMessages="newMessages" :show="show" />
 			<Footer :input="input" :target="target.id" />
 		</template>
@@ -22,7 +22,12 @@ export default {
 		Messages,
 		Blur,
 		Footer
-	}
+	},
+	computed: {
+        premium() {
+            return this.$user.premium
+        }
+    }
 }
 </script>
 

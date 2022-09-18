@@ -3,6 +3,7 @@
         <div class="wrapper">
             <div v-show="data._id == $user.id" class="elem">
                 <div class="btn">
+                    <div class="fill" :class="{ checked : premium > 0, unchecked : premium === 0 }" style="background-color: #EB9532;" />
                     <img src="/trial.webp">
                 </div>
                 <div class="btn" @click="$emit('modal', 'deactivate')">
@@ -50,6 +51,11 @@
 export default {
 	name: "Header",
     props: ["data", "checked", "add", "del", "l"],
+    computed: {
+        premium() {
+            return this.$user.premium
+        }
+    },
     methods: {
         like() {
             let method = "POST"
@@ -128,7 +134,7 @@ export default {
         },
 
         chat() {
-            if (this.checked.access.access 
+            if (this.premium > 0 || this.checked.access.access 
                 && (
                     !(this.data._id in this.$chat.messages) || 
                     this.data._id in this.$chat.messages && (!("access" in this.$chat.messages[this.data._id]) ||

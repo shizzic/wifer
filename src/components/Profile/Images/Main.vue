@@ -46,7 +46,7 @@
                 <div class="icon-wrap"><img src="/public.webp" alt="" class="icon" /></div>
             </div>
 
-            <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && priv.access)">
+            <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && (priv.access || premium > 0))">
                 <div v-for="(num, index) in data.private" :key="index" class="image-wrap">
                     <a
                         :href="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()"
@@ -71,7 +71,7 @@
                     </div>
                 </router-link>
 
-                <div v-else-if="data.private > 0 && ($user.id && $user.id > 0 && !priv.access)"
+                <div v-else-if="data.private > 0 && ($user.id && $user.id > 0 && !priv.access && !(premium > 0))"
                     class="image" style="margin-right: 20px; margin-bottom: 20px;"
                     @click="$emit('modal', 'private')"
                 >
@@ -126,6 +126,11 @@ export default {
 	},
     components: {
         Cropper
+    },
+    computed: {
+        premium() {
+            return this.$user.premium
+        }
     },
     data() {
 		return {

@@ -2,7 +2,7 @@
 	<main id="premium" class="scroll">
 		<div class="squares">
 			<Quantity :lang="quantity[l]" />
-			<Pay :lang="pay[l]" />
+			<Pay :lang="pay[l]" :response="response[l]" />
 			<Luckriza :lang="luckriza[l]" />
 			<FreeChat :lang="freeChat[l]" />
 			<Contact :lang="contact[l]" :response="response[l]" />
@@ -143,14 +143,25 @@ a:not(:last-of-type) {
 	}
 }
 
+@media screen and (max-width: 768px) {
+    #premium {
+		padding: 15px;
+	}
+}
+
 @media screen and (max-width: 588px) {
     .square {
 		margin-right: 0;
+		margin-left: 0;
 		width: 70%;
 	}
 }
 
 @media screen and (max-width: 450px) {
+	#premium {
+		padding: 10px;
+	}
+
     .square {
 		width: 85%;
 	}

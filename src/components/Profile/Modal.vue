@@ -66,6 +66,7 @@ export default {
 
 <style scoped>
 .modal {
+    z-index: 200;
 	background-color: rgba(0, 0, 0, 0.6);
 	
 	width: 100%;

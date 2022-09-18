@@ -18,14 +18,18 @@ export const PremiumJS = defineStore("Premium", {
             return {
                 en: {
                     month: "1 month premium",
+                    trial: "Trial for 7 days",
+                    try: "Try",
                     not: "Buy",
-                    expand: "Extend",
+                    extend: "Extend",
                     expires: "Expires in"
                 },
                 ru: {
                     month: "Премиум на 1 месяц",
+                    trial: "Пробник на 7 дней",
+                    try: "Попробовать",
                     not: "Купить",
-                    expand: "Продлить",
+                    extend: "Продлить",
                     expires: "Истекает через"
                 }
             }
@@ -93,11 +97,15 @@ export const PremiumJS = defineStore("Premium", {
             return {
                 en: {
                     success: "Your message was successfully delivered to me. I'll answer as soon as i can :)",
-                    error: "Sorry, somethin went wrong. Try again later"
+                    error: "Sorry, somethin went wrong. Try again later",
+                    trial: "You already used your one time trial. You can't do it again",
+                    trialSuccess: "You successfully got your trial period. Enjoy :)"
                 },
                 ru: {
                     success: "Ваше сообщение было успешно доставленно мне. Я отвечу настолько быстро, на сколько смогу :)",
-                    error: "Извините, что-то пошло не так. Попробуйте снова чуть позже"
+                    error: "Извините, что-то пошло не так. Попробуйте снова чуть позже",
+                    trial: "Вы уже использовали ваш одноразовый пробник. Вы не можете использовать это снова",
+                    trialSuccess: "Вы успешно получили свой пробник. Наслаждайтесь :)"
                 }
             }
         },
