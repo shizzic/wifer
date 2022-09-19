@@ -61,6 +61,8 @@ export default {
 						body: form,
 					})
 						.then(data => {
+							this.$emit("clear")
+							
 							if (data.status === 401) {
 								this.$user.logout(this.$domain)
 								this.$router.push({ name: "search" })
@@ -69,7 +71,6 @@ export default {
 						})
 						.then(data => {
 							this.$user.set({ field: "avatar", value: null })
-							this.$emit("clear")
 							
 							if ("error" in data)
 								this.$toast.error(this.lang[this.l][data.error])
