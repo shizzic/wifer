@@ -4,7 +4,7 @@
             <Lang :l="l" />
 
             <div class="filter-sort">
-                <div class="filters-wrap switch"><img src="/filters.webp" class="filters" @click="$emit('filters')" /></div>
+                <div class="filters-wrap switch"><img src="/images/filters.webp" class="filters" @click="$emit('filters')" /></div>
                 <Sort :data="data" :sort="data.data[data.active].sort" :lang="sort" :create="create" :getUsers="getUsers" />
             </div>
         </div>

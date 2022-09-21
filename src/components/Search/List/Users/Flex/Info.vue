@@ -12,7 +12,7 @@
         
         <div class="flex">
             <span class="images">{{ (user.avatar) ? user.public + user.private + 1 : user.public + user.private }} {{ photos }}</span>
-            <img v-if="user.premium > 0" src="/premium.webp" />
+            <img v-if="user.premium > 0" src="/images/premium.webp" />
         </div>
 	</div>
 </template>

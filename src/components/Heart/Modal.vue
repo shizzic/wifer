@@ -2,7 +2,7 @@
 	<div class="modal">
         <div class="block" v-click-outside="close" @mousedown="() => { up = true }" @mouseup="() => { up = null }">
             <div class="close" @click="$emit('close')" />
-            <img src="delete.webp" />
+            <img src="/images/delete.webp" />
             <div class="text">
                 <span v-for="(line, index) in text" :key="index">{{ line }}</span>
             </div>

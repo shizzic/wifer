@@ -2,8 +2,8 @@
 	<div id="note" :class="{ shown: show, closed: !show }"  v-click-outside="close" @mousedown="() => { up = true }" @mouseup="() => { up = null }">
         <textarea class="scroll" maxlength="150" v-model="checked.like.text" @click="show = true" @input="autosize($event)" />
         <div class="buttons">
-            <button @click="show = null"><img src="/cancel.webp" /></button>
-            <button @click="save"><img src="/save.webp" /></button>
+            <button @click="show = null"><img src="/images/cancel.webp" /></button>
+            <button @click="save"><img src="/images/save.webp" /></button>
         </div>
     </div>
 </template>

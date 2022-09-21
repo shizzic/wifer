@@ -5,8 +5,8 @@
             container: 'inline-block rounded-full outline-none focus:ring focus:ring-green-500 focus:ring-opacity-30'
         }">
             <template v-slot:label="{}">
-                <img v-show="mode" src="/man.webp" style="padding-left: 5px;" />
-                <img v-show="!mode" src="/woman.webp" style="padding-right: 5px;" />
+                <img v-show="mode" src="/images/man.webp" style="padding-left: 5px;" />
+                <img v-show="!mode" src="/images/woman.webp" style="padding-right: 5px;" />
             </template>
         </Toggle>
     </div>

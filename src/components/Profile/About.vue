@@ -2,7 +2,7 @@
 	<div class="about">
 		<div class="header">
 			<h3><span>{{ title }}</span><span>{{ username }}</span></h3>
-			<img v-show="about.length > 0" src="/translation.webp" @click="translate" />
+			<img v-show="about.length > 0" src="/images/translation.webp" @click="translate" />
 
 			<template v-if="about.length > 0">
 				<span v-show="mode">{{ about }}</span>

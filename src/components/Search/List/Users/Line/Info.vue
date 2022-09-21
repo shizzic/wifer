@@ -3,7 +3,7 @@
 		<span class="username">
             <div v-if="user.online" class="ring-container"><div class="circle green-back" /></div>
             <span>{{ user.username }}</span>
-            <img v-if="user.premium > 0" src="/premium.webp" class="premium" />
+            <img v-if="user.premium > 0" src="/images/premium.webp" class="premium" />
         </span>
 
         <span class="place">{{ user.age }}<span class="dot" />

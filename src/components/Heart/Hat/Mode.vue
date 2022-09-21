@@ -5,11 +5,11 @@
         <div class="flex">
             <div class="flex">
                 <div class="square" :class="{ active : mode }" @click="set(true)">
-                    <img src="/profile.webp" />
+                    <img src="/images/profile.webp" />
                 </div>
 
                 <div class="square" :class="{ active : !mode }" @click="set(null)">
-                    <img src="/others.webp" />
+                    <img src="/images/others.webp" />
                 </div>
             </div>
 

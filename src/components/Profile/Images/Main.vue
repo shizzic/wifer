@@ -8,10 +8,10 @@
             </div>
 
             <div v-show="buttons" class="buttons">
-                <img v-show="params.mode !== null" class="button" src="/profile.webp" @click="makeProfile" />
-                <img v-show="params.mode !== true && params.mode !== null" class="button" src="/public.webp" @click="dir('public')" />
-                <img v-show="params.mode !== false" class="button" src="/private.webp" @click="dir('private')" />
-                <img class="button" src="/delete.webp" @click="deleteImg" />
+                <img v-show="params.mode !== null" class="button" src="/images/profile.webp" @click="makeProfile" />
+                <img v-show="params.mode !== true && params.mode !== null" class="button" src="/images/public.webp" @click="dir('public')" />
+                <img v-show="params.mode !== false" class="button" src="/images/private.webp" @click="dir('private')" />
+                <img class="button" src="/images/delete.webp" @click="deleteImg" />
             </div>
 
             <input type="file" style="display: none;" ref="input" @change="load($event)" accept="image/*">
@@ -43,7 +43,7 @@
                     <img :src="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()" alt="" class="image" />
                 </a>
                 
-                <div class="icon-wrap"><img src="/public.webp" alt="" class="icon" /></div>
+                <div class="icon-wrap"><img src="/images/public.webp" alt="" class="icon" /></div>
             </div>
 
             <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && (priv.access || premium > 0))">
@@ -56,7 +56,7 @@
                         <img :src="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()" alt="" class="image" />
                     </a>
 
-                    <div class="icon-wrap"><img src="/private.webp" alt="" class="icon" /></div>
+                    <div class="icon-wrap"><img src="/images/private.webp" alt="" class="icon" /></div>
                 </div>
             </template>
 
@@ -67,7 +67,7 @@
                 >
                     <div class="private">
                         <span>{{ data.private }}</span>
-                        <img src="/private.webp" />
+                        <img src="/images/private.webp" />
                     </div>
                 </router-link>
 
@@ -77,7 +77,7 @@
                 >
                     <div class="private">
                         <span>{{ data.private }}</span>
-                        <img src="/private.webp" />
+                        <img src="/images/private.webp" />
                     </div>
                 </div>
             </template>

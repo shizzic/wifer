@@ -1,7 +1,7 @@
 <template>
     <div class="wrap">
         <div v-for="(elem, index) in text" :key="index" class="row">
-            <img :src="'/' + index + '.webp'">
+            <img :src="'/images/' + index + '.webp'">
             <span v-if="elem === 0">-</span>
             <template v-else>
                 <span v-if="elem < 3">{{ lang[elem] }}</span>
@@ -10,13 +10,13 @@
         </div>
 
         <div v-for="(elem, place) in place" :key="place" class="row">
-            <img :src="'/' + place + '.webp'">
+            <img :src="'/images/' + place + '.webp'">
             <span v-if="elem === 0">-</span>
             <span v-else>{{ getPlace(place, elem) }}</span>
         </div>
 
         <div v-for="(time, index) in time" :key="index" class="row">
-            <img :src="'/' + index + '.webp'">
+            <img :src="'/images/' + index + '.webp'">
             <span>{{ getDate(time) }}</span>
         </div>
     </div>

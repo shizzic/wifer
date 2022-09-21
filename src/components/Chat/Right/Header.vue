@@ -1,10 +1,10 @@
 <template>
 	<div class="header">
-        <img src="/back.webp" class="back" @click="$chat.set({ field: 'show', value: null })" />
+        <img src="/images/back.webp" class="back" @click="$chat.set({ field: 'show', value: null })" />
         <div class="elem pointer" @click="$router.push({ name: 'profile', params: { id : target.id } })" style="width: 100%;">
             <div class="avatar-wrapper">
                 <img v-if="target.avatar" :src="$ip + target.id + '/avatar.webp?' + Date.now()" class="avatar" />
-                <img v-else src="/avatar.webp" class="avatar" />
+                <img v-else src="/images/avatar.webp" class="avatar" />
                 <div v-show="rooms[target.id] && rooms[target.id].online" class="online" />
             </div>
             
@@ -14,7 +14,7 @@
         <div v-if="access" class="elem">
             <div class="btn" @click="accessHandle">
                 <div class="fill" :class="{ checked : access.user, unchecked : !access.user }" style="background-color: #EB9532;" />
-                <img src="/access.webp" class="icon">
+                <img src="/images/access.webp" class="icon">
             </div>
         </div>
 	</div>

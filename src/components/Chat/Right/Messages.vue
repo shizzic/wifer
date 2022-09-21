@@ -16,8 +16,8 @@
 
 						<span class="time">
 							{{ getTime(message.created_at) }}
-							<img v-show="message.user == $user.id && !message.viewed" src="/unreed.webp" class="view unseen" />
-							<img v-show="message.user == $user.id && message.viewed" src="/readed.webp" class="view seen" />
+							<img v-show="message.user == $user.id && !message.viewed" src="/images/unreed.webp" class="view unseen" />
+							<img v-show="message.user == $user.id && message.viewed" src="/images/readed.webp" class="view seen" />
 						</span>
 					</div>
 
@@ -27,7 +27,7 @@
 		</div>
 		
 		<div v-show="button" class="toBottom" @click="scrollToBottom">
-			<img src="/toBottom.webp" />
+			<img src="/images/toBottom.webp" />
 			<span v-show="count > 0" class="count"><span>{{ count }}</span></span>
 		</div>
 	</div>

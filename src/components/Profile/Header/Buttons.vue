@@ -4,43 +4,43 @@
             <div v-show="data._id == $user.id" class="elem">
                 <div class="btn">
                     <div class="fill" :class="{ checked : premium > 0, unchecked : premium === 0 }" style="background-color: #EB9532;" />
-                    <img src="/trial.webp">
+                    <img src="/images/trial.webp">
                 </div>
                 <div class="btn" @click="$emit('modal', 'deactivate')">
-                    <img src="/deactivate.webp">
+                    <img src="/images/deactivate.webp">
                 </div>
             </div>
             
             <div v-show="data._id == $user.id" class="elem">
                 <div class="btn" @click="$emit('settings')">
-                    <img src="/settings.webp">
+                    <img src="/images/settings.webp">
                 </div>
 
                 <div class="btn" @click="$emit('modal', 'logout')">
-                    <img src="/logout.webp">
+                    <img src="/images/logout.webp">
                 </div>
             </div>
 
             <div v-show="$user.id && data._id != $user.id" class="elem">
                 <div class="btn" @click="like">
                     <div class="fill" :class="{ checked : checked.like.is, unchecked : !checked.like.is }" style="background-color: #DD2647;" />
-                    <img src="/like.webp">
+                    <img src="/images/like.webp">
                 </div>
 
                 <div class="btn" @click="privateHandle">
                     <div class="fill" :class="{ checked : checked.private.is, unchecked : !checked.private.is }" style="background-color: #16AE85;" />
-                    <img src="/private.webp">
+                    <img src="/images/private.webp">
                 </div>
             </div>
 
             <div v-show="$user.id && data._id != $user.id" class="elem">
                 <div class="btn" @click="access">
                     <div class="fill" :class="{ checked : checked.access.is, unchecked : !checked.access.is }" style="background-color: #EB9532;" />
-                    <img src="/access.webp">
+                    <img src="/images/access.webp">
                 </div>
 
                 <div class="btn" @click="chat">
-                    <img src="/chat.webp">
+                    <img src="/images/chat.webp">
                 </div>
             </div>
         </div>

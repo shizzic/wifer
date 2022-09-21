@@ -5,7 +5,7 @@
             @input="autosize($event.target); type($event.target.value);" @keypress.enter="enter"
         />
         <V3Emoji size="small" :recent="true" @click-emoji="text += $event" />
-        <img src="/send.webp" :class="{ active : text.length > 0 }" @click="send" />
+        <img src="/images/send.webp" :class="{ active : text.length > 0 }" @click="send" />
 	</div>
 </template>
 

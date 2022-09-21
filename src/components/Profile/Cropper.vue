@@ -13,8 +13,8 @@
 					<div class="button" @click="upload">{{ lang[l].upload }}</div>
 					<div class="button" :class="{ 'active' : mode, 'inactive' : !mode }" @click="mode = true">{{ lang[l].public }}</div>
 					<div class="button" :class="{ 'active' : !mode, 'inactive' : mode }" @click="mode = null">{{ lang[l].private }}</div>
-					<div class="button" @click="rotate"><img src="/rotate.webp" /></div>
-					<div class="button" @click="flip"><img src="/flip.webp" /></div>
+					<div class="button" @click="rotate"><img src="/images/rotate.webp" /></div>
+					<div class="button" @click="flip"><img src="/images/flip.webp" /></div>
 					<div class="button" @click="$emit('clear'); mode = true;">{{ lang[l].cancel }}</div>
 				</div>
 			</div>

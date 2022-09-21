@@ -18,35 +18,35 @@ export const navJS = defineStore("nav", {
                         ru: "Поиск",
                         en: "Search"
                     },
-                    image: "/search.webp"
+                    image: "/images/search.webp"
                 },
                 heart: { 
                     title: {
                         ru: "Интересы",
                         en: "Interests"
                     },
-                    image: "/like.webp"
+                    image: "/images/like.webp"
                 },
                 premium: { 
                     title: {
                         ru: "Премиум",
                         en: "Premium"
                     },
-                    image: "/premium.webp"
+                    image: "/images/premium.webp"
                 },
                 chat: { 
                     title: {
                         ru: "Чат",
                         en: "Chat"
                     },
-                    image: "/chat.webp"
+                    image: "/images/chat.webp"
                 },
                 profile: {
                     title: {
                         ru: "Профиль",
                         en: "Profile"
                     },
-                    image: "/profile.webp"
+                    image: "/images/profile.webp"
                 }
             }
         },
@@ -57,21 +57,21 @@ export const navJS = defineStore("nav", {
                         ru: "Поиск",
                         en: "Search"
                     },
-                    image: "/search.webp"
+                    image: "/images/search.webp"
                 },
                 premium: { 
                     title: {
                         ru: "Премиум",
                         en: "Premium"
                     },
-                    image: "/premium.webp"
+                    image: "/images/premium.webp"
                 },
                 signin: { 
                     title: {
                         ru: "Вход",
                         en: "Sign in"
                     },
-                    image: "/signin.webp"
+                    image: "/images/signin.webp"
                 }
             }
         }

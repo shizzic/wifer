@@ -1,10 +1,10 @@
 <template>
 	<div class="hat">
 		<div class="search">
-            <img src="/search.webp" class="icon" />
+            <img src="/images/search.webp" class="icon" />
             <input maxlength="20" v-model="username" :placeholder="search" @input="input($event.target.value)" />
         </div>
-        <img src="/back.webp" class="back" @click="$chat.set({ field: 'show', value: true })" />
+        <img src="/images/back.webp" class="back" @click="$chat.set({ field: 'show', value: true })" />
 	</div>
 </template>
 

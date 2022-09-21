@@ -6,7 +6,7 @@
                 @click="$router.push({ name : 'profile', params : { id : user._id }})" 
             />
             <div v-else class="no" @click="$router.push({ name : 'profile', params : { id : user._id }})">
-                <img src="/avatar.webp" />
+                <img src="/images/avatar.webp" />
             </div>
 
             <div class="body">
@@ -15,7 +15,7 @@
                     <Params :user="user" :titles="titles" :values="values" />
                     <Time :time="time[user._id]" />
                     <div v-show="notes[user._id]" class="text">
-                        <img src="/note.webp" />
+                        <img src="/images/note.webp" />
                         <span>{{ notes[user._id] }}</span>
                     </div>
                 </div>

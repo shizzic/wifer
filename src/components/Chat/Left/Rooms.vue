@@ -6,7 +6,7 @@
         >
             <div class="icon-wrapper">
                 <img v-if="rooms[user_id].avatar" :src="$ip + user_id + '/avatar.webp?' + Date.now()" class="icon" />
-                <img v-else src="/avatar.webp" class="icon">
+                <img v-else src="/images/avatar.webp" class="icon">
 
                 <div v-show="rooms[user_id].online" class="online" />
             </div>
@@ -18,8 +18,8 @@
                 </div>
                 <div class="message">
                     <div v-if="rooms[user_id].user == $user.id && !rooms[user_id].typing" class="view-wrapper">
-                        <img v-show="!rooms[user_id].viewed" src="/unreed.webp" class="view unseen" />
-                        <img v-show="rooms[user_id].viewed" src="/readed.webp" class="view seen" />
+                        <img v-show="!rooms[user_id].viewed" src="/images/unreed.webp" class="view unseen" />
+                        <img v-show="rooms[user_id].viewed" src="/images/readed.webp" class="view seen" />
                     </div>
                     <template v-else>
                         <div v-show="rooms[user_id].typing" class="snippet">

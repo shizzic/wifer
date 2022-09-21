@@ -1,6 +1,6 @@
 <template>
 	<div class="none" :class="{ show: show, hide: !show }">
-        <img src="/back.webp" class="back" @click="$chat.set({ field: 'show', value: null })" />
+        <img src="/images/back.webp" class="back" @click="$chat.set({ field: 'show', value: null })" />
         <span>{{ lang }}</span>
 	</div>
 </template>

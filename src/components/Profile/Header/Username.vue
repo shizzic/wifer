@@ -1,7 +1,7 @@
 <template>
     <div class="wrap">
         <div class="username">
-            <img v-show="premium > 0" src="/premium.webp" />
+            <img v-show="premium > 0" src="/images/premium.webp" />
             <!-- <img v-show="premium === 2" src="/diamond.webp" /> -->
             <span>{{ username }}</span>
             <div class="ring-container">

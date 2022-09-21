@@ -10,7 +10,7 @@
 		</div>
 
 		<footer>
-			<img src="/18+.webp">
+			<img src="/images/18+.webp">
 
 			<div id="footer-wrap">
 				<div id="terms">

@@ -1,6 +1,6 @@
 <template>
     <div class="time">
-        <img src="/added.webp" />
+        <img src="/images/added.webp" />
         <span>{{ getDate(time) }}</span>
     </div>
 </template>
