@@ -30,7 +30,7 @@ app
 
 app.config.globalProperties.$domain     = "https://wifer-test.ru:450/"
 app.config.globalProperties.$domainName = "wifer-test.ru:450/"
-app.config.globalProperties.$ip         = "http://wifer-test:81/"
+app.config.globalProperties.$ip         = "https://wifer-test:82/"
 app.config.globalProperties.$lang       = langJS()
 app.config.globalProperties.$user       = userJS()
 app.config.globalProperties.$nav        = navJS()
