@@ -7,6 +7,7 @@ export const userJS = defineStore("user", {
         id: useStorage("id", null),
         templates: useStorage("templates", null),
         cookies: useStorage("cookies", null),
+        terms: useStorage("terms", false),
 
         avatar: false,
         username: "",

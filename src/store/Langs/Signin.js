@@ -14,6 +14,12 @@ export const SigninJS = defineStore("Signin", {
                 }
             }
         },
+        terms() {
+            return {
+                en: "I have read and accepted the",
+                ru: "Я прочитал/а и принимаю данные"
+            }
+        },
         input() {
             return {
                 en: "Email",

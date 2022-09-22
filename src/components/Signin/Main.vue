@@ -1,11 +1,12 @@
 <template>
 	<div class="wrap scroll">
 		<Title :l="l" :lang="lang.title" />
-		<Api :success="success" :response="response" :l="l" />
+		<Api :success="success" :response="response" :l="l" :terms="terms" />
 
 		<Form name="signin" @submit="signin">
 			<Email :title="lang.input[l]" :error="lang.error[l]" />
-			<button>{{ lang.button[l] }}</button>
+			<Accept :terms="terms" :lang="lang.terms[l]" />
+			<button :disabled="!terms">{{ lang.button[l] }}</button>
 		</Form>
 	</div>
 </template>
@@ -16,6 +17,7 @@ import { SigninJS } from "@/store/Langs/Signin"
 import Title from "@/components/Signin/Title.vue"
 import Api from "@/components/Signin/Api/Main.vue"
 import Email from "@/components/Signin/Form/Email.vue"
+import Accept from "@/components/Signin/Form/Accept.vue"
 import { Form } from 'vee-validate'
 export default {
 	name: "Signin",
@@ -24,7 +26,8 @@ export default {
 		Title,
 		Api,
 		Form,
-		Email
+		Email,
+		Accept
 	},
 	setup() {
         const lang 	   = SigninJS()
@@ -37,6 +40,11 @@ export default {
 			response,
 			success,
 			email
+		}
+	},
+	computed: {
+		terms() {
+			return this.$user.terms
 		}
 	},
 	beforeMount() {

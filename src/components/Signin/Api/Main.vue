@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper">
-		<Google @signin="signin" />
-		<Facebook @signin="signin" />
+		<Google @signin="signin" :terms="terms" />
+		<!-- <Facebook @signin="signin" /> -->
 	</div>
 </template>
 
@@ -10,7 +10,7 @@ import Google from "@/components/Signin/Api/Google.vue"
 import Facebook from "@/components/Signin/Api/Facebook.vue"
 export default {
 	name: "Api",
-	props: ["l", "success", "response"],
+	props: ["l", "success", "response", "terms"],
 	components: {
 		Google,
 		Facebook
