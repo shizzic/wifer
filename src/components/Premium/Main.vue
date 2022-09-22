@@ -128,6 +128,10 @@ img {
 	margin-bottom: 3px;
 }
 
+a {
+	color: #551A8B;
+}
+
 a:active {
 	color: blue;
 	text-decoration: none;
