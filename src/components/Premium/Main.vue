@@ -16,7 +16,7 @@
 				<div id="terms">
 					<a href="https://app.termly.io/document/terms-of-use-for-website/6bcad083-6995-488c-afa5-34cb4a635dfc" target="_blank">Terms and Conditions</a>
 					<a href="https://app.termly.io/document/privacy-policy/af3f50ee-eb72-4321-9af6-f722baaa418e" target="_blank">Privacy Policy</a>
-					<a href="" target="_blank">Return Policy</a>
+					<a href="https://app.termly.io/document/return-policy/19d7baaf-0369-4915-bc3f-86fa5ab78146" target="_blank">Return Policy</a>
 				</div>
 
 				<span>{{ age[l] }}</span>
