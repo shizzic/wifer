@@ -35,10 +35,10 @@ label {
     width: 100%;
     color: #fff;
     font-size: 19px;
-    text-align: center;
 
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 input {
