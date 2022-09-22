@@ -45,6 +45,8 @@ export default {
 			else
 				this.makeOnline(true)
 		})
+
+		this.visit()
 	},
 	methods: {
 		makeOnline(value) {
@@ -73,6 +75,11 @@ export default {
 		},
 		checkPremium() {
 			this.$user.checkPremium(this.$domain)
+		},
+		visit() {
+			fetch(this.$domain + "visit", {
+				method: "POST"
+			})
 		}
 	}
 }
