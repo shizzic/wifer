@@ -49,7 +49,12 @@ export const chatJS = defineStore("chat", {
                     this.addRoom(data, true, "text")
                     this.rooms[data.user].typing = false
                     this.rooms[data.user].viewed = false
-                    this.rooms[data.user].news  += 1
+
+                    if (Number.isInteger(this.rooms[data.user].news))
+                        this.rooms[data.user].news += 1
+                    else
+                        this.rooms[data.user].news = 1
+
                     this.rooms[data.user].user   = data.user
 
                     this.messages[data.user].typing = false
@@ -102,8 +107,14 @@ export const chatJS = defineStore("chat", {
 		},
 
         addRoom(data, newMessage, field = null) {
-            if (newMessage && (!this.rooms[data.user] || this.rooms[data.user].viewed))
+            // OLD VERSION OF CHECKING
+            // if (newMessage && (!this.rooms[data.user] || this.rooms[data.user].viewed))
+            //     navJS().setHearts(navJS().messages + 1, "messages")
+
+            if (newMessage) {
+                this.rooms[data.user].viewed = false
                 navJS().setHearts(navJS().messages + 1, "messages")
+            }
 
             if (!this.rooms[data.user]) {
                 data._id              = data.user

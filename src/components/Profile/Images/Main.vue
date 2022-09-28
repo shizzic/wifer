@@ -477,6 +477,10 @@ export default {
         padding-right: 0;
     }
 
+    .images-wrapper {
+        justify-content: center;
+    }
+
     .image-wrap {
         margin-right: 15px;
         margin-bottom: 15px;
@@ -643,6 +647,10 @@ export default {
 .icon {
     width: 20px;
     filter: invert(100%) sepia(3%) saturate(7472%) hue-rotate(50deg) brightness(108%) contrast(108%);
+}
+
+a {
+    margin-left: 0;
 }
 </style>
 

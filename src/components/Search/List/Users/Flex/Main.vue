@@ -35,7 +35,8 @@ export default {
 	display: flex;
 	flex-direction: column;
 
-	margin-bottom: 15px;
+	margin: 5px;
+	margin-bottom: 10px;
 }
 
 img {
@@ -74,12 +75,22 @@ img {
     .user {
 		width: 100%;
 		height: 400px;
+
+		margin: 0;
+		margin-bottom: 10px;
     }
 }
 
-@media screen and (min-width: 401px) and (max-width: 700px) {
+@media screen and (min-width: 400px) and (max-width: 558px) {
     .user {
-        width: 48.5%;
+        width: 47%;
+		height: 400px;
+    }
+}
+
+@media screen and (min-width: 558px) and (max-width: 700px) {
+    .user {
+        width: 48%;
 		height: 400px;
     }
 }
@@ -90,28 +101,35 @@ img {
 	}
 
     .user {
-        width: 32.5%;
+        width: 48%;
 		height: 400px;
     }
 }
 
-@media screen and (min-width: 790px) and (max-width: 1150px) {
+@media screen and (min-width: 790px) and (max-width: 953px) {
     .user {
-        width: 48.5%;
+        width: 47%;
 		height: 420px;
     }
 }
 
-@media screen and (min-width: 1150px) and (max-width: 1500px) {
+@media screen and (min-width: 953px) and (max-width: 1204px) {
     .user {
-        width: 32.5%;
+        width: 48%;
 		height: 420px;
     }
 }
 
-@media screen and (min-width: 1500px) and (max-width: 2000px) {
+@media screen and (min-width: 1204px) and (max-width: 1500px) {
     .user {
-        width: 32.5%;
+        width: 32%;
+		height: 420px;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .user {
+        width: 32%;
 		height: 480px;
     }
 }
