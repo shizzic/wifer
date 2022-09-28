@@ -38,11 +38,11 @@ export const PremiumJS = defineStore("Premium", {
             return {
                 en: {
                     text: "Just the best website for sugar daddy/baby relationship",
-                    reasons: "by price, by speed, by service"
+                    reasons: " by price, by speed, by service"
                 },
                 ru: {
                     text: "Просто лучший веб-сайт для отношений вида спонсор/содержанка",
-                    reasons: "по цене, по скорости, по сервису"
+                    reasons: " по цене, по скорости, по сервису"
                 }
             }
         },

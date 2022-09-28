@@ -1,7 +1,7 @@
 <template>
 	<div class="square">
         <h2>{{ lang.title }}</h2>
-        <span>1. {{ lang.without }}</span>
+        <span>1. {{ lang.without }} </span>
         <span>2. {{ lang.multiple }}</span>
     </div>
 </template>

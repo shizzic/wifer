@@ -4,7 +4,7 @@
 
         <div class="block">
             <span>{{ lang.text }}</span>
-            <span>{{ lang.reasons }}</span>
+            <span> {{ lang.reasons }}</span>
         </div>
     </div>
 </template>

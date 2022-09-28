@@ -28,8 +28,8 @@ app
 .use(vClickOutside)
 .use(vue3GoogleLogin, { clientId: '151585600074-mlb946h3m89a7o7tbg3kfnu54kbhc46k.apps.googleusercontent.com' })
 
-app.config.globalProperties.$domain     = "https://wifer-test.ru:450/"
-app.config.globalProperties.$domainName = "wifer-test.ru:450/"
+app.config.globalProperties.$domain     = "https://wifer-test.ru/"
+app.config.globalProperties.$domainName = "wifer-test.ru/"
 app.config.globalProperties.$ip         = "https://wifer-test.ru:82/"
 app.config.globalProperties.$lang       = langJS()
 app.config.globalProperties.$user       = userJS()
