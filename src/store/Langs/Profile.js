@@ -11,7 +11,11 @@ export const ProfileJS = defineStore("Profile", {
                 ru: {
                     "title": "Вход",
                     "text": "Кулити, если ты хочешь лучший опыт знакомств в инете, тогда присаживайся к столу :)"
-                }
+                },
+                de: {
+                    "title": "Eintreten",
+                    "text": "Hallo! Wenn Sie den besten Zucker im Internet wollen, dann willkommen an Bord :)"
+                },
             }
         },
         errors() {
@@ -23,19 +27,25 @@ export const ProfileJS = defineStore("Profile", {
                 ru: {
                     "int": "Индификатор должен состоять только из цифр",
                     "server": "Что-то случилось с сервером. Попробуйте снова"
-                }
+                },
+                de: {
+                    "int": "ID darf nur Ganzzahlen enthalten",
+                    "server": "Auf einem Server ist etwas passiert. Versuchen Sie es nochmal"
+                },
             }
         },
         response() {
             return {
                 en: "User doesn't exist or has been banned",
-                ru: "Пользователь не существует или был забанен"
+                ru: "Пользователь не существует или был забанен",
+                de: "Benutzer existiert nicht oder wurde gesperrt",
             }
         },
         success() {
             return {
                 en: "You signed in. Enjoy yourself :)",
-                ru: "Вы вошли. Развлекайтесь :)"
+                ru: "Вы вошли. Развлекайтесь :)",
+                de: "Du hast dich angemeldet. Viel Spaß :)",
             }
         },
         cropper() {
@@ -59,7 +69,17 @@ export const ProfileJS = defineStore("Profile", {
                     "max_size": "Максимальный размер фотки 3 мб",
                     "error": "Что-то случилось с сервером, попробуйте снова",
                     "success": "Фотка добавлена)"
-                }
+                },
+                de: {
+                    "upload": "Hochladen",
+                    "public": "Öffentlichkeit",
+                    "private": "Privatgelände",
+                    "cancel": "Absagen",
+                    "max_size": "Die maximale Bildgröße beträgt 3 MB",
+                    "max_image": "Sie können bis zu 20 Bilder haben",
+                    "error": "Auf dem Server ist ein Fehler aufgetreten. Versuchen Sie es erneut",
+                    "success": "Bild wurde hinzugefügt)"
+                },
             }
         }
     }

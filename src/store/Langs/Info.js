@@ -51,6 +51,30 @@ export const InfoJS = defineStore("Info", {
                     about: "Об",
                     prefer: "Предпочитаю",
                     images: "Фотки"
+                },
+                de: {
+                    premium: "Prämie",
+                    templates: "Vorlagen",
+                    locations: "Standorte",
+                    username: "Nutzername",
+                    title: "Dein Titel",
+                    sex: "Sex",
+                    age: "Das Alter",
+                    height: "Höhe (cm)",
+                    weight: "Gewicht (kg)",
+                    country: "Land",
+                    city: "Stadt",
+                    body: "Körpertyp",
+                    smokes: "Rauch",
+                    drinks: "Getränk",
+                    ethnicity: "Ethnizität",
+                    income: "Jahreseinkommen $",
+                    industry: "Industrie",
+                    search: "Suchen",
+                    children: "Kinder",
+                    about: "Um",
+                    prefer: "Vorziehen",
+                    images: "Fotos"
                 }
             }
         },
@@ -112,7 +136,7 @@ export const InfoJS = defineStore("Info", {
                     industry: {
                         1: "IT",
                         2: "Marketing",
-                        3: "Constuction",
+                        3: "Construction",
                         4: "Banks",
                         5: "Art and design",
                         6: "Education",
@@ -235,6 +259,96 @@ export const InfoJS = defineStore("Info", {
                         2: "Мужчин",
                         3: "Всех"
                     }
+                },
+                de: {
+                    premium: {
+                        0: "Hat nicht",
+                        1: "Haben"
+                    },
+                    sex: {
+                        1: "Mann",
+                        2: "Frau"
+                    },
+                    body: {
+                        1: "Schlank",
+                        2: "Sportlich",
+                        3: "Durchschnitt",
+                        4: "Kurvig",
+                        5: "Ein paar Pfunde mehr",
+                        6: "Übergewicht",
+                        7: "Sonstiges"
+                    },
+                    smokes: {
+                        1: "Nein",
+                        2: "Manchmal",
+                        3: "Ja"
+                    },
+                    drinks: {
+                        1: "Nein",
+                        2: "Manchmal",
+                        3: "Ja"
+                    },
+                    ethnicity: {
+                        1: "Asiatisch",
+                        2: "Schwarz",
+                        3: "Latein",
+                        4: "indisch",
+                        5: "Naher Osten",
+                        6: "Amerikanischer Ureinwohner",
+                        7: "Weiß",
+                        8: "Gemischt",
+                        9: "Sonstiges"
+                    },
+                    income: {
+                        1: "10 000 - 25 000",
+                        2: "25 000 - 50 000",
+                        3: "50 000 - 75 000",
+                        4: "75 000 - 100 000",
+                        5: "100 000 - 150 000",
+                        6: "150 000 - 200 000",
+                        7: "200 000 - 250 000",
+                        8: "250 000 - 300 000",
+                        9: "300 000 - 350 000",
+                        10: "350 000 - 400 000",
+                        11: "400 000 - 500 000",
+                        12: "More than 500 000"
+                    },
+                    industry: {
+                        1: "IT",
+                        2: "Marketing",
+                        3: "Konstruktion",
+                        4: "Banken",
+                        5: "Kunst und Design",
+                        6: "Ausbildung",
+                        7: "Essen",
+                        8: "Maschinenbau",
+                        9: "Gesundheitspflege",
+                        10: "Regierung",
+                        11: "Medien",
+                        12: "Selbstständiger",
+                        13: "Sport",
+                        14: "Verkauf",
+                        15: "Gesetz",
+                        16: "Geschäft",
+                        17: "Sonstiges"
+                    },
+                    search: {
+                        1: "Beziehungen",
+                        2: "Die Ehe",
+                        3: "Einmal Sex",
+                        4: "Langfristiger Sex",
+                        5: "Freund/Freundin",
+                        6: "Reisen",
+                        7: "Fetisch",
+                        8: "Platonische Liebe",
+                        9: "Keine Ahnung",
+                        10: "Investor/Investorin"
+                    },
+                    prefer: {
+                        1: "Frauen",
+                        2: "Männer",
+                        3: "Beide"
+                    }
                 }
             }
         },
@@ -242,7 +356,8 @@ export const InfoJS = defineStore("Info", {
         about() {
             return {
                 en: "This section han't filled yet",
-                ru: "Это блок пока-что не заполнен"
+                ru: "Это блок пока-что не заполнен",
+                de: "Dieser Abschnitt ist noch nicht gefüllt"
             }
         }
     }

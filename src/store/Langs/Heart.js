@@ -4,8 +4,9 @@ export const HeartJS = defineStore("Heart", {
     getters: {
         what() {
             return {
-                en: [ "Views", "Likes", "Privates", "Chat access"],
-                ru: [ "Просмотры", "Лайки", "Приватки", "Доступ на переписку"]
+                en: ["Views", "Likes", "Privates", "Chat access"],
+                ru: ["Просмотры", "Лайки", "Приватки", "Доступ на переписку"],
+                de: ["Ansichten", "Likes", "Private", "Chat-Zugriff"]
             }
         },
         text() {
@@ -16,6 +17,9 @@ export const HeartJS = defineStore("Heart", {
                     ],
                     ru: [
                         "Вы точно хотите удалить этого юзера из избранных?",
+                    ],
+                    de: [
+                        "Sind Sie sicher, dass Sie diesen Benutzer aus Ihren Favoriten löschen möchten?"
                     ]
                 },
                 private: {
@@ -26,6 +30,10 @@ export const HeartJS = defineStore("Heart", {
                     ru: [
                         "1. Уверенны, что хотите выйти?",
                         "2. Этот юзер больше не сможет просматривать ваши приватные фотки"
+                    ],
+                    de: [
+                        "1. Möchten Sie den privaten Zugriff wirklich entfernen?",
+                        "2. Dieser Benutzer kann Ihre privaten Bilder nicht mehr sehen"
                     ]
                 },
                 access: {
@@ -38,6 +46,11 @@ export const HeartJS = defineStore("Heart", {
                         "1. Уверенны, что хотите забрать доступ к чату для этого юзера?",
                         "2. Этот юзер больше не сможет писать вам без премиума",
                         "3. Этот юзер больше не сможет просматривать старые сообщения без премиума"
+                    ],
+                    de: [
+                        "1. Möchten Sie diesem Nutzer wirklich den Chat-Zugriff entziehen?",
+                        "2. Dieser Benutzer kann Ihnen ohne Premium keine SMS mehr senden",
+                        "3. Und ohne Premium kann er frühere Nachrichten in Ihrer Konversation nicht sehen"
                     ]
                 }
             }
@@ -45,7 +58,8 @@ export const HeartJS = defineStore("Heart", {
         submit() {
             return {
                 en: "Submit",
-                ru: "Подтвердить"
+                ru: "Подтвердить",
+                de: "Einreichen"
             }
         }
     }

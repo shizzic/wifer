@@ -3,18 +3,21 @@
         <template v-if="!trial">
             <h2>{{ lang.trial }}</h2>
             <div id="trial">
-                <span @click="getTrial">{{ lang.try }}</span>
+                <span v-if="id != null" @click="getTrial" class="try">{{ lang.try }}</span>
+                <router-link v-else :to="{ name: 'signin' }" class="try">{{ lang.try }}</router-link>
             </div>
         </template>
         
         <h2>{{ lang.month }}</h2>
         <div id="pay">
-            <span v-show="premium === 0">{{ lang.not }}</span>
-            <span v-show="premium > 0">{{ lang.extend }}</span>
+            <span id="dollar">{{ price }}$</span>
+            <PayPal v-if="id != null && priceSelected" :response="response" :price="price" />
+            <!-- <span v-show="premium === 0">{{ lang.not }}</span>
+            <span v-show="premium > 0">{{ lang.extend }}</span> -->
         </div>
 
         <template v-if="premium > 0">
-            <h2 style="margin-top: 15px;">{{ lang.expires }}</h2>
+            <h2>{{ lang.expires }}</h2>
 
             <div class="time">
                 <span class="digit">{{timer.days}}</span>:<span class="digit">{{timer.hours}}</span>:<span class="digit">{{timer.minutes}}</span>:<span class="digit">{{timer.seconds}}</span>
@@ -25,20 +28,39 @@
 
 <script scoped>
 import { useTimer } from 'vue-timer-hook'
+import PayPal from "@/components/Premium/PayPal.vue"
 export default {
 	name: "Pay",
     props: ["lang", "response"],
+    components: {
+        PayPal
+    },
     computed: {
         trial() {
             return this.$user.trial
         },
         premium() {
             return this.$user.premium
+        },
+        id() {
+            return this.$user.id
+        },
+        price() {
+            return this.$country.price
+        },
+        priceSelected() {
+            return this.$country.priceSelected
         }
     },
     data() {
         return {
             timer: null
+        }
+    },
+    watch: {
+        premium(n) {
+            if (n > 0)
+                this.setTimer()
         }
     },
     beforeMount() {
@@ -91,7 +113,8 @@ export default {
     align-items: center;
 }
 
-#pay span, #trial span {
+.try {
+    text-decoration: none;
     cursor: pointer;
     font-size: 18px;
     background-color: #ffc107;
@@ -99,12 +122,12 @@ export default {
     border-radius: 6px;
 
     display: inline-block;
-    padding: 8px 15px;
+    padding: 6px 20px;
 
     transition: background-color .1s linear;
 }
 
-#pay span:hover, #trial span:hover {
+.try:hover, .try:hover {
     background-color: #e0a800;
 }
 
@@ -117,6 +140,19 @@ h2 {
     text-align: center;
 
     margin-bottom: 10px;
+}
+
+#pay {
+    display: flex;
+    flex-direction: column;
+}
+
+#dollar {
+    color: rgb(225, 51, 51);
+    font-size: 22px;
+    font-weight: 700;
+
+    margin-bottom: 15px;
 }
 
 .time {

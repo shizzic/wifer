@@ -15,7 +15,7 @@ export const userJS = defineStore("user", {
         premium: 0,
         first: false
     }),
-    actions:{
+    actions: {
         set(data) {
             this[data.field] = data.value
         },
@@ -26,7 +26,7 @@ export const userJS = defineStore("user", {
 			})
                 .then(data => {
                     if (data.status === 401)
-                        this.$user.logout(domain)
+                        this.logout(domain)
                     else
                         return data.json()
                 })

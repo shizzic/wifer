@@ -72,6 +72,8 @@ export default {
 				clearInterval(this.interval)
 				this.interval = null
 			}
+
+			this.$country.getPrice()
 		},
 		checkPremium() {
 			this.$user.checkPremium(this.$domain)

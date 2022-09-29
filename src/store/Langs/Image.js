@@ -5,13 +5,15 @@ export const ImageJS = defineStore("Image", {
         delete() {
             return {
                 en: "Image was successfully deleted",
-                ru: "Фотка была удалена"
+                ru: "Фотка была удалена",
+                de: "Bild wurde erfolgreich gelöscht",
             }
         },
         error() {
             return {
                 en: "Bad request. Try again",
-                ru: "Че то шальнуло. Попробуй снова)"
+                ru: "Че то шальнуло. Попробуй снова)",
+                de: "Ungültige Anforderung. Versuchen Sie es nochmal",
             }
         }
     }

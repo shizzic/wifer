@@ -15,37 +15,48 @@ export const SearchJS = defineStore("Search", {
                     hold: "Текст, который вы бы хотели увидеть",
                     full: "Искать по фразе целиком",
                     is: "Юзер заполнил \"Обо мне\""
-                }
+                },
+                de: {
+                    title: "Profiltext",
+                    hold: "Text, den Sie von Benutzern sehen möchten",
+                    full: "Ganzen Satz suchen",
+                    is: "Benutzer hat \"Über mich\" ausgefüllt"
+                },
             }
         },
         images() {
             return {
                 en: "User has avatar",
-                ru: "Юзер добавил аватарку"
+                ru: "Юзер добавил аватарку",
+                de: "Benutzer hat Avatar",
             }
         },
         search() {
             return {
                 en: "Search",
-                ru: "Поиск"
+                ru: "Поиск",
+                de: "Suche",
             }
         },
         clear() {
             return {
                 en: "Clear",
-                ru: "Отчистить"
+                ru: "Отчистить",
+                de: "Klar",
             }
         },
         photos() {
             return {
                 en: "Photo",
-                ru: "Фото"
+                ru: "Фото",
+                de: "Foto",
             }
         },
         founded() {
             return {
                 en: "Founded",
-                ru: "Найдено"
+                ru: "Найдено",
+                de: "Gegründet",
             }
         },
         sort() {
@@ -57,7 +68,11 @@ export const SearchJS = defineStore("Search", {
                 ru: {
                     last_time: "Активность",
                     created_at: "Новые"
-                }
+                },
+                de: {
+                    last_time: "Aktivität",
+                    created_at: "Neueste"
+                },
             }
         },
         template() {
@@ -75,7 +90,14 @@ export const SearchJS = defineStore("Search", {
                     select: "Выбрать шаблон",
                     count: "Вы не можете иметь больше 10 шаблонов",
                     blank: "Название шаблона не может быть пустым"
-                }
+                },
+                de: {
+                    input: "Titel",
+                    hold: "Neue Vorlage",
+                    select: "Vorlage auswählen",
+                    count: "Sie können nicht mehr als 10 Vorlagen haben",
+                    blank: "Der Titel der Vorlage darf nicht leer sein"
+                },
             }
         }
     }

@@ -5,7 +5,8 @@ export const CookiesJS = defineStore("Cookies", {
         text() {
             return {
                 en: "I use cookies to improve your experience :)",
-                ru: "Я использую cookie для вашего комфорта :)"
+                ru: "Я использую cookie для вашего комфорта :)",
+                de: "Ich verwende Cookies, um Ihre Erfahrung zu verbessern :)"
             }
         }
     }
