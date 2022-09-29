@@ -1,7 +1,7 @@
 <template>
 	<div class="lang">
-        <div v-for="(elem, index) in $lang.languages" :key="index" class="elem" :class="{ active : elem === l }"
-        @click="$lang.setLang(elem)">
+        <div v-for="(elem, index) in $lang.languages" :key="index" class="elem" :class="{ active : index === l }"
+        @click="$lang.setLang(index)">
             {{ elem }}
         </div>
     </div>
@@ -29,6 +29,10 @@ export default {
     color: #5C5C5C;
     background-color: #E3E3E3;
     border-radius: 40px;
+    height: 30.8px;
+
+    display: flex;
+    align-items: center;
 
     padding: 5px 20px;
     margin-bottom: 10px;

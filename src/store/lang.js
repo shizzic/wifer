@@ -4,7 +4,14 @@ import { useStorage } from "@vueuse/core"
 export const langJS = defineStore("lang", {
     state: () =>({
         lang: useStorage("lang", null),
-        languages: ["en", "ru", "de", "fr", "es"]
+        languages: {
+            en: "en",
+            ru: "ru",
+            de: "de",
+            fr: "fr",
+            es: "es",
+            zh: "中文(简)"
+        }
     }),
     actions:{
         setLang(value) {
@@ -13,16 +20,15 @@ export const langJS = defineStore("lang", {
 
         autoLang(value) {
             let lang  = value.split("-")[0]
-            let index = this.languages.indexOf(lang)
 
-            if (index === -1)
-                this.lang = "en"
-            else
+            if (lang in this.languages)
                 this.lang = lang
+            else
+                this.lang = "en"
         },
 
         correctLang(value) {
-            if (!this.languages.includes(value))
+            if (!(value in this.languages))
                 this.autoLang(navigator.language)
         }
     }
