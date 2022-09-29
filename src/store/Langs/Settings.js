@@ -24,6 +24,11 @@ export const SettingsJS = defineStore("Settings", {
                     title: "Pour attirer l'attention",
                     about: "A propos de vous et de qui vous cherchez :)"
                 },
+                es: {
+                    username: "Su nombre de usuario",
+                    title: "Para llamar la atencion",
+                    about: "Sobre ti y a quién buscas :)"
+                },
             }
         },
         blank() {
@@ -32,6 +37,7 @@ export const SettingsJS = defineStore("Settings", {
                 ru: "Пусто",
                 de: "Leer",
                 fr: "Blanc",
+                es: "Vacío",
             }
         },
         buttons() {
@@ -51,6 +57,10 @@ export const SettingsJS = defineStore("Settings", {
                 fr: {
                     save: "Sauvegarder",
                     cancel: "Annuler"
+                },
+                es: {
+                    save: "Ahorrar",
+                    cancel: "Cancelar"
                 },
             }
         },
@@ -80,6 +90,12 @@ export const SettingsJS = defineStore("Settings", {
                     available: "Disponible",
                     taken: "Ce nom d'utilisateur est déjà utilisé"
                 },
+                es: {
+                    required: "Necesitas un nombre de usuario :)",
+                    space: "No puedes usar espacios para el nombre de usuario",
+                    available: "Disponible",
+                    taken: "El nombre de usuario ya esta siendo usado"
+                },
             }
         },
         response() {
@@ -104,6 +120,11 @@ export const SettingsJS = defineStore("Settings", {
                     1: "Ce nom d'utilisateur est déjà utilisé",
                     2: "Le compte n'a pas changé. Réessayer"
                 },
+                es: {
+                    0: "Validación fallida",
+                    1: "Dicho nombre de usuario ya se utiliza",
+                    2: "La cuenta no ha cambiado. Intentar otra vez"
+                },
             }
         },
         success() {
@@ -112,6 +133,7 @@ export const SettingsJS = defineStore("Settings", {
                 ru: "Ваша инфа была изменена",
                 de: "Ihre Daten wurden geändert",
                 fr: "Vos informations ont été modifiées",
+                es: "Tu información fue cambiada",
             }
         }
     }

@@ -20,6 +20,10 @@ export const PremiumJS = defineStore("Premium", {
                     text: "Désormais enregistré",
                     users: "utilisateurs"
                 },
+                es: {
+                    text: "Por ahora registrado",
+                    users: "usuarios"
+                },
             }
         },
         pay() {
@@ -48,6 +52,12 @@ export const PremiumJS = defineStore("Premium", {
                     try: "Essayer",
                     expires: "Expire dans"
                 },
+                es: {
+                    month: "Prima de 30 días",
+                    trial: "Prueba durante 7 días",
+                    try: "Probar",
+                    expires: "Expira en"
+                },
             }
         },
         luckriza() {
@@ -68,6 +78,10 @@ export const PremiumJS = defineStore("Premium", {
                     text: "Juste le meilleur site Web pour la relation Sugar Daddy / Baby",
                     reasons: " par prix, par rapidité, par service"
                 },
+                es: {
+                    text: "Simplemente el mejor sitio web para la relación sugar daddy/bebé",
+                    reasons: " por precio, por velocidad, por servicio"
+                },
             }
         },
         freeChat() {
@@ -87,6 +101,10 @@ export const PremiumJS = defineStore("Premium", {
                 fr: {
                     title: "Chat gratuit",
                     text: "Avec tous ceux qui vous ont donné accès à leur envoyer des SMS sans surcoût :)"
+                },
+                es: {
+                    title: "Chat gratis",
+                    text: "Con todos los que te dieron acceso para enviarles mensajes de texto sin prima :)"
                 },
             }
         },
@@ -111,6 +129,11 @@ export const PremiumJS = defineStore("Premium", {
                     title: "Recherche mondiale",
                     without: "Vous pouvez rechercher des utilisateurs sans sélectionner de pays",
                     multiple: "Vous pouvez spécifier plusieurs pays et villes pour la recherche"
+                },
+                es: {
+                    title: "Búsqueda mundial",
+                    without: "Puede buscar usuarios sin seleccionar el país",
+                    multiple: "Puede especificar varios países y ciudades para la búsqueda"
                 },
             }
         },
@@ -147,6 +170,14 @@ export const PremiumJS = defineStore("Premium", {
                     subject: "Matière",
                     message: "Message",
                     send: "Envoyer"
+                },
+                es: {
+                    title: "Contáctame",
+                    name: "Nombre",
+                    email: "Email",
+                    subject: "Sujeta",
+                    message: "Mensaje",
+                    send: "Enviar"
                 },
             }
         },
@@ -185,6 +216,14 @@ export const PremiumJS = defineStore("Premium", {
                     payError: "Il semble que ce paiement ait déjà été utilisé ou n'existe pas du tout. Vérifiez la politique de remboursement.",
                     payed: "Merci d'avoir acheté ma prime. Prendre plaisir :)"
                 },
+                es: {
+                    success: "Su mensaje fue entregado con éxito a mí. Responderé tan pronto como pueda :)",
+                    error: "Lo siento, algo salió mal. Vuelva a intentarlo más tarde",
+                    trial: "Ya usaste tu prueba única. no puedes hacerlo de nuevo",
+                    trialSuccess: "Obtuvo con éxito su período de prueba. Disfrutar :)",
+                    payError: "Parece que este pago ya se usó o no existe en absoluto. Consultar política de devoluciones.",
+                    payed: "Gracias por comprar mi prima. Disfrutar :)"
+                },
             }
         },
 
@@ -194,6 +233,7 @@ export const PremiumJS = defineStore("Premium", {
                 ru: "Сайт для лиц старше 18-ти лет",
                 de: "Website nur für Personen über 18 Jahre",
                 fr: "Site réservé aux personnes de plus de 18 ans",
+                es: "Sitio web solo para personas mayores de 18 años.",
             }
         }
     }

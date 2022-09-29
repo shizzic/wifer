@@ -8,6 +8,7 @@ export const CookiesJS = defineStore("Cookies", {
                 ru: "Я использую cookie для вашего комфорта :)",
                 de: "Ich verwende Cookies, um Ihre Erfahrung zu verbessern :)",
                 fr: "J'utilise des cookies pour améliorer votre expérience :)",
+                es: "Utilizo cookies para mejorar tu experiencia :)",
             }
         }
     }

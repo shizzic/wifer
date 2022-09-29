@@ -28,6 +28,12 @@ export const SearchJS = defineStore("Search", {
                     full: "Rechercher une phrase entière",
                     is: "L'utilisateur a rempli \"À propos de moi\""
                 },
+                es: {
+                    title: "Texto de perfil",
+                    hold: "Texto que quieres ver de los usuarios",
+                    full: "Buscar frase completa",
+                    is: "El usuario completó \"Acerca de mí\""
+                },
             }
         },
         images() {
@@ -36,6 +42,7 @@ export const SearchJS = defineStore("Search", {
                 ru: "Юзер добавил аватарку",
                 de: "Benutzer hat Avatar",
                 fr: "L'utilisateur a un avatar",
+                es: "El usuario tiene avatar",
             }
         },
         search() {
@@ -44,6 +51,7 @@ export const SearchJS = defineStore("Search", {
                 ru: "Поиск",
                 de: "Suche",
                 fr: "Chercher",
+                es: "Búsqueda",
             }
         },
         clear() {
@@ -52,6 +60,7 @@ export const SearchJS = defineStore("Search", {
                 ru: "Отчистить",
                 de: "Klar",
                 fr: "Dégager",
+                es: "Claro",
             }
         },
         photos() {
@@ -60,6 +69,7 @@ export const SearchJS = defineStore("Search", {
                 ru: "Фото",
                 de: "Foto",
                 fr: "Photo",
+                es: "Foto",
             }
         },
         founded() {
@@ -68,6 +78,7 @@ export const SearchJS = defineStore("Search", {
                 ru: "Найдено",
                 de: "Gegründet",
                 fr: "Fondé",
+                es: "Fundado",
             }
         },
         sort() {
@@ -87,6 +98,10 @@ export const SearchJS = defineStore("Search", {
                 fr: {
                     last_time: "Activité",
                     created_at: "Le plus récent"
+                },
+                es: {
+                    last_time: "Actividad",
+                    created_at: "El mas nuevo"
                 },
             }
         },
@@ -119,6 +134,13 @@ export const SearchJS = defineStore("Search", {
                     select: "Sélectionnez le modèle",
                     count: "Vous ne pouvez pas avoir plus de 10 modèles",
                     blank: "Le titre du modèle ne peut pas être vide"
+                },
+                es: {
+                    input: "Título",
+                    hold: "Nueva plantilla",
+                    select: "Seleccionar plantilla",
+                    count: "No puedes tener más de 10 plantillas.",
+                    blank: "El título de la plantilla no puede estar en blanco"
                 },
             }
         }

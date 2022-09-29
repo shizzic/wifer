@@ -8,6 +8,7 @@ export const ImageJS = defineStore("Image", {
                 ru: "Фотка была удалена",
                 de: "Bild wurde erfolgreich gelöscht",
                 fr: "L'image a été supprimée avec succès",
+                es: "La imagen fue eliminada con éxito",
             }
         },
         error() {
@@ -16,6 +17,7 @@ export const ImageJS = defineStore("Image", {
                 ru: "Че то шальнуло. Попробуй снова)",
                 de: "Ungültige Anforderung. Versuchen Sie es nochmal",
                 fr: "Mauvaise demande. Réessayer",
+                es: "Solicitud incorrecta. Intentar otra vez",
             }
         }
     }

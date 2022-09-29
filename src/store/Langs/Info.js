@@ -100,6 +100,30 @@ export const InfoJS = defineStore("Info", {
                     prefer: "Préfère",
                     images: "Photos"
                 },
+                es: {
+                    premium: "De primera calidad",
+                    templates: "Plantillas",
+                    locations: "Ubicaciones",
+                    username: "Nombre de usuario",
+                    title: "Tu título",
+                    sex: "Sexo",
+                    age: "Años",
+                    height: "Altura (cm)",
+                    weight: "Peso (kg)",
+                    country: "País",
+                    city: "Ciudad",
+                    body: "Tipo de cuerpo",
+                    smokes: "Fumar",
+                    drinks: "Beber",
+                    ethnicity: "Etnicidad",
+                    income: "Ingreso anual $",
+                    industry: "Industria",
+                    search: "Buscando",
+                    children: "Niños",
+                    about: "Sobre",
+                    prefer: "Preferir",
+                    images: "Fotos"
+                },
             }
         },
         values() {
@@ -464,6 +488,96 @@ export const InfoJS = defineStore("Info", {
                         3: "Tous les deux"
                     }
                 },
+                es: {
+                    premium: {
+                        0: "No tiene",
+                        1: "Tener"
+                    },
+                    sex: {
+                        1: "Hombre",
+                        2: "Mujer"
+                    },
+                    body: {
+                        1: "Delgado",
+                        2: "Atlético",
+                        3: "Promedio",
+                        4: "Con curvas",
+                        5: "Unas libras extras",
+                        6: "Exceso de peso",
+                        7: "Otro"
+                    },
+                    smokes: {
+                        1: "No",
+                        2: "Algunas veces",
+                        3: "Sí"
+                    },
+                    drinks: {
+                        1: "No",
+                        2: "Algunas veces",
+                        3: "Sí"
+                    },
+                    ethnicity: {
+                        1: "Asiático/Asiático",
+                        2: "Negra/Negro",
+                        3: "Latino/Latina",
+                        4: "Indio/India",
+                        5: "Medio este",
+                        6: "Nativo americano",
+                        7: "Blanco/Blanca",
+                        8: "Mezclado/Mezclada",
+                        9: "Otro/Otra"
+                    },
+                    income: {
+                        1: "10 000 - 25 000",
+                        2: "25 000 - 50 000",
+                        3: "50 000 - 75 000",
+                        4: "75 000 - 100 000",
+                        5: "100 000 - 150 000",
+                        6: "150 000 - 200 000",
+                        7: "200 000 - 250 000",
+                        8: "250 000 - 300 000",
+                        9: "300 000 - 350 000",
+                        10: "350 000 - 400 000",
+                        11: "400 000 - 500 000",
+                        12: "More than 500 000"
+                    },
+                    industry: {
+                        1: "IT",
+                        2: "Marketing",
+                        3: "Construcción",
+                        4: "Bancos",
+                        5: "Arte y Diseño",
+                        6: "Educación",
+                        7: "Alimento",
+                        8: "Ingeniería",
+                        9: "Cuidado de la salud",
+                        10: "Gobierno",
+                        11: "Medios de comunicación",
+                        12: "Trabajadores por cuenta propia",
+                        13: "Deporte",
+                        14: "Ventas",
+                        15: "Ley",
+                        16: "Negocio",
+                        17: "Otra"
+                    },
+                    search: {
+                        1: "Relaciones",
+                        2: "Matrimonio",
+                        3: "Sexo de una sola vez",
+                        4: "Sexo a largo plazo",
+                        5: "Amigo/Amiga",
+                        6: "Viaje",
+                        7: "Fetiche",
+                        8: "Amor platonico",
+                        9: "No sé",
+                        10: "Inversor/Inversora"
+                    },
+                    prefer: {
+                        1: "Mujeres",
+                        2: "Hombres",
+                        3: "Hombres"
+                    }
+                },
             }
         },
 
@@ -473,6 +587,7 @@ export const InfoJS = defineStore("Info", {
                 ru: "Это блок пока-что не заполнен",
                 de: "Dieser Abschnitt ist noch nicht gefüllt",
                 fr: "Cette section n'est pas encore remplie",
+                es: "Esta sección aún no se ha llenado",
             }
         }
     }

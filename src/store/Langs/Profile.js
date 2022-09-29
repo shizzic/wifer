@@ -20,6 +20,10 @@ export const ProfileJS = defineStore("Profile", {
                     "title": "Entrer",
                     "text": "Bonjour! Si vous voulez le meilleur sucre sur le web, alors bienvenue à bord :)"
                 },
+                es: {
+                    "title": "Ingresar",
+                    "text": "¡Hola! Si quieres el mejor azúcar en la web, bienvenido a bordo :)"
+                },
             }
         },
         errors() {
@@ -40,6 +44,10 @@ export const ProfileJS = defineStore("Profile", {
                     "int": "L'identifiant ne doit contenir que des entiers",
                     "server": "Quelque chose est arrivé à un serveur. Réessayer"
                 },
+                es: {
+                    "int": "El ID debe contener solo números enteros",
+                    "server": "Algo le ocurrió a un servidor. Intentar otra vez"
+                },
             }
         },
         response() {
@@ -48,6 +56,7 @@ export const ProfileJS = defineStore("Profile", {
                 ru: "Пользователь не существует или был забанен",
                 de: "Benutzer existiert nicht oder wurde gesperrt",
                 fr: "L'utilisateur n'existe pas ou a été banni",
+                es: "El usuario no existe o ha sido prohibido",
             }
         },
         success() {
@@ -56,6 +65,7 @@ export const ProfileJS = defineStore("Profile", {
                 ru: "Вы вошли. Развлекайтесь :)",
                 de: "Du hast dich angemeldet. Viel Spaß :)",
                 fr: "Vous vous êtes connecté. Amusez-vous bien :)",
+                es: "Has iniciado sesión. Diviértete :)",
             }
         },
         cropper() {
@@ -99,6 +109,16 @@ export const ProfileJS = defineStore("Profile", {
                     "max_image": "Vous pouvez avoir jusqu'à 20 images",
                     "error": "Quelque chose s'est produit sur le serveur, réessayez",
                     "success": "L'image a été ajoutée)"
+                },
+                es: {
+                    "upload": "Subir",
+                    "public": "Público",
+                    "private": "Privada",
+                    "cancel": "Cancelar",
+                    "max_size": "El tamaño máximo de la imagen es de 3 MB",
+                    "max_image": "Puedes tener hasta 20 imágenes.",
+                    "error": "Algo le ocurrió al servidor, inténtalo de nuevo",
+                    "success": "Se agregó la imagen)"
                 },
             }
         }

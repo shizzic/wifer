@@ -8,6 +8,7 @@ export const HeartJS = defineStore("Heart", {
                 ru: ["Просмотры", "Лайки", "Приватки", "Доступ на переписку"],
                 de: ["Ansichten", "Likes", "Private", "Chat-Zugriff"],
                 fr: ["Vues", "Aime", "Privées", "Accès au chat"],
+                es: ["Puntos de vista", "Gustos", "Partes pudendas", "Acceso al chat"],
             }
         },
         text() {
@@ -24,6 +25,9 @@ export const HeartJS = defineStore("Heart", {
                     ],
                     fr: [
                         "Êtes-vous sûr de vouloir supprimer cet utilisateur de vos favoris?",
+                    ],
+                    es: [
+                        "¿Estás seguro de que quieres eliminar a este usuario de tus favoritos?",
                     ],
                 },
                 private: {
@@ -42,6 +46,10 @@ export const HeartJS = defineStore("Heart", {
                     fr: [
                         "1. Voulez-vous vraiment supprimer l'accès privé?",
                         "2. Cet utilisateur ne pourra plus voir vos images privées"
+                    ],
+                    es: [
+                        "1. ¿Seguro que quieres quitar el acceso privado?",
+                        "2. Este usuario ya no podrá ver tus imágenes privadas."
                     ],
                 },
                 access: {
@@ -65,6 +73,11 @@ export const HeartJS = defineStore("Heart", {
                         "2. Cet utilisateur ne pourra plus vous envoyer de SMS sans prime",
                         "3. Et il ne pourra pas voir les messages passés dans votre conversation sans prime"
                     ],
+                    es: [
+                        "1. ¿Estás seguro de que quieres quitarle el acceso al chat a este usuario?",
+                        "2. Este usuario ya no podrá enviarte mensajes de texto sin prima",
+                        "3. Y no podrá ver mensajes pasados ​​​​en tu conversación sin premium"
+                    ],
                 }
             }
         },
@@ -74,6 +87,7 @@ export const HeartJS = defineStore("Heart", {
                 ru: "Подтвердить",
                 de: "Einreichen",
                 fr: "Soumettre",
+                es: "Enviar",
             }
         }
     }
