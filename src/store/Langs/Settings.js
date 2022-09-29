@@ -19,6 +19,11 @@ export const SettingsJS = defineStore("Settings", {
                     title: "Aufmerksamkeit zu bekommen",
                     about: "Über dich selbst und wen du suchst :)"
                 },
+                fr: {
+                    username: "Votre nom d'utilisateur",
+                    title: "Pour attirer l'attention",
+                    about: "A propos de vous et de qui vous cherchez :)"
+                },
             }
         },
         blank() {
@@ -26,6 +31,7 @@ export const SettingsJS = defineStore("Settings", {
                 en: "Blank",
                 ru: "Пусто",
                 de: "Leer",
+                fr: "Blanc",
             }
         },
         buttons() {
@@ -41,6 +47,10 @@ export const SettingsJS = defineStore("Settings", {
                 de: {
                     save: "Speichern",
                     cancel: "Absagen"
+                },
+                fr: {
+                    save: "Sauvegarder",
+                    cancel: "Annuler"
                 },
             }
         },
@@ -64,6 +74,12 @@ export const SettingsJS = defineStore("Settings", {
                     available: "Verfügbar",
                     taken: "Dieser Benutzername wird bereits verwendet"
                 },
+                fr: {
+                    required: "Tu as besoin d'un nom d'utilisateur :)",
+                    space: "Vous ne pouvez pas utiliser d'espaces pour le nom d'utilisateur",
+                    available: "Disponible",
+                    taken: "Ce nom d'utilisateur est déjà utilisé"
+                },
             }
         },
         response() {
@@ -83,6 +99,11 @@ export const SettingsJS = defineStore("Settings", {
                     1: "Dieser Benutzername wird bereits verwendet",
                     2: "Konto hat sich nicht geändert. Versuchen Sie es nochmal"
                 },
+                fr: {
+                    0: "Validation échouée",
+                    1: "Ce nom d'utilisateur est déjà utilisé",
+                    2: "Le compte n'a pas changé. Réessayer"
+                },
             }
         },
         success() {
@@ -90,6 +111,7 @@ export const SettingsJS = defineStore("Settings", {
                 en: "Your info was changed",
                 ru: "Ваша инфа была изменена",
                 de: "Ihre Daten wurden geändert",
+                fr: "Vos informations ont été modifiées",
             }
         }
     }

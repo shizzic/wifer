@@ -22,6 +22,12 @@ export const SearchJS = defineStore("Search", {
                     full: "Ganzen Satz suchen",
                     is: "Benutzer hat \"Über mich\" ausgefüllt"
                 },
+                fr: {
+                    title: "Texte du profil",
+                    hold: "Texte que vous voulez voir des utilisateurs",
+                    full: "Rechercher une phrase entière",
+                    is: "L'utilisateur a rempli \"À propos de moi\""
+                },
             }
         },
         images() {
@@ -29,6 +35,7 @@ export const SearchJS = defineStore("Search", {
                 en: "User has avatar",
                 ru: "Юзер добавил аватарку",
                 de: "Benutzer hat Avatar",
+                fr: "L'utilisateur a un avatar",
             }
         },
         search() {
@@ -36,6 +43,7 @@ export const SearchJS = defineStore("Search", {
                 en: "Search",
                 ru: "Поиск",
                 de: "Suche",
+                fr: "Chercher",
             }
         },
         clear() {
@@ -43,6 +51,7 @@ export const SearchJS = defineStore("Search", {
                 en: "Clear",
                 ru: "Отчистить",
                 de: "Klar",
+                fr: "Dégager",
             }
         },
         photos() {
@@ -50,6 +59,7 @@ export const SearchJS = defineStore("Search", {
                 en: "Photo",
                 ru: "Фото",
                 de: "Foto",
+                fr: "Photo",
             }
         },
         founded() {
@@ -57,6 +67,7 @@ export const SearchJS = defineStore("Search", {
                 en: "Founded",
                 ru: "Найдено",
                 de: "Gegründet",
+                fr: "Fondé",
             }
         },
         sort() {
@@ -72,6 +83,10 @@ export const SearchJS = defineStore("Search", {
                 de: {
                     last_time: "Aktivität",
                     created_at: "Neueste"
+                },
+                fr: {
+                    last_time: "Activité",
+                    created_at: "Le plus récent"
                 },
             }
         },
@@ -97,6 +112,13 @@ export const SearchJS = defineStore("Search", {
                     select: "Vorlage auswählen",
                     count: "Sie können nicht mehr als 10 Vorlagen haben",
                     blank: "Der Titel der Vorlage darf nicht leer sein"
+                },
+                fr: {
+                    input: "Titre",
+                    hold: "Nouveau modèle",
+                    select: "Sélectionnez le modèle",
+                    count: "Vous ne pouvez pas avoir plus de 10 modèles",
+                    blank: "Le titre du modèle ne peut pas être vide"
                 },
             }
         }

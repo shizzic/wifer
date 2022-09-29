@@ -16,6 +16,10 @@ export const SigninJS = defineStore("Signin", {
                     "title": "Eintreten",
                     "text": "Hallo! Wenn Sie den besten Zucker im Internet wollen, dann willkommen an Bord :)"
                 },
+                fr: {
+                    "title": "Entrer",
+                    "text": "Bonjour! Si vous voulez le meilleur sucre sur le web, alors bienvenue à bord :)"
+                },
             }
         },
         terms() {
@@ -23,6 +27,7 @@ export const SigninJS = defineStore("Signin", {
                 en: "I have read and accepted the",
                 ru: "Я прочитал/а и принимаю данные",
                 de: "Ich habe die gelesen und akzeptiert",
+                fr: "J'ai lu et accepté",
             }
         },
         input() {
@@ -30,6 +35,7 @@ export const SigninJS = defineStore("Signin", {
                 en: "Email",
                 ru: "Почта",
                 de: "Email",
+                fr: "E-mail",
             }
         },
         error() {
@@ -46,6 +52,10 @@ export const SigninJS = defineStore("Signin", {
                     "email": "A-a-a. Das Feld muss eine E-Mail sein",
                     "required": "Hey, füll es!"
                 },
+                fr: {
+                    "email": "A-a-a. Le champ doit être un email",
+                    "required": "Hé, remplis-le !"
+                },
             }
         },
         button() {
@@ -53,6 +63,7 @@ export const SigninJS = defineStore("Signin", {
                 en: "Sign up or sign in",
                 ru: "Зарегаться или войти",
                 de: "Melden Sie sich an oder melden Sie sich an",
+                fr: "Inscrivez-vous ou connectez-vous",
             }
         },
         response() {
@@ -78,6 +89,13 @@ export const SigninJS = defineStore("Signin", {
                     3: "Auf dem Server ist ein Fehler aufgetreten. Versuchen Sie es erneut und geben Sie niemals auf",
                     4: "Bruder, du wurdest gesperrt. Aber keine Sorge. Du kannst jederzeit ein neues Konto erstellen :)" 
                 },
+                fr: {
+                    0: "N'essaie pas de me pirater frère :)",
+                    1: "Mauvaise adresse mail",
+                    2: "L'e-mail avec le lien ne vous a pas été envoyé pour une raison quelconque. Veuillez réessayer",
+                    3: "Une erreur s'est produite sur le serveur. Réessayez et n'abandonnez jamais",
+                    4: "Frère, tu as été banni. Mais ne vous inquiétez pas. Vous pouvez créer un nouveau compte quand vous le souhaitez :)" 
+                },
             }
         },
         success() {
@@ -85,6 +103,7 @@ export const SigninJS = defineStore("Signin", {
                 en: "You signed in. Enjoy yourself :)",
                 ru: "Вы вошли. Развлекайтесь :)",
                 de: "Du hast dich angemeldet. Viel Spaß :)",
+                fr: "Vous vous êtes connecté. Amusez-vous bien :)",
             }
         },
         email() {
@@ -92,6 +111,7 @@ export const SigninJS = defineStore("Signin", {
                 en: "An email with login link was sent to your typed email. Just follow the link. And check spam box if you don't see an email",
                 ru: "Письмо с сылкой было отправленно на указанную вами почту. Просто проследуйте по сылке. И не забудьте чекнуть спам ящик, если не найдете письмо",
                 de: "Eine E-Mail mit einem Anmeldelink wurde an Ihre eingegebene E-Mail-Adresse gesendet. Folgen Sie einfach dem Link. Und überprüfen Sie das Spam-Kästchen, wenn Sie keine E-Mail sehen",
+                fr: "Un e-mail avec un lien de connexion a été envoyé à votre e-mail saisi. Suivez simplement le lien. Et cochez la case spam si vous ne voyez pas d'e-mail",
             }
         }
     }

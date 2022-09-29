@@ -18,7 +18,12 @@ export const AuthJS = defineStore("Auth", {
                     "0": "Ungültiger Code",
                     "1": "Versuchen Sie nicht, mich zu hacken",
                     "2": "Fehler auf einem Server. Versuchen Sie es nochmal"
-                }
+                },
+                fr: {
+                    "0": "Code invalide",
+                    "1": "N'essayez pas de me pirater",
+                    "2": "Erreur sur un serveur. Réessayer"
+                },
             }
         }
     }
