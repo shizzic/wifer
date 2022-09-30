@@ -24,6 +24,10 @@ export const PremiumJS = defineStore("Premium", {
                     text: "Por ahora registrado",
                     users: "usuarios"
                 },
+                zh: {
+                    text: "现已注册",
+                    users: "用户"
+                },
             }
         },
         pay() {
@@ -58,6 +62,12 @@ export const PremiumJS = defineStore("Premium", {
                     try: "Probar",
                     expires: "Expira en"
                 },
+                zh: {
+                    month: "30天保费",
+                    trial: "试用7天",
+                    try: "尝试",
+                    expires: "过期日期在"
+                },
             }
         },
         luckriza() {
@@ -82,6 +92,10 @@ export const PremiumJS = defineStore("Premium", {
                     text: "Simplemente el mejor sitio web para la relación sugar daddy/bebé",
                     reasons: " por precio, por velocidad, por servicio"
                 },
+                zh: {
+                    text: "只是最好的傍大款/宝贝关系网站",
+                    reasons: " 按价格、按速度、按服务"
+                },
             }
         },
         freeChat() {
@@ -105,6 +119,10 @@ export const PremiumJS = defineStore("Premium", {
                 es: {
                     title: "Chat gratis",
                     text: "Con todos los que te dieron acceso para enviarles mensajes de texto sin prima :)"
+                },
+                zh: {
+                    title: "免费聊天",
+                    text: "与所有人一起，谁让您无需付费就可以访问他们的短信:)"
                 },
             }
         },
@@ -134,6 +152,11 @@ export const PremiumJS = defineStore("Premium", {
                     title: "Búsqueda mundial",
                     without: "Puede buscar usuarios sin seleccionar el país",
                     multiple: "Puede especificar varios países y ciudades para la búsqueda"
+                },
+                zh: {
+                    title: "全球搜索",
+                    without: "您可以在不选择国家/地区的情况下搜索用户",
+                    multiple: "您可以指定多个国家和城市进行搜索"
                 },
             }
         },
@@ -178,6 +201,14 @@ export const PremiumJS = defineStore("Premium", {
                     subject: "Sujeta",
                     message: "Mensaje",
                     send: "Enviar"
+                },
+                zh: {
+                    title: "联络我",
+                    name: "姓名",
+                    email: "电子邮件",
+                    subject: "主题",
+                    message: "信息",
+                    send: "发送"
                 },
             }
         },
@@ -224,6 +255,14 @@ export const PremiumJS = defineStore("Premium", {
                     payError: "Parece que este pago ya se usó o no existe en absoluto. Consultar política de devoluciones.",
                     payed: "Gracias por comprar mi prima. Disfrutar :)"
                 },
+                zh: {
+                    success: "您的消息已成功发送给我。我会尽快回复:)",
+                    error: "抱歉，出了点问题。稍后再试",
+                    trial: "您已经使用了一次性试用版。你不能再这样做了",
+                    trialSuccess: "您已成功获得试用期。享受:)",
+                    payError: "这笔付款似乎已被使用或根本不存在。检查退款政策。",
+                    payed: "感谢您购买我的保费。享受:)"
+                },
             }
         },
 
@@ -234,6 +273,7 @@ export const PremiumJS = defineStore("Premium", {
                 de: "Website nur für Personen über 18 Jahre",
                 fr: "Site réservé aux personnes de plus de 18 ans",
                 es: "Sitio web solo para personas mayores de 18 años.",
+                zh: "网站仅供 18 岁以上人士使用",
             }
         }
     }

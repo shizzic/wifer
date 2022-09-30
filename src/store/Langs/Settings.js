@@ -29,6 +29,11 @@ export const SettingsJS = defineStore("Settings", {
                     title: "Para llamar la atencion",
                     about: "Sobre ti y a quién buscas :)"
                 },
+                zh: {
+                    username: "您的用户名",
+                    title: "为了引起注意",
+                    about: "关于你自己和你寻找的人:)"
+                },
             }
         },
         blank() {
@@ -38,6 +43,7 @@ export const SettingsJS = defineStore("Settings", {
                 de: "Leer",
                 fr: "Blanc",
                 es: "Vacío",
+                zh: "空白的",
             }
         },
         buttons() {
@@ -61,6 +67,10 @@ export const SettingsJS = defineStore("Settings", {
                 es: {
                     save: "Ahorrar",
                     cancel: "Cancelar"
+                },
+                zh: {
+                    save: "节省",
+                    cancel: "取消"
                 },
             }
         },
@@ -96,6 +106,12 @@ export const SettingsJS = defineStore("Settings", {
                     available: "Disponible",
                     taken: "El nombre de usuario ya esta siendo usado"
                 },
+                zh: {
+                    required: "你需要一些用户名:)",
+                    space: "你不能为用户名使用空格",
+                    available: "可用的",
+                    taken: "此用户名已被使用"
+                },
             }
         },
         response() {
@@ -125,6 +141,11 @@ export const SettingsJS = defineStore("Settings", {
                     1: "Dicho nombre de usuario ya se utiliza",
                     2: "La cuenta no ha cambiado. Intentar otra vez"
                 },
+                zh: {
+                    0: "验证失败",
+                    1: "该用户名已被使用",
+                    2: "帐户没有更改。再试一次"
+                },
             }
         },
         success() {
@@ -134,6 +155,7 @@ export const SettingsJS = defineStore("Settings", {
                 de: "Ihre Daten wurden geändert",
                 fr: "Vos informations ont été modifiées",
                 es: "Tu información fue cambiada",
+                zh: "您的信息已更改",
             }
         }
     }

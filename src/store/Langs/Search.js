@@ -34,6 +34,12 @@ export const SearchJS = defineStore("Search", {
                     full: "Buscar frase completa",
                     is: "El usuario completó \"Acerca de mí\""
                 },
+                zh: {
+                    title: "个人资料文本",
+                    hold: "您想从用户那里看到的文字",
+                    full: "搜索整个短语",
+                    is: "用户填写了“关于我”"
+                },
             }
         },
         images() {
@@ -43,6 +49,7 @@ export const SearchJS = defineStore("Search", {
                 de: "Benutzer hat Avatar",
                 fr: "L'utilisateur a un avatar",
                 es: "El usuario tiene avatar",
+                zh: "用户有头像",
             }
         },
         search() {
@@ -52,6 +59,7 @@ export const SearchJS = defineStore("Search", {
                 de: "Suche",
                 fr: "Chercher",
                 es: "Búsqueda",
+                zh: "搜索",
             }
         },
         clear() {
@@ -61,6 +69,7 @@ export const SearchJS = defineStore("Search", {
                 de: "Klar",
                 fr: "Dégager",
                 es: "Claro",
+                zh: "清除",
             }
         },
         photos() {
@@ -70,6 +79,7 @@ export const SearchJS = defineStore("Search", {
                 de: "Foto",
                 fr: "Photo",
                 es: "Foto",
+                zh: "照片",
             }
         },
         founded() {
@@ -79,6 +89,7 @@ export const SearchJS = defineStore("Search", {
                 de: "Gegründet",
                 fr: "Fondé",
                 es: "Fundado",
+                zh: "成立",
             }
         },
         sort() {
@@ -102,6 +113,10 @@ export const SearchJS = defineStore("Search", {
                 es: {
                     last_time: "Actividad",
                     created_at: "El mas nuevo"
+                },
+                zh: {
+                    last_time: "活动",
+                    created_at: "最新"
                 },
             }
         },
@@ -141,6 +156,13 @@ export const SearchJS = defineStore("Search", {
                     select: "Seleccionar plantilla",
                     count: "No puedes tener más de 10 plantillas.",
                     blank: "El título de la plantilla no puede estar en blanco"
+                },
+                zh: {
+                    input: "标题",
+                    hold: "新模板",
+                    select: "选择模板",
+                    count: "你不能有超过 10 个模板",
+                    blank: "模板标题不能为空"
                 },
             }
         }

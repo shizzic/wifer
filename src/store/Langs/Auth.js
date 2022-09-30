@@ -29,6 +29,11 @@ export const AuthJS = defineStore("Auth", {
                     "1": "No intentes hackearme",
                     "2": "Error en un servidor. Intentar otra vez"
                 },
+                zh: {
+                    "0": "无效的代码",
+                    "1": "不要试图破解我",
+                    "2": "服务器上的错误。再试一次"
+                },
             }
         }
     }

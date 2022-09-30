@@ -24,6 +24,10 @@ export const ProfileJS = defineStore("Profile", {
                     "title": "Ingresar",
                     "text": "¡Hola! Si quieres el mejor azúcar en la web, bienvenido a bordo :)"
                 },
+                zh: {
+                    "title": "进入",
+                    "text": "你好呀！如果您想要网络上最好的糖，欢迎加入 :)"
+                },
             }
         },
         errors() {
@@ -48,6 +52,10 @@ export const ProfileJS = defineStore("Profile", {
                     "int": "El ID debe contener solo números enteros",
                     "server": "Algo le ocurrió a un servidor. Intentar otra vez"
                 },
+                zh: {
+                    "int": "Id 必须只包含整数",
+                    "server": "服务器发生了一些事情。再试一次"
+                },
             }
         },
         response() {
@@ -57,6 +65,7 @@ export const ProfileJS = defineStore("Profile", {
                 de: "Benutzer existiert nicht oder wurde gesperrt",
                 fr: "L'utilisateur n'existe pas ou a été banni",
                 es: "El usuario no existe o ha sido prohibido",
+                zh: "用户不存在或已被禁止",
             }
         },
         success() {
@@ -66,6 +75,7 @@ export const ProfileJS = defineStore("Profile", {
                 de: "Du hast dich angemeldet. Viel Spaß :)",
                 fr: "Vous vous êtes connecté. Amusez-vous bien :)",
                 es: "Has iniciado sesión. Diviértete :)",
+                zh: "您已登录。尽情享受吧 :)",
             }
         },
         cropper() {
@@ -119,6 +129,16 @@ export const ProfileJS = defineStore("Profile", {
                     "max_image": "Puedes tener hasta 20 imágenes.",
                     "error": "Algo le ocurrió al servidor, inténtalo de nuevo",
                     "success": "Se agregó la imagen)"
+                },
+                zh: {
+                    "upload": "上传",
+                    "public": "上市",
+                    "private": "私人的",
+                    "cancel": "取消",
+                    "max_size": "图像的最大大小为 3 MB",
+                    "max_image": "您最多可以拥有 20 张图片",
+                    "error": "服务器出现问题，重试",
+                    "success": "图片已添加 )"
                 },
             }
         }
