@@ -34,6 +34,11 @@ export const SettingsJS = defineStore("Settings", {
                     title: "为了引起注意",
                     about: "关于你自己和你寻找的人:)"
                 },
+                ja: {
+                    username: "あなたのユーザーネーム",
+                    title: "注意を引くには",
+                    about: "あなた自身とあなたが求める人について:)"
+                },
             }
         },
         blank() {
@@ -44,6 +49,7 @@ export const SettingsJS = defineStore("Settings", {
                 fr: "Blanc",
                 es: "Vacío",
                 zh: "空白的",
+                ja: "空欄",
             }
         },
         buttons() {
@@ -71,6 +77,10 @@ export const SettingsJS = defineStore("Settings", {
                 zh: {
                     save: "节省",
                     cancel: "取消"
+                },
+                ja: {
+                    save: "保存",
+                    cancel: "キャンセル"
                 },
             }
         },
@@ -112,6 +122,12 @@ export const SettingsJS = defineStore("Settings", {
                     available: "可用的",
                     taken: "此用户名已被使用"
                 },
+                ja: {
+                    required: "ユーザー名が必要です:)",
+                    space: "ユーザー名にスペースは使用できません",
+                    available: "利用可能",
+                    taken: "このユーザー名は既に使用されています"
+                },
             }
         },
         response() {
@@ -146,6 +162,11 @@ export const SettingsJS = defineStore("Settings", {
                     1: "该用户名已被使用",
                     2: "帐户没有更改。再试一次"
                 },
+                ja: {
+                    0: "検証に失敗しました",
+                    1: "このユーザー名はすでに使用されています",
+                    2: "アカウントは変更されていません。再試行"
+                },
             }
         },
         success() {
@@ -156,6 +177,7 @@ export const SettingsJS = defineStore("Settings", {
                 fr: "Vos informations ont été modifiées",
                 es: "Tu información fue cambiada",
                 zh: "您的信息已更改",
+                ja: "あなたの情報が変更されました",
             }
         }
     }

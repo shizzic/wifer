@@ -10,6 +10,7 @@ export const HeartJS = defineStore("Heart", {
                 fr: ["Vues", "Aime", "Privées", "Accès au chat"],
                 es: ["Puntos de vista", "Gustos", "Partes pudendas", "Acceso al chat"],
                 zh: ["意见", "喜欢", "私人", "聊天访问"],
+                ja: ["ビュー", "いいね", "プライベート", "チャットへのアクセス"],
             }
         },
         text() {
@@ -32,6 +33,9 @@ export const HeartJS = defineStore("Heart", {
                     ],
                     zh: [
                         "您确定要从收藏夹中删除此用户吗？",
+                    ],
+                    ja: [
+                        "このユーザーをお気に入りから削除してもよろしいですか?",
                     ],
                 },
                 private: {
@@ -58,6 +62,10 @@ export const HeartJS = defineStore("Heart", {
                     zh: [
                         "1. 您确定要取消私人访问权限吗？",
                         "2. 此用户将无法再看到您的私人图片"
+                    ],
+                    ja: [
+                        "1. プライベート アクセスを削除してもよろしいですか？",
+                        "2. このユーザーはあなたの非公開画像を見ることができなくなります"
                     ],
                 },
                 access: {
@@ -91,6 +99,11 @@ export const HeartJS = defineStore("Heart", {
                         "2. 此用户将无法在没有付费的情况下向您发送短信",
                         "3. 如果没有付费，他将无法在您的对话中看到过去的消息"
                     ],
+                    ja: [
+                        "1. このユーザーのチャット アクセスを奪ってもよろしいですか?",
+                        "2. このユーザーは、プレミアムなしではテキスト メッセージを送信できなくなります",
+                        "3. また、プレミアムなしでは、彼はあなたの会話で過去のメッセージを見ることができません"
+                    ],
                 }
             }
         },
@@ -102,6 +115,7 @@ export const HeartJS = defineStore("Heart", {
                 fr: "Soumettre",
                 es: "Enviar",
                 zh: "提交",
+                ja: "送信",
             }
         }
     }

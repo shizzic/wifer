@@ -41,6 +41,12 @@ export const ModalJS = defineStore("Modal", {
                         "3. 我不会再用电子邮件打扰你了（直到下次登录 :D)",
                         "4. 只需重新登录，您就会再次看到所有信息 :)"
                     ],
+                    ja: [
+                        "1. 非アクティブ化すると、あなたのプロフィールは公開検索に表示されなくなります。",
+                        "2. すべてのデータが保存されます。",
+                        "3. もうメールであなたを悩ませることはありません (次のログインまで:D)",
+                        "4. 再ログインするだけで、すべての情報が再び表示されます:)"
+                    ],
                 },
                 logout: {
                     en: ["Are you sure you wanna logout?"],
@@ -49,6 +55,7 @@ export const ModalJS = defineStore("Modal", {
                     fr: ["Voulez-vous vraiment vous déconnecter?"],
                     es: ["¿Estás seguro de que quieres cerrar sesión?"],
                     zh: ["你确定要退出吗？"],
+                    ja: ["本当にログアウトしますか?"],
                 },
                 chat: {
                     en: [
@@ -87,6 +94,12 @@ export const ModalJS = defineStore("Modal", {
                         "3. 你问我，如果我不能写给她/他，我将如何获得访问权限?",
                         "4. 只需让您访问她/他，然后，您就会受到关注:)"
                     ],
+                    ja: [
+                        "1. ユーザーとチャットするにはプレミアムを購入する必要があります",
+                        "2. または、このユーザーから直接アクセスできる可能性があります",
+                        "3. あなたは私に尋ねます、私が彼女/彼にそれを書くことができない場合、どうすればアクセスできますか?",
+                        "4. あなたから彼女/彼にアクセスを与えるだけで、あなたは注目を集めるでしょう:)"
+                    ],
                 },
                 private: {
                     en: [
@@ -113,6 +126,10 @@ export const ModalJS = defineStore("Modal", {
                         "1. 您需要访问此用户的私人照片",
                         "2. 您可以直接在聊天中请求此访问权限"
                     ],
+                    ja: [
+                        "1. このユーザーからのプライベート写真へのアクセスが必要です",
+                        "2. このアクセス権はチャットで直接要求できます"
+                    ],
                 }
             }
         },
@@ -125,6 +142,7 @@ export const ModalJS = defineStore("Modal", {
                     fr: "Votre compte a été désactivé avec succès. Dans l'attente de votre retour :)",
                     es: "Su cuenta fue desactivada con éxito. Esperando su regreso :)",
                     zh: "您的帐户已成功停用。期待你的归来:)",
+                    ja: "あなたのアカウントは正常に無効化されました。あなたの帰りを楽しみにしています:)",
                 },
                 logout: {
                     en: "You've logouted. I hope u got what u wanted :)",
@@ -133,6 +151,7 @@ export const ModalJS = defineStore("Modal", {
                     fr: "Vous êtes déconnecté. J'espère que tu as eu ce que tu voulais :)",
                     es: "Ha cerrado sesión. Espero que hayas conseguido lo que querías :)",
                     zh: "您已注销。我希望你得到你想要的:)",
+                    ja: "ログアウトしました。私はあなたが望んでいたものを手に入れたことを願っています:)",
                 }
             }
         },
@@ -145,6 +164,7 @@ export const ModalJS = defineStore("Modal", {
                     fr: "Vous avez ajouté cet utilisateur à vos favoris",
                     es: "Has añadido este usuario a tus favoritos.",
                     zh: "您已将此用户添加到收藏夹",
+                    ja: "このユーザーをお気に入りに追加しました",
                 },
                 private: {
                     en: "You gave an access to your private photos",
@@ -153,6 +173,7 @@ export const ModalJS = defineStore("Modal", {
                     fr: "Vous avez donné accès à vos photos privées",
                     es: "Has dado acceso a tus fotos privadas.",
                     zh: "您授予了访问您私人照片的权限",
+                    ja: "プライベート写真へのアクセスを許可しました",
                 },
                 access: {
                     en: "You gave an access to text you and see last messages for this user",
@@ -161,6 +182,7 @@ export const ModalJS = defineStore("Modal", {
                     fr: "Vous avez donné un accès au SMS et voir les derniers messages de cet utilisateur",
                     es: "Le diste acceso para enviarte mensajes de texto y ver los últimos mensajes de este usuario",
                     zh: "您授予了对您发短信和查看此用户的最新消息的权限",
+                    ja: "あなたはテキスト メッセージへのアクセスを許可し、このユーザーの最後のメッセージを表示します",
                 }
             }
         },
@@ -173,6 +195,7 @@ export const ModalJS = defineStore("Modal", {
                     fr: "Vous avez supprimé cet utilisateur de vos favoris",
                     es: "Borraste a este usuario de tus favoritos",
                     zh: "您从收藏夹中删除了此用户",
+                    ja: "このユーザーをお気に入りから削除しました",
                 },
                 private: {
                     en: "You took away an access for your photos",
@@ -181,6 +204,7 @@ export const ModalJS = defineStore("Modal", {
                     fr: "Vous avez enlevé un accès pour vos photos",
                     es: "Le quitaste un acceso a tus fotos",
                     zh: "您取消了对照片的访问权限",
+                    ja: "写真へのアクセス権を奪いました",
                 },
                 access: {
                     en: "Now, this user can't text you and see your last messages",
@@ -189,6 +213,7 @@ export const ModalJS = defineStore("Modal", {
                     fr: "Maintenant, cet utilisateur ne peut pas vous envoyer de SMS et voir vos derniers messages",
                     es: "Ahora, este usuario no puede enviarte mensajes de texto y ver tus últimos mensajes.",
                     zh: "现在，此用户无法向您发送短信并查看您的最后一条消息",
+                    ja: "現在、このユーザーはあなたにテキスト メッセージを送信したり、最後のメッセージを表示したりすることはできません",
                 }
             }
         },
@@ -200,6 +225,7 @@ export const ModalJS = defineStore("Modal", {
                 fr: "Soumettre",
                 es: "Enviar",
                 zh: "提交",
+                ja: "送信",
             }
         },
         cancel() {
@@ -210,6 +236,7 @@ export const ModalJS = defineStore("Modal", {
                 fr: "Annuler",
                 es: "Cancelar",
                 zh: "取消",
+                ja: "キャンセル",
             }
         },
         save() {
@@ -220,6 +247,7 @@ export const ModalJS = defineStore("Modal", {
                 fr: "sauvegarder",
                 es: "Ahorrar",
                 zh: "节省",
+                ja: "保存",
             }
         }
     }

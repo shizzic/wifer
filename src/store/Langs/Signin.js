@@ -28,6 +28,10 @@ export const SigninJS = defineStore("Signin", {
                     "title": "进入",
                     "text": "你好呀！如果您想要网络上最好的糖，欢迎加入 :)"
                 },
+                ja: {
+                    "title": "入る",
+                    "text": "こんにちは！ウェブ上で最高のシュガーが必要な場合は、ようこそ :)"
+                },
             }
         },
         terms() {
@@ -38,6 +42,7 @@ export const SigninJS = defineStore("Signin", {
                 fr: "J'ai lu et accepté",
                 es: "He leído y acepto el",
                 zh: "我已阅读并接受",
+                ja: "を読み、同意しました",
             }
         },
         input() {
@@ -48,6 +53,7 @@ export const SigninJS = defineStore("Signin", {
                 fr: "E-mail",
                 es: "Email",
                 zh: "Email",
+                ja: "Email",
             }
         },
         error() {
@@ -76,6 +82,10 @@ export const SigninJS = defineStore("Signin", {
                     "email": "啊啊啊。字段必须是电子邮件",
                     "required": "喂，填!"
                 },
+                ja: {
+                    "email": "ああ。フィールドは電子メールである必要があります",
+                    "required": "おい、埋めろ！"
+                },
             }
         },
         button() {
@@ -86,6 +96,7 @@ export const SigninJS = defineStore("Signin", {
                 fr: "Inscrivez-vous ou connectez-vous",
                 es: "Regístrate o inicia sesión",
                 zh: "注册或登录",
+                ja: "サインアップまたはサインイン",
             }
         },
         response() {
@@ -132,6 +143,13 @@ export const SigninJS = defineStore("Signin", {
                     3: "服务器上发生了一些错误。再试一次，永不放弃",
                     4: "兄弟，你被禁言了。但别担心。你可以随时创建一个新帐户:)" 
                 },
+                ja: {
+                    0: "私をハックしようとしないでください:)",
+                    1: "間違ったメール",
+                    2: "なんらかの理由で、リンク付きのメールが送信されませんでした。もう一度やり直してください",
+                    3: "サーバーで何らかのエラーが発生しました。もう一度やり直して、決してあきらめないでください",
+                    4: "ブロ、あなたは禁止されています。しかし、心配しないでください。いつでも新しいアカウントを作成できます:)" 
+                },
             }
         },
         success() {
@@ -142,6 +160,7 @@ export const SigninJS = defineStore("Signin", {
                 fr: "Vous vous êtes connecté. Amusez-vous bien :)",
                 es: "Has iniciado sesión. Diviértete :)",
                 zh: "您已登录。尽情享受吧 :)",
+                ja: "サインインしました。お楽しみください :)",
             }
         },
         email() {
@@ -152,6 +171,7 @@ export const SigninJS = defineStore("Signin", {
                 fr: "Un e-mail avec un lien de connexion a été envoyé à votre e-mail saisi. Suivez simplement le lien. Et cochez la case spam si vous ne voyez pas d'e-mail",
                 es: "Se envió un correo electrónico con un enlace de inicio de sesión a su correo electrónico escrito. Solo sigue el enlace. Y marque la casilla de correo no deseado si no ve un correo electrónico",
                 zh: "一封带有登录链接的电子邮件已发送到您输入的电子邮件。只需点击链接即可。如果您没有看到电子邮件，请检查垃圾邮件框",
+                ja: "入力したメールアドレスに、ログインリンクが記載されたメールが送信されました。リンクをたどってください。メールが届かない場合は、迷惑メールボックスを確認してください",
             }
         }
     }

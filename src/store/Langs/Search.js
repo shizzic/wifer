@@ -40,6 +40,12 @@ export const SearchJS = defineStore("Search", {
                     full: "搜索整个短语",
                     is: "用户填写了“关于我”"
                 },
+                ja: {
+                    title: "プロフィールテキスト",
+                    hold: "ユーザーから見たいテキスト",
+                    full: "フレーズ全体を検索",
+                    is: "ユーザーが入力した「私について」"
+                },
             }
         },
         images() {
@@ -50,6 +56,7 @@ export const SearchJS = defineStore("Search", {
                 fr: "L'utilisateur a un avatar",
                 es: "El usuario tiene avatar",
                 zh: "用户有头像",
+                ja: "ユーザーはアバターを持っています",
             }
         },
         search() {
@@ -60,6 +67,7 @@ export const SearchJS = defineStore("Search", {
                 fr: "Chercher",
                 es: "Búsqueda",
                 zh: "搜索",
+                ja: "探す",
             }
         },
         clear() {
@@ -70,6 +78,7 @@ export const SearchJS = defineStore("Search", {
                 fr: "Dégager",
                 es: "Claro",
                 zh: "清除",
+                ja: "クリア",
             }
         },
         photos() {
@@ -80,6 +89,7 @@ export const SearchJS = defineStore("Search", {
                 fr: "Photo",
                 es: "Foto",
                 zh: "照片",
+                ja: "写真",
             }
         },
         founded() {
@@ -90,6 +100,7 @@ export const SearchJS = defineStore("Search", {
                 fr: "Fondé",
                 es: "Fundado",
                 zh: "成立",
+                ja: "設立",
             }
         },
         sort() {
@@ -116,6 +127,10 @@ export const SearchJS = defineStore("Search", {
                 },
                 zh: {
                     last_time: "活动",
+                    created_at: "最新"
+                },
+                ja: {
+                    last_time: "アクティビティ",
                     created_at: "最新"
                 },
             }
@@ -163,6 +178,13 @@ export const SearchJS = defineStore("Search", {
                     select: "选择模板",
                     count: "你不能有超过 10 个模板",
                     blank: "模板标题不能为空"
+                },
+                ja: {
+                    input: "題名",
+                    hold: "新しいテンプレート",
+                    select: "テンプレートを選択",
+                    count: "テンプレートは 10 個までです",
+                    blank: "テンプレートのタイトルを空白にすることはできません"
                 },
             }
         }

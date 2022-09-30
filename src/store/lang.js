@@ -10,7 +10,8 @@ export const langJS = defineStore("lang", {
             de: "de",
             fr: "fr",
             es: "es",
-            zh: "中文(简)"
+            zh: "中文(简)",
+            ja: "日本語"
         }
     }),
     actions:{

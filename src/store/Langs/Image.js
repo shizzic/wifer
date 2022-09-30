@@ -10,6 +10,7 @@ export const ImageJS = defineStore("Image", {
                 fr: "L'image a été supprimée avec succès",
                 es: "La imagen fue eliminada con éxito",
                 zh: "图片已成功删除",
+                ja: "画像が正常に削除されました",
             }
         },
         error() {
@@ -20,6 +21,7 @@ export const ImageJS = defineStore("Image", {
                 fr: "Mauvaise demande. Réessayer",
                 es: "Solicitud incorrecta. Intentar otra vez",
                 zh: "错误的请求。再试一次",
+                ja: "要求の形式が正しくありません。再試行",
             }
         }
     }

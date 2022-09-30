@@ -28,6 +28,10 @@ export const ProfileJS = defineStore("Profile", {
                     "title": "进入",
                     "text": "你好呀！如果您想要网络上最好的糖，欢迎加入 :)"
                 },
+                ja: {
+                    "title": "入る",
+                    "text": "こんにちは！ウェブ上で最高のシュガーが必要な場合は、ようこそ :)"
+                },
             }
         },
         errors() {
@@ -56,6 +60,10 @@ export const ProfileJS = defineStore("Profile", {
                     "int": "Id 必须只包含整数",
                     "server": "服务器发生了一些事情。再试一次"
                 },
+                ja: {
+                    "int": "ID には整数のみを含める必要があります",
+                    "server": "サーバーに何かが発生しました。再試行"
+                },
             }
         },
         response() {
@@ -66,6 +74,7 @@ export const ProfileJS = defineStore("Profile", {
                 fr: "L'utilisateur n'existe pas ou a été banni",
                 es: "El usuario no existe o ha sido prohibido",
                 zh: "用户不存在或已被禁止",
+                ja: "ユーザーが存在しないか、禁止されています",
             }
         },
         success() {
@@ -76,6 +85,7 @@ export const ProfileJS = defineStore("Profile", {
                 fr: "Vous vous êtes connecté. Amusez-vous bien :)",
                 es: "Has iniciado sesión. Diviértete :)",
                 zh: "您已登录。尽情享受吧 :)",
+                ja: "サインインしました。お楽しみください :)",
             }
         },
         cropper() {
@@ -139,6 +149,16 @@ export const ProfileJS = defineStore("Profile", {
                     "max_image": "您最多可以拥有 20 张图片",
                     "error": "服务器出现问题，重试",
                     "success": "图片已添加 )"
+                },
+                ja: {
+                    "upload": "アップロード",
+                    "public": "公衆",
+                    "private": "プライベート",
+                    "cancel": "キャンセル",
+                    "max_size": "画像の最大サイズは 3 MB です",
+                    "max_image": "最大 20 枚の画像を保持できます",
+                    "error": "サーバーで問題が発生しました。もう一度お試しください",
+                    "success": "画像追加しました）"
                 },
             }
         }
