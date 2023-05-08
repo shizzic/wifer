@@ -7,6 +7,7 @@
 <script scoped>
 import Nav from "@/components/Nav.vue"
 import Cookie from "@/components/Cookie.vue"
+
 export default {
 	name: 'App',
 	components: {
@@ -21,7 +22,7 @@ export default {
     },
 	watch: {
 		id() {
-			this.makeOnline(true)
+			this.make_user_online(true)
 			this.start()
 		}
 	},
@@ -37,19 +38,19 @@ export default {
 			this.$lang.correctLang(this.l)
 
 		this.start()
-		this.makeOnline(true)
+		this.make_user_online(true)
 		
 		document.addEventListener("visibilitychange", () => {
 			if (document.visibilityState === "hidden")
-				this.makeOnline(false)
+				this.make_user_online(false)
 			else
-				this.makeOnline(true)
+				this.make_user_online(true)
 		})
 
 		this.visit()
 	},
 	methods: {
-		makeOnline(value) {
+		make_user_online(value) {
 			if (this.id)
 				fetch(this.$domain + "online?online=" + value, {
 					method: "GET",

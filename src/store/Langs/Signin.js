@@ -37,7 +37,7 @@ export const SigninJS = defineStore("Signin", {
         terms() {
             return {
                 en: "I have read and accepted the",
-                ru: "Я прочитал/а и принимаю данные",
+                ru: "Я прочитал/а и принимаю",
                 de: "Ich habe die gelesen und akzeptiert",
                 fr: "J'ai lu et accepté",
                 es: "He leído y acepto el",

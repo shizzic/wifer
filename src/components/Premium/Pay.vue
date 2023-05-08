@@ -11,7 +11,7 @@
         <h2>{{ lang.month }}</h2>
         <div id="pay">
             <span id="dollar">{{ price }}$</span>
-            <PayPal v-if="id != null && priceSelected" :response="response" :price="price" />
+            <!-- <PayPal v-if="id != null && priceSelected" :response="response" :price="price" /> -->
             <!-- <span v-show="premium === 0">{{ lang.not }}</span>
             <span v-show="premium > 0">{{ lang.extend }}</span> -->
         </div>
@@ -28,13 +28,14 @@
 
 <script scoped>
 import { useTimer } from 'vue-timer-hook'
-import PayPal from "@/components/Premium/PayPal.vue"
+// import PayPal from "@/components/Premium/PayPal.vue"
+
 export default {
 	name: "Pay",
     props: ["lang", "response"],
-    components: {
-        PayPal
-    },
+    // components: {
+    //     PayPal
+    // },
     computed: {
         trial() {
             return this.$user.trial

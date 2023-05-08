@@ -6,7 +6,7 @@
 		<Form name="signin" @submit="signin">
 			<Email :title="lang.input[l]" :error="lang.error[l]" />
 			<Accept :terms="terms" :lang="lang.terms[l]" />
-			<button :disabled="!terms">{{ lang.button[l] }}</button>
+			<button :class="{ disabled: !terms }" :disabled="!terms">{{ lang.button[l] }}</button>
 		</Form>
 	</div>
 </template>
@@ -145,5 +145,9 @@ button:active:after {
   top:0;
   opacity: 1;
   transition: 0s;
+}
+
+.disabled {
+	cursor: not-allowed;
 }
 </style>

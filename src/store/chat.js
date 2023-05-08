@@ -2,7 +2,7 @@ import { defineStore } from "pinia"
 import { navJS } from "@/store/nav"
 
 export const chatJS = defineStore("chat", {
-    state: () =>({
+    state: () => ({
         show: null,
         socket: null,
         target: null,

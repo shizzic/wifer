@@ -1,7 +1,8 @@
 import { defineStore } from "pinia"
 import { useStorage } from "@vueuse/core"
 
-export const langJS = defineStore("lang", {
+export const langJS = defineStore({
+    id: "lang",
     state: () =>({
         lang: useStorage("lang", null),
         languages: {
@@ -12,7 +13,7 @@ export const langJS = defineStore("lang", {
             es: "es",
             zh: "中文(简)",
             ja: "日本語"
-        }
+        },
     }),
     actions:{
         setLang(value) {
@@ -20,12 +21,8 @@ export const langJS = defineStore("lang", {
         },
 
         autoLang(value) {
-            let lang  = value.split("-")[0]
-
-            if (lang in this.languages)
-                this.lang = lang
-            else
-                this.lang = "en"
+            let lang = value.split("-")[0]
+            lang in this.languages ? this.lang = lang : this.lang = "en"
         },
 
         correctLang(value) {

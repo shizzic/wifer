@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper">
+	<div class="wrapper" :class="{ disabled: !terms }">
 		<Google @signin="signin" :terms="terms" />
 		<!-- <Facebook @signin="signin" /> -->
 	</div>
