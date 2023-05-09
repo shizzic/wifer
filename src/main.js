@@ -38,7 +38,7 @@ app.config.globalProperties.$chat       = chatJS()
 app.config.globalProperties.$heart      = heartJS()
 
 app.config.globalProperties.$file       = (what, target_id, filename, dir = "") => {
-    return app.config.globalProperties.$domain + "file?what=" + what + "&target_id=" + target_id + "&filename=" + filename + "&dir=" + dir
+    return app.config.globalProperties.$domain + "file?what=" + what + "&target_id=" + target_id + "&filename=" + filename + "&dir=" + dir + "&" + Date.now()
 }
 
 app.mount('#app')

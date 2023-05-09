@@ -1,15 +1,16 @@
 <template>
-	<div class="images" :id="'gallery'" 
-        :class="{ expand : data && (data.public > 0 || (data.private > 0 && $user.id && (data._id == $user.id || data._id != $user.id && priv.access)) || data._id == $user.id) }"
-    >
+    <div class="images" :id="'gallery'"
+        :class="{ expand: data && (data.public > 0 || (data.private > 0 && $user.id && (data._id == $user.id || data._id != $user.id && priv.access)) || data._id == $user.id) }">
         <div class="images-wrapper">
-            <div v-show="opened && data._id == $user.id" class="dots" @click="showButtons" v-click-outside="() => { buttons = null }">
+            <div v-show="opened && data._id == $user.id" class="dots" @click="showButtons"
+                v-click-outside="() => { buttons = null }">
                 <div v-for="(_, index) in 3" :key="index" class="dot" />
             </div>
 
             <div v-show="buttons" class="buttons">
                 <img v-show="params.mode !== null" class="button" src="/images/profile.webp" @click="makeProfile" />
-                <img v-show="params.mode !== true && params.mode !== null" class="button" src="/images/public.webp" @click="dir('public')" />
+                <img v-show="params.mode !== true && params.mode !== null" class="button" src="/images/public.webp"
+                    @click="dir('public')" />
                 <img v-show="params.mode !== false" class="button" src="/images/private.webp" @click="dir('private')" />
                 <img class="button" src="/images/delete.webp" @click="deleteImg" />
             </div>
@@ -17,42 +18,28 @@
             <input type="file" style="display: none;" ref="input" @change="load($event)" accept="image/*">
             <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" @clear="clear" />
 
-            <div v-show="$user.id && data._id == $user.id" class="image file" style="border: 1px solid;" 
-                @click="$refs.input.click()"
-            >
+            <div v-show="$user.id && data._id == $user.id" class="image file" style="border: 1px solid;"
+                @click="$refs.input.click()">
                 <div class="plus" />
             </div>
 
             <div v-if="data.avatar === true" class="image" style="display: none;">
-                <a
-                    ref="avatar"
-                    :href="$file('images', $route.params.id, 'avatar.webp')"
-                    target="_blank"
-                    rel="noreferrer"
-                >
+                <a ref="avatar" :href="$file('images', $route.params.id, 'avatar.webp')" target="_blank" rel="noreferrer">
                     <img :src="$file('images', $route.params.id, 'avatar.webp')" alt="" />
                 </a>
             </div>
-            
+
             <div v-for="(num, index) in data.public" :key="index" class="image-wrap">
-                <a
-                    :href="$file('images', $route.params.id, num + '.webp', 'public')"
-                    target="_blank"
-                    rel="noreferrer"
-                >
+                <a :href="$file('images', $route.params.id, num + '.webp', 'public')" target="_blank" rel="noreferrer">
                     <img :src="$file('images', $route.params.id, num + '.webp', 'public')" alt="" class="image" />
                 </a>
-                
+
                 <div class="icon-wrap"><img src="/images/public.webp" alt="" class="icon" /></div>
             </div>
 
             <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && (priv.access || premium > 0))">
                 <div v-for="(num, index) in data.private" :key="index" class="image-wrap">
-                    <a
-                        :href="$file('images', $route.params.id, num + '.webp', 'private')"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
+                    <a :href="$file('images', $route.params.id, num + '.webp', 'private')" target="_blank" rel="noreferrer">
                         <img :src="$file('images', $route.params.id, num + '.webp', 'private')" alt="" class="image" />
                     </a>
 
@@ -61,10 +48,8 @@
             </template>
 
             <template v-else>
-                <router-link v-if="data.private > 0 && (!$user.id || $user.id && $user.id < 1)" 
-                    class="image" style="margin-right: 20px; margin-bottom: 20px;"
-                    :to="{ name: 'signin' }"
-                >
+                <router-link v-if="data.private > 0 && (!$user.id || $user.id && $user.id < 1)" class="image"
+                    style="margin-right: 20px; margin-bottom: 20px;" :to="{ name: 'signin' }">
                     <div class="private">
                         <span>{{ data.private }}</span>
                         <img src="/images/private.webp" />
@@ -72,9 +57,7 @@
                 </router-link>
 
                 <div v-else-if="data.private > 0 && ($user.id && $user.id > 0 && !priv.access && !(premium > 0))"
-                    class="image" style="margin-right: 20px; margin-bottom: 20px;"
-                    @click="$emit('modal', 'private')"
-                >
+                    class="image" style="margin-right: 20px; margin-bottom: 20px;" @click="$emit('modal', 'private')">
                     <div class="private">
                         <span>{{ data.private }}</span>
                         <img src="/images/private.webp" />
@@ -93,12 +76,12 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
 
 function getMimeType(file, fallback = null) {
-	const byteArray = (new Uint8Array(file)).subarray(0, 4)
+    const byteArray = (new Uint8Array(file)).subarray(0, 4)
     let header = ''
     for (let i = 0; i < byteArray.length; i++) {
-       header += byteArray[i].toString(16)
+        header += byteArray[i].toString(16)
     }
-	switch (header) {
+    switch (header) {
         case "89504e47":
             return "image/png"
         case "ffd8ffe0":
@@ -113,17 +96,17 @@ function getMimeType(file, fallback = null) {
 }
 
 export default {
-	name: "Images",
+    name: "Images",
     props: ["data", "lang", "l", "avatar", "priv"],
     setup() {
-		const del   = ImageJS()["delete"]
+        const del = ImageJS()["delete"]
         const error = ImageJS()["error"]
 
-		return {
+        return {
             del,
             error
-		}
-	},
+        }
+    },
     components: {
         Cropper
     },
@@ -133,11 +116,11 @@ export default {
         }
     },
     data() {
-		return {
-			image: {
-				src: null,
-				type: null
-			},
+        return {
+            image: {
+                src: null,
+                type: null
+            },
 
             lightbox: null,
             first: true,
@@ -150,8 +133,8 @@ export default {
                 dir: "public",
                 number: 1
             }
-		}
-	},
+        }
+    },
     watch: {
         avatar() {
             this.$refs.avatar.click()
@@ -170,54 +153,26 @@ export default {
                 modal: false
             })
 
+            this.lightbox.addFilter('itemData', (itemData, index) => {
+                itemData.w = itemData.element.firstChild.naturalWidth
+                itemData.h = itemData.element.firstChild.naturalHeight
+                return itemData
+            })
+
             this.lightbox.on("afterInit", () => { this.opened = true })
-
-            this.lightbox.on("afterInit", () => {
-                let length = this.lightbox.pswp.options.dataSource.items.length - 1
-
-                if (this.lightbox.pswp.options.dataSource.items[length].firstChild.naturalHeight > 0) {
-                    this.first = null
-                    this.resize()
-                }
-            })
-
-            this.lightbox.on("contentAppend", () => {
-                if (this.last && this.lightbox.pswp && this.lightbox.pswp.options.dataSource.items[this.lightbox.pswp.options.dataSource.items.length - 1].height) {
-                    this.last = null
-                    this.lightbox.pswp.refreshSlideContent(this.lightbox.pswp.options.dataSource.items.length - 1)
-                }
-
-                if (this.first) {
-                    this.first = null
-                    this.resize()
-                }
-            })
-
-            this.lightbox.on("contentResize", (e) => {
-                e.content.height = e.content.element.naturalHeight
-                e.content.width  = e.content.element.naturalWidth
-            })
-
             this.lightbox.on("close", () => { this.close() })
-
             this.lightbox.on("change", () => {
                 this.buttons = null
-                let src = this.lightbox.pswp.options.dataSource.items[this.lightbox.pswp.currIndex].src
+                let query = new URLSearchParams(this.lightbox.pswp.currSlide.content.element.src)
+                
+                if (query) {
+                    this.params.dir = query.get("dir")
+                    this.params.number = query.get("filename").split(".")[0]
 
-                if (src) {
-                    let arr  = this.lightbox.pswp.options.dataSource.items[this.lightbox.pswp.currIndex].src.split("/")
-                    let mode = arr[arr.length - 2]
-                    
-                    this.params.dir    = mode
-                    this.params.number = arr[arr.length - 1].split(".")[0]
-
-                    if (isNaN(mode) === false)
+                    if (this.params.dir === "")
                         this.params.mode = null
                     else
-                        if (mode === "public")
-                            this.params.mode = true
-                        else
-                            this.params.mode = false
+                        this.params.dir === "public" ? this.params.mode = true : this.params.mode = false
                 }
             })
 
@@ -235,7 +190,7 @@ export default {
         makeProfile() {
             fetch(this.$domain + "replaceAvatar?dir=" + this.params.dir + "&number=" + this.params.number, {
                 method: "PUT",
-				credentials: "include"
+                credentials: "include"
             })
                 .then(data => {
                     if (data.status === 401) {
@@ -258,7 +213,7 @@ export default {
 
             fetch(this.$domain + "changeImageDir?isAvatar=" + isAvatar + "&dir=" + this.params.dir + "&number=" + this.params.number + "&new=" + newDir, {
                 method: "PUT",
-				credentials: "include"
+                credentials: "include"
             })
                 .then(data => {
                     if (data.status === 401) {
@@ -278,10 +233,10 @@ export default {
             let isAvatar = 0
             if (this.params.mode === null)
                 isAvatar = 1
-            
-            fetch(this.$domain + "deleteImage?isAvatar=" + isAvatar + "&dir=" + this.params.dir +"&number=" + this.params.number, {
+
+            fetch(this.$domain + "deleteImage?isAvatar=" + isAvatar + "&dir=" + this.params.dir + "&number=" + this.params.number, {
                 method: "DELETE",
-				credentials: "include"
+                credentials: "include"
             })
                 .then(data => {
                     if (data.status === 401) {
@@ -292,7 +247,7 @@ export default {
                 })
                 .then(() => {
                     this.$user.set({ field: "avatar", value: null })
-                    location.reload() 
+                    location.reload()
                 })
                 .catch(() => { this.$toast.error(this.error[this.l]) })
         },
@@ -306,7 +261,7 @@ export default {
 
             if (all < 20) {
                 const { files } = event.target
-		
+
                 if (files && files[0] && files[0].size < 2000001) {
                     const blob = URL.createObjectURL(files[0])
                     const reader = new FileReader()
@@ -325,29 +280,6 @@ export default {
                 this.clear()
                 this.$toast.error(this.lang[this.l].max_image)
             }
-		},
-
-        resize() {
-            let length = this.lightbox.pswp.options.dataSource.items.length - 1
-
-            if (this.lightbox.pswp.options.dataSource.items[length].firstChild.naturalHeight)
-                for (let key in this.lightbox.pswp.options.dataSource.items) {
-                    if (this.lightbox.pswp.options.dataSource.items[key].firstChild.naturalHeight > 0)
-                        this.lightbox.pswp.options.dataSource.items[key] = { 
-                            src: this.lightbox.pswp.options.dataSource.items[key].href,
-                            width: this.lightbox.pswp.options.dataSource.items[key].firstChild.naturalWidth,
-                            height: this.lightbox.pswp.options.dataSource.items[key].firstChild.naturalHeight
-                        }
-                }
-            else
-                for (let key in this.lightbox.pswp.options.dataSource.items) {
-                    if (this.lightbox.pswp.options.dataSource.items[key].height > 0)
-                        this.lightbox.pswp.options.dataSource.items[key] = { 
-                            src: this.lightbox.pswp.options.dataSource.items[key].src,
-                            width: this.lightbox.pswp.options.dataSource.items[key].width,
-                            height: this.lightbox.pswp.options.dataSource.items[key].height
-                        }
-                }
         },
 
         showButtons() {
@@ -359,13 +291,13 @@ export default {
 
         close() {
             this.buttons = null
-            this.opened  = null
-            this.first   = true
-            this.last    = true
+            this.opened = null
+            this.first = true
+            this.last = true
         },
 
         clear() {
-            this.image = { src : null, type : null }
+            this.image = { src: null, type: null }
             this.$refs.input.value = ''
 
             if (this.$refs.avatar)
@@ -499,7 +431,7 @@ export default {
     }
 }
 
-@media only screen and (max-width : 295px) {    
+@media only screen and (max-width : 295px) {
     .image {
         width: 150px;
         min-width: 150px;
@@ -544,7 +476,7 @@ export default {
     right: 4px;
     height: 2px;
     width: 20px;
-    transform:translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .dots {
@@ -605,7 +537,7 @@ export default {
     color: #000;
     background-color: #b2b2b2;
     border-radius: 50%;
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
