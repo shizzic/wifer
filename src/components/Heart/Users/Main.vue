@@ -2,10 +2,10 @@
 	<div class="wrapper">
 		<div v-for="(user, index) in users" :key="index" class="user" :class="{ fresh : !mode && !viewed[user._id] }">
             <img v-if="user.avatar" 
-                :src="$ip + user._id + '/avatar.webp?' + Date.now()" class="avatar" 
+                :src="$file('images', user._id, 'avatar.webp')" class="avatar" :class="{ premium: user.premium }"
                 @click="$router.push({ name : 'profile', params : { id : user._id }})" 
             />
-            <div v-else class="no" @click="$router.push({ name : 'profile', params : { id : user._id }})">
+            <div v-else class="no" :class="{ premium: user.premium }" @click="$router.push({ name : 'profile', params : { id : user._id }})">
                 <img src="/images/avatar.webp" />
             </div>
 
@@ -77,6 +77,10 @@ export default {
 .user:not(:last-of-type) {
     border-bottom: 1.5px solid #bcbcbc;
     margin-bottom: 5px;
+}
+
+.premium {
+    border: 3px solid #cdbe1e;
 }
 
 .body {

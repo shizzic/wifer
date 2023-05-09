@@ -28,7 +28,6 @@ app
 
 app.config.globalProperties.$domain     = import.meta.env.VITE_DOMAIN
 app.config.globalProperties.$domainName = import.meta.env.VITE_DOMAIN_NAME
-app.config.globalProperties.$ip         = "https://wifer-test.ru:82/"
 app.config.globalProperties.$lang       = langJS()
 app.config.globalProperties.$user       = userJS()
 app.config.globalProperties.$nav        = navJS()
@@ -37,5 +36,9 @@ app.config.globalProperties.$country    = countryJS()
 app.config.globalProperties.$scroll     = scrollJS()
 app.config.globalProperties.$chat       = chatJS()
 app.config.globalProperties.$heart      = heartJS()
+
+app.config.globalProperties.$file       = (what, target_id, filename, dir = "") => {
+    return app.config.globalProperties.$domain + "file?what=" + what + "&target_id=" + target_id + "&filename=" + filename + "&dir=" + dir
+}
 
 app.mount('#app')

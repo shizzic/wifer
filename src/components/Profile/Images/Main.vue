@@ -26,21 +26,21 @@
             <div v-if="data.avatar === true" class="image" style="display: none;">
                 <a
                     ref="avatar"
-                    :href="$ip + $route.params.id + '/avatar.webp?' + Date.now()"
+                    :href="$file('images', $route.params.id, 'avatar.webp')"
                     target="_blank"
                     rel="noreferrer"
                 >
-                    <img :src="$ip + $route.params.id + '/avatar.webp?' + Date.now()" alt="" />
+                    <img :src="$file('images', $route.params.id, 'avatar.webp')" alt="" />
                 </a>
             </div>
             
             <div v-for="(num, index) in data.public" :key="index" class="image-wrap">
                 <a
-                    :href="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()"
+                    :href="$file('images', $route.params.id, num + '.webp', 'public')"
                     target="_blank"
                     rel="noreferrer"
                 >
-                    <img :src="$ip + $route.params.id + '/public/' + num + '.webp?' + Date.now()" alt="" class="image" />
+                    <img :src="$file('images', $route.params.id, num + '.webp', 'public')" alt="" class="image" />
                 </a>
                 
                 <div class="icon-wrap"><img src="/images/public.webp" alt="" class="icon" /></div>
@@ -49,11 +49,11 @@
             <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && (priv.access || premium > 0))">
                 <div v-for="(num, index) in data.private" :key="index" class="image-wrap">
                     <a
-                        :href="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()"
+                        :href="$file('images', $route.params.id, num + '.webp', 'private')"
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <img :src="$ip + $route.params.id + '/private/' + num + '.webp?' + Date.now()" alt="" class="image" />
+                        <img :src="$file('images', $route.params.id, num + '.webp', 'private')" alt="" class="image" />
                     </a>
 
                     <div class="icon-wrap"><img src="/images/private.webp" alt="" class="icon" /></div>

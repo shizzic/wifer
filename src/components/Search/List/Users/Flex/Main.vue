@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper">
 		<router-link v-for="(user, index) in users" :key="index" class="user" :to="{ name : 'profile', params : { id : user._id } }">
-			<img v-if="user.avatar" :src="$ip + user._id + '/avatar.webp?' + Date.now()" />
+			<img v-if="user.avatar" :src="$file('images', user._id, 'avatar.webp')" />
 			<div v-else class="no"><img src="/images/avatar.webp" /></div>
 			<Info :user="user" :photos="photos" />
 		</router-link>

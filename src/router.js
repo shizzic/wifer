@@ -1,21 +1,23 @@
 import { createWebHistory, createRouter } from "vue-router"
 
-import Search from "@/components/Search/Main.vue"
-import Chat from "@/components/Chat/Main.vue"
-import Premium from "@/components/Premium/Main.vue"
-import Heart from "@/components/Heart/Main.vue"
-import Profile from "@/components/Profile/Main.vue"
-import Signin from "@/components/Signin/Main.vue"
-import Auth from "@/components/Auth.vue"
+let c = {
+    Search: () => import("@/components/Search/Main.vue"),
+    Chat: () => import("@/components/Chat/Main.vue"),
+    Premium: () => import("@/components/Premium/Main.vue"),
+    Heart: () => import("@/components/Heart/Main.vue"),
+    Profile: () => import("@/components/Profile/Main.vue"),
+    Signin: () => import("@/components/Signin/Main.vue"),
+    Auth: () => import("@/components/Auth.vue"),
+}
 
 const routes = [
-    { path: "/", name: "premium", component: Premium, props: true },
-    { path: "/search", name: "search", component: Search, props: true },
-    { path: "/chat", name: "chat", component: Chat, props: true },
-    { path: "/heart", name: "heart", component: Heart, props: true },
-    { path: "/profile/:id", name: "profile", component: Profile, props: true },
-    { path: "/signin", name: "signin", component: Signin, props: true },
-    { path: "/auth/:id(\\S+)/:code", name: "auth", component: Auth, props: true }
+    { path: "/", name: "premium", component: c.Premium, props: true },
+    { path: "/search", name: "search", component: c.Search, props: true },
+    { path: "/chat", name: "chat", component: c.Chat, props: true },
+    { path: "/heart", name: "heart", component: c.Heart, props: true },
+    { path: "/profile/:id", name: "profile", component: c.Profile, props: true },
+    { path: "/signin", name: "signin", component: c.Signin, props: true },
+    { path: "/auth/:id(\\S+)/:code", name: "auth", component: c.Auth, props: true }
 ]
 
 const router = createRouter({

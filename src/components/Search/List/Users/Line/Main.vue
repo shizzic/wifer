@@ -1,8 +1,8 @@
 <template>
 	<div class="wrapper">
 		<router-link v-for="(user, index) in users" :key="index" class="user" :to="{ name : 'profile', params : { id : user._id } }">
-			<img v-if="user.avatar" :src="$ip + user._id + '/avatar.webp?' + Date.now()" class="avatar" />
-			<div v-else class="no"><img src="/images/avatar.webp" /></div>
+			<img v-if="user.avatar" :src="$file('images', user._id, 'avatar.webp')" class="avatar" :class="{ premium: user.premium }" />
+			<div v-else class="no" :class="{ premium: user.premium }"><img src="/images/avatar.webp" /></div>
 
             <div class="flex">
                 <Info :user="user" :photos="photos" />
@@ -63,6 +63,10 @@ export default {
     min-height: 190px;
 	border-radius: 8px;
 	object-fit: cover;
+}
+
+.premium {
+    border: 3px solid #cdbe1e;
 }
 
 .no {

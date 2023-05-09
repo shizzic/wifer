@@ -1,14 +1,14 @@
 <template>
     <div>
-        <img v-if="avatar === false" src="/images/avatar.webp" class="no">
-        <img v-else :src="$ip + $route.params.id + '/avatar.webp?' + Date.now()" class="avatar" @click="$emit('avatar')">
+        <img v-if="avatar === false" src="/images/avatar.webp" class="no" :class="{ premium: premium }">
+        <img v-else :src="$file('images', $route.params.id, 'avatar.webp')" class="avatar" :class="{ premium: premium }" @click="$emit('avatar')">
     </div>
 </template>
 
 <script scoped>
 export default {
 	name: "Avatar",
-    props: ["avatar"]
+    props: ["avatar", "premium"]
 }
 </script>
 
@@ -45,6 +45,10 @@ img {
     max-height: 100%;
 
     border-radius: 8px;
+}
+
+.premium {
+    border: 3px solid #cdbe1e;
 }
 
 @media screen and (max-width: 700px) {

@@ -1,5 +1,5 @@
 <template>
-	<div class="block">
+	<div class="block" :class="{ premium: user.premium }">
 		<span class="username">
             <div v-if="user.online" class="ring-container"><div class="circle green-back" /></div>
             {{ user.username }}
@@ -86,9 +86,14 @@ export default {
     flex-direction: column;
     padding: 0 15px;
 
-    border: 1px solid #000;
+    border: 3px solid;
+    border-color: #757373;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+}
+
+.premium {
+    border-color: #cdbe1e;
 }
 
 .username {

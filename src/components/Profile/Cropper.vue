@@ -11,8 +11,8 @@
 			<div class="right">
 				<div class="buttons">
 					<div class="button" @click="upload">{{ lang[l].upload }}</div>
-					<div class="button" :class="{ 'active' : mode, 'inactive' : !mode }" @click="mode = true">{{ lang[l].public }}</div>
-					<div class="button" :class="{ 'active' : !mode, 'inactive' : mode }" @click="mode = null">{{ lang[l].private }}</div>
+					<div class="button green" :class="{ 'active' : mode, 'inactive' : !mode }" @click="mode = true">{{ lang[l].public }}</div>
+					<div class="button red" :class="{ 'active' : !mode, 'inactive' : mode }" @click="mode = null">{{ lang[l].private }}</div>
 					<div class="button" @click="rotate"><img src="/images/rotate.webp" /></div>
 					<div class="button" @click="flip"><img src="/images/flip.webp" /></div>
 					<div class="button" @click="$emit('clear'); mode = true;">{{ lang[l].cancel }}</div>
@@ -179,13 +179,20 @@ export default {
 }
 
 .active {
-	background-color: #3dc464;
+	opacity: 1;
 	border-color: #fff;
 }
 
 .inactive {
-	background-color: #ce5050;
 	opacity: 0.5;
+}
+
+.green {
+	background-color: #3dc464;
+}
+
+.red {
+	background-color: #ce5050;
 }
 
 img {
