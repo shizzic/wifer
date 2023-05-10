@@ -46,16 +46,16 @@ export default {
 			const { canvas } = this.$refs.cropper.getResult()
 
 			if (canvas) {
-				let mode = "public"
+				let dir = "public"
 				if (!this.mode)
-					mode = "private"
+					dir = "private"
 				
 				const form = new FormData()
-				form.append("dir", mode)
+				form.append("dir", dir)
 
 				canvas.toBlob(blob => {
 					form.append("file", blob);
-					fetch(this.$domain + "upload", {
+					fetch(this.$domain + "upload-image", {
 						method: "POST",
 						credentials: "include",
 						body: form,

@@ -131,7 +131,7 @@ export default {
             params: {
                 mode: null,
                 dir: "public",
-                number: 1
+                name: 1
             }
         }
     },
@@ -167,7 +167,7 @@ export default {
                 
                 if (query) {
                     this.params.dir = query.get("dir")
-                    this.params.number = query.get("filename").split(".")[0]
+                    this.params.name = query.get("filename").split(".")[0]
 
                     if (this.params.dir === "")
                         this.params.mode = null
@@ -188,7 +188,7 @@ export default {
     },
     methods: {
         makeProfile() {
-            fetch(this.$domain + "replaceAvatar?dir=" + this.params.dir + "&number=" + this.params.number, {
+            fetch(this.$domain + "replaceAvatar?dir=" + this.params.dir + "&name=" + this.params.name, {
                 method: "PUT",
                 credentials: "include"
             })
@@ -207,11 +207,11 @@ export default {
         },
 
         dir(newDir) {
-            let isAvatar = "0"
+            let isAvatar = false
             if (this.params.mode === null)
-                isAvatar = "1"
+                isAvatar = true
 
-            fetch(this.$domain + "changeImageDir?isAvatar=" + isAvatar + "&dir=" + this.params.dir + "&number=" + this.params.number + "&new=" + newDir, {
+            fetch(this.$domain + "changeImageDir?isAvatar=" + isAvatar + "&dir=" + this.params.dir + "&name=" + this.params.name + "&newDir=" + newDir, {
                 method: "PUT",
                 credentials: "include"
             })
@@ -230,11 +230,11 @@ export default {
         },
 
         deleteImg() {
-            let isAvatar = 0
+            let isAvatar = false
             if (this.params.mode === null)
-                isAvatar = 1
+                isAvatar = true
 
-            fetch(this.$domain + "deleteImage?isAvatar=" + isAvatar + "&dir=" + this.params.dir + "&number=" + this.params.number, {
+            fetch(this.$domain + "deleteImage?isAvatar=" + isAvatar + "&dir=" + this.params.dir + "&name=" + this.params.name, {
                 method: "DELETE",
                 credentials: "include"
             })

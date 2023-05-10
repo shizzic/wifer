@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img v-if="avatar === false" src="/images/avatar.webp" class="no" :class="{ premium: premium }">
+        <img v-if="avatar === false" src="/images/avatar.webp" class="no round" :class="{ premium: premium }">
         <img v-else :src="$file('images', $route.params.id, 'avatar.webp')" class="avatar" :class="{ premium: premium }" @click="$emit('avatar')">
     </div>
 </template>
@@ -31,6 +31,10 @@ img {
 
 .no {
     width: 100%;
+}
+
+.round {
+    border-radius: 50%;
 }
 
 .avatar {
