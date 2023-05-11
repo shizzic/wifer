@@ -44,6 +44,10 @@ export default {
     padding: 5px 20px;
 }
 
+#cookie > * {
+    overflow-wrap: break-word;
+}
+
 #cookie-btn {
     cursor: pointer;
     background-color: #2c3249;

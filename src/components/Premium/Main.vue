@@ -84,6 +84,10 @@ export default {
 	overflow-y: auto;
 }
 
+#premium > * {
+	overflow-wrap: break-word;
+}
+
 .squares {
 	display: flex;
 	justify-content: center;
@@ -124,7 +128,17 @@ img {
 	align-items: center;
 }
 
+#footer-wrap span {
+	text-align: center;
+}
+
 #terms {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+#terms > * {
 	margin-bottom: 3px;
 }
 

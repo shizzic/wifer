@@ -8,9 +8,11 @@ let c = {
     Profile: () => import("@/components/Profile/Main.vue"),
     Signin: () => import("@/components/Signin/Main.vue"),
     Auth: () => import("@/components/Auth.vue"),
+    404: () => import("@/components/404.vue"),
 }
 
 const routes = [
+    { path: "/:catchAll(.*)", name: "404", component: c[404] },
     { path: "/", name: "premium", component: c.Premium, props: true },
     { path: "/search", name: "search", component: c.Search, props: true },
     { path: "/chat", name: "chat", component: c.Chat, props: true },
