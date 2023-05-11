@@ -1,77 +1,63 @@
 <template>
-	<div class="block" :class="{ premium: user.premium }">
-		<span class="username">
-            <div v-if="user.online" class="ring-container"><div class="circle green-back" /></div>
+    <div class="block" :class="{ premium: user.premium }">
+        <span class="username">
+            <div v-if="user.online" class="ring-container">
+                <div class="circle green-back" />
+            </div>
             {{ user.username }}
         </span>
 
         <span class="place">{{ user.age }}<span class="dot" />
-            {{ (country === 0) ? "" : country }}{{ (city === 0) ? "" : " , " + city }}
+            {{ user.country_id ? $country.country[user.country_id] : "" }}
+            {{ user.city_id && $city.city[user.country_id] && $city.city[user.country_id][user.city_id] ? " , " + $city.city[user.country_id][user.city_id] : "" }}
         </span>
         <span class="title">{{ user.title }}</span>
-        
+
         <div class="flex">
-            <span class="images">{{ (user.avatar) ? user.public + user.private + 1 : user.public + user.private }} {{ photos }}</span>
+            <span class="images">{{ (user.avatar) ? user.public + user.private + 1 : user.public + user.private }} {{ photos
+            }}</span>
             <img v-if="user.premium > 0" src="/images/premium.webp" />
         </div>
-	</div>
+    </div>
 </template>
 
 <script scoped>
 export default {
-	name: "Info",
-	props: ["user", "photos"],
-    data() {
-		return {
-			country: null,
-            city:    null
-		}
-	},
+    name: "Info",
+    props: ["user", "photos"],
     beforeMount() {
-        if (this.user.country_id !== 0)
-            this.getPlace("country", this.user.country_id)
-        else
-            this.country = 0
-
-        if (this.user.city_id !== 0)
-            this.getPlace("city", this.user.city_id)
-        else
-            this.city = 0
+        this.getPlace("country", this.user.country_id)
+        this.getPlace("city", this.user.city_id)
     },
     methods: {
-        getPlace(place, index) {
-            if (place === "city")
-                if (this.user.country_id in this.$city.city && index in this.$city.city[this.user.country_id])
-                    this.city = this.$city.city[this.user.country_id][index]
-                else
-                    this.returnPlace(place)
-            else
-                if (index in this.$country.country)
-                    this.country = this.$country.country[index]
-                else
-                    this.returnPlace(place)
+        getPlace(place, place_id) {
+            if (place === "city") {
+                if (!(this.user.country_id in this.$city.city) || this.$city.city[this.user.country_id] && !(place_id in this.$city.city[this.user.country_id]))
+                    this.fetchPlace(place)
+            } else {
+                if (!(place_id in this.$country.country))
+                    this.fetchPlace(place)
+            }
         },
-        returnPlace(place) {
+        fetchPlace(place) {
             fetch(this.$domain + place + "?country_id=" + this.user.country_id, {
-				method: "GET",
-				credentials: "include"
-			})
-				.then(data => { return data.json() })
-				.then(data => {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(data => { return data.json() })
+                .then(data => {
                     let obj = {}
 
                     for (let index in data)
                         obj[data[index]._id] = data[index].title
 
                     if (place === "city") {
-                        this.$city.set({ "data" : obj, "country_id": this.user.country_id })
-                        this.city = this.$city.city[this.user.country_id][this.user.city_id]
-                    } else {
-                        this.$country.set(obj)
-                        this.country = this.$country.country[this.user.country_id]
-                    }
-				})
-        }
+                        if (this.user.city_id)
+                            return this.$city.set({ "data": obj, "country_id": this.user.country_id })
+                    } else
+                        return this.$country.set(obj)
+                })
+        },
     }
 }
 </script>

@@ -52,7 +52,7 @@ export const userJS = defineStore("user", {
                 })
                 .then(left => {
                     if (!left)
-                        this.premium        = 0
+                        this.premium = 0
                 })
         },
         logout(domain) {

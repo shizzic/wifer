@@ -9,10 +9,12 @@
             </template>
         </div>
 
-        <div v-for="(elem, place) in place" :key="place" class="row">
-            <img :src="'/images/' + place + '.webp'">
-            <span v-if="elem === 0">-</span>
-            <span v-else>{{ getPlace(place, elem) }}</span>
+        <div v-for="(_, place_index) in place" :key="place" class="row">
+            <img :src="'/images/' + place_index + '.webp'">
+            <span v-show="place_index === 'country'">{{ $country.country[place.country] ? $country.country[place.country] : "-" }}</span>
+            <span v-show="place_index === 'city'">
+                {{ $city.city[place.country] && $city.city[place.country][place.city] ? $city.city[place.country][place.city] : "-" }}
+            </span>
         </div>
 
         <div v-for="(time, index) in time" :key="index" class="row">
@@ -24,20 +26,21 @@
 
 <script scoped>
 export default {
-	name: "Icons",
+    name: "Icons",
     props: ["time", "text", "place", "lang"],
+    beforeMount() {
+        this.getPlace("country", this.place.country)
+        this.getPlace("city", this.place.city)
+    },
     methods: {
-        getPlace(place, index) {
-            if (place === "city")
-                if (this.place.country in this.$city.city && index in this.$city.city[this.place.country])
-                    return this.$city.city[this.place.country][index]
-                else
-                    this.returnPlace(place)
-            else
-                if (index in this.$country.country)
-                    return this.$country.country[index]
-                else
-                    this.returnPlace(place)
+        getPlace(place, place_id) {
+            if (place === "city") {
+                if (!(this.place.country in this.$city.city) || this.$city.city[this.place.country] && !(place_id in this.$city.city[this.place.country]))
+                    this.fetchPlace(place)
+            } else {
+                if (!(place_id in this.$country.country))
+                    this.fetchPlace(place)
+            }
         },
         getDate(time) {
             var date = new Date(time * 1000)
@@ -47,26 +50,24 @@ export default {
             var formattedTime = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear() + " " + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2)
             return formattedTime
         },
-        returnPlace(place) {
+        fetchPlace(place) {
             fetch(this.$domain + place + "?country_id=" + this.place.country, {
-				method: "GET",
-				credentials: "include"
-			})
-				.then(data => { return data.json() })
-				.then(data => {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(data => { return data.json() })
+                .then(data => {
                     let obj = {}
 
                     for (let index in data)
                         obj[data[index]._id] = data[index].title
 
                     if (place === "city") {
-                        this.$city.set({ "data" : obj, "country_id": this.place.country })
-                        return this.$city.city[this.place.country][this.place.city]
-                    } else {
-                        this.$country.set(obj)
-                        return this.$country.country[this.place.country]
-                    }
-				})
+                        if (this.place.city)
+                            return this.$city.set({ "data": obj, "country_id": this.place.country })
+                    } else
+                        return this.$country.set(obj)
+                })
         }
     }
 }

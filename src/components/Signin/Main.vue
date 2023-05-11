@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap scroll">
+	<div v-if="!$user.id" class="wrap scroll">
 		<Title :l="l" :lang="lang.title" />
 		<Api :success="success" :response="response" :l="l" :terms="terms" />
 
@@ -12,7 +12,6 @@
 </template>
 
 <script scoped>
-import { userJS } from "@/store/user"
 import { SigninJS } from "@/store/Langs/Signin"
 import Title from "@/components/Signin/Title.vue"
 import Api from "@/components/Signin/Api/Main.vue"
@@ -46,10 +45,6 @@ export default {
 		terms() {
 			return this.$user.terms
 		}
-	},
-	beforeMount() {
-		if (userJS().id)
-			this.$router.push({ name: "search" })
 	},
 	methods: {
 		signin(values) {
