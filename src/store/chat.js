@@ -16,9 +16,9 @@ export const chatJS = defineStore("chat", {
         rooms: {}
     }),
     actions:{
-        startSocket(domainName) {
+        startSocket() {
             if (!this.socket) {
-                this.socket = new WebSocket("wss://" + domainName + "chat")
+                this.socket = new WebSocket(import.meta.env.VITE_WEBSOCKET_PROTOCOL + "://" + import.meta.env.VITE_DOMAIN_NAME + "chat")
         
                 this.socket.onmessage = (e) => {
                     this.onMessage(e.data)

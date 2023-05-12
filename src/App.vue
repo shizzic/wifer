@@ -66,7 +66,7 @@ export default {
 		start() {
 			if (this.id && this.id > 0) {
 				this.$user.getParamsAfterLogin(this.$domain)
-				this.$chat.startSocket(this.$domainName)
+				this.$chat.startSocket()
 				this.interval = setInterval(this.checkPremium, 60000 * 20)
 			} else {
 				this.$chat.closeSocket()
