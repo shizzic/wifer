@@ -51,23 +51,24 @@ export default {
             return formattedTime
         },
         fetchPlace(place) {
-            fetch(this.$domain + place + "?country_id=" + this.place.country, {
-                method: "GET",
-                credentials: "include"
-            })
-                .then(data => { return data.json() })
-                .then(data => {
-                    let obj = {}
-
-                    for (let index in data)
-                        obj[data[index]._id] = data[index].title
-
-                    if (place === "city") {
-                        if (this.place.city)
-                            return this.$city.set({ "data": obj, "country_id": this.place.country })
-                    } else
-                        return this.$country.set(obj)
+            if (this.place.country)
+                fetch(this.$domain + place + "?country_id=" + this.place.country, {
+                    method: "GET",
+                    credentials: "include"
                 })
+                    .then(data => { return data.json() })
+                    .then(data => {
+                        let obj = {}
+
+                        for (let index in data)
+                            obj[data[index]._id] = data[index].title
+
+                        if (place === "city") {
+                            if (this.place.city)
+                                return this.$city.set({ "data": obj, "country_id": this.place.country })
+                        } else
+                            return this.$country.set(obj)
+                    })
         }
     }
 }

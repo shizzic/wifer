@@ -46,6 +46,10 @@ export default {
 			return this.$user.terms
 		}
 	},
+	beforeMount() {
+		if (this.$user.id)
+			this.$router.push({ name: "search" })
+	},
 	methods: {
 		signin(values) {
 			let form = new FormData()

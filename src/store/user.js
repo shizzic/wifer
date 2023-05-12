@@ -61,6 +61,7 @@ export const userJS = defineStore("user", {
             this.username = ""
             this.premium  = 0
             this.trial    = false
+            this.first    = false
 
             fetch(domain + "logout", {
 				method: "PUT",

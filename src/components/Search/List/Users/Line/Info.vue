@@ -41,23 +41,24 @@ export default {
             }
         },
         fetchPlace(place) {
-            fetch(this.$domain + place + "?country_id=" + this.user.country_id, {
-                method: "GET",
-                credentials: "include"
-            })
-                .then(data => { return data.json() })
-                .then(data => {
-                    let obj = {}
-
-                    for (let index in data)
-                        obj[data[index]._id] = data[index].title
-
-                    if (place === "city") {
-                        if (this.user.city_id)
-                            return this.$city.set({ "data": obj, "country_id": this.user.country_id })
-                    } else
-                        return this.$country.set(obj)
+            if (this.user.country_id)
+                fetch(this.$domain + place + "?country_id=" + this.user.country_id, {
+                    method: "GET",
+                    credentials: "include"
                 })
+                    .then(data => { return data.json() })
+                    .then(data => {
+                        let obj = {}
+
+                        for (let index in data)
+                            obj[data[index]._id] = data[index].title
+
+                        if (place === "city") {
+                            if (this.user.city_id)
+                                return this.$city.set({ "data": obj, "country_id": this.user.country_id })
+                        } else
+                            return this.$country.set(obj)
+                    })
         },
     }
 }

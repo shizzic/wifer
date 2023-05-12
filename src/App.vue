@@ -1,6 +1,6 @@
 <template>
 	<Nav id="menu" :l="l" />
-	<div id="wrap" v-if="!id || id && first"><router-view :l="l" /></div>
+	<div id="wrap"><router-view :l="l" /></div>
 	<Cookie v-if="!cookies" :l="l" />
 </template>
 
@@ -18,7 +18,6 @@ export default {
         l() { return this.$lang.lang },
 		id() { return this.$user.id },
 		cookies() { return this.$user.cookies },
-		first() { return this.$user.first }
     },
 	watch: {
 		id() {
@@ -70,8 +69,7 @@ export default {
 				this.interval = setInterval(this.checkPremium, 60000 * 20)
 			} else {
 				this.$chat.closeSocket()
-				clearInterval(this.interval)
-				this.interval = null
+				this.interval = clearInterval(this.interval)
 			}
 
 			this.$country.getPrice()

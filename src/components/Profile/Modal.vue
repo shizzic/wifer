@@ -43,7 +43,7 @@ export default {
         logout() {
             this.$toast.success(this.success[this.modal][this.l])
             this.$user.logout(this.$domain)
-            this.$router.push({ name: "search" })
+            this.$router.push({ name: "signin" })
         },
 
         // trigger specific function

@@ -81,17 +81,17 @@ export default {
 		}
 	},
 	watch: {
-		id(n) {
-			if (n && n > 0)
+		id(user_id) {
+			if (user_id && user_id > 0) {
 				if (!this.interval) {
 					this.getHearts()
 					this.interval = setInterval(this.getHearts, 1000 * 120)
 				}
-			else {
+			} else {
 				for (let field of this.$nav.fields)
 					this.$nav.setHearts(0, field)
 
-				clearInterval(this.interval)
+				this.interval = clearInterval(this.interval)
 			}
 		},
 

@@ -70,8 +70,7 @@ export default {
 		this.interval = setInterval(this.checkUsersOnline, 1000 * 60 * 3)
 	},
 	beforeUnmount() {
-		clearInterval(this.interval)
-		this.interval = null
+		this.interval = clearInterval(this.interval)
 	},
 	methods: {
 		getRooms(byUsername = false, username = "") {

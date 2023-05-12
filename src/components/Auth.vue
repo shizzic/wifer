@@ -7,7 +7,7 @@ export default {
 	name: "Auth",
 	setup() {
 		const response = AuthJS()["response"]
-		const success  = SigninJS()["success"]
+		const success = SigninJS()["success"]
 
 		return {
 			response,
@@ -15,13 +15,13 @@ export default {
 		}
 	},
 	computed: {
-        l() {
-            return langJS()["lang"]
-        },
+		l() {
+			return langJS()["lang"]
+		},
 		id() {
 			return this.$user.id
 		}
-    },
+	},
 	beforeMount() {
 		if (/^[0-9]+$/.test(this.$route.params.code) && this.$route.params.code.length === 6)
 			this.check()
@@ -32,26 +32,28 @@ export default {
 	},
 	methods: {
 		check() {
-			let form = new FormData()
-			form.append("id", this.$route.params.id)
-			form.append("code", this.$route.params.code)
+			if (!this.$user.id) {
+				let form = new FormData()
+				form.append("id", this.$route.params.id)
+				form.append("code", this.$route.params.code)
 
-			fetch(this.$domain + "checkCode", {
-				method: "POST",
-				credentials: "include",
-				body: form
-			})
-				.then(data => { return data.json() })
-				.then(data => {
-					if ("error" in data) {
-						this.$toast.error(this.response[this.l][data["error"]])
-						this.$router.push({ name: "search" })
-					} else {
-						this.$user.set({ field: "id", value: data.id })
-						this.$router.push({ name: "profile", params: { id: this.id } })
-						this.$toast.success(this.success[this.l])
-					}
+				fetch(this.$domain + "checkCode", {
+					method: "POST",
+					credentials: "include",
+					body: form
 				})
+					.then(data => { return data.json() })
+					.then(data => {
+						if ("error" in data) {
+							this.$toast.error(this.response[this.l][data["error"]])
+							this.$router.push({ name: "search" })
+						} else {
+							this.$user.set({ field: "id", value: data.id })
+							this.$router.push({ name: "profile", params: { id: this.id } })
+							this.$toast.success(this.success[this.l])
+						}
+					})
+			}
 		}
 	}
 }
