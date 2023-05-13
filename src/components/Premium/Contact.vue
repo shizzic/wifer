@@ -1,28 +1,59 @@
 <template>
-	<form name="contact" class="square" style="background-color: #272a34;" @submit.prevent="contact">
+    <Form name="contact" class="square" style="background-color: #272a34;" @submit="contact">
         <h2>{{ lang.title }}</h2>
 
-        <input type="text" name="name" v-model="name" :placeholder="lang.name" />
-        <input type="text" name="email" v-model="email" :placeholder="lang.email" />
+        <Field name="name" :rules="message_rules" v-slot="{ field }" v-model="name">
+            <input v-bind="field" v-model="name" :placeholder="lang.name" maxlength="254" />
+        </Field>
+        <ErrorMessage name="name" class="error" />
+        
+        <Field name="email" :rules="email_rules" v-slot="{ field }" v-model="email">
+            <input v-bind="field" type="email" v-model="email" :placeholder="lang.email" maxlength="254" />
+        </Field>
+        <ErrorMessage name="email" class="error" />
+
         <input type="text" name="subject" v-model="subject" :placeholder="lang.subject" />
-        <textarea v-model="message" maxlength="1500" :placeholder="lang.message" />
+
+        <Field name="message" :rules="message_rules" v-slot="{ field }" v-model="message">
+            <textarea v-bind="field" v-model="message" :placeholder="lang.message" maxlength="1500" />
+        </Field>
+        <ErrorMessage name="message" class="error" style="margin-top: -12px;" />
 
         <input type="submit" :value="lang.send" />
-    </form>
+    </Form>
 </template>
 
 <script scoped>
+import { SigninJS } from "@/store/Langs/Signin"
+import { Form } from "vee-validate"
+import { Field, ErrorMessage } from "vee-validate"
+import * as yup from "yup"
 export default {
-	name: "Contact",
-    props: ["lang", "response"],
+    name: "Contact",
+    props: ["lang", "response", "l"],
+    components: {
+        Form,
+        Field,
+        ErrorMessage
+    },
+    setup() {
+        const error = SigninJS().error
+
+        return {
+            error,
+        }
+    },
     data() {
-		return {
-			name: "",
+        return {
+            email_rules: yup.string().email(this.error[this.l]["email"]).required(this.error[this.l]["required"]),
+            message_rules: yup.string().required(this.error[this.l]["required"]),
+
+            name: "",
             email: "",
             subject: "",
             message: ""
-		}
-	},
+        }
+    },
     methods: {
         contact() {
             let form = new FormData()
@@ -68,7 +99,10 @@ input {
     padding-bottom: 8px;
 }
 
-input:focus, input:active, textarea:focus, textarea:active {
+input:focus,
+input:active,
+textarea:focus,
+textarea:active {
     background: transparent;
     border-color: rgba(255, 255, 255, 0.5) !important;
 }
@@ -104,5 +138,13 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #d67a0c;
+}
+
+.error {
+    color: rgb(228, 96, 96);
+    font-size: 13px;
+
+    margin-top: -18px;
+    margin-bottom: 15px;
 }
 </style>

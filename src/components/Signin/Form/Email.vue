@@ -1,8 +1,8 @@
 <template>
 	<h3>{{ title }}</h3>
 	<div>
-        <Field name="email" :rules="rules" maxlength="254" v-slot="{ field, errorMessage }" v-model="value">
-			<input v-bind="field" type="email" v-model="value" />
+        <Field name="email" :rules="rules" v-slot="{ field, errorMessage }" v-model="value">
+			<input v-bind="field" type="email" v-model="value" maxlength="254" />
 
 			<span v-show="!errorMessage && value" style="color: #40e64e;">&#10004;</span>
 			<span v-show="errorMessage" style="font-size: 12px;">&#10060;</span>
@@ -12,8 +12,8 @@
 </template>
 
 <script scoped>
-import { Field, ErrorMessage  } from 'vee-validate';
-import * as yup from 'yup';
+import { Field, ErrorMessage  } from 'vee-validate'
+import * as yup from 'yup'
 export default {
 	name: "Email",
 	props: ["title", "error"],

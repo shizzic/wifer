@@ -5,7 +5,7 @@
 			<Pay :lang="pay[l]" :response="response[l]" />
 			<Luckriza :lang="luckriza[l]" />
 			<FreeChat :lang="freeChat[l]" />
-			<Contact :lang="contact[l]" :response="response[l]" />
+			<Contact :lang="contact[l]" :response="response[l]" :l="l" />
 			<WorldWide :lang="worldWide[l]" />
 		</div>
 

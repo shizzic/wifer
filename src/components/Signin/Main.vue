@@ -17,7 +17,7 @@ import Title from "@/components/Signin/Title.vue"
 import Api from "@/components/Signin/Api/Main.vue"
 import Email from "@/components/Signin/Form/Email.vue"
 import Accept from "@/components/Signin/Form/Accept.vue"
-import { Form } from 'vee-validate'
+import { Form } from "vee-validate"
 export default {
 	name: "Signin",
 	props: ["l"],
