@@ -1,6 +1,6 @@
 <template>
     <v-facebook-login
-        app-id="3352108845111671"
+        :app-id="app_id"
         @sdk-init="init"
         @login="signin"
         :useAltLogo="true"
@@ -21,6 +21,7 @@ export default {
 	},
 	data() {
 		return {
+			app_id: import.meta.env.VITE_FACEBOOK_ID,
 			FB: {},
 			user: {}
 		}

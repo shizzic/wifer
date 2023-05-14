@@ -123,14 +123,18 @@ export default {
 			data.limit 	   = this.data.data[this.data.active].limit
 			data.sort      = this.data.data[this.data.active].sort
 
-			for (let elem in this.slider) {
-				data[elem + "Min"] = this.data.data[this.data.active][elem][0]
-				data[elem + "Max"] = this.data.data[this.data.active][elem][1]
+			for (let field in this.slider) {
+				if (this.slider[field].min == this.data.data[this.data.active][field][0] && this.slider[field].max == this.data.data[this.data.active][field][1]) {
+					data[field + "Min"] = 0
+					data[field + "Max"] = this.slider[field].max
+				} else {
+					data[field + "Min"] = this.data.data[this.data.active][field][0]
+					data[field + "Max"] = this.data.data[this.data.active][field][1]
+				}
 			}
 
 			data["imagesMin"] = this.data.data[this.data.active].images[0]
 			data["imagesMax"] = this.data.data[this.data.active].images[1]
-			data["imagesMin"] = this.data.data[this.data.active].images[0]
 			data["avatar"] 	  = this.data.data[this.data.active].avatar
 
 			for (let elem of this.checkbox)

@@ -1,25 +1,37 @@
 <template>
 	<div class="wrapper" :class="{ disabled: !terms }">
 		<Google @signin="signin" :terms="terms" />
-		<!-- <Facebook @signin="signin" /> -->
+		<Facebook v-if="https" @signin="signin" :terms="terms" />
+		<!-- <Twitter @signin="signin" :terms="terms" /> -->
 	</div>
 </template>
 
 <script scoped>
 import Google from "@/components/Signin/Api/Google.vue"
 import Facebook from "@/components/Signin/Api/Facebook.vue"
+import Twitter from "@/components/Signin/Api/Twitter.vue"
 export default {
 	name: "Api",
 	props: ["l", "success", "response", "terms"],
 	components: {
 		Google,
-		Facebook
+		Facebook,
+		Twitter,
 	},
 	computed: {
 		id() {
 			return this.$user.id
 		}
     },
+	data() {
+		return {
+			https: false
+		}
+	},
+	beforeMount() {
+		if (window.location.protocol === "https:")
+			this.https = true
+	},
 	methods: {
 		signin(data) {
 			let form = new FormData()
