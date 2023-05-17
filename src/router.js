@@ -9,6 +9,9 @@ let c = {
     Signin: () => import("@/components/Signin/Main.vue"),
     Auth: () => import("@/components/Auth.vue"),
     404: () => import("@/components/404.vue"),
+    TermsAndConditions: () => import("@/components/terms/TermsAndConditions.vue"),
+    PrivacyPolicy: () => import("@/components/terms/PrivacyPolicy.vue"),
+    RefundPolicy: () => import("@/components/terms/RefundPolicy.vue"),
 }
 
 const routes = [
@@ -19,7 +22,10 @@ const routes = [
     { path: "/heart", name: "heart", component: c.Heart, props: true },
     { path: "/profile/:id", name: "profile", component: c.Profile, props: true },
     { path: "/signin", name: "signin", component: c.Signin, props: true },
-    { path: "/auth/:id(\\S+)/:code", name: "auth", component: c.Auth, props: true }
+    { path: "/auth/:id(\\S+)/:code", name: "auth", component: c.Auth, props: true },
+    { path: "/terms/terms_and_conditions", name: "terms_and_conditions", component: c.TermsAndConditions, props: true },
+    { path: "/terms/privacy_policy", name: "privacy_policy", component: c.PrivacyPolicy, props: true },
+    { path: "/terms/refund_policy", name: "refund_policy", component: c.RefundPolicy, props: true },
 ]
 
 const router = createRouter({

@@ -14,9 +14,9 @@
 
 			<div id="footer-wrap">
 				<div id="terms">
-					<a href="https://app.termly.io/document/terms-of-use-for-website/6bcad083-6995-488c-afa5-34cb4a635dfc" target="_blank">Terms and Conditions</a>
-					<a href="https://app.termly.io/document/privacy-policy/af3f50ee-eb72-4321-9af6-f722baaa418e" target="_blank">Privacy Policy</a>
-					<a href="https://app.termly.io/document/return-policy/19d7baaf-0369-4915-bc3f-86fa5ab78146" target="_blank">Return Policy</a>
+					<router-link :to="{name: 'terms_and_conditions'}" target="_blank">Terms and Conditions</router-link>
+					<router-link :to="{name: 'privacy_policy'}" target="_blank">Privacy Policy</router-link>
+					<router-link :to="{name: 'refund_policy'}" target="_blank">Refund Policy</router-link>
 				</div>
 
 				<span>{{ age[l] }}</span>
