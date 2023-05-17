@@ -14,9 +14,9 @@
 
 			<div id="footer-wrap">
 				<div id="terms">
-					<router-link :to="{name: 'terms_and_conditions'}" target="_blank">Terms and Conditions</router-link>
-					<router-link :to="{name: 'privacy_policy'}" target="_blank">Privacy Policy</router-link>
-					<router-link :to="{name: 'refund_policy'}" target="_blank">Refund Policy</router-link>
+					<router-link :to="{name: 'terms_and_conditions'}">Terms and Conditions</router-link>
+					<router-link :to="{name: 'privacy_policy'}">Privacy Policy</router-link>
+					<router-link :to="{name: 'refund_policy'}">Refund Policy</router-link>
 				</div>
 
 				<span>{{ age[l] }}</span>

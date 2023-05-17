@@ -46,7 +46,9 @@ export default {
 				this.make_user_online(true)
 		})
 
-		this.visit()
+		let work = window.sessionStorage.getItem("work")
+		if (!work)
+			this.visit()
 	},
 	methods: {
 		make_user_online(value) {
@@ -78,6 +80,8 @@ export default {
 			this.$user.checkPremium(this.$domain)
 		},
 		visit() {
+			window.sessionStorage.setItem("work", true)
+
 			fetch(this.$domain + "visit", {
 				method: "POST"
 			})
