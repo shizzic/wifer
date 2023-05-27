@@ -125,6 +125,7 @@ export default {
 						this.$toast.error(this.response[this.l])
 					else {
 						this.data = data.user
+						document.title = data.user.username
 						this.pulse()
 
 						if (data.target) {

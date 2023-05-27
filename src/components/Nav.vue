@@ -97,9 +97,9 @@ export default {
 
 		allWithMessages(n) {
 			if (n > 0)
-				document.title = "luckriza (" + n + ")"
+				document.title = document.title + " (" + n + ")"
 			else
-				document.title = "luckriza"
+				document.title = document.title.split("(")[0]
 		}
 	},
 	beforeMount() {
