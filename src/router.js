@@ -227,11 +227,6 @@ router.beforeEach((to, from, next) => {
         .forEach(tag => document.head.appendChild(tag))
 
     next()
-
-    // const title = to.meta.title
-    // if (title)
-    //     document.title = title
-    // next()
 })
 
 export default router

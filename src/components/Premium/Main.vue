@@ -3,7 +3,7 @@
 		<div class="squares">
 			<Quantity :lang="quantity[l]" />
 			<Pay :lang="pay[l]" :response="response[l]" />
-			<Luckriza :lang="luckriza[l]" />
+			<About :lang="about[l]" />
 			<FreeChat :lang="freeChat[l]" />
 			<Contact :lang="contact[l]" :response="response[l]" :l="l" />
 			<WorldWide :lang="worldWide[l]" />
@@ -29,7 +29,7 @@
 import { PremiumJS } from "@/store/Langs/Premium"
 import Quantity from "@/components/Premium/Quantity.vue"
 import Pay from "@/components/Premium/Pay.vue"
-import Luckriza from "@/components/Premium/Luckriza.vue"
+import About from "@/components/Premium/About.vue"
 import FreeChat from "@/components/Premium/FreeChat.vue"
 import WorldWide from "@/components/Premium/WorldWide.vue"
 import Contact from "@/components/Premium/Contact.vue"
@@ -39,7 +39,7 @@ export default {
 	components: {
 		Quantity,
 		Pay,
-		Luckriza,
+		About,
 		FreeChat,
 		WorldWide,
 		Contact
@@ -47,7 +47,7 @@ export default {
 	setup() {
 		const quantity  = PremiumJS().quantity
 		const pay       = PremiumJS().pay
-		const luckriza  = PremiumJS().luckriza
+		const about     = PremiumJS().about
 		const freeChat  = PremiumJS().freeChat
 		const worldWide = PremiumJS().worldWide
 		const contact   = PremiumJS().contact
@@ -57,7 +57,7 @@ export default {
 		return {
 			quantity,
 			pay,
-			luckriza,
+			about,
 			freeChat,
 			worldWide,
 			contact,

@@ -80,7 +80,7 @@ export const PremiumJS = defineStore("Premium", {
                 },
             }
         },
-        luckriza() {
+        about() {
             return {
                 en: {
                     text: "Just the best website for sugar daddy/baby relationship",
