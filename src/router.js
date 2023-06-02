@@ -27,6 +27,10 @@ const routes = [
                 {
                     property: "og:description",
                     content: "You will see this page if something is wrong with url."
+                },
+                {
+                    property: "robots",
+                    content: "noindex"
                 }
             ],
         }
