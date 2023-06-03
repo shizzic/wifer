@@ -16,24 +16,10 @@ let c = {
 
 const routes = [
     {
-        path: "/:catchAll(.*)", name: "404", component: c[404],
-        meta: {
-            title: "Not found :(",
-            metaTags: [
-                {
-                    name: "description",
-                    content: "You will see this page if something is wrong with url."
-                },
-                {
-                    property: "og:description",
-                    content: "You will see this page if something is wrong with url."
-                },
-                {
-                    property: "robots",
-                    content: "noindex"
-                }
-            ],
-        }
+        path: "/:pathMatch(.*)*", name: "404", component: c[404],
+        beforeEnter() {
+            window.location.href = "https://dateshipper.com:444/404";
+        },
     },
     {
         path: "/", name: "premium", component: c.Premium, props: true,
