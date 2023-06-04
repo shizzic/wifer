@@ -16,10 +16,10 @@ let c = {
 
 const routes = [
     {
-        path: "/:pathMatch(.*)*", name: "404", component: c[404],
-        beforeEnter() {
-            window.location.href = "https://dateshipper.com:444/404";
-        },
+        path: "/:pathMatch(.*)*", redirect: "/404",
+    },
+    {
+        path: "/404", name: "404", component: c[404],
     },
     {
         path: "/", name: "premium", component: c.Premium, props: true,
