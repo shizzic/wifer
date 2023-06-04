@@ -8,19 +8,12 @@ let c = {
     Profile: () => import("@/components/Profile/Main.vue"),
     Signin: () => import("@/components/Signin/Main.vue"),
     Auth: () => import("@/components/Auth.vue"),
-    404: () => import("@/components/404.vue"),
     TermsAndConditions: () => import("@/components/terms/TermsAndConditions.vue"),
     PrivacyPolicy: () => import("@/components/terms/PrivacyPolicy.vue"),
     RefundPolicy: () => import("@/components/terms/RefundPolicy.vue"),
 }
 
 const routes = [
-    {
-        path: "/:pathMatch(.*)*", redirect: "/404",
-    },
-    {
-        path: "/404", name: "404", component: c[404],
-    },
     {
         path: "/", name: "premium", component: c.Premium, props: true,
         meta: {
