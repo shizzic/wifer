@@ -1,23 +1,17 @@
 <template>
 	<div class="wrap">
 		<div v-if="users" class="content scroll" ref="heart" @touchend="saveScroll">
-			<Hat
-				:what="what[l]" :which="which" :limit="limit" :founded="founded[l]" :mode="mode" :all="all"
+			<Hat :what="what[l]" :which="which" :limit="limit" :founded="founded[l]" :mode="mode" :all="all"
 				@which="$heart.set({ field: 'which', value: $event }); count = true; get();"
 				@mode="$heart.set({ field: 'mode', value: $event }); count = true; get();"
-				@limit="limit = $event; get();"
-			/>
-			<Users
-				:users="users" :time="time" :viewed="viewed" :notes="notes" :photos="photos[l]" :titles="titles[l]" 
-				:values="values[l]" :mode="mode" :which="which" @modal="modal = $event.modal; index = $event.index; id = $event.id"
-			/>
-			<Pagination v-show="all > 0" :count="all" :limit="limit" :skip="skip" 
-				@skip="skip = $event; get(); $refs.heart.scrollTop = 0; $scroll.set({ field: 'heart', value: 0 });" 
-			/>
-			<Modal v-if="modal" 
-				:users="users" :modal="modal" :text="text[modal][l]" :submit="submit[l]" :index="index" :id="id"
-				@users="users = $event" @close="modal = null; index = null; id = null;" @all="--all"
-			/>
+				@limit="limit = $event; get();" />
+			<Users :users="users" :time="time" :viewed="viewed" :notes="notes" :photos="photos[l]" :titles="titles[l]"
+				:values="values[l]" :mode="mode" :which="which"
+				@modal="modal = $event.modal; index = $event.index; id = $event.id" />
+			<Pagination v-show="all > 0" :count="all" :limit="limit" :skip="skip"
+				@skip="skip = $event; get(); $refs.heart.scrollTop = 0; $scroll.set({ field: 'heart', value: 0 });" />
+			<Modal v-if="modal" :users="users" :modal="modal" :text="text[modal][l]" :submit="submit[l]" :index="index"
+				:id="id" @users="users = $event" @close="modal = null; index = null; id = null;" @all="--all" />
 		</div>
 	</div>
 </template>
@@ -30,6 +24,9 @@ import Hat from "@/components/Heart/Hat/Main.vue"
 import Users from "@/components/Heart/Users/Main.vue"
 import Pagination from "@/components/Heart/Pagination.vue"
 import Modal from "@/components/Heart/Modal.vue"
+
+import { useSeoMeta } from "@unhead/vue"
+
 export default {
 	name: "Heart",
 	props: ["l"],
@@ -40,16 +37,24 @@ export default {
 		Modal
 	},
 	setup() {
-		const what    = HeartJS().what
-		const text    = HeartJS().text
-		const submit  = HeartJS().submit
-		const titles  = InfoJS().keys
-		const values  = InfoJS().values
+		useSeoMeta({
+			title: "Activities",
+			ogTitle: "Activities",
+			description: "It's a collection of all of your actions with other profiles and others' profiles with yours.",
+			ogDescription: "It's a collection of all of your actions with other profiles and others' profiles with yours.",
+			robots: "noindex",
+		})
+
+		const what = HeartJS().what
+		const text = HeartJS().text
+		const submit = HeartJS().submit
+		const titles = InfoJS().keys
+		const values = InfoJS().values
 		const founded = SearchJS().founded
-		const photos  = SearchJS().photos
+		const photos = SearchJS().photos
 
 		return {
-            what,
+			what,
 			text,
 			submit,
 			titles,
@@ -72,7 +77,7 @@ export default {
 
 			modal: null,
 			index: null,
-			id:    null
+			id: null
 		}
 	},
 	computed: {
@@ -85,14 +90,14 @@ export default {
 	},
 	beforeMount() {
 		if (!this.$user.id || this.$user.id && this.$user.id < 1)
-			this.$router.push({ name : "search" })
+			this.$router.push({ name: "search" })
 		else
 			this.get()
 	},
 	mounted() {
 		function createWheelStopListener(element, callback, timeout) {
 			var handle = null
-			var onScroll = function() {
+			var onScroll = function () {
 				if (handle)
 					clearTimeout(handle)
 
@@ -100,12 +105,12 @@ export default {
 			}
 
 			element.addEventListener("wheel", onScroll)
-			return function() {
+			return function () {
 				element.removeEventListener("wheel", onScroll)
 			}
 		}
 
-		createWheelStopListener(window, function() {
+		createWheelStopListener(window, function () {
 			this.saveScroll()
 		}.bind(this))
 	},
@@ -113,9 +118,9 @@ export default {
 		get() {
 			let data = {}
 			data.which = +this.which
-			data.mode  = this.mode
+			data.mode = this.mode
 			data.limit = this.limit
-			data.skip  = this.skip
+			data.skip = this.skip
 
 			if (this.count)
 				data.count = true
@@ -138,11 +143,11 @@ export default {
 
 					if (data.data.targets && data.data.targets.length > 0 && data.data.users && data.data.users.length > 0) {
 						this.viewed = {}
-						this.notes  = {}
-						this.time   = {}
-						let users   = []
+						this.notes = {}
+						this.time = {}
+						let users = []
 
-						let hearts   = 0
+						let hearts = 0
 						let key = "target"
 						if (!this.mode)
 							key = "user"
@@ -150,8 +155,8 @@ export default {
 						for (let target of data.data.targets) {
 							if (!this.mode && target.viewed === false)
 								hearts += 1
-								
-							this.time[target[key]]   = target.created_at
+
+							this.time[target[key]] = target.created_at
 							this.viewed[target[key]] = target.viewed
 
 							if ("text" in target)
@@ -167,14 +172,14 @@ export default {
 						this.users = users
 						this.$nav.takeHearts(hearts, this.$nav.fields[this.which])
 					} else {
-						this.users  = []
-						this.time   = {}
+						this.users = []
+						this.time = {}
 						this.viewed = {}
-						this.notes  = {}
-						this.all    = 0
+						this.notes = {}
+						this.all = 0
 					}
 				})
-			
+
 			this.count = null
 			setTimeout(this.scroll, 100)
 		},
@@ -183,7 +188,7 @@ export default {
 			if (this.$refs.heart)
 				this.$scroll.set({ field: "heart", value: this.$refs.heart.scrollTop })
 		},
-		
+
 		scroll() {
 			if (this.$refs.heart)
 				this.$refs.heart.scrollTop = this.$scroll.heart
@@ -213,14 +218,14 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
-    .wrap {
-        padding: 15px;
-    }
+	.wrap {
+		padding: 15px;
+	}
 }
 
 @media screen and (max-width: 450px) {
-    .wrap {
-        padding: 10px;
-    }
+	.wrap {
+		padding: 10px;
+	}
 }
 </style>

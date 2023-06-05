@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from "@/router"
+import { createHead } from "@unhead/vue"
 import "./style"
 
 import { createPinia } from "pinia"
@@ -21,6 +22,7 @@ const app = createApp(App)
 
 app
 .use(router)
+.use(createHead())
 .use(createPinia())
 .use(Toaster, { position: "bottom-left", maxToasts: 3, duration: 4000 })
 .use(vClickOutside)

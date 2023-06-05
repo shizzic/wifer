@@ -1,13 +1,12 @@
 <template>
 	<div class="wrap">
 		<div v-if="socket" id="chat">
-			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" 
-			:show="show" />
+			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms"
+				:show="show" />
 
-			<Right v-if="target && target.id in messages"
-				:target="target" :input="input[l]" :messages="messages[target.id]" :newMessages="newMessages[target.id]"
-				:blur="blur[l]" :getMessages="getMessages" :rooms="rooms" :show="show"
-			/>
+			<Right v-if="target && target.id in messages" :target="target" :input="input[l]" :messages="messages[target.id]"
+				:newMessages="newMessages[target.id]" :blur="blur[l]" :getMessages="getMessages" :rooms="rooms"
+				:show="show" />
 			<None v-else :lang="none[l]" :show="show" />
 		</div>
 	</div>
@@ -18,6 +17,9 @@ import Left from "@/components/Chat/Left/Main.vue"
 import Right from "@/components/Chat/Right/Main.vue"
 import None from "@/components/Chat/Right/None.vue"
 import { chatJS } from "@/store/chat"
+
+import { useSeoMeta } from '@unhead/vue'
+
 export default {
 	name: "Chat",
 	props: ["l"],
@@ -27,11 +29,19 @@ export default {
 		None
 	},
 	setup() {
-		const none   = chatJS().none
+		useSeoMeta({
+			title: "Chat",
+			ogTitle: "Chat",
+			description: "Chat with people you like on Dateshipper.",
+			ogDescription: "Chat with people you like on Dateshipper.",
+			robots: "noindex",
+		})
+
+		const none = chatJS().none
 		const search = chatJS().search
-		const input  = chatJS().input
-		const chats  = chatJS().chats
-		const blur   = chatJS().blur
+		const input = chatJS().input
+		const chats = chatJS().chats
+		const blur = chatJS().blur
 
 		return {
 			none,
@@ -102,7 +112,7 @@ export default {
 						if (data) {
 							if (data.rooms && data.rooms.length === 25)
 								this.$chat.set({ field: "roomsLeft", value: true })
-							
+
 							if (data.rooms && data.users) {
 								let rooms = this.rooms
 
@@ -114,7 +124,7 @@ export default {
 											id = room.user
 										else
 											id = room.target
-										
+
 										let index = order.indexOf(id)
 
 										if (index === -1)
@@ -147,7 +157,7 @@ export default {
 								this.$chat.set({ field: "order", value: order })
 							}
 						}
-				})
+					})
 			}
 		},
 
@@ -160,7 +170,7 @@ export default {
 				let access = true
 				let skip = 0
 				if (this.target.id in this.messages) {
-					skip   = this.messages[this.target.id].skip
+					skip = this.messages[this.target.id].skip
 
 					if (this.messages[this.target.id].accessed)
 						access = false
@@ -179,7 +189,7 @@ export default {
 								if (data.accesses)
 									for (let elem of data.accesses)
 										if (elem.user == this.$user.id)
-											obj.user   = true
+											obj.user = true
 										else
 											obj.target = true
 
@@ -190,8 +200,8 @@ export default {
 								let left = false
 								if (data.messages.length === 25)
 									left = true
-								
-								this.$chat.setMessages({ id: +this.target.id, messages: data.messages, left: left  })
+
+								this.$chat.setMessages({ id: +this.target.id, messages: data.messages, left: left })
 							}
 						}
 					})
@@ -213,7 +223,7 @@ export default {
 							if (user._id in this.rooms)
 								this.rooms[user._id].online = user.online
 				})
-	}
+		}
 	}
 }
 </script>
@@ -239,14 +249,14 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
-    .wrap {
-        padding: 15px;
-    }
+	.wrap {
+		padding: 15px;
+	}
 }
 
 @media screen and (max-width: 450px) {
-    .wrap {
-        padding: 10px;
-    }
+	.wrap {
+		padding: 10px;
+	}
 }
 </style>

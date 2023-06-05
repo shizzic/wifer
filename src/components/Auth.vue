@@ -3,9 +3,20 @@
 import { langJS } from "@/store/lang"
 import { SigninJS } from "@/store/Langs/Signin"
 import { AuthJS } from "@/store/Langs/Auth"
+
+import { useSeoMeta } from "@unhead/vue"
+
 export default {
 	name: "Auth",
 	setup() {
+		useSeoMeta({
+			title: "Authentication",
+			ogTitle: "Authentication",
+			description: "Authentication process with user id and special token.",
+			ogDescription: "Authentication process with user id and special token.",
+			robots: "noindex",
+		})
+
 		const response = AuthJS()["response"]
 		const success = SigninJS()["success"]
 

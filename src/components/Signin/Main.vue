@@ -18,6 +18,9 @@ import Api from "@/components/Signin/Api/Main.vue"
 import Email from "@/components/Signin/Form/Email.vue"
 import Accept from "@/components/Signin/Form/Accept.vue"
 import { Form } from "vee-validate"
+
+import { useSeoMeta } from "@unhead/vue"
+
 export default {
 	name: "Signin",
 	props: ["l"],
@@ -29,13 +32,20 @@ export default {
 		Accept
 	},
 	setup() {
-        const lang 	   = SigninJS()
+		useSeoMeta({
+			title: "Sign in",
+			ogTitle: "Sign in",
+			description: "Sign in for free! The fastest registration you've ever seen! You don't need any password!",
+			ogDescription: "Sign in for free! The fastest registration you've ever seen! You don't need any password!",
+		})
+
+		const lang = SigninJS()
 		const response = SigninJS()["response"]
-		const success  = SigninJS()["success"]
-		const email    = SigninJS()["email"]
+		const success = SigninJS()["success"]
+		const email = SigninJS()["email"]
 
 		return {
-            lang,
+			lang,
 			response,
 			success,
 			email
@@ -87,9 +97,10 @@ export default {
 	overflow-x: hidden;
 }
 
-.wrap::before, .wrap::after {
-  content: '';
-  margin: auto;
+.wrap::before,
+.wrap::after {
+	content: '';
+	margin: auto;
 }
 
 form {
@@ -118,32 +129,32 @@ button {
 }
 
 button:hover {
-  transition-duration: 0.1s;
-  background-color: #dadada;
+	transition-duration: 0.1s;
+	background-color: #dadada;
 }
 
 button:after {
-  content: "";
-  display: block;
-  position: absolute;
-  border-radius: 4em;
-  left: 0;
-  top:0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: all 0.5s;
-  box-shadow: 0 0 10px 40px white;
+	content: "";
+	display: block;
+	position: absolute;
+	border-radius: 4em;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: all 0.5s;
+	box-shadow: 0 0 10px 40px white;
 }
 
 button:active:after {
-  box-shadow: 0 0 0 0 white;
-  position: absolute;
-  border-radius: 4em;
-  left: 0;
-  top:0;
-  opacity: 1;
-  transition: 0s;
+	box-shadow: 0 0 0 0 white;
+	position: absolute;
+	border-radius: 4em;
+	left: 0;
+	top: 0;
+	opacity: 1;
+	transition: 0s;
 }
 
 .disabled {

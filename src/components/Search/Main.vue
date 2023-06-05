@@ -1,20 +1,15 @@
 <template>
-	<div class="wrap" :class="{ column : filters }">
-		<div class="side-wrap" :class="{ shown : filters }">
+	<div class="wrap" :class="{ column: filters }">
+		<div class="side-wrap" :class="{ shown: filters }">
 			<div v-show="filters" class="close"><span @click="filters = null">&#10060;</span></div>
-			<Sidebar 
-				:titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :template="template[l]" :data="data"
-				:filters="filters" :create="createTemplate" :slider="slider" :checkbox="checkbox" :getUsers="getUsers" 
-				:images="images[l]" :clear="clear[l]"
-				@filters="filters = null" 
-			/>
+			<Sidebar :titles="titles[l]" :values="values[l]" :text="text[l]" :search="search[l]" :template="template[l]"
+				:data="data" :filters="filters" :create="createTemplate" :slider="slider" :checkbox="checkbox"
+				:getUsers="getUsers" :images="images[l]" :clear="clear[l]" @filters="filters = null" />
 		</div>
 
-		<List v-show="!filters"
-			:l="l" :data="data" :sort="sort[l]" :create="createTemplate" :users="users" :mode="data.data[data.active].mode" :first="first"
-			:photos="photos[l]" :count="count" :founded="founded[l]" :getUsers="getUsers" :titles="titles[l]" :values="values[l]"
-			@filters="filters = true" @moved="moved = true"
-		/>
+		<List v-show="!filters" :l="l" :data="data" :sort="sort[l]" :create="createTemplate" :users="users"
+			:mode="data.data[data.active].mode" :first="first" :photos="photos[l]" :count="count" :founded="founded[l]"
+			:getUsers="getUsers" :titles="titles[l]" :values="values[l]" @filters="filters = true" @moved="moved = true" />
 	</div>
 </template>
 
@@ -23,6 +18,9 @@ import { InfoJS } from "@/store/Langs/Info"
 import { SearchJS } from "@/store/Langs/Search"
 import Sidebar from "@/components/Search/Sidebar/Main.vue"
 import List from "@/components/Search/List/Main.vue"
+
+import { useSeoMeta } from "@unhead/vue"
+
 export default {
 	name: "Search",
 	props: ["l"],
@@ -31,16 +29,23 @@ export default {
 		List
 	},
 	setup() {
-		const titles   = InfoJS().keys
-		const values   = InfoJS().values
-		const text     = SearchJS().text
-		const images   = SearchJS().images
-		const search   = SearchJS().search
-		const clear    = SearchJS().clear
-		const sort     = SearchJS().sort
+		useSeoMeta({
+			title: "Search",
+			ogTitle: "Search",
+			description: "Look for your pair on Dateshipper. You can see profiles without registration.",
+			ogDescription: "Look for your pair on Dateshipper. You can see profiles without registration.",
+		})
+
+		const titles = InfoJS().keys
+		const values = InfoJS().values
+		const text = SearchJS().text
+		const images = SearchJS().images
+		const search = SearchJS().search
+		const clear = SearchJS().clear
+		const sort = SearchJS().sort
 		const template = SearchJS().template
-		const photos   = SearchJS().photos
-		const founded  = SearchJS().founded
+		const photos = SearchJS().photos
+		const founded = SearchJS().founded
 
 		return {
 			titles,
@@ -118,10 +123,10 @@ export default {
 	},
 	methods: {
 		getUsers(count = false) {
-			let data   	   = {}
-			data.skip  	   = this.data.data[this.data.active].skip
-			data.limit 	   = this.data.data[this.data.active].limit
-			data.sort      = this.data.data[this.data.active].sort
+			let data = {}
+			data.skip = this.data.data[this.data.active].skip
+			data.limit = this.data.data[this.data.active].limit
+			data.sort = this.data.data[this.data.active].sort
 
 			for (let field in this.slider) {
 				if (this.slider[field].min == this.data.data[this.data.active][field][0] && this.slider[field].max == this.data.data[this.data.active][field][1]) {
@@ -135,7 +140,7 @@ export default {
 
 			data["imagesMin"] = this.data.data[this.data.active].images[0]
 			data["imagesMax"] = this.data.data[this.data.active].images[1]
-			data["avatar"] 	  = this.data.data[this.data.active].avatar
+			data["avatar"] = this.data.data[this.data.active].avatar
 
 			for (let elem of this.checkbox)
 				data[elem] = this.data.data[this.data.active][elem]
@@ -147,7 +152,7 @@ export default {
 
 			if (this.data.data[this.data.active].about.value.length > 0) {
 				let text = this.data.data[this.data.active].about.value.trim()
-				text     = text.replaceAll(/(\n\n)\n*/g, "\n\n")
+				text = text.replaceAll(/(\n\n)\n*/g, "\n\n")
 
 				if (this.data.data[this.data.active].about.full)
 					data.text = "\"" + text + "\""
@@ -156,7 +161,7 @@ export default {
 			}
 
 			data.country = []
-			data.city    = []
+			data.city = []
 
 			for (let country in this.data.data[this.data.active].countries)
 				data.country.push(+country)
@@ -166,11 +171,11 @@ export default {
 					let index = data.country.indexOf(+country)
 					data.country.splice(index, 1)
 				}
-				
+
 				for (let city in this.data.data[this.data.active].cities[country])
 					data.city.push(+city)
 			}
-			
+
 			data.count = count
 
 			fetch(this.$domain + "getUsers", {
@@ -292,34 +297,34 @@ export default {
 }
 
 @media screen and (max-width: 730px) {
-    .wrap {
-        padding: 15px;
-    }
+	.wrap {
+		padding: 15px;
+	}
 }
 
 @media screen and (min-width: 790px) {
-    .side-wrap {
+	.side-wrap {
 		min-width: 350px;
 		margin-right: 25px;
-    }
+	}
 }
 
 @media screen and (max-width: 790px) {
-    .side-wrap {
+	.side-wrap {
 		width: 100%;
 		min-width: none;
 
 		margin: 0;
-        position: absolute;
-        left: 0;
-        top: -3000px;
-    }
+		position: absolute;
+		left: 0;
+		top: -3000px;
+	}
 }
 
 @media screen and (max-width: 450px) {
-    .wrap {
-        padding: 10px;
-    }
+	.wrap {
+		padding: 10px;
+	}
 }
 
 .close {
@@ -343,13 +348,13 @@ export default {
 }
 
 .close span:hover {
-  transition-duration: 0.1s;
-  background-color: #dadada;
+	transition-duration: 0.1s;
+	background-color: #dadada;
 }
 
 .close span:active {
-  transition-duration: 0.1s;
-  background-color: #c2c2c2;
+	transition-duration: 0.1s;
+	background-color: #c2c2c2;
 }
 
 .column {

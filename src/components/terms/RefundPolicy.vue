@@ -22,8 +22,19 @@
 </template>
 
 <script scoped>
+import { useSeoMeta } from "@unhead/vue"
+
 export default {
 	name: "RefundPolicy",
+	setup() {
+		useSeoMeta({
+			title: "Refund policy",
+			ogTitle: "Refund policy",
+			description: "Refund policy document of Dateshipper.",
+			ogDescription: "Refund policy document of Dateshipper.",
+			robots: "noindex",
+		})
+	}
 }
 </script>
 

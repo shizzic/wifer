@@ -196,8 +196,19 @@
 </div></template>
 
 <script scoped>
+import { useSeoMeta } from "@unhead/vue"
+
 export default {
 	name: "TermsAndConditions",
+	setup() {
+		useSeoMeta({
+			title: "Terms",
+			ogTitle: "Terms",
+			description: "Terms and Conditions of Dateshipper.",
+			ogDescription: "Terms and Conditions of Dateshipper.",
+			robots: "noindex",
+		})
+	}
 }
 </script>
 

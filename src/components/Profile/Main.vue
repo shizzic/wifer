@@ -1,31 +1,24 @@
 <template>
 	<div v-if="data" class="wrap scroll">
-		<Header
-			:data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l" :live="live"
-			@avatar="++avatar" @settings="settings = true" @modal="modal = $event"
-		/>
+		<Header :data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l"
+			:live="live" @avatar="++avatar" @settings="settings = true" @modal="modal = $event" />
 		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" :priv="checked.private" @modal="modal = $event" />
 
 		<div class="flex">
 			<Info :data="data" :titles="titles[l]" :values="values[l]" />
 			<About :title="titles[l].about" :username="data.username" :about="data.about" :l="l" :blank="about[l]" />
 		</div>
-		
+
 		<Seeking v-show="data.search.length > 0" :list="values[l].search" :value="data.search" :title="titles[l].search" />
 
-		<Settings v-if="settings"
-			:l="l" :lang="settingsJS" :titles="titles" :fields="data" :info="values[l]"
-			@close="settings = null" @data="data = $event"
-		/>
+		<Settings v-if="settings" :l="l" :lang="settingsJS" :titles="titles" :fields="data" :info="values[l]"
+			@close="settings = null" @data="data = $event" />
 
-		<Modal v-if="modal" 
-			:text="modalJS.text[modal][l]" :modal="modal" :submit="modalJS.submit[l]" :success="modalJS.success" :l="l"
-			@close="modal = null"
-		/>
+		<Modal v-if="modal" :text="modalJS.text[modal][l]" :modal="modal" :submit="modalJS.submit[l]"
+			:success="modalJS.success" :l="l" @close="modal = null" />
 
-		<Note v-if="$user.id && data._id != $user.id"
-			:checked="checked" :text="checked.like" :target="data._id" @note="note = $event"
-		/>
+		<Note v-if="$user.id && data._id != $user.id" :checked="checked" :text="checked.like" :target="data._id"
+			@note="note = $event" />
 	</div>
 </template>
 
@@ -42,21 +35,33 @@ import About from "@/components/Profile/About.vue"
 import Settings from "@/components/Settings/Main.vue"
 import Modal from "@/components/Profile/Modal.vue"
 import Note from "@/components/Profile/Note.vue"
+
+import { useSeoMeta } from "@unhead/vue"
+
 export default {
 	name: "Profile",
 	props: ["l"],
 	setup() {
-		const errors   	 = ProfileJS().errors
-		const response 	 = ProfileJS().response
-		const cropper  	 = ProfileJS().cropper
-		const titles  	 = InfoJS().keys
-		const values  	 = InfoJS().values
-		const about  	 = InfoJS().about
+		useSeoMeta({
+			title: "Profile",
+			ogTitle: "Profile",
+			description: "Profile page with full information about targeting user. You can chat with them, sharing accesses to your photos and even more!",
+			ogDescription: "Profile page with full information about targeting user. You can chat with them, sharing accesses to your photos and even more!",
+			robots: "noindex",
+		})
+
+
+		const errors = ProfileJS().errors
+		const response = ProfileJS().response
+		const cropper = ProfileJS().cropper
+		const titles = InfoJS().keys
+		const values = InfoJS().values
+		const about = InfoJS().about
 		const settingsJS = SettingsJS()
-		const modalJS    = ModalJS()
+		const modalJS = ModalJS()
 
 		return {
-            errors,
+			errors,
 			response,
 			cropper,
 			titles,
@@ -130,21 +135,21 @@ export default {
 
 						if (data.target) {
 							if ("Like" in data.target && data.target.Like) {
-								this.checked.like.is   = true
+								this.checked.like.is = true
 								this.checked.like.text = data.target.Like.text
 							}
 
 							if ("Private" in data.target && data.target.Private)
 								for (let elem of data.target.Private)
 									if (elem.user == this.$user.id)
-										this.checked.private.is 	= true
+										this.checked.private.is = true
 									else
 										this.checked.private.access = true
 
 							if ("Access" in data.target && data.target.Access)
 								for (let elem of data.target.Access)
 									if (elem.user == this.$user.id)
-										this.checked.access.is 	= true
+										this.checked.access.is = true
 									else
 										this.checked.access.access = true
 						}
@@ -160,13 +165,13 @@ export default {
 				else
 					this.$toast.error(this.errors[this.l].int)
 		},
-		
+
 		pulse() {
-            if (this.$route.params.id == this.$user.id)
-                this.live = true
-            else
-                this.live = this.data.online
-        }
+			if (this.$route.params.id == this.$user.id)
+				this.live = true
+			else
+				this.live = this.data.online
+		}
 	}
 }
 </script>
@@ -182,9 +187,9 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
-    .wrap {
-        padding: 15px;
-    }
+	.wrap {
+		padding: 15px;
+	}
 }
 
 .flex {
@@ -192,14 +197,14 @@ export default {
 }
 
 @media screen and (max-width: 800px) {
-    .flex {
-        flex-wrap: wrap;
-    }
+	.flex {
+		flex-wrap: wrap;
+	}
 }
 
 @media screen and (max-width: 450px) {
-    .wrap {
-        padding: 10px;
-    }
+	.wrap {
+		padding: 10px;
+	}
 }
 </style>

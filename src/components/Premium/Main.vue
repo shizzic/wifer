@@ -14,9 +14,9 @@
 
 			<div id="footer-wrap">
 				<div id="terms">
-					<router-link :to="{name: 'terms_and_conditions'}">Terms and Conditions</router-link>
-					<router-link :to="{name: 'privacy_policy'}">Privacy Policy</router-link>
-					<router-link :to="{name: 'refund_policy'}">Refund Policy</router-link>
+					<router-link :to="{ name: 'terms_and_conditions' }">Terms and Conditions</router-link>
+					<router-link :to="{ name: 'privacy_policy' }">Privacy Policy</router-link>
+					<router-link :to="{ name: 'refund_policy' }">Refund Policy</router-link>
 				</div>
 
 				<span>{{ age[l] }}</span>
@@ -33,6 +33,9 @@ import About from "@/components/Premium/About.vue"
 import FreeChat from "@/components/Premium/FreeChat.vue"
 import WorldWide from "@/components/Premium/WorldWide.vue"
 import Contact from "@/components/Premium/Contact.vue"
+
+import { useSeoMeta } from '@unhead/vue'
+
 export default {
 	name: "Premium",
 	props: ["l"],
@@ -45,14 +48,21 @@ export default {
 		Contact
 	},
 	setup() {
-		const quantity  = PremiumJS().quantity
-		const pay       = PremiumJS().pay
-		const about     = PremiumJS().about
-		const freeChat  = PremiumJS().freeChat
+		useSeoMeta({
+			title: "Dateshipper - Join Free",
+			ogTitle: "Dateshipper - Join Free",
+			description: "Dateshipper.com is the most convenient, fast and reasonable dating website. Try it out for free!",
+			ogDescription: "Dateshipper.com is the most convenient, fast and reasonable dating website. Try it out for free!",
+		})
+
+		const quantity = PremiumJS().quantity
+		const pay = PremiumJS().pay
+		const about = PremiumJS().about
+		const freeChat = PremiumJS().freeChat
 		const worldWide = PremiumJS().worldWide
-		const contact   = PremiumJS().contact
-		const response  = PremiumJS().response
-		const age       = PremiumJS().age
+		const contact = PremiumJS().contact
+		const response = PremiumJS().response
+		const age = PremiumJS().age
 
 		return {
 			quantity,
@@ -79,12 +89,12 @@ export default {
 	justify-content: space-between;
 
 	padding: 25px;
-	
+
 	overflow-x: hidden;
 	overflow-y: auto;
 }
 
-#premium > * {
+#premium>* {
 	overflow-wrap: break-word;
 }
 
@@ -138,7 +148,7 @@ img {
 	justify-content: center;
 }
 
-#terms > * {
+#terms>* {
 	margin-bottom: 3px;
 }
 
@@ -156,19 +166,19 @@ a:not(:last-of-type) {
 }
 
 @media screen and (max-width: 824px) {
-    .square {
+	.square {
 		width: 46%;
 	}
 }
 
 @media screen and (max-width: 768px) {
-    #premium {
+	#premium {
 		padding: 15px;
 	}
 }
 
 @media screen and (max-width: 588px) {
-    .square {
+	.square {
 		margin-right: 0;
 		margin-left: 0;
 		width: 70%;
@@ -180,13 +190,13 @@ a:not(:last-of-type) {
 		padding: 10px;
 	}
 
-    .square {
+	.square {
 		width: 85%;
 	}
 }
 
 @media screen and (max-width: 380px) {
-    .square {
+	.square {
 		width: 100%;
 	}
 }
