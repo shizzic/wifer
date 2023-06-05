@@ -58,7 +58,11 @@ const routes = [
                 {
                     property: "og:description",
                     content: "Chat with people you like."
-                }
+                },
+                {
+                    property: "robots",
+                    content: "noodp,noydir"
+                },
             ],
         }
     },
@@ -74,7 +78,11 @@ const routes = [
                 {
                     property: "og:description",
                     content: "It's a collection of all of your actions with other profiles and others' profiles with yours."
-                }
+                },
+                {
+                    property: "robots",
+                    content: "noodp,noydir"
+                },
             ],
         }
     },
@@ -90,7 +98,11 @@ const routes = [
                 {
                     property: "og:description",
                     content: "Profile page with full information."
-                }
+                },
+                {
+                    property: "robots",
+                    content: "noodp,noydir"
+                },
             ],
         }
     },
@@ -122,7 +134,11 @@ const routes = [
                 {
                     property: "og:description",
                     content: "Authentication process."
-                }
+                },
+                {
+                    property: "robots",
+                    content: "noodp,noydir"
+                },
             ],
         }
     },
@@ -138,7 +154,11 @@ const routes = [
                 {
                     property: "og:description",
                     content: "Terms and Conditions."
-                }
+                },
+                {
+                    property: "robots",
+                    content: "noodp,noydir"
+                },
             ],
         }
     },
@@ -154,7 +174,11 @@ const routes = [
                 {
                     property: "og:description",
                     content: "Privacy policy document."
-                }
+                },
+                {
+                    property: "robots",
+                    content: "noodp,noydir"
+                },
             ],
         }
     },
@@ -170,7 +194,11 @@ const routes = [
                 {
                     property: "og:description",
                     content: "Refund policy document."
-                }
+                },
+                {
+                    property: "robots",
+                    content: "noodp,noydir"
+                },
             ],
         }
     },
