@@ -61,7 +61,7 @@ const routes = [
                 },
                 {
                     property: "robots",
-                    content: "noodp,noydir"
+                    content: "noindex"
                 },
             ],
         }
@@ -81,7 +81,7 @@ const routes = [
                 },
                 {
                     property: "robots",
-                    content: "noodp,noydir"
+                    content: "noindex"
                 },
             ],
         }
@@ -101,7 +101,7 @@ const routes = [
                 },
                 {
                     property: "robots",
-                    content: "noodp,noydir"
+                    content: "noindex"
                 },
             ],
         }
@@ -137,7 +137,7 @@ const routes = [
                 },
                 {
                     property: "robots",
-                    content: "noodp,noydir"
+                    content: "noindex"
                 },
             ],
         }
@@ -157,7 +157,7 @@ const routes = [
                 },
                 {
                     property: "robots",
-                    content: "noodp,noydir"
+                    content: "noindex"
                 },
             ],
         }
@@ -177,7 +177,7 @@ const routes = [
                 },
                 {
                     property: "robots",
-                    content: "noodp,noydir"
+                    content: "noindex"
                 },
             ],
         }
@@ -197,7 +197,7 @@ const routes = [
                 },
                 {
                     property: "robots",
-                    content: "noodp,noydir"
+                    content: "noindex"
                 },
             ],
         }
