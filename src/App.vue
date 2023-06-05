@@ -8,11 +8,19 @@
 import Nav from "@/components/Nav.vue"
 import Cookie from "@/components/Cookie.vue"
 
+import { useSeoMeta } from "@unhead/vue"
+
 export default {
 	name: 'App',
 	components: {
 		Nav,
 		Cookie
+	},
+	setup() {
+		useSeoMeta({
+			ogImage: "https://dateshipper.com/favicon.ico",
+		})
+
 	},
 	computed: {
         l() { return this.$lang.lang },
