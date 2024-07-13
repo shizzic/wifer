@@ -9,7 +9,8 @@
 
 		<List v-show="!filters" :l="l" :data="data" :sort="sort[l]" :create="createTemplate" :users="users"
 			:mode="data.data[data.active].mode" :first="first" :photos="photos[l]" :count="count" :founded="founded[l]"
-			:getUsers="getUsers" :titles="titles[l]" :values="values[l]" @filters="filters = true" @moved="moved = true" />
+			:getUsers="getUsers" :titles="titles[l]" :values="values[l]" @filters="filters = true"
+			@moved="moved = true" />
 	</div>
 </template>
 
@@ -181,6 +182,9 @@ export default {
 			fetch(this.$domain + "getUsers", {
 				method: "POST",
 				credentials: "include",
+				headers: {
+					"Content-Type": "application/json",
+				},
 				body: JSON.stringify(data)
 			})
 				.then(data => { return data.json() })
@@ -197,13 +201,15 @@ export default {
 
 		createTemplate() {
 			if (this.$user.id) {
-				let form = new FormData()
-				form.append("text", JSON.stringify(this.data))
-
 				fetch(this.$domain + "templates", {
 					method: "POST",
 					credentials: 'include',
-					body: form
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						text: JSON.stringify(this.data)
+					})
 				})
 					.then(data => {
 						if (data.status === 401) {
@@ -240,13 +246,15 @@ export default {
 							else
 								this.$user.setTemplates(JSON.stringify(this.data))
 
-							let form = new FormData()
-							form.append("text", JSON.stringify(this.data))
-
 							fetch(this.$domain + "templates", {
 								method: "POST",
 								credentials: 'include',
-								body: form
+								headers: {
+									"Content-Type": "application/json",
+								},
+								body: JSON.stringify({
+									text: JSON.stringify(this.data)
+								})
 							})
 								.then(data => {
 									if (data.status === 401) {

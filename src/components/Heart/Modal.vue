@@ -1,5 +1,5 @@
 <template>
-	<div class="modal">
+    <div class="modal">
         <div class="block" v-click-outside="close" @mousedown="() => { up = true }" @mouseup="() => { up = null }">
             <div class="close" @click="$emit('close')" />
             <img src="/images/delete.webp" />
@@ -13,23 +13,25 @@
 
 <script scoped>
 export default {
-	name: "Modal",
+    name: "Modal",
     props: ["modal", "users", "text", "submit", "index", "id"],
     data() {
-		return {
-			up: null
-		}
-	},
+        return {
+            up: null
+        }
+    },
     methods: {
         del() {
-            let form = new FormData()
-            form.append("target", this.id)
-            
             fetch(this.$domain + this.modal, {
-				method: "DELETE",
-				credentials: "include",
-                body: form
-			})
+                method: "DELETE",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    target: this.id
+                })
+            })
                 .then(data => {
                     if (data.status === 401) {
                         this.$user.logout(this.$domain)
@@ -46,11 +48,11 @@ export default {
         },
 
         close() {
-			if (!this.up)
-				this.$emit("close")
+            if (!this.up)
+                this.$emit("close")
 
-			this.up = null
-		}
+            this.up = null
+        }
     }
 }   
 </script>
@@ -58,18 +60,18 @@ export default {
 <style scoped>
 .modal {
     z-index: 20;
-	background-color: rgba(0, 0, 0, 0.6);
-	
-	width: 100%;
-	height: 100%;
-	padding: 30px;
+    background-color: rgba(0, 0, 0, 0.6);
 
-	position: absolute;
-	top: 0;
-	left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
 
-	display: flex;
-	justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -148,7 +150,8 @@ img {
     opacity: 1;
 }
 
-.close:before, .close:after {
+.close:before,
+.close:after {
     position: absolute;
     left: 15px;
     content: ' ';
@@ -158,9 +161,10 @@ img {
 }
 
 .close:before {
-  transform: rotate(45deg);
+    transform: rotate(45deg);
 }
+
 .close:after {
-  transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }
 </style>

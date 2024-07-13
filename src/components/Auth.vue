@@ -44,14 +44,16 @@ export default {
 	methods: {
 		check() {
 			if (!this.$user.id) {
-				let form = new FormData()
-				form.append("id", this.$route.params.id)
-				form.append("code", this.$route.params.code)
-
 				fetch(this.$domain + "checkCode", {
 					method: "POST",
 					credentials: "include",
-					body: form
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						id: this.$route.params.id,
+						code: this.$route.params.code,
+					})
 				})
 					.then(data => { return data.json() })
 					.then(data => {

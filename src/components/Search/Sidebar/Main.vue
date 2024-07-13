@@ -134,13 +134,15 @@ export default {
 
 		updateTemplate() {
 			if (this.$user.id) {
-				let form = new FormData()
-				form.append("text", JSON.stringify(this.data))
-
 				fetch(this.$domain + "templates", {
 					method: "POST",
 					credentials: 'include',
-					body: form
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						text: JSON.stringify(this.data)
+					})
 				})
 					.then(data => {
 						if (data.status === 401) {

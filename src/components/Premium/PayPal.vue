@@ -26,24 +26,26 @@ export default {
                 onApprove: this.onApprove,
                 onError: this.onError
             })
-            .render('#paypal-button-container');
+                .render('#paypal-button-container');
         },
 
         createOrder(data, actions) {
             return actions.order.create({
-                purchase_units: [{"description":"premium for 30 days","amount":{"currency_code":"USD","value":this.price}}]
+                purchase_units: [{ "description": "premium for 30 days", "amount": { "currency_code": "USD", "value": this.price } }]
             });
         },
 
         onApprove(data, actions) {
             return actions.order.capture().then(orderData => {
-                let form = new FormData()
-                form.append("orderID", orderData.id)
-
                 fetch(this.$domain + "checkPayment", {
                     method: "POST",
                     credentials: "include",
-                    body: form
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        orderID: orderData.id
+                    })
                 })
                     .then(res => {
                         if (res.status === 401)

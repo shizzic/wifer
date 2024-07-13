@@ -6,7 +6,7 @@
             <input v-bind="field" v-model="name" :placeholder="lang.name" maxlength="254" />
         </Field>
         <ErrorMessage name="name" class="error" />
-        
+
         <Field name="email" :rules="email_rules" v-slot="{ field }" v-model="email">
             <input v-bind="field" type="email" v-model="email" :placeholder="lang.email" maxlength="254" />
         </Field>
@@ -56,22 +56,24 @@ export default {
     },
     methods: {
         contact() {
-            let form = new FormData()
-            form.append("name", this.name)
-            form.append("email", this.email)
-            form.append("subject", this.subject)
-            form.append("message", this.message)
-
             fetch(this.$domain + "contact", {
                 method: "POST",
-                body: form
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: this.name,
+                    email: this.email,
+                    subject: this.subject,
+                    message: this.message,
+                })
             })
                 .then(data => { return data.json() })
                 .then(data => {
                     if (!data)
                         this.$toast.success(this.response.success)
                     else
-                        this.$toast.console.error();(this.response.success)
+                        this.$toast.console.error(); (this.response.success)
                 })
         }
     }

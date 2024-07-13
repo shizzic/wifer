@@ -1,18 +1,15 @@
 <template>
 	<div class="wrap">
 		<div class="wrapper scroll">
-			<cropper
-				ref="cropper"
-				class="cropper"
-				:src="image.src"
-				:debounce="false"
-			/>
+			<cropper ref="cropper" class="cropper" :src="image.src" :debounce="false" />
 
 			<div class="right">
 				<div class="buttons">
 					<div class="button" @click="upload">{{ lang[l].upload }}</div>
-					<div class="button green" :class="{ 'active' : mode, 'inactive' : !mode }" @click="mode = true">{{ lang[l].public }}</div>
-					<div class="button red" :class="{ 'active' : !mode, 'inactive' : mode }" @click="mode = null">{{ lang[l].private }}</div>
+					<div class="button green" :class="{ 'active': mode, 'inactive': !mode }" @click="mode = true">{{
+						lang[l].public }}</div>
+					<div class="button red" :class="{ 'active': !mode, 'inactive': mode }" @click="mode = null">{{
+						lang[l].private }}</div>
 					<div class="button" @click="rotate"><img src="/images/rotate.webp" /></div>
 					<div class="button" @click="flip"><img src="/images/flip.webp" /></div>
 					<div class="button" @click="$emit('clear'); mode = true;">{{ lang[l].cancel }}</div>
@@ -49,29 +46,31 @@ export default {
 				let dir = "public"
 				if (!this.mode)
 					dir = "private"
-				
-				const form = new FormData()
-				form.append("dir", dir)
 
 				canvas.toBlob(blob => {
 					form.append("file", blob);
 					fetch(this.$domain + "upload-image", {
 						method: "POST",
 						credentials: "include",
-						body: form,
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							dir: dir
+						}),
 					})
 						.then(data => {
 							this.$emit("clear")
-							
+
 							if (data.status === 401) {
 								this.$user.logout(this.$domain)
 								this.$router.push({ name: "search" })
 							} else
-								return data.json() 
+								return data.json()
 						})
 						.then(data => {
 							this.$user.set({ field: "avatar", value: null })
-							
+
 							if ("error" in data)
 								this.$toast.error(this.lang[this.l][data.error])
 							else
@@ -94,17 +93,17 @@ export default {
 
 <style scoped>
 .wrap {
-    z-index: 999999999;
+	z-index: 999999999;
 	border-radius: 0;
 	backdrop-filter: blur(5px);
 
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 	margin: 0 auto;
 
-    position: absolute;
-    top: 0;
-    left: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
 
 	display: flex;
 	justify-content: center;
@@ -113,7 +112,8 @@ export default {
 	overflow: hidden;
 }
 
-.wrap::before, .wrap::after {
+.wrap::before,
+.wrap::after {
 	content: '';
 	margin: auto;
 }
@@ -124,8 +124,8 @@ export default {
 	height: 70%;
 	border-radius: 12px;
 
-	background: rgb(2,0,36);
-	background: linear-gradient(278deg, rgba(2,0,36,1) 0%, rgba(177,177,191,1) 91%, rgba(136,164,170,1) 100%);
+	background: rgb(2, 0, 36);
+	background: linear-gradient(278deg, rgba(2, 0, 36, 1) 0%, rgba(177, 177, 191, 1) 91%, rgba(136, 164, 170, 1) 100%);
 
 	display: flex;
 	flex-wrap: wrap;
@@ -133,8 +133,8 @@ export default {
 }
 
 .cropper {
-    width: 65%;
-    height: 100%;
+	width: 65%;
+	height: 100%;
 	border-radius: 12px;
 
 	margin-right: 25px;
@@ -217,7 +217,7 @@ img {
 		overflow-y: auto;
 	}
 
-    .cropper {
+	.cropper {
 		width: 100%;
 		height: auto;
 		margin-right: 0;
@@ -231,7 +231,8 @@ img {
 </style>
 
 <style>
-.vue-advanced-cropper *, cropper * {
+.vue-advanced-cropper *,
+cropper * {
 	border-radius: 12px;
 }
 </style>

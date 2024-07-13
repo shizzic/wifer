@@ -128,6 +128,9 @@ export default {
 			fetch(this.$domain + "targets", {
 				method: "POST",
 				credentials: "include",
+				headers: {
+					"Content-Type": "application/json",
+				},
 				body: JSON.stringify(data)
 			})
 				.then(data => {

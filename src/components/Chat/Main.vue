@@ -1,12 +1,12 @@
 <template>
 	<div class="wrap">
 		<div v-if="socket" id="chat">
-			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms"
-				:show="show" />
+			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target"
+				:getRooms="getRooms" :show="show" />
 
-			<Right v-if="target && target.id in messages" :target="target" :input="input[l]" :messages="messages[target.id]"
-				:newMessages="newMessages[target.id]" :blur="blur[l]" :getMessages="getMessages" :rooms="rooms"
-				:show="show" />
+			<Right v-if="target && target.id in messages" :target="target" :input="input[l]"
+				:messages="messages[target.id]" :newMessages="newMessages[target.id]" :blur="blur[l]"
+				:getMessages="getMessages" :rooms="rooms" :show="show" />
 			<None v-else :lang="none[l]" :show="show" />
 		</div>
 	</div>
@@ -101,6 +101,9 @@ export default {
 				fetch(this.$domain + "getRooms", {
 					method: "POST",
 					credentials: "include",
+					headers: {
+						"Content-Type": "application/json",
+					},
 					body: JSON.stringify({
 						nin: order,
 						byUsername: byUsername,
@@ -212,6 +215,9 @@ export default {
 			fetch(this.$domain + "checkOnlineInChat", {
 				method: "POST",
 				credentials: "include",
+				headers: {
+					"Content-Type": "application/json",
+				},
 				body: JSON.stringify({
 					nin: this.order
 				})

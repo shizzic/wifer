@@ -62,13 +62,15 @@ export default {
 	},
 	methods: {
 		signin(values) {
-			let form = new FormData()
-			form.append("email", values["email"])
-
 			fetch(this.$domain + "signin", {
 				method: "POST",
 				credentials: 'include',
-				body: form
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email: values.email
+				})
 			})
 				.then(data => { return data.json() })
 				.then(data => {

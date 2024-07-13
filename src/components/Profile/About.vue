@@ -23,7 +23,7 @@ export default {
 		const errors = ImageJS().error
 
 		return {
-            errors
+			errors
 		}
 	},
 	data() {
@@ -34,21 +34,23 @@ export default {
 	},
 	watch: {
 		about() {
-			this.mode       = true
+			this.mode = true
 			this.translated = null
 		}
 	},
 	methods: {
 		translate() {
 			if (!this.translated && this.original !== "") {
-				let form = new FormData()
-				form.append("text", this.about)
-				form.append("lang", this.l)
-
 				fetch(this.$domain + "translate", {
 					method: "PUT",
 					credentials: "include",
-					body: form
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						text: this.about,
+						lang: this.l
+					})
 				})
 					.then(data => {
 						if (data.status === 401) {
@@ -82,13 +84,13 @@ export default {
 	position: relative;
 
 	width: 100%;
-    background-color: #FFFFFF;
-    border-radius: 8px;
+	background-color: #FFFFFF;
+	border-radius: 8px;
 
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 
-    padding: 20px 25px;
+	padding: 20px 25px;
 	margin-bottom: 30px;
 
 	box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 1);
@@ -105,9 +107,9 @@ export default {
 h3 {
 	color: #4d4d4d;
 	font-weight: 600;
-    font-size: 18px;
-    
-    margin-bottom: 10px;
+	font-size: 18px;
+
+	margin-bottom: 10px;
 }
 
 h3 span {

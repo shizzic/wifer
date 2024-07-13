@@ -34,16 +34,18 @@ export default {
 	},
 	methods: {
 		signin(data) {
-			let form = new FormData()
-			form.append("id", data.id)
-			form.append("token", data.token)
-			form.append("api", true)
-			form.append("method", data.method)
-
 			fetch(this.$domain + "signin", {
 				method: "POST",
 				credentials: "include",
-				body: form
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					id: data.id,
+					token: data.token,
+					api: true,
+					method: data.method,
+				})
 			})
 				.then(data => { return data.json() })
 				.then(data => {
