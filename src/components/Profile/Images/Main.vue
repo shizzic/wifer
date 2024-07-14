@@ -24,7 +24,8 @@
             </div>
 
             <div v-if="data.avatar === true" class="image" style="display: none;">
-                <a ref="avatar" :href="$file('images', $route.params.id, 'avatar.webp')" target="_blank" rel="noreferrer">
+                <a ref="avatar" :href="$file('images', $route.params.id, 'avatar.webp')" target="_blank"
+                    rel="noreferrer">
                     <img :src="$file('images', $route.params.id, 'avatar.webp')" alt="" />
                 </a>
             </div>
@@ -39,7 +40,8 @@
 
             <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && (priv.access || premium > 0))">
                 <div v-for="(num, index) in data.private" :key="index" class="image-wrap">
-                    <a :href="$file('images', $route.params.id, num + '.webp', 'private')" target="_blank" rel="noreferrer">
+                    <a :href="$file('images', $route.params.id, num + '.webp', 'private')" target="_blank"
+                        rel="noreferrer">
                         <img :src="$file('images', $route.params.id, num + '.webp', 'private')" alt="" class="image" />
                     </a>
 
@@ -164,7 +166,7 @@ export default {
             this.lightbox.on("change", () => {
                 this.buttons = null
                 let query = new URLSearchParams(this.lightbox.pswp.currSlide.content.element.src)
-                
+
                 if (query) {
                     this.params.dir = query.get("dir")
                     this.params.name = query.get("filename").split(".")[0]
@@ -261,21 +263,25 @@ export default {
 
             if (all < 20) {
                 const { files } = event.target
+                for (const index in files) {
+                    const file = files[index]
 
-                if (files && files[0] && files[0].size < 2000001) {
-                    const blob = URL.createObjectURL(files[0])
-                    const reader = new FileReader()
+                    // 20 мб
+                    if (!file || file && file.size > 20000000)
+                        return this.$toast.error(this.lang[this.l].max_size)
+                }
 
-                    reader.onload = (e) => {
-                        this.image = {
-                            src: blob,
-                            type: getMimeType(e.target.result, files[0].type),
-                        }
+                const blob = URL.createObjectURL(files[0])
+                const reader = new FileReader()
+
+                reader.onload = (e) => {
+                    this.image = {
+                        src: blob,
+                        type: getMimeType(e.target.result, files[0].type),
                     }
+                }
 
-                    reader.readAsArrayBuffer(files[0])
-                } else
-                    this.$toast.error(this.lang[this.l].max_size)
+                reader.readAsArrayBuffer(files[0])
             } else {
                 this.clear()
                 this.$toast.error(this.lang[this.l].max_image)

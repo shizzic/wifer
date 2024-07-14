@@ -43,21 +43,16 @@ export default {
 			const { canvas } = this.$refs.cropper.getResult()
 
 			if (canvas) {
-				let dir = "public"
-				if (!this.mode)
-					dir = "private"
+				const dir = !this.mode ? 'private' : "public"
 
+				let form = new FormData()
 				canvas.toBlob(blob => {
-					form.append("file", blob);
-					fetch(this.$domain + "upload-image", {
+					form.append("files[]", blob)
+
+					fetch(this.$domain + "upload-image?dir=" + dir, {
 						method: "POST",
 						credentials: "include",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify({
-							dir: dir
-						}),
+						body: form,
 					})
 						.then(data => {
 							this.$emit("clear")
@@ -71,9 +66,12 @@ export default {
 						.then(data => {
 							this.$user.set({ field: "avatar", value: null })
 
-							if ("error" in data)
-								this.$toast.error(this.lang[this.l][data.error])
-							else
+							if ("error" in data) {
+								let message = this.lang[this.l][data.error]
+								if ("overcount" in data)
+									message += data.overcount
+								this.$toast.error(message)
+							} else
 								location.reload()
 						})
 				}, 'image/*')

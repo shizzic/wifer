@@ -95,7 +95,7 @@ export const ProfileJS = defineStore("Profile", {
                     "public": "Public",
                     "private": "Private",
                     "cancel": "Cancel",
-                    "max_size": "Max size of image is 3 MB",
+                    "max_size": "Max size of image is 20 MB. Excess: ",
                     "max_image": "You can have up to 20 images",
                     "error": "Something occured to the server, try again",
                     "success": "Image was added)"
@@ -105,8 +105,8 @@ export const ProfileJS = defineStore("Profile", {
                     "public": "Публичная",
                     "private": "Приватная",
                     "cancel": "Отменить",
-                    "max_image": "Вы можете иметь до 20 фоток",
-                    "max_size": "Максимальный размер фотки 3 мб",
+                    "max_image": "Вы можете иметь до 20 фоток. Избыток: ",
+                    "max_size": "Максимальный размер фотки 20 мб",
                     "error": "Что-то случилось с сервером, попробуйте снова",
                     "success": "Фотка добавлена)"
                 },
@@ -115,8 +115,8 @@ export const ProfileJS = defineStore("Profile", {
                     "public": "Öffentlichkeit",
                     "private": "Privatgelände",
                     "cancel": "Absagen",
-                    "max_size": "Die maximale Bildgröße beträgt 3 MB",
-                    "max_image": "Sie können bis zu 20 Bilder haben",
+                    "max_image": "Sie können bis zu 20 Bilder haben. Überschuss: ",
+                    "max_size": "Die maximale Bildgröße beträgt 20 MB",
                     "error": "Auf dem Server ist ein Fehler aufgetreten. Versuchen Sie es erneut",
                     "success": "Bild wurde hinzugefügt)"
                 },
@@ -125,7 +125,7 @@ export const ProfileJS = defineStore("Profile", {
                     "public": "Public",
                     "private": "Privé",
                     "cancel": "Annuler",
-                    "max_size": "La taille maximale de l'image est de 3 Mo",
+                    "max_size": "La taille maximale de l'image est de 20 Mo. Excès: ",
                     "max_image": "Vous pouvez avoir jusqu'à 20 images",
                     "error": "Quelque chose s'est produit sur le serveur, réessayez",
                     "success": "L'image a été ajoutée)"
@@ -135,8 +135,8 @@ export const ProfileJS = defineStore("Profile", {
                     "public": "Público",
                     "private": "Privada",
                     "cancel": "Cancelar",
-                    "max_size": "El tamaño máximo de la imagen es de 3 MB",
-                    "max_image": "Puedes tener hasta 20 imágenes.",
+                    "max_size": "El tamaño máximo de la imagen es de 20 MB",
+                    "max_image": "Puedes tener hasta 20 imágenes. Exceso: ",
                     "error": "Algo le ocurrió al servidor, inténtalo de nuevo",
                     "success": "Se agregó la imagen)"
                 },
@@ -145,8 +145,8 @@ export const ProfileJS = defineStore("Profile", {
                     "public": "上市",
                     "private": "私人的",
                     "cancel": "取消",
-                    "max_size": "图像的最大大小为 3 MB",
-                    "max_image": "您最多可以拥有 20 张图片",
+                    "max_image": "您最多可以拥有 20 张图片. 過量的: ",
+                    "max_size": "图像的最大大小为 20 MB",
                     "error": "服务器出现问题，重试",
                     "success": "图片已添加 )"
                 },
@@ -155,8 +155,8 @@ export const ProfileJS = defineStore("Profile", {
                     "public": "公衆",
                     "private": "プライベート",
                     "cancel": "キャンセル",
-                    "max_size": "画像の最大サイズは 3 MB です",
-                    "max_image": "最大 20 枚の画像を保持できます",
+                    "max_image": "最大 20 枚の画像を保持できます. 過剰: ",
+                    "max_size": "画像の最大サイズは 20 MB です",
                     "error": "サーバーで問題が発生しました。もう一度お試しください",
                     "success": "画像追加しました）"
                 },
