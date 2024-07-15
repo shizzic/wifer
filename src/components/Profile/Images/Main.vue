@@ -15,8 +15,9 @@
                 <img class="button" src="/images/delete.webp" @click="deleteImg" />
             </div>
 
-            <input type="file" style="display: none;" ref="input" @change="load($event)" accept="image/*">
-            <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" @clear="clear" />
+            <input type="file" style="display: none;" ref="input" @change="load($event)" accept="image/*" multiple>
+            <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" :fetchImages="fetchImages"
+                @clear="clear" />
 
             <div v-show="$user.id && data._id == $user.id" class="image file" style="border: 1px solid;"
                 @click="$refs.input.click()">
@@ -259,18 +260,31 @@ export default {
             if (this.data.avatar === true)
                 avatar = 1
 
-            let all = this.data.public + this.data.private + avatar
+            const { files } = event.target
+            const all = this.data.public + this.data.private + avatar + files.length
+            if (all > 20) {
+                this.clear()
+                return this.$toast.error(this.lang[this.l].max_image + (all - 20))
+            }
 
-            if (all < 20) {
-                const { files } = event.target
+            for (const index in files) {
+                const file = files[index]
+
+                // 20 мб
+                if (!file || file && file.size > 20000000)
+                    return this.$toast.error(this.lang[this.l].max_size)
+            }
+
+            if (files.length > 1) {
+                let form = new FormData()
                 for (const index in files) {
-                    const file = files[index]
-
-                    // 20 мб
-                    if (!file || file && file.size > 20000000)
-                        return this.$toast.error(this.lang[this.l].max_size)
+                    if (index === "length")
+                        break
+                    
+                    form.append("files[]", files[index])
                 }
-
+                this.fetchImages("public", form)
+            } else {
                 const blob = URL.createObjectURL(files[0])
                 const reader = new FileReader()
 
@@ -282,10 +296,35 @@ export default {
                 }
 
                 reader.readAsArrayBuffer(files[0])
-            } else {
-                this.clear()
-                this.$toast.error(this.lang[this.l].max_image)
             }
+        },
+
+        fetchImages(dir, form) {
+            fetch(this.$domain + "upload-image?dir=" + dir, {
+                method: "POST",
+                credentials: "include",
+                body: form,
+            })
+                .then(data => {
+                    this.$emit("clear")
+
+                    if (data.status === 401) {
+                        this.$user.logout(this.$domain)
+                        this.$router.push({ name: "search" })
+                    } else
+                        return data.json()
+                })
+                .then(data => {
+                    this.$user.set({ field: "avatar", value: null })
+
+                    if ("error" in data) {
+                        let message = this.lang[this.l][data.error]
+                        if ("overcount" in data)
+                            message += data.overcount
+                        this.$toast.error(message)
+                    } else
+                        location.reload()
+                })
         },
 
         showButtons() {

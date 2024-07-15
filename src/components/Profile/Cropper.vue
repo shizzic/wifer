@@ -25,7 +25,7 @@ import 'vue-advanced-cropper/dist/style.css'
 
 export default {
 	name: 'Copper',
-	props: ["image", "lang", "l"],
+	props: ["image", "lang", "l", "fetchImages"],
 	components: {
 		Cropper
 	},
@@ -48,32 +48,7 @@ export default {
 				let form = new FormData()
 				canvas.toBlob(blob => {
 					form.append("files[]", blob)
-
-					fetch(this.$domain + "upload-image?dir=" + dir, {
-						method: "POST",
-						credentials: "include",
-						body: form,
-					})
-						.then(data => {
-							this.$emit("clear")
-
-							if (data.status === 401) {
-								this.$user.logout(this.$domain)
-								this.$router.push({ name: "search" })
-							} else
-								return data.json()
-						})
-						.then(data => {
-							this.$user.set({ field: "avatar", value: null })
-
-							if ("error" in data) {
-								let message = this.lang[this.l][data.error]
-								if ("overcount" in data)
-									message += data.overcount
-								this.$toast.error(message)
-							} else
-								location.reload()
-						})
+					this.fetchImages(dir, form)
 				}, 'image/*')
 			}
 		},
