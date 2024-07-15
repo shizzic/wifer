@@ -9,8 +9,7 @@
 
             <div v-show="buttons" class="buttons">
                 <img v-show="params.mode !== null" class="button" src="/images/profile.webp" @click="makeProfile" />
-                <img v-show="params.mode !== true && params.mode !== null" class="button" src="/images/public.webp"
-                    @click="dir('public')" />
+                <img v-show="params.mode !== true" class="button" src="/images/public.webp" @click="dir('public')" />
                 <img v-show="params.mode !== false" class="button" src="/images/private.webp" @click="dir('private')" />
                 <img class="button" src="/images/delete.webp" @click="deleteImg" />
             </div>
@@ -190,8 +189,36 @@ export default {
         }
     },
     methods: {
+        fetchImages(dir, form) {
+            fetch(this.$domain + "upload-image?dir=" + dir, {
+                method: "POST",
+                credentials: "include",
+                body: form,
+            })
+                .then(data => {
+                    this.$emit("clear")
+
+                    if (data.status === 401) {
+                        this.$user.logout(this.$domain)
+                        this.$router.push({ name: "search" })
+                    } else
+                        return data.json()
+                })
+                .then(data => {
+                    this.$user.set({ field: "avatar", value: null })
+
+                    if ("error" in data) {
+                        let message = this.lang[this.l][data.error]
+                        if ("overcount" in data)
+                            message += data.overcount
+                        this.$toast.error(message)
+                    } else
+                        location.reload()
+                })
+        },
+
         makeProfile() {
-            fetch(this.$domain + "replaceAvatar?dir=" + this.params.dir + "&name=" + this.params.name, {
+            fetch(this.$domain + "replaceAvatar?dir=" + this.params.dir + "&filename=" + this.params.name, {
                 method: "PUT",
                 credentials: "include"
             })
@@ -214,7 +241,7 @@ export default {
             if (this.params.mode === null)
                 isAvatar = true
 
-            fetch(this.$domain + "changeImageDir?isAvatar=" + isAvatar + "&dir=" + this.params.dir + "&name=" + this.params.name + "&newDir=" + newDir, {
+            fetch(this.$domain + "changeImageDir?" + (isAvatar ? '' : "&dir=" + this.params.dir) + "&filename=" + this.params.name + "&newDir=" + newDir, {
                 method: "PUT",
                 credentials: "include"
             })
@@ -225,9 +252,9 @@ export default {
                     } else
                         return data.json()
                 })
-                .then(() => {
+                .then(data => {
                     this.$user.set({ field: "avatar", value: null })
-                    location.reload()
+                    "error" in data ? this.$toast.error(data.error) : location.reload()
                 })
                 .catch(() => { this.$toast.error(this.error[this.l]) })
         },
@@ -237,7 +264,7 @@ export default {
             if (this.params.mode === null)
                 isAvatar = true
 
-            fetch(this.$domain + "deleteImage?isAvatar=" + isAvatar + "&dir=" + this.params.dir + "&name=" + this.params.name, {
+            fetch(this.$domain + "deleteImage?isAvatar=" + isAvatar + "&dir=" + this.params.dir + "&filename=" + this.params.name, {
                 method: "DELETE",
                 credentials: "include"
             })
@@ -280,7 +307,7 @@ export default {
                 for (const index in files) {
                     if (index === "length")
                         break
-                    
+
                     form.append("files[]", files[index])
                 }
                 this.fetchImages("public", form)
@@ -297,34 +324,6 @@ export default {
 
                 reader.readAsArrayBuffer(files[0])
             }
-        },
-
-        fetchImages(dir, form) {
-            fetch(this.$domain + "upload-image?dir=" + dir, {
-                method: "POST",
-                credentials: "include",
-                body: form,
-            })
-                .then(data => {
-                    this.$emit("clear")
-
-                    if (data.status === 401) {
-                        this.$user.logout(this.$domain)
-                        this.$router.push({ name: "search" })
-                    } else
-                        return data.json()
-                })
-                .then(data => {
-                    this.$user.set({ field: "avatar", value: null })
-
-                    if ("error" in data) {
-                        let message = this.lang[this.l][data.error]
-                        if ("overcount" in data)
-                            message += data.overcount
-                        this.$toast.error(message)
-                    } else
-                        location.reload()
-                })
         },
 
         showButtons() {
