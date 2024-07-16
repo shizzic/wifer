@@ -240,8 +240,11 @@ export default {
             let isAvatar = false
             if (this.params.mode === null)
                 isAvatar = true
+                
+            if (isAvatar && this.data.images == 1)
+                return this.$toast.error(this.lang[this.l].avatar_must_be)
 
-            fetch(this.$domain + "changeImageDir?" + (isAvatar ? '' : "&dir=" + this.params.dir) + "&filename=" + this.params.name + "&newDir=" + newDir, {
+            fetch(this.$domain + "changeImageDir?filename=" + ((this.params.dir.length > 0 ? '/' : '') + this.params.name + ".webp") + "&newDir=" + newDir + "&dir=" + this.params.dir, {
                 method: "PUT",
                 credentials: "include"
             })
@@ -254,7 +257,7 @@ export default {
                 })
                 .then(data => {
                     this.$user.set({ field: "avatar", value: null })
-                    "error" in data ? this.$toast.error(data.error) : location.reload()
+                    "error" in data ? this.$toast.error(this.lang[this.l][data.error]) : location.reload()
                 })
                 .catch(() => { this.$toast.error(this.error[this.l]) })
         },
@@ -264,7 +267,7 @@ export default {
             if (this.params.mode === null)
                 isAvatar = true
 
-            fetch(this.$domain + "deleteImage?isAvatar=" + isAvatar + "&dir=" + this.params.dir + "&filename=" + this.params.name, {
+            fetch(this.$domain + "deleteImage?isAvatar=" + isAvatar + "&dir=" + (this.params.dir ? ('/' + this.params.dir) : '') + "&filename=" + this.params.name, {
                 method: "DELETE",
                 credentials: "include"
             })
