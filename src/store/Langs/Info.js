@@ -24,7 +24,7 @@ export const InfoJS = defineStore("Info", {
                     industry: "Industry",
                     search: "Seeking",
                     children: "Children",
-                    about: "About",
+                    about: "Details",
                     prefer: "Prefer",
                     images: "Photos"
                 },
@@ -48,7 +48,7 @@ export const InfoJS = defineStore("Info", {
                     industry: "Сфера деятельности",
                     search: "Ищет",
                     children: "Дети",
-                    about: "Об",
+                    about: "Подробно",
                     prefer: "Предпочитаю",
                     images: "Фотки"
                 },
@@ -72,7 +72,7 @@ export const InfoJS = defineStore("Info", {
                     industry: "Industrie",
                     search: "Suchen",
                     children: "Kinder",
-                    about: "Um",
+                    about: "Einzelheiten",
                     prefer: "Vorziehen",
                     images: "Fotos"
                 },
@@ -96,7 +96,7 @@ export const InfoJS = defineStore("Info", {
                     industry: "Industrie",
                     search: "En cherchant",
                     children: "Enfants",
-                    about: "À propos de",
+                    about: "Détails",
                     prefer: "Préfère",
                     images: "Photos"
                 },
@@ -120,7 +120,7 @@ export const InfoJS = defineStore("Info", {
                     industry: "Industria",
                     search: "Buscando",
                     children: "Niños",
-                    about: "Sobre",
+                    about: "Detalles",
                     prefer: "Preferir",
                     images: "Fotos"
                 },
@@ -144,7 +144,7 @@ export const InfoJS = defineStore("Info", {
                     industry: "行业",
                     search: "寻求",
                     children: "孩子们",
-                    about: "关于",
+                    about: "细节",
                     prefer: "更喜欢",
                     images: "相片"
                 },
@@ -168,7 +168,7 @@ export const InfoJS = defineStore("Info", {
                     industry: "業界",
                     search: "探している",
                     children: "子供",
-                    about: "約",
+                    about: "詳細",
                     prefer: "好む",
                     images: "写真"
                 },

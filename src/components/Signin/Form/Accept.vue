@@ -1,35 +1,32 @@
 <template>
-    <div class="wrapper" @click="set">
-        <label for="accept">
-            <input type="checkbox" id="accept" name="accept" v-model="terms" @change="set" />
-            {{ lang }}
-            <a href="https://app.termly.io/document/terms-of-use-for-website/6bcad083-6995-488c-afa5-34cb4a635dfc" target="_blank">Terms and Conditions</a>
-        </label>
-    </div>
+    <label for="accept" :value="terms">
+        <input type="checkbox" id="accept" name="accept" v-model="value" />
+        {{ lang }}
+        <a href="https://app.termly.io/document/terms-of-use-for-website/6bcad083-6995-488c-afa5-34cb4a635dfc"
+            target="_blank">Terms and Conditions</a>
+    </label>
 </template>
 
 <script scoped>
 export default {
-	name: "Accept",
+    name: "Accept",
     props: ["terms", "lang"],
-    methods: {
-        set() {
-            if (this.terms)
-                this.$user.set({ field: "terms", value: false })
-            else
-                this.$user.set({ field: "terms", value: true })
+    data() {
+        return {
+            value: this.terms,
+        }
+    },
+    watch: {
+        value: {
+            handler(value) {
+                this.$user.set({ field: "terms", value: value })
+            }
         }
     }
 }
 </script>
 
 <style scoped>
-.wrapper {
-    width: 100%;
-
-    margin-top: 40px;
-}
-
 label {
     cursor: pointer;
     width: 100%;
@@ -39,6 +36,7 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 40px;
 }
 
 input {
