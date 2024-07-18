@@ -5,13 +5,13 @@
 </template>
 
 <script scoped>
+import { computed } from "vue"
 import Nav from "@/components/Nav.vue"
 import Cookie from "@/components/Cookie.vue"
 
 import { useSeoMeta } from "@unhead/vue"
 
 export default {
-	name: 'App',
 	components: {
 		Nav,
 		Cookie
@@ -23,14 +23,19 @@ export default {
 
 	},
 	computed: {
-        l() { return this.$lang.lang },
+		l() { return this.$lang.lang },
 		id() { return this.$user.id },
 		cookies() { return this.$user.cookies },
-    },
+	},
 	watch: {
 		id() {
 			this.make_user_online(true)
 			this.start()
+		}
+	},
+	provide() {
+		return {
+			l: this.l,
 		}
 	},
 	data() {
@@ -46,7 +51,7 @@ export default {
 
 		this.start()
 		this.make_user_online(true)
-		
+
 		document.addEventListener("visibilitychange", () => {
 			if (document.visibilityState === "hidden")
 				this.make_user_online(false)
@@ -54,7 +59,7 @@ export default {
 				this.make_user_online(true)
 		})
 
-		let work = window.sessionStorage.getItem("work")
+		const work = window.sessionStorage.getItem("work")
 		if (!work)
 			this.visit()
 	},
@@ -118,7 +123,7 @@ export default {
 @media only screen and (min-width : 1200px) {
 
 } */
-	
+
 #app {
 	position: relative;
 }
@@ -134,9 +139,9 @@ export default {
 }
 
 @media screen and (max-width: 529px) {
-    #menu {
+	#menu {
 		bottom: 0;
-    }
+	}
 
 	#wrap {
 		top: 0;

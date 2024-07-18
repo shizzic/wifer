@@ -15,7 +15,7 @@
 
 			<div class="block">
 				<Country :title="titles[l].country" :id="data.country_id" @value="data.country_id = $event" />
-				<City :title="titles[l].city" :id="data.city_id" :country="data.country_id"
+				<City :key="data.country_id" :title="titles[l].city" :id="data.city_id" :country="data.country_id"
 					@value="data.city_id = $event" />
 			</div>
 

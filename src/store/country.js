@@ -2,8 +2,8 @@ import { defineStore } from "pinia"
 import { useStorage } from "@vueuse/core"
 
 export const countryJS = defineStore("country", {
-    state: () =>({
-        country: useStorage("country", {}),
+    state: () => ({
+        list: useStorage("country", {}),
         price: 5,
         priceSelected: null,
         selection: {
@@ -14,9 +14,29 @@ export const countryJS = defineStore("country", {
             30: ["United Arab Emirates", "Switzerland", "Israel", "Iceland", "South Korea", "Monaco", "Netherlands", "Norway", "Oman", "Qatar", "Singapore", "United States of America"]
         }
     }),
-    actions:{
+    actions: {
         set(data) {
             this.country = data
+        },
+
+        async get(domain, locale) {
+            if (!this.list || this.list && Object.keys(this.list).length === 0) {
+                await fetch(domain + "country?locale=" + locale, {
+                    method: "GET",
+                    credentials: "include"
+                })
+                    .then(data => { return data.json() })
+                    .then(data => {
+                        let obj = {}
+
+                        for (let index in data)
+                            obj[data[index]._id] = data[index].title
+
+                        this.list = obj
+                    })
+            }
+
+            return this.list
         },
 
         getPrice() {
@@ -33,9 +53,9 @@ export const countryJS = defineStore("country", {
             this.price = 5
             this.priceSelected = true
         },
-        
+
         getCountry() {
-            var countries = {
+            let countries = {
                 AD: "Andorra",
                 AE: "United Arab Emirates",
                 AF: "Afghanistan",
@@ -286,7 +306,7 @@ export const countryJS = defineStore("country", {
                 ZM: "Zambia",
                 ZW: "Zimbabwe"
             };
-            var timezones = {
+            let timezones = {
                 "Africa/Abidjan": {
                     u: 0,
                     c: ["CI", "BF", "GH", "GM", "GN", "ML", "MR", "SH", "SL", "SN", "TG"]
@@ -2890,13 +2910,13 @@ export const countryJS = defineStore("country", {
                     r: 1
                 }
             };
-        
+
             const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        
+
             if (timezone === "" || !timezone) {
                 return null;
             }
-        
+
             const _country = timezones[timezone].c[0];
             const country = countries[_country];
             return country;

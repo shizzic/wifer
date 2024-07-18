@@ -1,6 +1,7 @@
 <template>
-	<div v-if="fetched" class="body">
+	<div class="body">
 		<h3>{{ title }}</h3>
+
 		<div class="wrapper" v-click-outside="() => { mode = null }">
             <input type="text" class="result" v-model="value" @input="input($event.target.value)" @click="mode = true" />
 			<div class="arrow" :class="{ closed: !mode, opened: mode }" @click="mode = true" />
@@ -10,9 +11,9 @@
 					<div class="mini" />
 
 					<ul class="ul scroll">
-						<template v-for="(elem, index) in list" :key="index">
+						<template v-for="(elem, index) in $country.list" :key="index">
 							<li v-if="(!reg || reg && elem.match(reg)) && index != id" 
-                                @click="$emit('value', +index); value = elem; reg = null; mode = null;"
+                                @click="$emit('value', +index); reg = null; value = elem; mode = null;"
                             >
                                 {{ elem }}
                             </li>
@@ -28,54 +29,22 @@
 export default {
 	name: "Country",
 	props: ["title", "id"],
+	inject: ['l'],
 	emits: ["value"],
 	data() {
 		return {
 			mode: null,
-
-            value: null,
-            list: null,
-
-            fetched: null,
             reg: null,
+			value: ""
 		}
 	},
-    beforeMount() {
-        if (this.$country.country[this.id]) {
-            this.list    = Object.assign({}, this.$country.country)
-            this.value   = this.list[this.id]
-            this.fetched = true
-        } else
-            this.returnCountry()
+    async beforeMount() {
+        await this.$country.get(this.$domain, this.l)
+		this.value = this.$country.list[this.id]
     },
 	methods: {
-        returnCountry() {
-			if (this.id !== 0)
-				fetch(this.$domain + "country", {
-					method: "GET",
-					credentials: "include"
-				})
-					.then(data => { return data.json() })
-					.then(data => {
-						this.reg = null
-						let obj = {}
-
-						for (let index in data)
-							obj[data[index]._id] = data[index].title
-
-						this.$country.set(obj)
-						this.list    = Object.assign({}, this.$country.country)
-						this.value   = this.list[this.id]
-						this.fetched = true
-					})
-			else {
-				this.list    = Object.assign({}, this.$country.country)
-				this.fetched = true
-			}
-        },
-
         input(value) {
-            this.reg  = new RegExp(value, 'gi')
+            this.reg  = new RegExp(value, 'giy')
             this.$emit("value", 0)
 			this.mode = true
         }
