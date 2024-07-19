@@ -7,7 +7,7 @@ export const langJS = defineStore({
         lang: useStorage("lang", null),
         languages: {
             en: "en",
-            ru: "ru",
+            ru: "ру",
             de: "de",
             fr: "fr",
             es: "es",

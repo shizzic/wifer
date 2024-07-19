@@ -1,20 +1,19 @@
 <template>
-	<div v-if="fetched" class="body">
+	<div class="body">
 		<h3>{{ title }}</h3>
 		<div class="wrapper" v-click-outside="() => { mode = null }">
-            <input type="text" class="result" v-model="value" @input="input($event.target.value)" @click="mode = true" />
+			<input type="text" class="result" v-model="value" @input="input($event.target.value)" @click="mode = true" />
 
 			<transition name="slide-fade">
 				<div v-if="mode">
 					<div class="mini" />
 
-					<ul class="ul scroll">
-						<template v-for="(elem, index) in list" :key="index">
-							<li v-if="(!reg || reg && elem.match(reg)) && (!has || !(index in has))" 
-                                @click="set(+index, elem)"
-                            >
-                                {{ elem }}
-                            </li>
+					<ul class="ul">
+						<template v-for="(elem, index) in $city.list[country]" :key="index">
+							<li v-if="(!reg || reg && elem.match(reg)) && (!has || !(index in has))"
+								@click="set(index, elem)">
+								{{ elem }}
+							</li>
 						</template>
 					</ul>
 				</div>
@@ -30,66 +29,24 @@ export default {
 	data() {
 		return {
 			mode: null,
-
-            value: null,
-            list: null,
-
-            fetched: null,
-            reg: null,
+			value: '',
+			reg: null,
 		}
 	},
-    watch: {
-        country(n) {
-			if (this.$city.city[n]) {
-				this.reg     = null
-				this.list    = Object.assign({}, this.$city.city[n])
-				this.value   = null
-				this.fetched = true
-			} else
-				this.returnCity()
-        }
-    },
-    beforeMount() {
-        if (this.$city.city[this.country] && Object.keys(this.$city.city[this.country]).length > 0) {
-            this.list 	 = Object.assign({}, this.$city.city[this.country])
-            this.fetched = true
-        } else
-			this.returnCity()
-    },
+	async beforeMount() {
+		await this.$city.get(this.$domain, this.country, this.l)
+	},
 	methods: {
-        returnCity() {
-            this.value = null
-            
-            fetch(this.$domain + "city?country_id=" + this.country, {
-				method: "GET",
-				credentials: "include"
-			})
-				.then(data => { return data.json() })
-				.then(data => {
-					if (data) {
-						this.reg = null
-						let obj = {}
-
-						for (let index in data)
-							obj[data[index]._id] = data[index].title
-
-						this.$city.set({ "data" : obj, "country_id": this.country })
-						this.list = Object.assign({}, this.$city.city[this.country])
-						this.fetched = true
-					}
-				})
-        },
-
 		set(index, elem) {
-			this.$emit('value', { id : index, title : elem, country : this.country })
+			this.$emit('value', { id: +index, title: elem, country: this.country })
 			this.value = ''
-			this.reg   = null
+			this.reg = null
 		},
 
-        input(value) {
-            this.reg  = new RegExp(value, 'giy')
+		input(value) {
+			this.reg = new RegExp(value, 'giy')
 			this.mode = true
-        }
+		}
 	}
 }
 </script>
@@ -112,11 +69,11 @@ h3 {
 }
 
 .wrapper {
-    position: relative;
+	position: relative;
 }
 
 .result {
-    color: #000;
+	color: #000;
 	font-size: 20px;
 	letter-spacing: 1px;
 	background: none;
@@ -127,11 +84,11 @@ h3 {
 	margin-bottom: 5px;
 
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  	-webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: transparent;
 
 	border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
+	border-radius: 4px;
+	background-color: #f8f8f8;
 }
 
 .ul {
@@ -149,7 +106,6 @@ ul {
 	left: 0;
 
 	margin-top: 15px;
-	overflow-y: auto;
 }
 
 li {
@@ -173,36 +129,38 @@ li:not(:last-child) {
 	z-index: 2;
 
 	width: 7px;
-    height: 7px;
+	height: 7px;
 	border-top: 1px solid #b5b5b5;
-    border-left: 1px solid #b5b5b5;
-    background-color: #fff;
+	border-left: 1px solid #b5b5b5;
+	background-color: #fff;
 
 	display: block;
 	margin-bottom: -4px;
 
 	position: absolute;
-    bottom: -14px;
-    right: 25px;
-    
-    transform: rotate(45deg);
-    transition: all .4s ease-in-out;
+	bottom: -14px;
+	right: 25px;
+
+	transform: rotate(45deg);
+	transition: all .4s ease-in-out;
 }
 
 .slide-fade-enter-active {
-  transition: all .3s ease;
+	transition: all .3s ease;
 }
 
 .slide-fade-leave-active {
-  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 
-.slide-fade-enter, .slide-fade-leave-to {
-  transform: translateX(10px);
+.slide-fade-enter,
+.slide-fade-leave-to {
+	transform: translateX(10px);
 }
 
-.slide-fade-leave-to, .slide-fade-enter-from {
-    transform: translateX(10px);
+.slide-fade-leave-to,
+.slide-fade-enter-from {
+	transform: translateX(10px);
 }
 
 input {

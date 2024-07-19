@@ -1,11 +1,13 @@
 <template>
 	<div class="block">
-		<Locations v-if="Object.keys(data.data[data.active].countries).length > 0 || Object.keys(data.data[data.active].cities).length > 0" 
+		<Locations
+			v-if="Object.keys(data.data[data.active].countries).length > 0 || Object.keys(data.data[data.active].cities).length > 0"
 			:countries="data.data[data.active].countries" :cities="data.data[data.active].cities"
-			@country="delete data.data[data.active].cities[$event]; delete data.data[data.active].countries[$event];" @city="delete data.data[data.active].cities[$event.country][$event.city]" 
-		/>
+			@country="delete data.data[data.active].cities[$event]; delete data.data[data.active].countries[$event]; $event == country ? country = null : null;"
+			@city="delete data.data[data.active].cities[$event.country][$event.city]" />
 		<Country :title="lang.country" :has="data.data[data.active].countries" @value="getCountry($event)" />
-		<City v-if="country" :title="lang.city" :country="country" :has="data.data[data.active].cities[country]" @value="getCity($event)" />
+		<City v-if="country" :key="country" :title="lang.city" :country="country"
+			:has="data.data[data.active].cities[country]" @value="getCity($event)" />
 	</div>
 </template>
 
@@ -28,7 +30,7 @@ export default {
 	},
 	methods: {
 		getCity(data) {
-			this.data.data[this.data.active].countries[this.country] = this.$country.country[this.country]
+			this.data.data[this.data.active].countries[this.country] = this.$country.list[this.country]
 
 			if (!this.data.data[this.data.active].cities[data.country])
 				this.data.data[this.data.active].cities[data.country] = {}
@@ -38,7 +40,7 @@ export default {
 
 		getCountry(data) {
 			this.data.data[this.data.active].countries[data.id] = data.title
-			this.country            	 						= data.id
+			this.country = data.id
 		}
 	}
 }
@@ -48,7 +50,7 @@ export default {
 .block {
 	background-color: #fff;
 
-    width: 100%;
+	width: 100%;
 	padding: 15px;
 }
 </style>

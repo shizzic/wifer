@@ -43,4 +43,10 @@ app.config.globalProperties.$file = (what, target_id, filename, dir = "") => {
     return app.config.globalProperties.$domain + "file?what=" + what + "&target_id=" + target_id + "&filename=" + filename + "&dir=" + dir + "&" + Date.now()
 }
 
+app.config.globalProperties.$date = (timestamp) => {
+    const date = new Date(timestamp * 1000)
+    return (String(date.getDate()).padStart(2, '0')) + '.' + (String(date.getMonth() + 1).padStart(2, '0')) + '.' + date.getFullYear() + " - " +
+    (String(date.getHours()).padStart(2, '0')) + '.' + (String(date.getMinutes() + 1).padStart(2, '0')) + '.' + (String(date.getSeconds() + 1).padStart(2, '0'))
+}
+
 app.mount('#app')

@@ -1,20 +1,19 @@
 <template>
-	<div v-if="fetched" class="body">
+	<div class="body">
 		<h3>{{ title }}</h3>
 		<div class="wrapper" v-click-outside="() => { mode = null }">
-            <input type="text" class="result" v-model="value" @input="input($event.target.value)" @click="mode = true" />
+			<input type="text" class="result" v-model="text" @input="input($event.target.value)"
+				@click="mode = true" />
 
 			<transition name="slide-fade">
 				<div v-if="mode">
 					<div class="mini" />
 
 					<ul class="ul scroll">
-						<template v-for="(elem, index) in list" :key="index">
-							<li v-if="(!reg || reg && elem.match(reg)) && elem !== value" 
-                                @click="set(+index, elem)"
-                            >
-                                {{ elem }}
-                            </li>
+						<template v-for="(elem, index) in $country.list" :key="index">
+							<li v-if="(!reg || reg && elem.match(reg)) && index != value"  @click="set(index, elem)">
+								{{ elem }}
+							</li>
 						</template>
 					</ul>
 				</div>
@@ -27,54 +26,29 @@
 export default {
 	name: "Country",
 	props: ["title"],
+	inject: ['l'],
 	data() {
 		return {
 			mode: null,
-
-            value: null,
-            list: null,
-
-            fetched: null,
-            reg: null,
+			value: null,
+			reg: null,
+			text: ''
 		}
 	},
-    beforeMount() {
-        if (Object.keys(this.$country.country).length > 0) {
-            this.list    = Object.assign({}, this.$country.country)
-            this.fetched = true
-        } else
-            this.returnCountry()
-    },
+	async beforeMount() {
+		await this.$country.get(this.$domain, this.l)
+	},
 	methods: {
-        returnCountry() {
-            fetch(this.$domain + "country", {
-				method: "GET",
-				credentials: "include"
-			})
-				.then(data => { return data.json() })
-				.then(data => {
-                    this.reg = null
-                    let obj = {}
-
-                    for (let index in data)
-                        obj[data[index]._id] = data[index].title
-
-                    this.$country.set(obj)
-                    this.list    = Object.assign({}, this.$country.country)
-                    this.fetched = true
-				})
-        },
-
 		set(index, elem) {
-			this.$emit('value', { id : index, title : elem })
-			this.value = elem
-			this.reg   = null
+			this.$emit('value', { id: +index, title: elem })
+			this.value = +index
+			this.reg = null
 		},
 
-        input(value) {
-            this.reg  = new RegExp(value, 'giy')
+		input(value) {
+			this.reg = new RegExp(value, 'giy')
 			this.mode = true
-        }
+		}
 	}
 }
 </script>
@@ -95,7 +69,7 @@ h3 {
 }
 
 .wrapper {
-    position: relative;
+	position: relative;
 }
 
 .result {
@@ -110,11 +84,11 @@ h3 {
 	margin-bottom: 5px;
 
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  	-webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: transparent;
 
 	border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
+	border-radius: 4px;
+	background-color: #f8f8f8;
 }
 
 .ul {
@@ -123,7 +97,7 @@ h3 {
 
 ul {
 	width: 100%;
-	max-height: 200px;
+	max-height: 300px;
 	background-color: #fff;
 	border: 1px solid #b5b5b5;
 	border-radius: 4px;
@@ -132,7 +106,6 @@ ul {
 	left: 0;
 
 	margin-top: 15px;
-	overflow-y: auto;
 }
 
 li {
@@ -157,36 +130,38 @@ li:not(:last-child) {
 	z-index: 2;
 
 	width: 7px;
-    height: 7px;
+	height: 7px;
 	border-top: 1px solid #b5b5b5;
-    border-left: 1px solid #b5b5b5;
-    background-color: #fff;
+	border-left: 1px solid #b5b5b5;
+	background-color: #fff;
 
 	display: block;
 	margin-bottom: -4px;
 
 	position: absolute;
-    bottom: -14px;
-    right: 25px;
-    
-    transform: rotate(45deg);
-    transition: all .4s ease-in-out;
+	bottom: -14px;
+	right: 25px;
+
+	transform: rotate(45deg);
+	transition: all .4s ease-in-out;
 }
 
 .slide-fade-enter-active {
-  transition: all .3s ease;
+	transition: all .3s ease;
 }
 
 .slide-fade-leave-active {
-  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 
-.slide-fade-enter, .slide-fade-leave-to {
-  transform: translateX(10px);
+.slide-fade-enter,
+.slide-fade-leave-to {
+	transform: translateX(10px);
 }
 
-.slide-fade-leave-to, .slide-fade-enter-from {
-    transform: translateX(10px);
+.slide-fade-leave-to,
+.slide-fade-enter-from {
+	transform: translateX(10px);
 }
 
 input {

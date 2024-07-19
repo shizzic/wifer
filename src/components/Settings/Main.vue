@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper">
 		<Form class="form scroll" name="settings" @submit="change" @mousedown="() => { up = true }"
-			@mouseup="() => { up = null }" v-click-outside="close">
+			@mouseup="() => { up = true }" v-click-outside="close" @click="up = false">
 			<Username :title="titles[l].username" :holder="lang.placeholder[l].username" :lang="lang.username[l]"
 				:value="data.username" @value="data.username = $event" />
 			<Title :title="titles[l].title" :holder="lang.placeholder[l].title" :value="data.title"
@@ -89,7 +89,7 @@ export default {
 				{ income: 4, industry: 3 },
 				{ prefer: 2 }
 			],
-			up: null
+			up: false
 		}
 	},
 	beforeMount() {
@@ -130,7 +130,7 @@ export default {
 			if (!this.up)
 				this.$emit('close')
 
-			this.up = null
+			this.up = false
 		}
 	}
 }
