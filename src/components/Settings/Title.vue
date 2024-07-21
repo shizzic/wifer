@@ -1,8 +1,9 @@
 <template>
 	<h3>{{ title }}</h3>
 	<div style="margin-bottom: 20px;">
-		<Field name="title" v-slot="{ field }" v-model="value">
-			<input v-bind="field" maxlength="150" :placeholder="holder" v-model="value" @input="$emit('value', $event.target.value)" />
+		<Field name="title" v-slot="{ field }" :modelValue="value" @update:modelValue="value = $event">
+			<input v-bind="field" maxlength="150" :placeholder="holder" :modelValue="value"
+				@update:modelValue="value = $event" @input="$emit('value', $event.target.value)" />
 		</Field>
 		<div class="count">
 			<span>{{ value.length }}</span>
@@ -47,11 +48,11 @@ input {
 	margin-bottom: 5px;
 
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  	-webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: transparent;
 
 	border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
+	border-radius: 4px;
+	background-color: #f8f8f8;
 }
 
 input:focus {
@@ -59,17 +60,16 @@ input:focus {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active
-{
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
 	transition: background-color 5000s ease-in-out 0s;
 }
 
 .count {
-    font-weight: 700;
-    color: #4d4d4d;
+	font-weight: 700;
+	color: #4d4d4d;
 
-    float: right;
+	float: right;
 }
 </style>

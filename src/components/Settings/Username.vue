@@ -1,8 +1,10 @@
 <template>
 	<h3>{{ title }}</h3>
 	<div style="margin-bottom: 20px;">
-		<Field name="username" :rules="rules" v-slot="{ field, errorMessage }" v-model="value">
-			<input v-bind="field" maxlength="20" :placeholder="holder" v-model="value" @input="error = errorMessage; get($event.target.value);" />
+		<Field name="username" :rules="rules" v-slot="{ field, errorMessage }" :modelValue="value"
+			@update:modelValue="value = $event">
+			<input v-bind="field" maxlength="20" :placeholder="holder" :modelValue="value"
+				@update:modelValue="value = $event" @input="error = errorMessage; get($event.target.value);" />
 		</Field>
 		<div>
 			<ErrorMessage name="username" class="error" />
@@ -42,10 +44,10 @@ export default {
 		get(username) {
 			this.fetched = null
 			this.$emit('value', username)
-			
+
 			if (this.timeout)
 				clearTimeout(this.timeout)
-			
+
 			this.timeout = setTimeout(() => {
 				this.check(username)
 			}, 850)
@@ -62,7 +64,7 @@ export default {
 							this.$user.logout(this.$domain)
 							this.$router.push({ name: "search" })
 						} else
-							return data.json() 
+							return data.json()
 					})
 					.then(data => {
 						if (data === true || data === false) {
@@ -103,11 +105,11 @@ input {
 	margin-bottom: 5px;
 
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  	-webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: transparent;
 
 	border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
+	border-radius: 4px;
+	background-color: #f8f8f8;
 }
 
 input:focus {
@@ -115,18 +117,17 @@ input:focus {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active
-{
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
 	transition: background-color 5000s ease-in-out 0s;
 }
 
 .count {
-    font-weight: 700;
-    color: #4d4d4d;
+	font-weight: 700;
+	color: #4d4d4d;
 
-    float: right;
+	float: right;
 }
 
 .error {

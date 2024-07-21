@@ -1,7 +1,7 @@
 <template>
 	<h3>{{ title }}</h3>
     <div class="wrapper">
-        <Slider v-model="value" v-bind="options" @change="get" />
+        <Slider :modelValue="value" @update:modelValue="value = $event" v-bind="options" @change="get" />
     </div>
 </template>
 

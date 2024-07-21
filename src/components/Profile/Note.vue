@@ -90,8 +90,8 @@ textarea {
     border-top: 3px solid #654321;
 
 	background-image: 
-    url("/line.webp"), 
-    url("/paper.webp");
+    url("/images/line.webp"), 
+    url("/images/paper.webp");
 	background-repeat: repeat, repeat;
 
     padding: 5px 20px;

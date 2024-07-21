@@ -1,7 +1,7 @@
 <template>
     <div style="width: 100%;">
         <h3>{{ title }}</h3>
-        <textarea v-model="value" :placeholder="holder" maxlength="1500" @input="autosize($event)" />
+        <textarea :modelValue="value" @update:modelValue="value = $event" :placeholder="holder" maxlength="1500" @input="autosize($event)" />
         <div class="count">
             <span>{{ value.length }}</span>
             <span> / 1500</span>
