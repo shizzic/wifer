@@ -34,15 +34,19 @@ export default {
 	data() {
 		return {
 			rules: yup.string().matches(/^[\S]+$/, this.lang.space).required(this.lang.required),
-			fetched: null,
-			available: null,
+			fetched: false,
+			available: false,
 			error: null,
-			timeout: null
+			timeout: null,
+			oldUsername: null
 		}
+	},
+	beforeMount() {
+		this.oldUsername = this.value
 	},
 	methods: {
 		get(username) {
-			this.fetched = null
+			this.fetched = false
 			this.$emit('value', username)
 
 			if (this.timeout)
@@ -68,12 +72,10 @@ export default {
 					})
 					.then(data => {
 						if (data === true || data === false) {
-							this.fetched = true
-
-							if (data === true)
+							this.available = data
+							if (this.oldUsername === this.value)
 								this.available = true
-							else
-								this.available = null
+							this.fetched = true
 						}
 					})
 		}
