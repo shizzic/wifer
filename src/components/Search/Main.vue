@@ -73,9 +73,9 @@ export default {
 
 			filters: null,
 			data: {
-				active: 1,
+				active: this.template[this.l].first,
 				data: {
-					1: {
+					[this.template[this.l].first]: {
 						mode: true,
 						limit: 25,
 						skip: 0,

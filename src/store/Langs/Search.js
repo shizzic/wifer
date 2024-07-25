@@ -140,6 +140,7 @@ export const SearchJS = defineStore("Search", {
                 en: {
                     input: "Title",
                     hold: "New template",
+                    first: 'First template',
                     select: "Select template",
                     count: "U can't have more than 10 templates",
                     blank: "Template's title can't be blank"
@@ -147,6 +148,7 @@ export const SearchJS = defineStore("Search", {
                 ru: {
                     input: "Название",
                     hold: "Новый шаблон",
+                    first: 'Первый шаблон',
                     select: "Выбрать шаблон",
                     count: "Вы не можете иметь больше 10 шаблонов",
                     blank: "Название шаблона не может быть пустым"
@@ -154,6 +156,7 @@ export const SearchJS = defineStore("Search", {
                 de: {
                     input: "Titel",
                     hold: "Neue Vorlage",
+                    first: 'Erste Vorlage',
                     select: "Vorlage auswählen",
                     count: "Sie können nicht mehr als 10 Vorlagen haben",
                     blank: "Der Titel der Vorlage darf nicht leer sein"
@@ -161,6 +164,7 @@ export const SearchJS = defineStore("Search", {
                 fr: {
                     input: "Titre",
                     hold: "Nouveau modèle",
+                    first: 'Premier modèle',
                     select: "Sélectionnez le modèle",
                     count: "Vous ne pouvez pas avoir plus de 10 modèles",
                     blank: "Le titre du modèle ne peut pas être vide"
@@ -168,6 +172,7 @@ export const SearchJS = defineStore("Search", {
                 es: {
                     input: "Título",
                     hold: "Nueva plantilla",
+                    first: 'Primera plantilla',
                     select: "Seleccionar plantilla",
                     count: "No puedes tener más de 10 plantillas.",
                     blank: "El título de la plantilla no puede estar en blanco"
@@ -175,6 +180,7 @@ export const SearchJS = defineStore("Search", {
                 zh: {
                     input: "标题",
                     hold: "新模板",
+                    first: '第一个模板',
                     select: "选择模板",
                     count: "你不能有超过 10 个模板",
                     blank: "模板标题不能为空"
@@ -182,6 +188,7 @@ export const SearchJS = defineStore("Search", {
                 ja: {
                     input: "題名",
                     hold: "新しいテンプレート",
+                    first: '最初のテンプレート',
                     select: "テンプレートを選択",
                     count: "テンプレートは 10 個までです",
                     blank: "テンプレートのタイトルを空白にすることはできません"

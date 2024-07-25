@@ -1,6 +1,6 @@
 <template>
 	<div v-if="data" class="wrap scroll">
-		<Header :data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l"
+		<Header :data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l" :titles="titles[l]"
 			:live="live" @avatar="++avatar" @settings="settings = true" @modal="modal = $event" />
 		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" :priv="checked.private" @modal="modal = $event" />
 

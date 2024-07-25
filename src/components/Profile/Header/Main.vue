@@ -4,10 +4,11 @@
         <div class="right">
             <Username :username="data.username" :title="data.title" :online="data.online" :premium="data.premium" :live="live" />
             <Icons
+                :titles="titles"
                 :lang="lang"
-                :time="{ created_at: data.created_at, last_time: data.last_time }" 
                 :text="{ age: data.age, sex: data.sex }"
                 :place="{ country: data.country_id, city: data.city_id }"
+                :time="{ created_at: data.created_at, last_time: data.last_time }" 
             />
         </div>
         <Buttons 
@@ -24,7 +25,7 @@ import Icons from "@/components/Profile/Header/Icons.vue"
 import Buttons from "@/components/Profile/Header/Buttons.vue"
 export default {
 	name: "Header",
-    props: ["data", "lang", "checked", "add", "del", "l", "live"],
+    props: ["data", "lang", "checked", "add", "del", "l", "live", 'titles'],
     components: {
         Avatar,
         Username,

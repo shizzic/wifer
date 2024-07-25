@@ -4,7 +4,7 @@
 
 		<div class="flex">
 			<div class="wrapper" v-click-outside="() => { mode = null }">
-				<div class="result" @click="show">{{ active }}</div>
+				<div class="result" @click="show()">{{ active }}</div>
 				<div class="arrow" v-show="Object.keys(data.data).length > 1" :class="{ closed: !mode, opened: mode }" @click="show" />
 
 				<transition name="slide-fade">
@@ -12,7 +12,7 @@
 						<div class="mini" />
 
 						<ul class="ul scroll">
-							<template v-for="(elem, index) in data.data" :key="index">
+							<template v-for="(_, index) in data.data" :key="index">
 								<li v-if="index != active" @click="change(index)">{{ index }}</li>
 							</template>
 						</ul>
@@ -20,7 +20,7 @@
 				</transition>
 			</div>
 
-			<div v-show="Object.keys(data.data).length > 1" class="btn" @click="del">&#10006;</div>
+			<div v-show="Object.keys(data.data).length > 1" class="btn" @click="del()">&#10006;</div>
 		</div>
     </div>
 </template>
@@ -31,13 +31,13 @@ export default {
 	props: ["lang", "data", "active", "create"],
 	data() {
 		return {
-			mode: null
+			mode: false
 		}
 	},
 	methods: {
 		change(index) {
 			this.data.active = index
-			this.mode = null
+			this.mode = false
 			this.create()
 		},
 
@@ -55,10 +55,7 @@ export default {
 		},
 
 		show() {
-			if (this.mode)
-				this.mode = null
-			else
-				this.mode = true
+			this.mode = !this.mode
 		}
 	}
 }

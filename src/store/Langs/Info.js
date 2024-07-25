@@ -26,7 +26,9 @@ export const InfoJS = defineStore("Info", {
                     children: "Children",
                     about: "Details",
                     prefer: "Prefer",
-                    images: "Photos"
+                    images: "Photos",
+                    created_at: "Profile created at",
+                    last_time: 'Last time seen'
                 },
                 ru: {
                     premium: "Премиум",
@@ -50,7 +52,9 @@ export const InfoJS = defineStore("Info", {
                     children: "Дети",
                     about: "Подробно",
                     prefer: "Предпочитаю",
-                    images: "Фотки"
+                    images: "Фотки",
+                    created_at: "Профиль создан",
+                    last_time: 'Последний раз в сети'
                 },
                 de: {
                     premium: "Prämie",
@@ -74,7 +78,9 @@ export const InfoJS = defineStore("Info", {
                     children: "Kinder",
                     about: "Einzelheiten",
                     prefer: "Vorziehen",
-                    images: "Fotos"
+                    images: "Fotos",
+                    created_at: "Profil erstellt bei",
+                    last_time: 'Zuletzt gesehen'
                 },
                 fr: {
                     premium: "Prime",
@@ -98,7 +104,9 @@ export const InfoJS = defineStore("Info", {
                     children: "Enfants",
                     about: "Détails",
                     prefer: "Préfère",
-                    images: "Photos"
+                    images: "Photos",
+                    created_at: "Profil créé à",
+                    last_time: 'vu la dernière fois'
                 },
                 es: {
                     premium: "De primera calidad",
@@ -122,7 +130,9 @@ export const InfoJS = defineStore("Info", {
                     children: "Niños",
                     about: "Detalles",
                     prefer: "Preferir",
-                    images: "Fotos"
+                    images: "Fotos",
+                    created_at: "Perfil creado en",
+                    last_time: 'visto por última vez'
                 },
                 zh: {
                     premium: "优质的",
@@ -146,7 +156,9 @@ export const InfoJS = defineStore("Info", {
                     children: "孩子们",
                     about: "细节",
                     prefer: "更喜欢",
-                    images: "相片"
+                    images: "相片",
+                    created_at: "个人资料创建于",
+                    last_time: '最后一次见到'
                 },
                 ja: {
                     premium: "プレミアム",
@@ -170,7 +182,9 @@ export const InfoJS = defineStore("Info", {
                     children: "子供",
                     about: "詳細",
                     prefer: "好む",
-                    images: "写真"
+                    images: "写真",
+                    created_at: "プロファイルの作成場所",
+                    last_time: '最後に見た時間'
                 },
             }
         },
