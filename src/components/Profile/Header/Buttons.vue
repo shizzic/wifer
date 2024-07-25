@@ -22,24 +22,24 @@
             </div>
 
             <div v-show="$user.id && data._id != $user.id" class="elem">
-                <div class="btn" @click="like">
+                <div class="btn" @click="like()">
                     <div class="fill" :class="{ checked : checked.like.is, unchecked : !checked.like.is }" style="background-color: #DD2647;" />
                     <img src="/images/like.webp">
                 </div>
 
-                <div class="btn" @click="privateHandle">
+                <div class="btn" @click="privateHandle()">
                     <div class="fill" :class="{ checked : checked.private.is, unchecked : !checked.private.is }" style="background-color: #16AE85;" />
                     <img src="/images/private.webp">
                 </div>
             </div>
 
             <div v-show="$user.id && data._id != $user.id" class="elem">
-                <div class="btn" @click="access">
+                <div class="btn" @click="access()">
                     <div class="fill" :class="{ checked : checked.access.is, unchecked : !checked.access.is }" style="background-color: #EB9532;" />
                     <img src="/images/access.webp">
                 </div>
 
-                <div class="btn" @click="chat">
+                <div class="btn" @click="chat()">
                     <img src="/images/chat.webp">
                 </div>
             </div>
