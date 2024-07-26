@@ -1,16 +1,16 @@
 <template>
 	<h3>{{ title }}</h3>
 	<div style="margin-bottom: 20px;">
-		<Field name="username" :rules="rules" v-slot="{ field, errorMessage }" :modelValue="value"
-			@update:modelValue="value = $event">
-			<input v-bind="field" maxlength="20" :placeholder="holder" :modelValue="value"
-				@update:modelValue="value = $event" @input="error = errorMessage; get($event.target.value);" />
+		<Field name="username" :rules="rules" v-slot="{ field, errorMessage }" v-model="input_value"
+			@input="error = errorMessage; get($event.target.value);">
+			<input v-bind="field" maxlength="20" :placeholder="holder" v-model="input_value"
+				@input="error = errorMessage; get($event.target.value);" />
 		</Field>
 		<div>
 			<ErrorMessage name="username" class="error" />
 			<template v-if="!error && fetched">
-				<span v-show="!available" class="error">{{ lang.taken }}</span>
-				<span v-show="available" class="success">{{ lang.available }}</span>
+				<span v-if="!available" class="error">{{ lang.taken }}</span>
+				<span v-else class="success">{{ lang.available }}</span>
 			</template>
 			<div class="count">
 				<span>{{ value.length }}</span>
@@ -33,6 +33,7 @@ export default {
 	},
 	data() {
 		return {
+			input_value: this.value,
 			rules: yup.string().matches(/^[\S]+$/, this.lang.space).required(this.lang.required),
 			fetched: false,
 			available: false,
@@ -58,7 +59,7 @@ export default {
 		},
 
 		check(username) {
-			if (!this.error && username !== "")
+			if (!this.error && username !== "" && this.oldUsername !== this.value)
 				fetch(this.$domain + "checkUsername?username=" + username, {
 					method: "GET",
 					credentials: 'include'
@@ -73,8 +74,6 @@ export default {
 					.then(data => {
 						if (data === true || data === false) {
 							this.available = data
-							if (this.oldUsername === this.value)
-								this.available = true
 							this.fetched = true
 						}
 					})

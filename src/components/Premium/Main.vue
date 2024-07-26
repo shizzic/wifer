@@ -26,6 +26,7 @@
 </template>
 
 <script scoped>
+import { name } from "/package"
 import { PremiumJS } from "@/store/Langs/Premium"
 import Quantity from "@/components/Premium/Quantity.vue"
 import Pay from "@/components/Premium/Pay.vue"
@@ -48,9 +49,10 @@ export default {
 		Contact
 	},
 	setup() {
+		const Name = name[0].toUpperCase() + name.slice(1)
 		useSeoMeta({
-			title: "Dateshipper - Join Free",
-			ogTitle: "Dateshipper - Join Free",
+			title: Name + " - Join Free",
+			ogTitle: Name + " - Join Free",
 			description: "Dateshipper.com is the most convenient, fast and reasonable dating website. Try it out for free!",
 			ogDescription: "Dateshipper.com is the most convenient, fast and reasonable dating website. Try it out for free!",
 		})

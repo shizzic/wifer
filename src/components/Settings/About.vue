@@ -1,7 +1,7 @@
 <template>
     <div style="width: 100%;">
         <h3>{{ title }}</h3>
-        <textarea :modelValue="value" @update:modelValue="value = $event" :placeholder="holder" maxlength="1500" @input="autosize($event)" />
+        <textarea v-model="input_value" :placeholder="holder" maxlength="1500" @input="autosize($event)" />
         <div class="count">
             <span>{{ value.length }}</span>
             <span> / 1500</span>
@@ -14,6 +14,11 @@ export default {
 	name: "About",
 	props: ["title", "holder", "value"],
     emits: ["value"],
+    data() {
+        return {
+            input_value: this.value,
+        }
+    },
     methods: {
         autosize(e) {
             this.$emit('value', e.target.value)

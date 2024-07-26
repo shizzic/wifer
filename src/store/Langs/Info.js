@@ -826,7 +826,7 @@ export const InfoJS = defineStore("Info", {
         about() {
             return {
                 en: "This section han't filled yet",
-                ru: "Это блок пока-что не заполнен",
+                ru: "Этот блок пока-что не заполнен",
                 de: "Dieser Abschnitt ist noch nicht gefüllt",
                 fr: "Cette section n'est pas encore remplie",
                 es: "Esta sección aún no se ha llenado",

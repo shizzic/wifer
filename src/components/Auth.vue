@@ -44,16 +44,9 @@ export default {
 	methods: {
 		check() {
 			if (!this.$user.id) {
-				fetch(this.$domain + "checkCode", {
+				fetch(this.$domain + "checkCode?id=" + this.$route.params.id + "&code=" + this.$route.params.code, {
 					method: "POST",
 					credentials: "include",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						id: this.$route.params.id,
-						code: this.$route.params.code,
-					})
 				})
 					.then(data => { return data.json() })
 					.then(data => {

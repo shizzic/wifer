@@ -5,6 +5,7 @@ export const chatJS = defineStore("chat", {
     state: () => ({
         show: null,
         socket: null,
+        ping_pong: null,
         target: null,
         messages: {},
         newMessages: {},
@@ -15,15 +16,19 @@ export const chatJS = defineStore("chat", {
         order: [],
         rooms: {}
     }),
-    actions:{
+    actions: {
         startSocket() {
             if (!this.socket) {
                 this.socket = new WebSocket(import.meta.env.VITE_WEBSOCKET_PROTOCOL + "://" + import.meta.env.VITE_DOMAIN_NAME + "chat")
-        
+
                 this.socket.onmessage = (e) => {
                     this.onMessage(e.data)
                 }
-        
+
+                this.socket.onopen = () => {
+                    this.ping_pong = setInterval(this.ping, 10000)
+                }
+
                 this.socket.onclose = () => {
                     this.socket = null
                 }
@@ -31,8 +36,10 @@ export const chatJS = defineStore("chat", {
         },
 
         closeSocket() {
-            if (this.socket)
+            if (this.socket) {
+                clearInterval(this.ping_pong)
                 this.socket.close()
+            }
 
             this.socket = null
         },
@@ -55,11 +62,11 @@ export const chatJS = defineStore("chat", {
                     else
                         this.rooms[data.user].news = 1
 
-                    this.rooms[data.user].user   = data.user
+                    this.rooms[data.user].user = data.user
 
                     this.messages[data.user].typing = false
                     this.newMessages[data.user].unshift(data)
-                    
+
                     if (!this.lastSearch)
                         this.changeOrder(data.user)
                     else {
@@ -99,12 +106,16 @@ export const chatJS = defineStore("chat", {
                         this.messages[data.user].access = { target: data.access, user: false }
                     break
             }
-		},
+        },
 
-        sendMessage(data) {            
+        sendMessage(data) {
             if (this.socket)
-			    this.socket.send(JSON.stringify(data))
-		},
+                this.socket.send(JSON.stringify(data))
+        },
+
+        ping() {
+            this.sendMessage('ping')
+        },
 
         addRoom(data, newMessage, field = null) {
             // OLD VERSION OF CHECKING
@@ -117,7 +128,7 @@ export const chatJS = defineStore("chat", {
             }
 
             if (!this.rooms[data.user]) {
-                data._id              = data.user
+                data._id = data.user
                 this.rooms[data.user] = data
             } else {
                 if (field) {
@@ -152,7 +163,7 @@ export const chatJS = defineStore("chat", {
                     for (let message of data.messages)
                         this.messages[data.id].messages.push(message)
                 } else {
-                    this.messages[data.id]          = {}
+                    this.messages[data.id] = {}
                     this.messages[data.id].messages = data.messages
                 }
 
@@ -172,18 +183,18 @@ export const chatJS = defineStore("chat", {
             let obj = Object.assign({}, this.rooms[data.message.target])
 
             if (this.rooms[data.message.target]) {
-                obj.user       = data.message.user
-                obj.viewed     = false
-                obj.text       = data.message.text
+                obj.user = data.message.user
+                obj.viewed = false
+                obj.text = data.message.text
                 obj.created_at = data.message.created_at
             } else {
-                obj._id        = this.target.id
-                obj.user       = data.message.user
-                obj.target     = this.target.id
-                obj.viewed     = true
-                obj.text       = data.message.text
-                obj.avatar     = this.target.avatar
-                obj.username   = this.target.username
+                obj._id = this.target.id
+                obj.user = data.message.user
+                obj.target = this.target.id
+                obj.viewed = true
+                obj.text = data.message.text
+                obj.avatar = this.target.avatar
+                obj.username = this.target.username
                 obj.created_at = data.message.created_at
             }
 
@@ -195,8 +206,8 @@ export const chatJS = defineStore("chat", {
             let messages = this.messages[id].messages
             for (let message of this.newMessages[id])
                 messages.unshift(message)
-            
-            this.newMessages[id]       = []
+
+            this.newMessages[id] = []
             this.messages[id].messages = messages
         },
 
@@ -205,12 +216,12 @@ export const chatJS = defineStore("chat", {
                 this.newMessages[id] = []
 
             if (!(id in this.messages)) {
-                this.messages[id]          = {}
+                this.messages[id] = {}
                 this.messages[id].messages = []
-                this.messages[id].skip     = 0
-                this.messages[id].left     = true
-                this.messages[id].first    = true
-                this.messages[id].typing   = false
+                this.messages[id].skip = 0
+                this.messages[id].left = true
+                this.messages[id].first = true
+                this.messages[id].typing = false
                 this.messages[id].accessed = false
             }
         },

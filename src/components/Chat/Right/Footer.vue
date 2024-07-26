@@ -109,7 +109,6 @@ export default {
                 e.preventDefault()
                 this.send()
             }
-
         },
 
         autosize(e) {

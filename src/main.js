@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from "@/router"
 import { createHead } from "@unhead/vue"
 import "./style"
+import { name } from "/package"
 
 import { createPinia } from "pinia"
 import vue3GoogleLogin from "vue3-google-login"
@@ -28,6 +29,7 @@ app
 .use(vClickOutside)
 .use(vue3GoogleLogin, { clientId: import.meta.env.VITE_GOOGLE_ID })
 
+app.config.globalProperties.$app_name = name[0].toUpperCase() + name.slice(1)
 app.config.globalProperties.$domain = import.meta.env.VITE_DOMAIN
 app.config.globalProperties.$domainName = import.meta.env.VITE_DOMAIN_NAME
 app.config.globalProperties.$lang = langJS()

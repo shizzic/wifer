@@ -1,9 +1,8 @@
 <template>
 	<h3>{{ title }}</h3>
 	<div style="margin-bottom: 20px;">
-		<Field name="title" v-slot="{ field }" :modelValue="value" @update:modelValue="value = $event">
-			<input v-bind="field" maxlength="150" :placeholder="holder" :modelValue="value"
-				@update:modelValue="value = $event" @input="$emit('value', $event.target.value)" />
+		<Field name="title" v-slot="{ field }" v-model="input_value">
+			<input v-bind="field" maxlength="150" :placeholder="holder" v-model="input_value" @input="$emit('value', $event.target.value)" />
 		</Field>
 		<div class="count">
 			<span>{{ value.length }}</span>
@@ -20,6 +19,11 @@ export default {
 	emits: ["value"],
 	components: {
 		Field
+	},
+	data() {
+		return {
+			input_value: ''
+		}
 	}
 }
 </script>

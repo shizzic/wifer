@@ -1,7 +1,7 @@
 <template>
 	<h3>{{ title }}</h3>
     <div class="wrapper">
-        <Slider :modelValue="value" @update:modelValue="value = $event" v-bind="options" @change="get" />
+        <Slider v-model="input_value" v-bind="options" @change="get" />
     </div>
 </template>
 
@@ -17,6 +17,7 @@ export default {
     },
 	data() {
 		return {
+            input_value: '',
             options: {
                 min: 18,
                 max: 80

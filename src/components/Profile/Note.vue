@@ -1,6 +1,8 @@
 <template>
-	<div id="note" :class="{ shown: show, closed: !show }"  v-click-outside="close" @mousedown="() => { up = true }" @mouseup="() => { up = null }">
-        <textarea class="scroll" maxlength="150" v-model="checked.like.text" @click="show = true" @input="autosize($event)" />
+    <div id="note" :class="{ shown: show, closed: !show }" v-click-outside="close" @mousedown="() => { up = true }"
+        @mouseup="() => { up = null }">
+        <textarea class="scroll" maxlength="150" v-model="checked.like.text" @click="show = true"
+            @input="autosize($event)" @keypress.enter="enter" />
         <div class="buttons">
             <button @click="show = null"><img src="/images/cancel.webp" /></button>
             <button @click="save"><img src="/images/save.webp" /></button>
@@ -10,28 +12,30 @@
 
 <script scoped>
 export default {
-	name: "Note",
+    name: "Note",
     props: ["checked", "text", "target"],
     data() {
-		return {
+        return {
             show: null,
-			up: null
-		}
-	},
+            up: null
+        }
+    },
     methods: {
         save() {
             this.close()
-
-            let form = new FormData()
-            form.append("text", this.checked.like.text)
-            form.append("target", this.target)
             this.checked.like.is = true
 
             fetch(this.$domain + "like", {
-				method: "POST",
-				credentials: "include",
-                body: form
-			})
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    text: this.checked.like.text,
+                    target: this.target
+                })
+            })
                 .then(data => {
                     if (data.status === 401) {
                         this.$user.logout(this.$domain)
@@ -44,18 +48,25 @@ export default {
             this.$emit('value', e.target.value)
 
             let el = e.target
-            setTimeout(function() {
+            setTimeout(function () {
                 el.style.height = "5px"
                 el.style.height = (el.scrollHeight) + "px"
             }, 0)
         },
 
         close() {
-			if (!this.up)
-				this.show = null
+            if (!this.up)
+                this.show = null
 
-			this.up = null
-		}
+            this.up = null
+        },
+
+        enter(e) {
+            if (window.screen.width > 992 && e.keyCode == 13 && !e.shiftKey) {
+                e.preventDefault()
+                this.save()
+            }
+        },
     }
 }
 </script>
@@ -78,21 +89,21 @@ textarea {
     outline: none;
     border: none;
     color: #222;
-	font-size: 24px;
+    font-size: 24px;
     width: 100%;
     min-height: 200px;
     max-height: 350px;
-	line-height: 40px;
+    line-height: 40px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     border-left: 3px solid #654321;
     border-right: 3px solid #654321;
     border-top: 3px solid #654321;
 
-	background-image: 
-    url("/images/line.webp"), 
-    url("/images/paper.webp");
-	background-repeat: repeat, repeat;
+    background-image:
+        url("/images/line.webp"),
+        url("/images/paper.webp");
+    background-repeat: repeat, repeat;
 
     padding: 5px 20px;
     resize: none;
@@ -122,10 +133,10 @@ span {
 }
 
 button {
-	cursor: pointer;
-	text-shadow: 0px -1px 0px #000000;
-	border-radius: 6px;
-	background-color: #62add6;
+    cursor: pointer;
+    text-shadow: 0px -1px 0px #000000;
+    border-radius: 6px;
+    background-color: #62add6;
 
     display: flex;
     align-items: center;
@@ -133,10 +144,11 @@ button {
     padding: 4px 15px;
 }
 
-button:active, button:focus {
-	zoom: 1;
-	filter: alpha(opacity=80);
-	opacity: 0.8;
+button:active,
+button:focus {
+    zoom: 1;
+    filter: alpha(opacity=80);
+    opacity: 0.8;
 }
 
 button:first-of-type {

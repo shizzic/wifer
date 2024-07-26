@@ -1,6 +1,6 @@
 <template>
 	<div class="square">
-        <h1>Dateshipper</h1>
+        <h1>{{ $app_name }}</h1>
 
         <div class="block">
             <span>{{ lang.text }}</span>
