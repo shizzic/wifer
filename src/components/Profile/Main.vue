@@ -36,21 +36,10 @@ import Settings from "@/components/Settings/Main.vue"
 import Modal from "@/components/Profile/Modal.vue"
 import Note from "@/components/Profile/Note.vue"
 
-import { useSeoMeta } from "@unhead/vue"
-
 export default {
 	name: "Profile",
 	props: ["l"],
 	setup() {
-		useSeoMeta({
-			title: "Profile",
-			ogTitle: "Profile",
-			description: "Profile page with full information about targeting user. You can chat with them, sharing accesses to your photos and even more!",
-			ogDescription: "Profile page with full information about targeting user. You can chat with them, sharing accesses to your photos and even more!",
-			robots: "noindex",
-		})
-
-
 		const errors = ProfileJS().errors
 		const response = ProfileJS().response
 		const cropper = ProfileJS().cropper

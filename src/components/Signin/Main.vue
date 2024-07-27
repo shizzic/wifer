@@ -19,8 +19,6 @@ import Email from "@/components/Signin/Form/Email.vue"
 import Accept from "@/components/Signin/Form/Accept.vue"
 import { Form } from "vee-validate"
 
-import { useSeoMeta } from "@unhead/vue"
-
 export default {
 	name: "Signin",
 	props: ["l"],
@@ -32,13 +30,6 @@ export default {
 		Accept
 	},
 	setup() {
-		useSeoMeta({
-			title: "Sign in",
-			ogTitle: "Sign in",
-			description: "Sign in for free! The fastest registration you've ever seen! You don't need any password!",
-			ogDescription: "Sign in for free! The fastest registration you've ever seen! You don't need any password!",
-		})
-
 		const lang = SigninJS()
 		const response = SigninJS()["response"]
 		const success = SigninJS()["success"]

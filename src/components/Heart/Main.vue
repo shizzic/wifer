@@ -25,8 +25,6 @@ import Users from "@/components/Heart/Users/Main.vue"
 import Pagination from "@/components/Heart/Pagination.vue"
 import Modal from "@/components/Heart/Modal.vue"
 
-import { useSeoMeta } from "@unhead/vue"
-
 export default {
 	name: "Heart",
 	props: ["l"],
@@ -37,14 +35,6 @@ export default {
 		Modal
 	},
 	setup() {
-		useSeoMeta({
-			title: "Activities",
-			ogTitle: "Activities",
-			description: "It's a collection of all of your actions with other profiles and others' profiles with yours.",
-			ogDescription: "It's a collection of all of your actions with other profiles and others' profiles with yours.",
-			robots: "noindex",
-		})
-
 		const what = HeartJS().what
 		const text = HeartJS().text
 		const submit = HeartJS().submit

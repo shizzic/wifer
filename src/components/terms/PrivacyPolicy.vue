@@ -306,23 +306,6 @@
 	</div>
 </template>
 
-<script scoped>
-import { useSeoMeta } from "@unhead/vue"
-
-export default {
-	name: "PrivacyPolicy",
-	setup() {
-		useSeoMeta({
-			title: "Privacy policy",
-			ogTitle: "Privacy policy",
-			description: "Privacy policy document of Dateshipper.",
-			ogDescription: "Privacy policy document of Dateshipper.",
-			robots: "noindex",
-		})
-	}
-}
-</script>
-
 <style scoped>
 .wrap {
 	z-index: 10;

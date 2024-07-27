@@ -84,14 +84,14 @@ export default {
 		},
 
         getDate(time) {
-            let today = new Date().getDate()
-            let date = new Date(time * 1000)
-            let dateDay = date.getDate()
+            const today = new Date().getDate()
+            const date = new Date(time * 1000)
+            const dateDay = date.getDate()
 
             if (today === dateDay)
-                return date.getHours() + ":" + ("0" + date.getMinutes()).substr(-2)
+                return (String(date.getHours()).padStart(2, '0')) + ":" + (String(date.getMinutes()).padStart(2, '0'))
             else
-                return dateDay + "." + (date.getMonth() + 1) + "." + date.getFullYear()
+                return (String(dateDay).padStart(2, '0')) + "." + (String(date.getMonth() + 1).padStart(2, '0')) + "." + date.getFullYear()
         }
     }
 }

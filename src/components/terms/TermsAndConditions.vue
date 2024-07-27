@@ -195,23 +195,6 @@
 		liable for any loss or damage of any nature.</p>
 </div></template>
 
-<script scoped>
-import { useSeoMeta } from "@unhead/vue"
-
-export default {
-	name: "TermsAndConditions",
-	setup() {
-		useSeoMeta({
-			title: "Terms",
-			ogTitle: "Terms",
-			description: "Terms and Conditions of Dateshipper.",
-			ogDescription: "Terms and Conditions of Dateshipper.",
-			robots: "noindex",
-		})
-	}
-}
-</script>
-
 <style scoped>
 .wrap {
 	z-index: 10;

@@ -24,7 +24,7 @@ export default {
     width: 100%;
 
 	display: flex;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	flex-wrap: wrap;
 }
 
@@ -106,7 +106,7 @@ img {
     }
 }
 
-@media screen and (min-width: 790px) and (max-width: 953px) {
+@media screen and (min-width: 790px) and (max-width: 952px) {
     .user {
         width: 47%;
 		height: 420px;
@@ -114,15 +114,19 @@ img {
 }
 
 @media screen and (min-width: 953px) and (max-width: 1204px) {
+	.wrapper {
+		justify-content: center;
+	}
+
     .user {
-        width: 48%;
+        width: 47%;
 		height: 420px;
     }
 }
 
 @media screen and (min-width: 1204px) and (max-width: 1500px) {
     .user {
-        width: 32%;
+        width: 33%;
 		height: 420px;
     }
 }

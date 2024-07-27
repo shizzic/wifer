@@ -2,7 +2,8 @@
 	<div class="right" :class="{ show: show, hide: !show }">
 		<Header :target="target" :access="messages.access" :rooms="rooms" />
 		<template v-if="premium > 0 || 'access' in messages && messages.access.target">
-			<Messages :target="target.id" :messages="messages" :getMessages="getMessages" :newMessages="newMessages" :show="show" />
+			<Messages :target="target.id" :messages="messages" :getMessages="getMessages" :newMessages="newMessages"
+				:show="show" />
 			<Footer :input="input" :target="target.id" />
 		</template>
 		<Blur v-else :lang="blur" />
@@ -24,10 +25,19 @@ export default {
 		Footer
 	},
 	computed: {
-        premium() {
-            return this.$user.premium
-        }
-    }
+		premium() {
+			return this.$user.premium
+		},
+	},
+	watch: {
+		"messages.access.target": {
+			handler(value, old) {
+				if (!old && value && this.messages.messages.length === 0)
+					this.getMessages(null, true)
+			},
+			deep:  true
+		}
+	},
 }
 </script>
 
@@ -39,12 +49,12 @@ export default {
 
 	display: flex;
 	flex-direction: column;
-	
+
 	overflow: hidden;
 }
 
 @media screen and (max-width: 700px) {
-    .show {
+	.show {
 		width: 100%;
 		min-width: 0;
 	}

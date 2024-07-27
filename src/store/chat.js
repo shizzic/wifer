@@ -50,8 +50,6 @@ export const chatJS = defineStore("chat", {
 
             switch (data.api) {
                 case "message":
-                    // if (!this.messages[data.user].first) {
-                    // }
                     data.viewed = false
                     this.addRoom(data, true, "text")
                     this.rooms[data.user].typing = false
@@ -114,16 +112,13 @@ export const chatJS = defineStore("chat", {
         },
 
         ping() {
-            this.sendMessage('ping')
+            this.sendMessage({ text: 'ping' })
         },
 
         addRoom(data, newMessage, field = null) {
-            // OLD VERSION OF CHECKING
-            // if (newMessage && (!this.rooms[data.user] || this.rooms[data.user].viewed))
-            //     navJS().setHearts(navJS().messages + 1, "messages")
-
             if (newMessage) {
                 this.rooms[data.user].viewed = false
+                this.rooms[data.user].created_at = data.created_at
                 navJS().setHearts(navJS().messages + 1, "messages")
             }
 
@@ -234,31 +229,56 @@ export const chatJS = defineStore("chat", {
         none() {
             return {
                 en: "You haven't selected any room",
-                ru: "Вы не выбрали комнату"
+                ru: "Вы не выбрали комнату",
+                de: "Sie haben kein Zimmer ausgewählt",
+                fr: "Vous n'avez sélectionné aucune chambre",
+                es: "No has seleccionado ninguna habitación",
+                zh: "您还没有选择任何房间",
+                ja: "部屋を選択していません"
             }
         },
         search() {
             return {
                 en: "Search by username",
-                ru: "Поиск по нику"
+                ru: "Поиск по нику",
+                de: "Suche nach Benutzernamen",
+                fr: "Recherche par nom d'utilisateur",
+                es: "Buscar por nombre de usuario",
+                zh: "按用户名搜索",
+                ja: "ユーザー名で検索",
             }
         },
         input() {
             return {
-                en: "Write what you want ...",
-                ru: "Напишите чего вы хотите ..."
+                en: "Write what you want...",
+                ru: "Напишите чего вы хотите...",
+                de: "Schreib was du willst...",
+                fr: "Écrivez ce que vous voulez...",
+                es: "Escribe lo que quieres...",
+                zh: "写下您想要的...",
+                ja: "書きたいことを書いてください...",
             }
         },
         chats() {
             return {
                 en: "You don't have any room yet",
-                ru: "У вас нет ни одной комноты пока что"
+                ru: "У вас нет ни одной комноты пока что",
+                de: "Sie haben noch kein Zimmer",
+                fr: "Tu n'as pas encore de place",
+                es: "Aún no tienes espacio",
+                zh: "您还没有房间",
+                ja: "まだ空きがありません",
             }
         },
         blur() {
             return {
                 en: "You doen't have an access to this chat by another user. And you don't have a premium. So buy it and you will be able to text again without any restriction :)",
-                ru: "Вы не имеете доступ к этому чату от этого юзера. А так же, вы не имеете премиума. Так что купи его и тогда, ты сможешь писать кому угодно без огроничений :)"
+                ru: "Вы не имеете доступ к этому чату от этого юзера. А так же, вы не имеете премиума. Так что купи его и тогда, ты сможешь писать кому угодно без огроничений :)",
+                de: "Du hast keinen Zugriff auf diesen Chat durch einen anderen Benutzer. Und du hast kein Premium-Abonnement. Kaufe es also und du kannst wieder ohne Einschränkungen Textnachrichten senden :)",
+                fr: "Vous n'avez pas accès à ce chat par un autre utilisateur. Et vous n'avez pas d'abonnement premium. Alors achetez-le et vous pourrez à nouveau envoyer des SMS sans aucune restriction :)",
+                es: "No tienes acceso a este chat por parte de otro usuario y no tienes una suscripción premium. Así que cómprala y podrás volver a enviar mensajes de texto sin ninguna restricción :)",
+                zh: "您无权访问其他用户的聊天内容。而且您没有高级版。所以购买它，您将能够再次发送短信而不受任何限制 :)",
+                ja: "他のユーザーによるこのチャットへのアクセス権はありません。また、プレミアムも持っていません。プレミアムを購入すれば、制限なく再度テキストを送信できるようになります :)",
             }
         }
     }

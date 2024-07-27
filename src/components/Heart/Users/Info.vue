@@ -9,9 +9,9 @@
         </span>
 
         <span class="place">{{ user.age }}<span class="dot" />
-            {{ user.country_id ? $country.country[user.country_id] : "" }}
-            {{ user.city_id && $city.city[user.country_id] && $city.city[user.country_id][user.city_id] ? " , " +
-                $city.city[user.country_id][user.city_id] : "" }}
+            {{ user.country_id ? $country.list[user.country_id] : "" }}
+            {{ user.city_id && $city.list[user.country_id] && $city.list[user.country_id][user.city_id] ? " , " +
+                $city.list[user.country_id][user.city_id] : "" }}
         </span>
         <span class="title">{{ user.title }}</span>
 
@@ -26,41 +26,11 @@
 export default {
     name: "Info",
     props: ["user", "photos"],
+    inject: ['l'],
     beforeMount() {
-        this.getPlace("country", this.user.country_id)
-        this.getPlace("city", this.user.city_id)
+        this.$country.get(this.$domain, this.l)
+        this.$city.get(this.$domain, this.user.country_id, this.l)
     },
-    methods: {
-        getPlace(place, place_id) {
-            if (place === "city") {
-                if (!(this.user.country_id in this.$city.city) || this.$city.city[this.user.country_id] && !(place_id in this.$city.city[this.user.country_id]))
-                    this.fetchPlace(place)
-            } else {
-                if (!(place_id in this.$country.country))
-                    this.fetchPlace(place)
-            }
-        },
-        fetchPlace(place) {
-            if (this.user.country_id)
-                fetch(this.$domain + place + "?country_id=" + this.user.country_id, {
-                    method: "GET",
-                    credentials: "include"
-                })
-                    .then(data => { return data.json() })
-                    .then(data => {
-                        let obj = {}
-
-                        for (let index in data)
-                            obj[data[index]._id] = data[index].title
-
-                        if (place === "city") {
-                            if (this.user.city_id)
-                                return this.$city.set({ "data": obj, "country_id": this.user.country_id })
-                        } else
-                            return this.$country.set(obj)
-                    })
-        },
-    }
 }
 </script>
 

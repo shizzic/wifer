@@ -2,12 +2,13 @@
 	<nav>
 		<div id="links">
 			<template v-for="(elem, key) in list" :key="key">
-				<router-link v-if="key === 'profile'" :to="{ name: key, params: { id: id } }" class="wrap" :title="elem.title[l]" @click="set(key)">
+				<router-link v-if="key === 'profile'" :to="{ name: key, params: { id: id } }" class="wrap"
+					:title="elem.title[l]" @click="set(key)">
 					<div class="elem">
 						<div class="circle" />
 
 						<div class="link">
-							<img :src="elem.image"  />
+							<img :src="elem.image" />
 						</div>
 					</div>
 
@@ -19,9 +20,9 @@
 						<div class="circle" />
 
 						<div v-if="key === 'heart' && all > 0" class="notification">
-							<span :class="{ 
-								important : likes > 0 || privates > 0 || accesses > 0, 
-								useless: likes === 0 && privates === 0 && accesses === 0 
+							<span :class="{
+								important: likes > 0 || privates > 0 || accesses > 0,
+								useless: likes === 0 && privates === 0 && accesses === 0
 							}">{{ all }}</span>
 						</div>
 
@@ -30,7 +31,7 @@
 						</div>
 
 						<div class="link">
-							<img :src="elem.image"  />
+							<img :src="elem.image" />
 						</div>
 					</div>
 
@@ -42,9 +43,18 @@
 </template>
 
 <script scoped>
+import { SeoJS } from "@/store/Langs/Seo"
+
 export default {
 	name: 'Nav',
 	props: ["l"],
+	setup() {
+		const names = SeoJS().names
+
+		return {
+			names
+		}
+	},
 	computed: {
 		id() {
 			return this.$user.id
@@ -72,7 +82,7 @@ export default {
 		},
 		allWithMessages() {
 			return this.views + this.likes + this.privates + this.accesses + this.$nav.messages
-		}
+		},
 	},
 	data() {
 		return {
@@ -95,11 +105,14 @@ export default {
 			}
 		},
 
-		allWithMessages(n) {
-			if (n > 0)
-				document.title = document.title + " (" + n + ")"
-			else
-				document.title = document.title.split("(")[0]
+		allWithMessages() {
+			this.update_page_title(this.names[this.l][this.$route.name])
+		},
+
+		"$route.name": {
+			handler(name) {
+				this.update_page_title(this.names[this.l][name])
+			}
 		}
 	},
 	beforeMount() {
@@ -138,6 +151,13 @@ export default {
 							}
 						}
 				})
+		},
+		update_page_title(name) {
+			if (!name)
+				return
+
+			const count = this.allWithMessages
+			document.title = count > 0 ? name + " (" + count + ")" : name
 		}
 	}
 }
@@ -166,7 +186,7 @@ nav {
 	cursor: pointer;
 	height: 100%;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  	-webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .elem {
@@ -181,7 +201,7 @@ nav {
 	flex-direction: column;
 	justify-content: space-between;
 
-  	overflow: hidden;
+	overflow: hidden;
 }
 
 .link {
@@ -201,8 +221,8 @@ nav {
 	opacity: 0;
 
 	border-radius: 50%;
-	background-color:rgb(226, 235, 253);
-	
+	background-color: rgb(226, 235, 253);
+
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -226,10 +246,10 @@ img {
 
 .border {
 	width: 0;
-    height: 5%;
-    background-color: #000;
+	height: 5%;
+	background-color: #000;
 
-    transition: width .3s;
+	transition: width .3s;
 }
 
 .checked {

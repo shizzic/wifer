@@ -18,8 +18,6 @@ import Right from "@/components/Chat/Right/Main.vue"
 import None from "@/components/Chat/Right/None.vue"
 import { chatJS } from "@/store/chat"
 
-import { useSeoMeta } from '@unhead/vue'
-
 export default {
 	name: "Chat",
 	props: ["l"],
@@ -29,14 +27,6 @@ export default {
 		None
 	},
 	setup() {
-		useSeoMeta({
-			title: "Chat",
-			ogTitle: "Chat",
-			description: "Chat with people you like on Dateshipper.",
-			ogDescription: "Chat with people you like on Dateshipper.",
-			robots: "noindex",
-		})
-
 		const none = chatJS().none
 		const search = chatJS().search
 		const input = chatJS().input
@@ -164,10 +154,10 @@ export default {
 			}
 		},
 
-		getMessages(scroll = null) {
-			let have = this.target.id in this.messages
+		getMessages(scroll = null, anyway = undefined) {
+			const have = this.target.id in this.messages
 
-			if (!have || this.messages[this.target.id].left && (scroll || this.messages[this.target.id].first)) {
+			if (anyway || !have || this.target.id in this.messages && this.messages[this.target.id].left && (scroll || this.messages[this.target.id].first)) {
 				this.$chat.setMessages({ id: +this.target.id, left: null })
 
 				let access = true

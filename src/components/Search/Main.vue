@@ -20,8 +20,6 @@ import { SearchJS } from "@/store/Langs/Search"
 import Sidebar from "@/components/Search/Sidebar/Main.vue"
 import List from "@/components/Search/List/Main.vue"
 
-import { useSeoMeta } from "@unhead/vue"
-
 export default {
 	name: "Search",
 	props: ["l"],
@@ -30,13 +28,6 @@ export default {
 		List
 	},
 	setup() {
-		useSeoMeta({
-			title: "Search",
-			ogTitle: "Search",
-			description: "Look for your pair on Dateshipper. You can see profiles without registration.",
-			ogDescription: "Look for your pair on Dateshipper. You can see profiles without registration.",
-		})
-
 		const titles = InfoJS().keys
 		const values = InfoJS().values
 		const text = SearchJS().text

@@ -5,7 +5,6 @@
 </template>
 
 <script scoped>
-import { computed } from "vue"
 import Nav from "@/components/Nav.vue"
 import Cookie from "@/components/Cookie.vue"
 
@@ -18,7 +17,7 @@ export default {
 	},
 	setup() {
 		useSeoMeta({
-			ogImage: "https://dateshipper.com/favicon.ico",
+			ogImage: location.origin + "/favicon.ico",
 		})
 
 	},
@@ -31,7 +30,7 @@ export default {
 		id() {
 			this.make_user_online(true)
 			this.start()
-		}
+		},
 	},
 	provide() {
 		return {
@@ -44,11 +43,7 @@ export default {
 		}
 	},
 	beforeMount() {
-		if (!this.l)
-			this.$lang.autoLang(navigator.language)
-		else
-			this.$lang.correctLang(this.l)
-
+		!this.l ? this.$lang.autoLang(navigator.language) : this.$lang.correctLang(this.l)
 		this.start()
 		this.make_user_online(true)
 

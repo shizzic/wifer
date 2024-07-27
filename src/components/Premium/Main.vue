@@ -26,7 +26,6 @@
 </template>
 
 <script scoped>
-import { name } from "/package"
 import { PremiumJS } from "@/store/Langs/Premium"
 import Quantity from "@/components/Premium/Quantity.vue"
 import Pay from "@/components/Premium/Pay.vue"
@@ -34,8 +33,6 @@ import About from "@/components/Premium/About.vue"
 import FreeChat from "@/components/Premium/FreeChat.vue"
 import WorldWide from "@/components/Premium/WorldWide.vue"
 import Contact from "@/components/Premium/Contact.vue"
-
-import { useSeoMeta } from '@unhead/vue'
 
 export default {
 	name: "Premium",
@@ -49,14 +46,6 @@ export default {
 		Contact
 	},
 	setup() {
-		const Name = name[0].toUpperCase() + name.slice(1)
-		useSeoMeta({
-			title: Name + " - Join Free",
-			ogTitle: Name + " - Join Free",
-			description: "Dateshipper.com is the most convenient, fast and reasonable dating website. Try it out for free!",
-			ogDescription: "Dateshipper.com is the most convenient, fast and reasonable dating website. Try it out for free!",
-		})
-
 		const quantity = PremiumJS().quantity
 		const pay = PremiumJS().pay
 		const about = PremiumJS().about

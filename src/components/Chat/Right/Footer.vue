@@ -66,7 +66,7 @@ export default {
                 this.clearTrash()
 
             if (this.typing)
-                this.timeout = setTimeout(this.sendTyping, 5000)
+                this.timeout = setTimeout(this.sendTyping, 3000)
         },
 
         sendTyping(typing = false, tar = null) {

@@ -4,7 +4,7 @@ import { useStorage } from "@vueuse/core"
 export const langJS = defineStore({
     id: "lang",
     state: () =>({
-        lang: useStorage("lang", null),
+        lang: useStorage("lang", 'ru'),
         languages: {
             en: "en",
             ru: "ру",
