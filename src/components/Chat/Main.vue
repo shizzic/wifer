@@ -13,6 +13,7 @@
 </template>
 
 <script scoped>
+import { clearInterval, setInterval } from 'worker-timers'
 import Left from "@/components/Chat/Left/Main.vue"
 import Right from "@/components/Chat/Right/Main.vue"
 import None from "@/components/Chat/Right/None.vue"
@@ -63,6 +64,7 @@ export default {
 		}
 	},
 	beforeMount() {
+		this.$chat.startSocket()
 		if (this.target)
 			this.getMessages()
 
@@ -70,6 +72,7 @@ export default {
 		this.interval = setInterval(this.checkUsersOnline, 1000 * 60 * 3)
 	},
 	beforeUnmount() {
+		this.$chat.closeSocket()
 		this.interval = clearInterval(this.interval)
 	},
 	methods: {

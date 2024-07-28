@@ -27,6 +27,7 @@
 </template>
 
 <script scoped>
+import { clearTimeout, setTimeout } from 'worker-timers'
 export default {
 	name: "About",
 	props: ["lang", "data", "full", "is", "templates"],

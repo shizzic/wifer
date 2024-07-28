@@ -7,19 +7,12 @@
 <script scoped>
 import Nav from "@/components/Nav.vue"
 import Cookie from "@/components/Cookie.vue"
-
-import { useSeoMeta } from "@unhead/vue"
+import { clearInterval, setInterval } from 'worker-timers'
 
 export default {
 	components: {
 		Nav,
 		Cookie
-	},
-	setup() {
-		useSeoMeta({
-			ogImage: location.origin + "/favicon.ico",
-		})
-
 	},
 	computed: {
 		l() { return this.$lang.lang },
@@ -75,12 +68,9 @@ export default {
 		start() {
 			if (this.id && this.id > 0) {
 				this.$user.getParamsAfterLogin(this.$domain)
-				this.$chat.startSocket()
 				this.interval = setInterval(this.checkPremium, 60000 * 20)
-			} else {
-				this.$chat.closeSocket()
+			} else
 				this.interval = clearInterval(this.interval)
-			}
 
 			this.$country.getPrice()
 		},

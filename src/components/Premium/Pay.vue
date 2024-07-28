@@ -69,7 +69,7 @@ export default {
     },
     methods: {
         getTrial() {
-            fetch(this.$domain + "trial", {
+            fetch(this.$domain + "activate-one-time-trial", {
                 method: "PUT",
                 credentials: "include"
             })
@@ -86,7 +86,7 @@ export default {
                     else {
                         this.$toast.success(this.response.trialSuccess)
                         this.$user.trial   = true
-                        this.$user.premium = data.premium
+                        this.$user.premium = data.expires
                         this.setTimer()
                     }
                 })

@@ -17,6 +17,7 @@
 </template>
 
 <script scoped>
+import { clearTimeout, setTimeout } from 'worker-timers'
 import { HeartJS } from "@/store/Langs/Heart"
 import { InfoJS } from "@/store/Langs/Info"
 import { SearchJS } from "@/store/Langs/Search"

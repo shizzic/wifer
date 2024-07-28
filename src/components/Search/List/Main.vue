@@ -12,6 +12,7 @@
 </template>
 
 <script scoped>
+import { clearTimeout, setTimeout } from 'worker-timers'
 import Hat from "@/components/Search/List/Hat/Main.vue"
 import Users from "@/components/Search/List/Users/Main.vue"
 import Pagination from "@/components/Search/List/Pagination.vue"

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"
 import { navJS } from "@/store/nav"
+import { clearInterval, setInterval } from 'worker-timers'
 
 export const chatJS = defineStore("chat", {
     state: () => ({
@@ -26,20 +27,19 @@ export const chatJS = defineStore("chat", {
                 }
 
                 this.socket.onopen = () => {
-                    this.ping_pong = setInterval(this.ping, 10000)
+                    this.ping_pong = setInterval(this.ping, 10000) // отправляю пинг
                 }
 
                 this.socket.onclose = () => {
+                    clearInterval(this.ping_pong) // прекращаю отправление пинга на разорванное соединение
                     this.socket = null
                 }
             }
         },
 
         closeSocket() {
-            if (this.socket) {
-                clearInterval(this.ping_pong)
+            if (this.socket)
                 this.socket.close()
-            }
 
             this.socket = null
         },

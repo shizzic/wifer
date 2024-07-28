@@ -9,6 +9,8 @@
 </template>
 
 <script scoped>
+import { clearTimeout, setTimeout } from 'worker-timers'
+
 export default {
 	name: "Hat",
     props: ["search", "getRooms"],

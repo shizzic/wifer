@@ -43,6 +43,7 @@
 </template>
 
 <script scoped>
+import { clearInterval, setInterval } from 'worker-timers'
 import { SeoJS } from "@/store/Langs/Seo"
 
 export default {

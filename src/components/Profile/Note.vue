@@ -11,6 +11,7 @@
 </template>
 
 <script scoped>
+import { clearTimeout, setTimeout } from 'worker-timers'
 export default {
     name: "Note",
     props: ["checked", "text", "target"],

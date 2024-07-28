@@ -56,6 +56,7 @@
 </template>
 
 <script scoped>
+import { clearTimeout, setTimeout } from 'worker-timers'
 import Templates from "@/components/Search/Sidebar/Templates/Main.vue"
 import Locations from "@/components/Search/Sidebar/Locations/Main.vue"
 import Images from "@/components/Search/Sidebar/Images.vue"

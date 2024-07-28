@@ -63,17 +63,14 @@ export default {
                 },
                 body: JSON.stringify({
                     name: this.name,
-                    email: this.email,
+                    sender: this.email,
                     subject: this.subject,
                     message: this.message,
                 })
             })
                 .then(data => { return data.json() })
-                .then(data => {
-                    if (!data)
-                        this.$toast.success(this.response.success)
-                    else
-                        this.$toast.console.error(); (this.response.success)
+                .then(err => {
+                    !err ? this.$toast.success(this.response.success) : this.$toast.error(this.response.error) 
                 })
         }
     }

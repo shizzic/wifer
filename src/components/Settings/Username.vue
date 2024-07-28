@@ -21,6 +21,7 @@
 </template>
 
 <script scoped>
+import { clearTimeout, setTimeout } from 'worker-timers'
 import { Field, ErrorMessage } from 'vee-validate'
 import * as yup from 'yup'
 export default {

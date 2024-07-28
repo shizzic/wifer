@@ -34,6 +34,7 @@
 </template>
 
 <script scoped>
+import { clearTimeout, setTimeout } from 'worker-timers'
 export default {
 	name: "Messages",
 	props: ["target", "messages", "getMessages", "newMessages", "show"],

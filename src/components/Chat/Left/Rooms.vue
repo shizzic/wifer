@@ -40,6 +40,7 @@
 </template>
 
 <script scoped>
+import { clearTimeout, setTimeout } from 'worker-timers'
 export default {
 	name: "Rooms",
 	props: ["order", "rooms", "target", "getRooms", "changeTop"],

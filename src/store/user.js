@@ -12,7 +12,7 @@ export const userJS = defineStore("user", {
         avatar: false,
         username: "",
         trial: false,
-        premium: 0,
+        premium: 0, // сколько времени осталось
         first: false
     }),
     actions: {
