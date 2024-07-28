@@ -69,7 +69,7 @@ export default {
 			this.getMessages()
 
 		this.getRooms(this.$chat.lastSearch, this.$chat.lastUsername)
-		this.interval = setInterval(this.checkUsersOnline, 1000 * 60 * 3)
+		this.interval = setInterval(this.checkUsersOnline, 1000 * 60 / 2) // каждые 30 секунд
 	},
 	beforeUnmount() {
 		this.$chat.closeSocket()

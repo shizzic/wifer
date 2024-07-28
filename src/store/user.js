@@ -1,6 +1,5 @@
 import { defineStore } from "pinia"
 import { useStorage } from "@vueuse/core"
-import { navJS } from "@/store/nav"
 
 export const userJS = defineStore("user", {
     state: () =>({
@@ -35,24 +34,7 @@ export const userJS = defineStore("user", {
                     this.avatar         = data.user.avatar
                     this.trial          = data.user.trial
                     this.premium        = data.user.premium
-                    navJS()["messages"] = data.messages.length
                     this.first          = true
-                })
-        },
-        checkPremium(domain) {
-            fetch(domain + "checkPremium", {
-				method: "GET",
-				credentials: "include"
-			})
-                .then(data => {
-                    if (data.status === 401)
-                        this.$user.logout(domain)
-                    else
-                        return data.json()
-                })
-                .then(left => {
-                    if (!left)
-                        this.premium = 0
                 })
         },
         logout(domain) {

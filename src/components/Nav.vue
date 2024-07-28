@@ -43,7 +43,6 @@
 </template>
 
 <script scoped>
-import { clearInterval, setInterval } from 'worker-timers'
 import { SeoJS } from "@/store/Langs/Seo"
 
 export default {
@@ -88,22 +87,13 @@ export default {
 	data() {
 		return {
 			checked: 0,
-			interval: null
 		}
 	},
 	watch: {
 		id(user_id) {
-			if (user_id && user_id > 0) {
-				if (!this.interval) {
-					this.getHearts()
-					this.interval = setInterval(this.getHearts, 1000 * 120)
-				}
-			} else {
-				for (let field of this.$nav.fields)
-					this.$nav.setHearts(0, field)
-
-				this.interval = clearInterval(this.interval)
-			}
+			if (!user_id || user_id && user_id < 1)
+				for (let key of this.$nav.fields)
+					this.$nav.setHearts(0, key)
 		},
 
 		allWithMessages() {
@@ -116,42 +106,12 @@ export default {
 			}
 		}
 	},
-	beforeMount() {
-		if (this.id) {
-			this.getHearts()
-			this.interval = setInterval(this.getHearts, 1000 * 120)
-		}
-	},
 	methods: {
 		set(component) {
 			this.checked = component
 
 			if (component !== "heart")
 				this.$scroll.set({ field: "heart", value: 0 });
-		},
-		getHearts() {
-			fetch(this.$domain + "notifications", {
-				method: "GET",
-				credentials: "include"
-			})
-				.then(data => {
-					if (data.status === 401) {
-						this.$user.logout(this.$domain)
-						this.$router.push({ name: "search" })
-					} else
-						return data.json()
-				})
-				.then(data => {
-					if (data)
-						for (let key in data) {
-							let hearts = 0
-
-							if (data[key] > 0) {
-								hearts += data[key]
-								this.$nav.setHearts(hearts, key)
-							}
-						}
-				})
 		},
 		update_page_title(name) {
 			if (!name)

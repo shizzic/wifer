@@ -8,7 +8,7 @@ export const navJS = defineStore("nav", {
         accesses: 0,
         messages: 0,
 
-        fields: ["views", "likes", "privates", "accesses"]
+        fields: ["views", "likes", "privates", "accesses", "messages"]
     }),
     getters: {
         inner() {
@@ -77,11 +77,8 @@ export const navJS = defineStore("nav", {
         }
     },
     actions:{
-        setHearts(value, field) {
-            if (value > -1)
-                this[field] = value
-            else
-                this[field] = 0
+        setHearts(value, key) {
+            this[key] = value > -1 ? value : 0
         },
         takeHearts(value, field) {
             let res = this[field] - value

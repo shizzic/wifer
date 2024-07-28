@@ -7,7 +7,6 @@
 <script scoped>
 import Nav from "@/components/Nav.vue"
 import Cookie from "@/components/Cookie.vue"
-import { clearInterval, setInterval } from 'worker-timers'
 
 export default {
 	components: {
@@ -30,11 +29,6 @@ export default {
 			l: this.l,
 		}
 	},
-	data() {
-		return {
-			interval: null
-		}
-	},
 	beforeMount() {
 		!this.l ? this.$lang.autoLang(navigator.language) : this.$lang.correctLang(this.l)
 		this.start()
@@ -50,6 +44,9 @@ export default {
 		const work = window.sessionStorage.getItem("work")
 		if (!work)
 			this.visit()
+	},
+	beforeUnmount() {
+		this.$sse.close()
 	},
 	methods: {
 		make_user_online(value) {
@@ -68,14 +65,11 @@ export default {
 		start() {
 			if (this.id && this.id > 0) {
 				this.$user.getParamsAfterLogin(this.$domain)
-				this.interval = setInterval(this.checkPremium, 60000 * 20)
+				this.$sse.start()
 			} else
-				this.interval = clearInterval(this.interval)
+				this.$sse.close()
 
 			this.$country.getPrice()
-		},
-		checkPremium() {
-			this.$user.checkPremium(this.$domain)
 		},
 		visit() {
 			window.sessionStorage.setItem("work", true)
