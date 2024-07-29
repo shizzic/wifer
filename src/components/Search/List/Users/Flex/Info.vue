@@ -8,9 +8,9 @@
         </span>
 
         <span class="place">{{ user.age }}<span class="dot" />
-            {{ user.country_id ? $country.list[user.country_id] : "-" }}
+            {{ user.country_id ? $country.list[user.country_id] : "" }}
             {{ user.city_id && $city.list[user.country_id] && $city.list[user.country_id][user.city_id] ? " , " +
-                $city.list[user.country_id][user.city_id] : "-" }}
+                $city.list[user.country_id][user.city_id] : "" }}
         </span>
         <span class="title">{{ user.title }}</span>
 
