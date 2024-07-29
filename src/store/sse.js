@@ -4,7 +4,8 @@ import { userJS } from "@/store/user"
 
 export const sseJS = defineStore("sse", {
     state: () => ({
-        server: null
+        server: null,
+        attempts: 0,
     }),
     actions: {
         start() {
@@ -34,14 +35,27 @@ export const sseJS = defineStore("sse", {
                     userJS().premium = 0
             }.bind(this), false)
 
+            this.server.onerror = () => {
+                ++this.attempts
+
+                if (this.attempts === 5) // максимум 5 попыток реконекта
+                    this.close()
+            }
+
             this.server.onclose = () => {
-                this.server = null
+                this.after_close_handle()
             }
         },
 
         close() {
-            if (this.server)
+            if (this.server) {
                 this.server.close()
+                this.after_close_handle()
+            }
         },
+
+        after_close_handle() {
+            this.server = null
+        }
     },
 })
