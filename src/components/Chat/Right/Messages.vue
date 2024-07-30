@@ -66,10 +66,10 @@ export default {
 		},
 
 		'newMessages': {
-			handler(n) {
+			handler(data) {
 				this.countNewMessages()
-
-				if (n.length > 0 && Math.floor(this.$refs.messages.scrollTop) === 0)
+				
+				if (data.length > 0 && Math.floor(this.$refs.messages.scrollTop) === 0)
 					this.$chat.addNewMessages(this.target)
 			},
 			deep: true
@@ -77,7 +77,7 @@ export default {
 
 		'messages.messages': {
 			handler() {
-				if ((window.innerWidth > 700 || window.innerWidth < 701 && this.show) && Math.floor(this.$refs.messages.scrollTop) === 0)
+				if ((window.innerWidth > 700 || window.innerWidth < 701 && this.show) && this.$refs.messages && Math.floor(this.$refs.messages.scrollTop) === 0)
 					this.read()
 
 				this.setDates()
@@ -91,7 +91,6 @@ export default {
 		}
 	},
 	beforeMount() {
-		console.log(this.$chat.rooms, this.target)
 		this.read()
 		this.setDates()
 	},
@@ -99,7 +98,6 @@ export default {
 		this.getScroll()
 	},
 	beforeUnmount() {
-		console.log(this.$chat.rooms, this.target)
 		if (this.timeout) {
 			clearTimeout(this.timeout)
 			this.timeout = null
@@ -119,13 +117,8 @@ export default {
 				this.timeout = setTimeout(this.get, 50)
 			}
 
-			if (this.$refs.messages.scrollTop > this.scrollTop && this.$refs.messages.scrollTop < -500)
-				this.button = true
-			else
-				this.button = null
-
+			this.button = this.$refs.messages.scrollTop > this.scrollTop && this.$refs.messages.scrollTop < -500 ? true : null
 			this.scrollTop = this.$refs.messages.scrollTop
-
 			this.$scroll.set({ field: "messages", value: this.scrollTop })
 			this.rooms[this.target].scrollTop = this.scrollTop
 

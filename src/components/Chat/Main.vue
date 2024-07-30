@@ -4,9 +4,9 @@
 			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target"
 				:getRooms="getRooms" :show="show" />
 
-			<Right v-if="rooms && target && target.id in messages && target.id in rooms" :target="target" :input="input[l]"
-				:messages="messages[target.id]" :newMessages="newMessages[target.id]" :blur="blur[l]"
-				:getMessages="getMessages" :rooms="rooms" :show="show" />
+			<Right v-if="rooms && target && target.id in messages && target.id in rooms" :key="rooms[target.id].target"
+				:target="target" :input="input[l]" :messages="messages[target.id]" :newMessages="newMessages[target.id]"
+				:blur="blur[l]" :getMessages="getMessages" :rooms="rooms" :show="show" />
 			<None v-else :lang="none[l]" :show="show" />
 		</div>
 	</div>
@@ -59,11 +59,19 @@ export default {
 	},
 	watch: {
 		target(target) {
-			if (target)
+			if (target) {
+				if (this.messages && target.id in this.messages)
+					if (this.messages[target.id].messages.length === 0)
+						this.newMessages[target.id] = []
+					else
+						this.$chat.addNewMessages(target.id)
+
 				this.getMessages()
+			}
 		}
 	},
 	beforeMount() {
+		console.log(this.rooms)
 		this.$chat.start()
 		this.getRooms(this.$chat.lastSearch, this.$chat.lastUsername)
 		this.interval = setInterval(this.checkUsersOnline, 1000 * 60 / 2) // каждые 30 секунд

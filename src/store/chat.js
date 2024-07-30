@@ -1,6 +1,5 @@
 import { defineStore } from "pinia"
 import { navJS } from "@/store/nav"
-import { userJS } from "@/store/user"
 import { clearInterval, setInterval } from 'worker-timers'
 
 export const chatJS = defineStore("chat", {
@@ -62,7 +61,8 @@ export const chatJS = defineStore("chat", {
                     this.rooms[data.user].user = data.user
 
                     this.messages[data.user].typing = false
-                    this.newMessages[data.user].unshift(data)
+                    if (this.newMessages && data.user in this.newMessages)
+                        this.newMessages[data.user].unshift(data)
 
                     if (!this.lastSearch)
                         this.changeOrder(data.user)
@@ -74,7 +74,7 @@ export const chatJS = defineStore("chat", {
                     }
                     break
                 case "view":
-                    if (this.newMessages[data.user].length > 0) {
+                    if (this.newMessages[data.user] && this.newMessages[data.user].length > 0) {
                         for (let message in this.newMessages[data.user]) {
                             if (this.newMessages[data.user][message].user == data.target && this.newMessages[data.user][message].viewed)
                                 break
@@ -121,6 +121,7 @@ export const chatJS = defineStore("chat", {
             if (newMessage) {
                 this.rooms[data.user].viewed = false
                 this.rooms[data.user].created_at = data.created_at
+
                 if (!this.rooms[data.user].news)
                     navJS().setHearts(navJS().messages + 1, "messages")
             }
@@ -172,7 +173,6 @@ export const chatJS = defineStore("chat", {
 
         addMessage(data) {
             this.addTarget(data.id)
-            // if (data.message.user != userJS().id)
             this.newMessages[data.id].unshift(data.message)
             let obj = Object.assign({}, this.rooms[data.message.target])
 
@@ -202,7 +202,6 @@ export const chatJS = defineStore("chat", {
                 messages.unshift(message)
 
             this.newMessages[id] = []
-            this.messages[id].messages = messages
         },
 
         addTarget(id) {

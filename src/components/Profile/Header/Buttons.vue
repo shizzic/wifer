@@ -1,16 +1,17 @@
 <template>
-	<div class="wrap">
+    <div class="wrap">
         <div class="wrapper">
             <div v-show="data._id == $user.id" class="elem">
                 <div class="btn">
-                    <div class="fill" :class="{ checked : premium > 0, unchecked : premium === 0 }" style="background-color: #EB9532;" />
+                    <div class="fill" :class="{ checked: premium > 0, unchecked: premium === 0 }"
+                        style="background-color: #EB9532;" />
                     <img src="/images/trial.webp">
                 </div>
                 <div class="btn" @click="$emit('modal', 'deactivate')">
                     <img src="/images/deactivate.webp">
                 </div>
             </div>
-            
+
             <div v-show="data._id == $user.id" class="elem">
                 <div class="btn" @click="$emit('settings')">
                     <img src="/images/settings.webp">
@@ -23,19 +24,22 @@
 
             <div v-show="$user.id && data._id != $user.id" class="elem">
                 <div class="btn" @click="like()">
-                    <div class="fill" :class="{ checked : checked.like.is, unchecked : !checked.like.is }" style="background-color: #DD2647;" />
+                    <div class="fill" :class="{ checked: checked.like.is, unchecked: !checked.like.is }"
+                        style="background-color: #DD2647;" />
                     <img src="/images/like.webp">
                 </div>
 
                 <div class="btn" @click="privateHandle()">
-                    <div class="fill" :class="{ checked : checked.private.is, unchecked : !checked.private.is }" style="background-color: #16AE85;" />
+                    <div class="fill" :class="{ checked: checked.private.is, unchecked: !checked.private.is }"
+                        style="background-color: #16AE85;" />
                     <img src="/images/private.webp">
                 </div>
             </div>
 
             <div v-show="$user.id && data._id != $user.id" class="elem">
                 <div class="btn" @click="access()">
-                    <div class="fill" :class="{ checked : checked.access.is, unchecked : !checked.access.is }" style="background-color: #EB9532;" />
+                    <div class="fill" :class="{ checked: checked.access.is, unchecked: !checked.access.is }"
+                        style="background-color: #EB9532;" />
                     <img src="/images/access.webp">
                 </div>
 
@@ -49,7 +53,7 @@
 
 <script scoped>
 export default {
-	name: "Header",
+    name: "Header",
     props: ["data", "checked", "add", "del", "l"],
     computed: {
         premium() {
@@ -61,7 +65,7 @@ export default {
             let method = "POST"
 
             if (this.checked.like.is) {
-                this.checked.like.is   = false
+                this.checked.like.is = false
                 this.checked.like.text = ""
                 method = "DELETE"
                 this.$toast.show(this.del.like[this.l])
@@ -71,9 +75,9 @@ export default {
             }
 
             fetch(this.$domain + "like?target=" + this.$route.params.id, {
-				method: method,
-				credentials: "include"
-			})
+                method: method,
+                credentials: "include"
+            })
                 .then(data => {
                     if (data.status === 401) {
                         this.$user.logout(this.$domain)
@@ -95,9 +99,9 @@ export default {
             }
 
             fetch(this.$domain + "private?target=" + this.$route.params.id, {
-				method: method,
-				credentials: "include"
-			})
+                method: method,
+                credentials: "include"
+            })
                 .then(data => {
                     if (data.status === 401) {
                         this.$user.logout(this.$domain)
@@ -119,9 +123,9 @@ export default {
             }
 
             fetch(this.$domain + "access?target=" + this.$route.params.id, {
-				method: method,
-				credentials: "include"
-			})
+                method: method,
+                credentials: "include"
+            })
                 .then(data => {
                     if (data.status === 401) {
                         this.$user.logout(this.$domain)
@@ -130,24 +134,25 @@ export default {
                 })
 
             if (this.$chat.server)
-                this.$chat.sendMessage({ target: this.data._id, user: +this.$user.id, api: "access", access: this.checked.access.is  })
+                this.$chat.sendMessage({ target: this.data._id, user: +this.$user.id, api: "access", access: this.checked.access.is })
         },
 
         chat() {
-            if (this.premium > 0 || this.checked.access.access 
+            if (this.premium > 0 || this.checked.access.access
                 && (
-                    !(this.data._id in this.$chat.messages) || 
+                    !(this.data._id in this.$chat.messages) ||
                     this.data._id in this.$chat.messages && (!("access" in this.$chat.messages[this.data._id]) ||
-                    "access" in this.$chat.messages[this.data._id] && this.$chat.messages[this.data._id].access.target)
+                        "access" in this.$chat.messages[this.data._id] && this.$chat.messages[this.data._id].access.target)
                 )
-                || !this.checked.access.access 
+                || !this.checked.access.access
                 && (
-                    this.data._id in this.$chat.messages && "access" in this.$chat.messages[this.data._id] 
+                    this.data._id in this.$chat.messages && "access" in this.$chat.messages[this.data._id]
                     && this.$chat.messages[this.data._id].access.target
                 )
             ) {
-                this.$chat.set({ field: "show", value: true})
+                this.$chat.set({ field: "show", value: true })
                 this.$chat.set({ field: "target", value: { id: this.data._id, avatar: this.data.avatar, username: this.data.username } })
+                this.$chat.addRoom({ user: +this.$user.id, typing: false, viewed: false }, null)
                 this.$router.push({ name: "chat" })
             } else
                 this.$emit("modal", "chat")
