@@ -1,42 +1,39 @@
 <template>
-	<div class="header">
+    <div class="header">
         <img src="/images/back.webp" class="back" @click="$chat.set({ field: 'show', value: null })" />
-        <div class="elem pointer" @click="$router.push({ name: 'profile', params: { id : target.id } })" style="width: 100%;">
+        <div class="elem pointer" @click="$router.push({ name: 'profile', params: { id: target.id } })"
+            style="width: 100%;">
             <div class="avatar-wrapper">
                 <img v-if="target.avatar" :src="$file('images', target.id, 'avatar.webp')" class="avatar" />
                 <img v-else src="/images/avatar.webp" class="avatar" />
                 <div v-show="rooms[target.id] && rooms[target.id].online" class="online" />
             </div>
-            
+
             <span>{{ target.username }}</span>
         </div>
 
         <div v-if="access" class="elem">
             <div class="btn" @click="accessHandle">
-                <div class="fill" :class="{ checked : access.user, unchecked : !access.user }" style="background-color: #EB9532;" />
+                <div class="fill" :class="{ checked: access.user, unchecked: !access.user }"
+                    style="background-color: #EB9532;" />
                 <img src="/images/access.webp" class="icon">
             </div>
         </div>
-	</div>
+    </div>
 </template>
 
 <script scoped>
 export default {
-	name: "Header",
+    name: "Header",
     props: ["target", "access", "rooms"],
     methods: {
         accessHandle() {
             let access = Object.assign({}, this.access)
-
-            if (access.user)
-                access.user = false
-            else
-                access.user = true
-            
+            access.user = !access.user
             this.$chat.setMessages({ id: +this.target.id, access: access })
 
-            if (this.$chat.socket)
-                this.$chat.sendMessage({ target: +this.target.id, user: +this.$user.id, api: "access", access: access.user  })
+            if (this.$chat.server)
+                this.$chat.sendMessage({ target: +this.target.id, user: +this.$user.id, api: "access", access: access.user })
         }
     }
 }
@@ -44,15 +41,15 @@ export default {
 
 <style scoped>
 .header {
-	width: 100%;
+    width: 100%;
     min-height: 60px;
     border-bottom: 1px solid #b0b5b8;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-	
-	overflow: hidden;
+
+    overflow: hidden;
 }
 
 .elem {

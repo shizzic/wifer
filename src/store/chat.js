@@ -1,11 +1,12 @@
 import { defineStore } from "pinia"
 import { navJS } from "@/store/nav"
+import { userJS } from "@/store/user"
 import { clearInterval, setInterval } from 'worker-timers'
 
 export const chatJS = defineStore("chat", {
     state: () => ({
         show: null,
-        socket: null,
+        server: null,
         ping_pong: null,
         target: null,
         messages: {},
@@ -15,33 +16,31 @@ export const chatJS = defineStore("chat", {
         lastSearch: false,
         roomsLeft: true,
         order: [],
-        rooms: {}
+        rooms: {},
     }),
     actions: {
-        startSocket() {
-            if (!this.socket) {
-                this.socket = new WebSocket(import.meta.env.VITE_WEBSOCKET_PROTOCOL + "://" + import.meta.env.VITE_DOMAIN_NAME + "chat")
+        start() {
+            if (!this.server) {
+                this.server = new WebSocket(import.meta.env.VITE_WEBSOCKET_PROTOCOL + "://" + import.meta.env.VITE_DOMAIN_NAME + "chat")
 
-                this.socket.onmessage = (e) => {
+                this.server.onmessage = (e) => {
                     this.onMessage(e.data)
                 }
 
-                this.socket.onopen = () => {
-                    this.ping_pong = setInterval(this.ping, 10000) // отправляю пинг
+                this.server.onopen = () => {
+                    this.ping_pong = setInterval(this.sendPing, 10000) // отправляю пинг
                 }
 
-                this.socket.onclose = () => {
+                this.server.onclose = () => {
                     clearInterval(this.ping_pong) // прекращаю отправление пинга на разорванное соединение
-                    this.socket = null
+                    this.$reset()
                 }
             }
         },
 
-        closeSocket() {
-            if (this.socket)
-                this.socket.close()
-
-            this.socket = null
+        close() {
+            if (this.server)
+                this.server.close()
         },
 
         onMessage(data) {
@@ -75,7 +74,7 @@ export const chatJS = defineStore("chat", {
                     }
                     break
                 case "view":
-                    if (this.newMessages[data.user].length > 0)
+                    if (this.newMessages[data.user].length > 0) {
                         for (let message in this.newMessages[data.user]) {
                             if (this.newMessages[data.user][message].user == data.target && this.newMessages[data.user][message].viewed)
                                 break
@@ -83,7 +82,8 @@ export const chatJS = defineStore("chat", {
                             if (this.newMessages[data.user][message].user == data.target)
                                 this.newMessages[data.user][message].viewed = true
                         }
-                    else
+                    }
+                    else {
                         for (let message in this.messages[data.user].messages) {
                             if (this.messages[data.user].messages[message].user == data.target && this.messages[data.user].messages[message].viewed)
                                 break
@@ -91,6 +91,7 @@ export const chatJS = defineStore("chat", {
                             if (this.messages[data.user].messages[message].user == data.target)
                                 this.messages[data.user].messages[message].viewed = true
                         }
+                    }
                     this.addRoom(data, false, "viewed")
                     break
                 case "typing":
@@ -107,11 +108,12 @@ export const chatJS = defineStore("chat", {
         },
 
         sendMessage(data) {
-            if (this.socket)
-                this.socket.send(JSON.stringify(data))
+            if (this.server)
+                this.server.send(JSON.stringify(data))
         },
 
-        ping() {
+        // поддержка соединения
+        sendPing() {
             this.sendMessage({ text: 'ping' })
         },
 
@@ -119,20 +121,16 @@ export const chatJS = defineStore("chat", {
             if (newMessage) {
                 this.rooms[data.user].viewed = false
                 this.rooms[data.user].created_at = data.created_at
-                navJS().setHearts(navJS().messages + 1, "messages")
+                if (!this.rooms[data.user].news)
+                    navJS().setHearts(navJS().messages + 1, "messages")
             }
 
             if (!this.rooms[data.user]) {
                 data._id = data.user
                 this.rooms[data.user] = data
-            } else {
-                if (field) {
-                    if (field in data)
-                        this.rooms[data.user][field] = data[field]
-                    else
-                        this.rooms[data.user][field] = true
-                }
-            }
+            } else
+                if (field)
+                    this.rooms[data.user][field] = field in data ? data[field] : true
 
             this.rooms[data.user].online = true
         },
@@ -174,6 +172,7 @@ export const chatJS = defineStore("chat", {
 
         addMessage(data) {
             this.addTarget(data.id)
+            // if (data.message.user != userJS().id)
             this.newMessages[data.id].unshift(data.message)
             let obj = Object.assign({}, this.rooms[data.message.target])
 

@@ -1,8 +1,11 @@
 <template>
 	<div class="wrapper">
 		<div class="messages scroll" ref="messages" @scroll="scroll">
-			<div v-show="(!$refs.messages || $refs.messages && $refs.messages.scrollTop === 0) && messages.typing" class="snippet">
-				<div class="pulse-wrapper"><div class="dot-pulse" /></div>
+			<div v-show="(!$refs.messages || $refs.messages && $refs.messages.scrollTop === 0) && messages.typing"
+				class="snippet">
+				<div class="pulse-wrapper">
+					<div class="dot-pulse" />
+				</div>
 			</div>
 
 			<div v-for="(message, index) in messages.messages" :key="index" class="message-wrapper">
@@ -16,16 +19,20 @@
 
 						<span class="time">
 							{{ getTime(message.created_at) }}
-							<img v-show="message.user == $user.id && !message.viewed" src="/images/unreed.webp" class="view unseen" />
-							<img v-show="message.user == $user.id && message.viewed" src="/images/readed.webp" class="view seen" />
+							<img v-show="message.user == $user.id && !message.viewed" src="/images/unreed.webp"
+								class="view unseen" />
+							<img v-show="message.user == $user.id && message.viewed" src="/images/readed.webp"
+								class="view seen" />
 						</span>
 					</div>
 
-					<div class="new-wrapper" v-show="message.user != $user.id && !message.viewed"><div class="new" /></div>
+					<div class="new-wrapper" v-show="message.user != $user.id && !message.viewed">
+						<div class="new" />
+					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<div v-show="button" class="toBottom" @click="scrollToBottom">
 			<img src="/images/toBottom.webp" />
 			<span v-show="count > 0" class="count"><span>{{ count }}</span></span>
@@ -49,10 +56,6 @@ export default {
 		}
 	},
 	watch: {
-		target() {
-			this.$refs.messages.scrollTop = 0
-		},
-
 		show(n) {
 			if (n) {
 				setTimeout(this.getScroll, 10)
@@ -82,7 +85,13 @@ export default {
 			deep: true
 		}
 	},
+	computed: {
+		rooms() {
+			return this.$chat.rooms
+		}
+	},
 	beforeMount() {
+		console.log(this.$chat.rooms, this.target)
 		this.read()
 		this.setDates()
 	},
@@ -90,6 +99,7 @@ export default {
 		this.getScroll()
 	},
 	beforeUnmount() {
+		console.log(this.$chat.rooms, this.target)
 		if (this.timeout) {
 			clearTimeout(this.timeout)
 			this.timeout = null
@@ -100,12 +110,12 @@ export default {
 			let sum = Math.abs(this.$refs.messages.scrollTop) + this.$refs.messages.offsetHeight
 			let scrolled = this.$refs.messages.scrollHeight - sum
 
-			if (scrolled < 301) {
+			if (scrolled <= 300) {
 				if (this.timeout) {
 					clearTimeout(this.timeout)
 					this.timeout = null
 				}
-				
+
 				this.timeout = setTimeout(this.get, 50)
 			}
 
@@ -115,7 +125,9 @@ export default {
 				this.button = null
 
 			this.scrollTop = this.$refs.messages.scrollTop
+
 			this.$scroll.set({ field: "messages", value: this.scrollTop })
+			this.rooms[this.target].scrollTop = this.scrollTop
 
 			if (this.newMessages.length > 0 && Math.floor(this.$refs.messages.scrollTop) === 0)
 				this.$chat.addNewMessages(this.target)
@@ -139,18 +151,17 @@ export default {
 				this.$chat.sendMessage({ user: +this.$user.id, target: +target, api: "view", avatar: this.$user.avatar, username: this.$user.username })
 				this.$nav.takeHearts(1, "messages")
 			}
-			
+
 			this.count = 0
 		},
 
 		scrollToBottom() {
 			this.$chat.addNewMessages(this.target)
-			this.$refs.messages.scrollTop = 0
 		},
 
 		getScroll() {
 			if (this.$refs.messages)
-				this.$refs.messages.scrollTop = this.$scroll.messages
+				this.$refs.messages.scrollTop = this.rooms[this.target].scrollTop < 0 ? this.rooms[this.target].scrollTop : this.$scroll.messages
 		},
 
 		countNewMessages() {
@@ -174,19 +185,19 @@ export default {
 		},
 
 		getTime(time) {
-            let date = new Date(time * 1000)
-            return date.getHours() + ':' + ("0" + date.getMinutes()).substr(-2)
-        },
+			let date = new Date(time * 1000)
+			return date.getHours() + ':' + ("0" + date.getMinutes()).substr(-2)
+		},
 
 		getDate(time) {
 			let date = new Date(time * 1000)
-			let key  = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear()
+			let key = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear()
 
 			if (!this.keys[key]) {
 				this.date[time] = key
-				this.keys[key]  = time
+				this.keys[key] = time
 			}
-        },
+		},
 
 		setDates() {
 			this.date = {}
@@ -215,10 +226,10 @@ export default {
 .messages {
 	width: 100%;
 	height: 100%;
-    background-color: #e5f3f6;
+	background-color: #e5f3f6;
 
 	display: flex;
-  	flex-direction: column-reverse;
+	flex-direction: column-reverse;
 	padding: 0 20px;
 	padding-top: 10px;
 
@@ -360,7 +371,7 @@ export default {
 .new-wrapper {
 	width: 100%;
 	height: 100%;
-	
+
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -371,18 +382,18 @@ export default {
 
 .new {
 	border-radius: 50%;
-    background-color: #5181b8;
+	background-color: #5181b8;
 
 	position: absolute;
 	right: -17px;
 
-    padding: 4px;
+	padding: 4px;
 }
 
 .snippet {
-    position: relative;
-    box-shadow: 0 .4rem .8rem -.1rem rgba(0, 32, 128, .1), 0 0 0 1px #f0f2f7;
-    border-radius: .25rem;
+	position: relative;
+	box-shadow: 0 .4rem .8rem -.1rem rgba(0, 32, 128, .1), 0 0 0 1px #f0f2f7;
+	border-radius: .25rem;
 }
 
 .pulse-wrapper {
@@ -406,7 +417,8 @@ export default {
 	animation-delay: .25s;
 }
 
-.dot-pulse::before, .dot-pulse::after {
+.dot-pulse::before,
+.dot-pulse::after {
 	content: '';
 	display: inline-block;
 	position: absolute;
@@ -434,10 +446,13 @@ export default {
 	0% {
 		box-shadow: 9984px 0 0 -5px #b1bbbb;
 	}
+
 	30% {
 		box-shadow: 9984px 0 0 2px #b1bbbb;
 	}
-	60%, 100% {
+
+	60%,
+	100% {
 		box-shadow: 9984px 0 0 -5px #b1bbbb;
 	}
 }
@@ -446,10 +461,13 @@ export default {
 	0% {
 		box-shadow: 9999px 0 0 -5px #b1bbbb;
 	}
+
 	30% {
 		box-shadow: 9999px 0 0 2px #b1bbbb;
 	}
-	60%, 100% {
+
+	60%,
+	100% {
 		box-shadow: 9999px 0 0 -5px #b1bbbb;
 	}
 }
@@ -458,16 +476,19 @@ export default {
 	0% {
 		box-shadow: 10014px 0 0 -5px #b1bbbb;
 	}
+
 	30% {
 		box-shadow: 10014px 0 0 2px #b1bbbb;
 	}
-	60%, 100% {
+
+	60%,
+	100% {
 		box-shadow: 10014px 0 0 -5px #b1bbbb;
 	}
 }
 
 @media screen and (max-width: 768px) {
-    .message {
+	.message {
 		max-width: 85%;
 	}
 }

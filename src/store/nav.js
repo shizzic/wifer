@@ -80,8 +80,9 @@ export const navJS = defineStore("nav", {
         setHearts(value, key) {
             this[key] = value > -1 ? value : 0
         },
+        // Уменьшить кол-во уведомлений у ключа
         takeHearts(value, field) {
-            let res = this[field] - value
+            const res = this[field] - value
 
             if (res > -1)
                 this[field] = res

@@ -129,7 +129,7 @@ export default {
                     }
                 })
 
-            if (this.$chat.socket)
+            if (this.$chat.server)
                 this.$chat.sendMessage({ target: this.data._id, user: +this.$user.id, api: "access", access: this.checked.access.is  })
         },
 

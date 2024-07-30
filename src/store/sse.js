@@ -43,19 +43,13 @@ export const sseJS = defineStore("sse", {
             }
 
             this.server.onclose = () => {
-                this.after_close_handle()
+                this.$reset()
             }
         },
 
         close() {
-            if (this.server) {
+            if (this.server)
                 this.server.close()
-                this.after_close_handle()
-            }
         },
-
-        after_close_handle() {
-            this.server = null
-        }
     },
 })

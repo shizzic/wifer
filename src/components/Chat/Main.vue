@@ -4,7 +4,7 @@
 			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target"
 				:getRooms="getRooms" :show="show" />
 
-			<Right v-if="target && target.id in messages" :target="target" :input="input[l]"
+			<Right v-if="rooms && target && target.id in messages && target.id in rooms" :target="target" :input="input[l]"
 				:messages="messages[target.id]" :newMessages="newMessages[target.id]" :blur="blur[l]"
 				:getMessages="getMessages" :rooms="rooms" :show="show" />
 			<None v-else :lang="none[l]" :show="show" />
@@ -49,7 +49,7 @@ export default {
 	},
 	computed: {
 		show() { return this.$chat.show },
-		socket() { return this.$chat.socket },
+		socket() { return this.$chat.server },
 		target() { return this.$chat.target },
 		order() { return this.$chat.order },
 		rooms() { return this.$chat.rooms },
@@ -64,15 +64,12 @@ export default {
 		}
 	},
 	beforeMount() {
-		this.$chat.startSocket()
-		if (this.target)
-			this.getMessages()
-
+		this.$chat.start()
 		this.getRooms(this.$chat.lastSearch, this.$chat.lastUsername)
 		this.interval = setInterval(this.checkUsersOnline, 1000 * 60 / 2) // каждые 30 секунд
 	},
 	beforeUnmount() {
-		this.$chat.closeSocket()
+		this.$chat.close()
 		this.interval = clearInterval(this.interval)
 	},
 	methods: {
