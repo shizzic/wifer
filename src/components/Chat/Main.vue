@@ -1,10 +1,10 @@
 <template>
 	<div class="wrap">
-		<div v-if="socket" id="chat">
+		<div v-if="socket && $chat.open" id="chat">
 			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target"
 				:getRooms="getRooms" :show="show" />
 
-			<Right v-if="rooms && target && target.id in messages && target.id in rooms" :key="rooms[target.id].target"
+			<Right v-if="rooms && target && target.id in messages" :key="target.id"
 				:target="target" :input="input[l]" :messages="messages[target.id]" :newMessages="newMessages[target.id]"
 				:blur="blur[l]" :getMessages="getMessages" :rooms="rooms" :show="show" />
 			<None v-else :lang="none[l]" :show="show" />
@@ -71,9 +71,10 @@ export default {
 		}
 	},
 	beforeMount() {
-		console.log(this.rooms)
 		this.$chat.start()
 		this.getRooms(this.$chat.lastSearch, this.$chat.lastUsername)
+		if (this.target)
+			this.getMessages(null, true)
 		this.interval = setInterval(this.checkUsersOnline, 1000 * 60 / 2) // каждые 30 секунд
 	},
 	beforeUnmount() {

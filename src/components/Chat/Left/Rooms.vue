@@ -17,7 +17,7 @@
                     <span class="date">{{ getDate(rooms[user_id].created_at) }}</span>
                 </div>
                 <div class="message">
-                    <div v-if="rooms[user_id].user == $user.id && !rooms[user_id].typing" class="view-wrapper">
+                    <div v-if="'viewed' in rooms[user_id] && rooms[user_id].user == $user.id && !rooms[user_id].typing" class="view-wrapper">
                         <img v-show="!rooms[user_id].viewed" src="/images/unreed.webp" class="view unseen" />
                         <img v-show="rooms[user_id].viewed" src="/images/readed.webp" class="view seen" />
                     </div>

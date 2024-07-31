@@ -152,7 +152,7 @@ export default {
             ) {
                 this.$chat.set({ field: "show", value: true })
                 this.$chat.set({ field: "target", value: { id: this.data._id, avatar: this.data.avatar, username: this.data.username } })
-                this.$chat.addRoom({ user: +this.$user.id, typing: false, viewed: false }, null)
+                this.$chat.setMessages({id: this.data._id})
                 this.$router.push({ name: "chat" })
             } else
                 this.$emit("modal", "chat")

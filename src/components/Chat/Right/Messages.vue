@@ -154,7 +154,7 @@ export default {
 
 		getScroll() {
 			if (this.$refs.messages)
-				this.$refs.messages.scrollTop = this.rooms[this.target].scrollTop < 0 ? this.rooms[this.target].scrollTop : this.$scroll.messages
+				this.$refs.messages.scrollTop = this.rooms[this.target] && this.rooms[this.target].scrollTop < 0 ? this.rooms[this.target].scrollTop : this.$scroll.messages
 		},
 
 		countNewMessages() {

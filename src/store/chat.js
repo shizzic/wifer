@@ -4,6 +4,7 @@ import { clearInterval, setInterval } from 'worker-timers'
 
 export const chatJS = defineStore("chat", {
     state: () => ({
+        open: false,
         show: null,
         server: null,
         ping_pong: null,
@@ -27,6 +28,7 @@ export const chatJS = defineStore("chat", {
                 }
 
                 this.server.onopen = () => {
+                    this.open = true
                     this.ping_pong = setInterval(this.sendPing, 10000) // отправляю пинг
                 }
 
@@ -108,7 +110,7 @@ export const chatJS = defineStore("chat", {
         },
 
         sendMessage(data) {
-            if (this.server)
+            if (this.server && this.open)
                 this.server.send(JSON.stringify(data))
         },
 
@@ -128,7 +130,7 @@ export const chatJS = defineStore("chat", {
 
             if (!this.rooms[data.user]) {
                 data._id = data.user
-                this.rooms[data.user] = data
+                this.rooms[data._id] = data
             } else
                 if (field)
                     this.rooms[data.user][field] = field in data ? data[field] : true
