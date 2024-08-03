@@ -2,9 +2,8 @@
 	<nav>
 		<div id="links">
 			<template v-for="(elem, key) in list" :key="key">
-				<router-link v-if="key === 'profile'" :to="{ name: key, params: { id: id } }" class="wrap"
-					:title="elem.title[l]" @click="set(key)">
-					<div class="elem">
+				<router-link v-if="key === 'profile'" :to="{ name: key, params: { id: id } }" class="wrap" @click="set(key)">
+					<div class="elem" :data-title="elem.title[l]">
 						<div class="circle" />
 
 						<div class="link">
@@ -15,8 +14,8 @@
 					<div class="border" :class="{ 'checked': $route.name === key }" />
 				</router-link>
 
-				<router-link v-else :to="{ name: key }" class="wrap" :title="elem.title[l]" @click="set(key)">
-					<div class="elem">
+				<router-link v-else :to="{ name: key }" class="wrap" @click="set(key)">
+					<div class="elem" :data-title="elem.title[l]">
 						<div class="circle" />
 
 						<div v-if="key === 'heart' && all > 0" class="notification">
@@ -34,7 +33,7 @@
 							<img :src="elem.image" />
 						</div>
 					</div>
-
+					
 					<div class="border" :class="{ 'checked': $route.name === key }" />
 				</router-link>
 			</template>
@@ -247,6 +246,21 @@ img {
 
 .important {
 	background-color: #f34338;
+}
+
+.wrap:hover [data-title]::after {
+  content: attr(data-title);
+  font-size: 15px;
+  z-index: 100;
+  background-color: rgb(199, 199, 199);
+  border-radius: 2px;
+  word-break: normal;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  padding: 1px 6px;
 }
 
 @media screen and (min-width: 529px) {

@@ -7,16 +7,28 @@
             {{ user.username }}
         </span>
 
-        <span class="place">{{ user.age }}<span class="dot" />
-            {{ user.country_id ? $country.list[user.country_id] : "" }}
-            {{ user.city_id && $city.list[user.country_id] && $city.list[user.country_id][user.city_id] ? " , " +
-                $city.list[user.country_id][user.city_id] : "" }}
+        <span class="place">
+            <template v-if="user.age">
+                {{ user.age }}
+                <span class="dot" />
+            </template>
+
+            <template v-if="user.country_id">
+                {{ $country.list[user.country_id] }}
+
+                <template v-if="user.city_id">
+                    <span class="dot" />
+                    {{ $city.list[user.country_id] && $city.list[user.country_id][user.city_id] ?
+                        $city.list[user.country_id][user.city_id] : "" }}
+                </template>
+            </template>
         </span>
         <span class="title">{{ user.title }}</span>
 
         <div class="flex">
-            <span class="images">{{ (user.avatar) ? user.public + user.private + 1 : user.public + user.private }} {{ photos
-            }}</span>
+            <span class="images">{{ (user.avatar) ? user.public + user.private + 1 : user.public + user.private }} {{
+                photos
+                }}</span>
             <img v-if="user.premium > 0" src="/images/premium.webp" />
         </div>
     </div>

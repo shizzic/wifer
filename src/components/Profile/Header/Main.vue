@@ -11,8 +11,8 @@
                 :time="{ created_at: data.created_at, last_time: data.last_time }" 
             />
         </div>
-        <Buttons 
-            :data="data" :checked="checked" :add="add" :del="del" :l="l"
+        <Buttons
+            :data="data" :checked="checked" :add="add" :del="del" :popover="popover" :l="l"
             @settings="$emit('settings')" @modal="$emit('modal', $event)"
         />
     </div>
@@ -25,7 +25,7 @@ import Icons from "@/components/Profile/Header/Icons.vue"
 import Buttons from "@/components/Profile/Header/Buttons.vue"
 export default {
 	name: "Header",
-    props: ["data", "lang", "checked", "add", "del", "l", "live", 'titles'],
+    props: ["data", "lang", "checked", "add", "del", "l", "live", 'titles', 'popover'],
     components: {
         Avatar,
         Username,
@@ -37,6 +37,7 @@ export default {
 
 <style scoped>
 .header {
+    position: relative;
     width: 100%;
     background-color: #FFFFFF;
     border-radius: 8px;

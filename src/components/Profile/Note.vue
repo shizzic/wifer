@@ -1,7 +1,7 @@
 <template>
     <div id="note" :class="{ shown: show, closed: !show }" v-click-outside="close" @mousedown="() => { up = true }"
         @mouseup="() => { up = null }">
-        <textarea class="scroll" maxlength="150" v-model="checked.like.text" @click="show = true"
+        <textarea class="scroll" maxlength="150" v-model="checked.like.text" @click="show = true" :placeholder="placeholder"
             @input="autosize($event)" @keypress.enter="enter" />
         <div class="buttons">
             <button @click="show = null"><img src="/images/cancel.webp" /></button>
@@ -11,10 +11,10 @@
 </template>
 
 <script scoped>
-import { clearTimeout, setTimeout } from 'worker-timers'
+import { setTimeout } from 'worker-timers'
 export default {
     name: "Note",
-    props: ["checked", "text", "target"],
+    props: ["checked", "text", "target", 'placeholder'],
     data() {
         return {
             show: null,

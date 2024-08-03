@@ -14,7 +14,7 @@ export const ProfileJS = defineStore("Profile", {
                 },
                 de: {
                     "title": "Eintreten",
-                    "text": "Hallo! Wenn Sie den besten Zucker im Internet wollen, dann willkommen an Bord :)"
+                    "text": "Hallo! Wenn Sie den besten zucker im Internet wollen, dann willkommen an Bord :)"
                 },
                 fr: {
                     "title": "Entrer",
@@ -30,7 +30,7 @@ export const ProfileJS = defineStore("Profile", {
                 },
                 ja: {
                     "title": "入る",
-                    "text": "こんにちは！ウェブ上で最高のシュガーが必要な場合は、ようこそ :)"
+                    "text": "こんにちは！ウェブ上で最高のシュガーが必要な場合は,ようこそ :)"
                 },
             }
         },
@@ -74,7 +74,7 @@ export const ProfileJS = defineStore("Profile", {
                 fr: "L'utilisateur n'existe pas ou a été banni",
                 es: "El usuario no existe o ha sido prohibido",
                 zh: "用户不存在或已被禁止",
-                ja: "ユーザーが存在しないか、禁止されています",
+                ja: "ユーザーが存在しないか,禁止されています",
             }
         },
         success() {
@@ -168,6 +168,95 @@ export const ProfileJS = defineStore("Profile", {
                     avatar_must_be: "アバターに代わるものはありません",
                 },
             }
-        }
+        },
+
+        popover() {
+            return {
+                en: {
+                    premium: 'Premium status',
+                    deactivate: 'Put account to sleep',
+                    settings: 'Settings',
+                    logout: 'Logout',
+                    chat: 'Write a message',
+                    like: 'Like a profile',
+                    access: 'Allow the profile to send you messages',
+                    private: 'Allow the profile to view your hidden photos',
+                    note: 'Your profile note',
+                    add: 'Add new photo'
+                },
+                ru: {
+                    premium: 'Статус премиума',
+                    deactivate: 'Усыпить аккаунт',
+                    settings: 'Настройки',
+                    logout: 'Выход',
+                    chat: 'Написать сообщение',
+                    like: 'Лайкнуть профиль',
+                    access: 'Разрешить профилю отправлять вам сообщения',
+                    private: 'Разрешить профилю смотреть ваши скрытые фото',
+                    note: 'Ваша заметка о профиле',
+                    add: 'Добавить новое фото'
+                },
+                de: {
+                    premium: "Premium status",
+                    deactivate: "Konto in den Ruhezustand versetzen",
+                    settings: "Einstellungen",
+                    logout: "Abmelden",
+                    chat: "Nachricht schreiben",
+                    like: "Profil liken",
+                    access: "Profil erlauben, dir Nachrichten zu senden",
+                    private: "Profil erlauben, deine versteckten Fotos anzuzeigen",
+                    note: 'Deine Profilnotiz',
+                    add: 'Neues Foto hinzufügen'
+                },
+                fr: {
+                    premium: 'Statut Premium',
+                    deactivate: 'Mettre le compte en veille',
+                    settings: 'Paramètres',
+                    logout: 'Se déconnecter',
+                    chat: 'Écrire un message',
+                    like: 'Aimer un profil',
+                    access: 'Autoriser le profil à vous envoyer des messages',
+                    private: 'Autoriser le profil à voir vos photos cachées',
+                    note: 'Votre note de profil',
+                    add: 'Ajouter une nouvelle photo'
+                },
+                es: {
+                    premium: 'Estado Premium',
+                    desactivate: 'Poner la cuenta en modo de suspensión',
+                    settings: 'Configuración',
+                    logout: 'Cerrar sesión',
+                    chat: 'Escribir un mensaje',
+                    like: 'Dar me gusta a un perfil',
+                    access: 'Permitir que el perfil te envíe mensajes',
+                    private: 'Permitir que el perfil vea tus fotos ocultas',
+                    note: 'Tu nota de perfil',
+                    add: 'Añadir nueva foto'
+                },
+                zh: {
+                    premium: '高级状态',
+                    deactivate: '将帐户置于休眠状态',
+                    settings: '设置',
+                    logout: '注销',
+                    chat: '写消息',
+                    like: '喜欢个人资料',
+                    access: '允许个人资料向您发送消息',
+                    private: '允许个人资料查看您的隐藏照片',
+                    note: '您的个人资料注释',
+                    add: '添加新照片'
+                },
+                ja: {
+                    premium: 'プレミアムステータス',
+                    deactivate: 'アカウントをスリープ状態にする',
+                    settings: '設定',
+                    logout: 'ログアウト',
+                    chat: 'メッセージを書く',
+                    like: 'プロフィールにいいねする',
+                    access: 'プロフィールがあなたにメッセージを送信することを許可する',
+                    private: 'プロフィールがあなたの非表示の写真を見ることを許可する',
+                    note: 'あなたのプロフィールメモ',
+                    add: '新しい写真を追加する'
+                },
+            }
+        },
     }
 })

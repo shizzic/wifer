@@ -1,52 +1,91 @@
 <template>
     <div class="wrap">
         <div class="wrapper">
-            <div v-show="data._id == $user.id" class="elem">
-                <div class="btn">
-                    <div class="fill" :class="{ checked: premium > 0, unchecked: premium === 0 }"
-                        style="background-color: #EB9532;" />
-                    <img src="/images/trial.webp">
-                </div>
-                <div class="btn" @click="$emit('modal', 'deactivate')">
-                    <img src="/images/deactivate.webp">
-                </div>
-            </div>
+            <template v-if="data._id == $user.id">
+                <div class="elem">
+                    <div class="popover">
+                        <div class="popover_text" :data-title="popover.premium">
+                            <div class="btn">
+                                <div class="fill" :class="{ checked: premium > 0, unchecked: premium === 0 }"
+                                    style="background-color: #EB9532;" />
+                                <img src="/images/trial.webp">
+                            </div>
+                        </div>
+                    </div>
 
-            <div v-show="data._id == $user.id" class="elem">
-                <div class="btn" @click="$emit('settings')">
-                    <img src="/images/settings.webp">
-                </div>
-
-                <div class="btn" @click="$emit('modal', 'logout')">
-                    <img src="/images/logout.webp">
-                </div>
-            </div>
-
-            <div v-show="$user.id && data._id != $user.id" class="elem">
-                <div class="btn" @click="like()">
-                    <div class="fill" :class="{ checked: checked.like.is, unchecked: !checked.like.is }"
-                        style="background-color: #DD2647;" />
-                    <img src="/images/like.webp">
+                    <div class="popover">
+                        <div class="popover_text" :data-title="popover.deactivate">
+                            <div class="btn" @click="$emit('modal', 'deactivate')">
+                                <img src="/images/deactivate.webp">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="btn" @click="privateHandle()">
-                    <div class="fill" :class="{ checked: checked.private.is, unchecked: !checked.private.is }"
-                        style="background-color: #16AE85;" />
-                    <img src="/images/private.webp">
-                </div>
-            </div>
+                <div class="elem">
+                    <div class="popover">
+                        <div class="popover_text" :data-title="popover.settings">
+                            <div class="btn" @click="$emit('settings')">
+                                <img src="/images/settings.webp">
+                            </div>
+                        </div>
+                    </div>
 
-            <div v-show="$user.id && data._id != $user.id" class="elem">
-                <div class="btn" @click="access()">
-                    <div class="fill" :class="{ checked: checked.access.is, unchecked: !checked.access.is }"
-                        style="background-color: #EB9532;" />
-                    <img src="/images/access.webp">
+                    <div class="popover">
+                        <div class="popover_text" :data-title="popover.logout">
+                            <div class="btn" @click="$emit('modal', 'logout')">
+                                <img src="/images/logout.webp">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <template v-else-if="$user.id && data._id != $user.id">
+                <div class="elem">
+                    <div class="popover">
+                        <div class="popover_text" :data-title="popover.like">
+                            <div class="btn" @click="like()">
+                                <div class="fill" :class="{ checked: checked.like.is, unchecked: !checked.like.is }"
+                                    style="background-color: #DD2647;" />
+                                <img src="/images/like.webp">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="popover">
+                        <div class="popover_text" :data-title="popover.private">
+                            <div class="btn" @click="privateHandle()">
+                                <div class="fill"
+                                    :class="{ checked: checked.private.is, unchecked: !checked.private.is }"
+                                    style="background-color: #16AE85;" />
+                                <img src="/images/private.webp">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="btn" @click="chat()">
-                    <img src="/images/chat.webp">
+                <div class="elem">
+                    <div class="popover">
+                        <div class="popover_text" :data-title="popover.access">
+                            <div class="btn" @click="access()">
+                                <div class="fill" :class="{ checked: checked.access.is, unchecked: !checked.access.is }"
+                                    style="background-color: #EB9532;" />
+                                <img src="/images/access.webp">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popover">
+                        <div class="popover_text" :data-title="popover.chat">
+                            <div class="btn" @click="chat()">
+                                <img src="/images/chat.webp">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </template>
         </div>
     </div>
 </template>
@@ -54,7 +93,7 @@
 <script scoped>
 export default {
     name: "Header",
-    props: ["data", "checked", "add", "del", "l"],
+    props: ["data", "checked", "add", "del", 'popover', "l"],
     computed: {
         premium() {
             return this.$user.premium
@@ -152,7 +191,7 @@ export default {
             ) {
                 this.$chat.set({ field: "show", value: true })
                 this.$chat.set({ field: "target", value: { id: this.data._id, avatar: this.data.avatar, username: this.data.username } })
-                this.$chat.setMessages({id: this.data._id})
+                this.$chat.setMessages({ id: this.data._id })
                 this.$router.push({ name: "chat" })
             } else
                 this.$emit("modal", "chat")
@@ -221,6 +260,21 @@ img {
 
 .unchecked {
     width: 0;
+}
+
+.popover:hover [data-title]::after {
+    content: attr(data-title);
+    font-size: 15px;
+    z-index: 100;
+    background-color: rgb(199, 199, 199);
+    border-radius: 2px;
+    word-break: normal;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    padding: 1px 6px;
 }
 
 @media screen and (max-width: 700px) {

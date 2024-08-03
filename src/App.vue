@@ -23,6 +23,11 @@ export default {
 			this.make_user_online(true)
 			this.start()
 		},
+		l() {
+			this.$city.list = {}
+			this.$country.list = {}
+			location.reload()
+		}
 	},
 	provide() {
 		return {

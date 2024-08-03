@@ -1,8 +1,8 @@
 <template>
 	<div v-if="data" class="wrap scroll">
-		<Header :data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l" :titles="titles[l]"
+		<Header :data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l" :titles="titles[l]" :popover="popover[l]"
 			:live="live" @avatar="++avatar" @settings="settings = true" @modal="modal = $event" />
-		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" :priv="checked.private" @modal="modal = $event" />
+		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" :priv="checked.private" :add_text="popover[l].add" @modal="modal = $event" />
 
 		<div class="flex">
 			<Info :data="data" :titles="titles[l]" :values="values[l]" />
@@ -17,7 +17,7 @@
 		<Modal v-if="modal" :text="modalJS.text[modal][l]" :modal="modal" :submit="modalJS.submit[l]"
 			:success="modalJS.success" :l="l" @close="modal = null" />
 
-		<Note v-if="$user.id && data._id != $user.id" :checked="checked" :text="checked.like" :target="data._id"
+		<Note v-if="$user.id && data._id != $user.id" :checked="checked" :text="checked.like" :target="data._id" :placeholder="popover[l].note"
 			@note="note = $event" />
 	</div>
 </template>
@@ -43,6 +43,7 @@ export default {
 		const errors = ProfileJS().errors
 		const response = ProfileJS().response
 		const cropper = ProfileJS().cropper
+		const popover = ProfileJS().popover
 		const titles = InfoJS().keys
 		const values = InfoJS().values
 		const about = InfoJS().about
@@ -53,6 +54,7 @@ export default {
 			errors,
 			response,
 			cropper,
+			popover,
 			titles,
 			values,
 			about,

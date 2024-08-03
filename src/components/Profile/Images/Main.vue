@@ -18,9 +18,10 @@
             <Cropper v-if="image.src && image.type" :image="image" :lang="lang" :l="l" :fetchImages="fetchImages"
                 @clear="clear" />
 
-            <div v-show="$user.id && data._id == $user.id" class="image file" style="border: 1px solid;"
-                @click="$refs.input.click()">
-                <div class="plus" />
+            <div v-if="$user.id && data._id == $user.id && (data.private + data.public + (data.avatar ? 1 : 0)) < 20" class="popover">
+                <div class="image file" style="border: 1px solid;" :data-title="add_text" @click="$refs.input.click()">
+                    <div class="plus" />
+                </div>
             </div>
 
             <div v-if="data.avatar === true" class="image" style="display: none;">
@@ -99,7 +100,7 @@ function getMimeType(file, fallback = null) {
 
 export default {
     name: "Images",
-    props: ["data", "lang", "l", "avatar", "priv"],
+    props: ["data", "lang", "l", "avatar", "priv", 'add_text'],
     setup() {
         const del = ImageJS()["delete"]
         const error = ImageJS()["error"]
@@ -240,7 +241,7 @@ export default {
             let isAvatar = false
             if (this.params.mode === null)
                 isAvatar = true
-                
+
             if (isAvatar && this.data.images == 1)
                 return this.$toast.error(this.lang[this.l].avatar_must_be)
 
@@ -388,6 +389,8 @@ export default {
 }
 
 .file {
+    position: relative;
+    
     margin-right: 20px;
     margin-bottom: 20px;
 }
@@ -630,6 +633,21 @@ export default {
 
 a {
     margin-left: 0;
+}
+
+.popover:hover [data-title]::after {
+  content: attr(data-title);
+  font-size: 15px;
+  z-index: 100;
+  background-color: rgb(199, 199, 199);
+  border-radius: 2px;
+  word-break: normal;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  padding: 1px 6px;
 }
 </style>
 
