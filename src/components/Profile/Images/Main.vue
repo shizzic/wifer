@@ -24,14 +24,14 @@
                 </div>
             </div>
 
-            <div v-if="data.avatar === true" class="image" style="display: none;">
+            <div v-if="data.avatar === true" class="image-wrap" style="visibility: hidden; width: 0; height: 0; margin: 0;">
                 <a ref="avatar" :href="$file('images', $route.params.id, 'avatar.webp')" target="_blank"
                     rel="noreferrer">
-                    <Image :src="$file('images', $route.params.id, 'avatar.webp')" alt="" />
+                    <Image :src="$file('images', $route.params.id, 'avatar.webp')" alt="" class="image" />
                 </a>
             </div>
 
-            <div v-for="(num, index) in data.public" :key="index" class="image-wrap">
+            <div v-for="(num, _) in data.public" :key="'public|' + num" class="image-wrap">
                 <a :href="$file('images', $route.params.id, num + '.webp', 'public')" target="_blank" rel="noreferrer">
                     <Image :src="$file('images', $route.params.id, num + '.webp', 'public')" alt="" class="image" />
                 </a>
@@ -40,7 +40,7 @@
             </div>
 
             <template v-if="$user.id && (data._id == $user.id || data._id != $user.id && (priv.access || premium > 0))">
-                <div v-for="(num, index) in data.private" :key="index" class="image-wrap">
+                <div v-for="(num, _) in data.private" :key="'private|' + num" class="image-wrap">
                     <a :href="$file('images', $route.params.id, num + '.webp', 'private')" target="_blank"
                         rel="noreferrer">
                         <Image :src="$file('images', $route.params.id, num + '.webp', 'private')" alt="" class="image" />

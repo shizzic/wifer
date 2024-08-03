@@ -2,9 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from "@/router"
 import "./style"
-import { name } from "/package"
+import { name, store_version } from "/package"
 
-import { createPinia } from "pinia"
+import { createPinia, getActivePinia } from "pinia"
 import vue3GoogleLogin from "vue3-google-login"
 import vClickOutside from "click-outside-vue3"
 import Toaster from "@meforma/vue-toaster"
@@ -29,6 +29,14 @@ app
     .use(Toaster, { position: "bottom-left", maxToasts: 3, duration: 4000 })
     .use(vClickOutside)
     .use(vue3GoogleLogin, { clientId: import.meta.env.VITE_GOOGLE_ID })
+    .component("Image", Image)
+
+const curruent_db_version = +localStorage.getItem("store_version")
+if (curruent_db_version && curruent_db_version != +store_version) {
+    getActivePinia()._s.forEach(store => store.$reset())
+    localStorage.clear()
+}
+localStorage.setItem("store_version", store_version)
 
 app.config.globalProperties.$app_name = name[0].toUpperCase() + name.slice(1)
 app.config.globalProperties.$domain = import.meta.env.VITE_DOMAIN
@@ -53,6 +61,4 @@ app.config.globalProperties.$date = (timestamp) => {
         (String(date.getHours()).padStart(2, '0')) + '.' + (String(date.getMinutes() + 1).padStart(2, '0')) + '.' + (String(date.getSeconds() + 1).padStart(2, '0'))
 }
 
-app
-    .component("Image", Image)
-    .mount('#app')
+app.mount('#app')
