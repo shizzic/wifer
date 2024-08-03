@@ -133,39 +133,39 @@ export const SettingsJS = defineStore("Settings", {
         response() {
             return {
                 en: {
-                    0: "Validation failed",
-                    1: "Such username is already used",
-                    2: "Account hasn't changed. Try again"
+                    validation_failed: "Validation failed",
+                    username_already_in_use: "Such username is already used",
+                    update_was_not_performed: "Account hasn't changed. Try again"
                 },
                 ru: {
-                    0: "Валидация провалена",
-                    1: "Такой ник уже используется",
-                    2: "Данные не изменились. Попробуйте снова"
+                    validation_failed: "Валидация провалена",
+                    username_already_in_use: "Такой ник уже используется",
+                    update_was_not_performed: "Данные не изменились. Попробуйте снова"
                 },
                 de: {
-                    0: "Überprüfung fehlgeschlagen",
-                    1: "Dieser Benutzername wird bereits verwendet",
-                    2: "Konto hat sich nicht geändert. Versuchen Sie es nochmal"
+                    validation_failed: "Überprüfung fehlgeschlagen",
+                    username_already_in_use: "Dieser Benutzername wird bereits verwendet",
+                    update_was_not_performed: "Konto hat sich nicht geändert. Versuchen Sie es nochmal"
                 },
                 fr: {
-                    0: "Validation échouée",
-                    1: "Ce nom d'utilisateur est déjà utilisé",
-                    2: "Le compte n'a pas changé. Réessayer"
+                    validation_failed: "Validation échouée",
+                    username_already_in_use: "Ce nom d'utilisateur est déjà utilisé",
+                    update_was_not_performed: "Le compte n'a pas changé. Réessayer"
                 },
                 es: {
-                    0: "Validación fallida",
-                    1: "Dicho nombre de usuario ya se utiliza",
-                    2: "La cuenta no ha cambiado. Intentar otra vez"
+                    validation_failed: "Validación fallida",
+                    username_already_in_use: "Dicho nombre de usuario ya se utiliza",
+                    update_was_not_performed: "La cuenta no ha cambiado. Intentar otra vez"
                 },
                 zh: {
-                    0: "验证失败",
-                    1: "该用户名已被使用",
-                    2: "帐户没有更改。再试一次"
+                    validation_failed: "验证失败",
+                    username_already_in_use: "该用户名已被使用",
+                    update_was_not_performed: "帐户没有更改。再试一次"
                 },
                 ja: {
-                    0: "検証に失敗しました",
-                    1: "このユーザー名はすでに使用されています",
-                    2: "アカウントは変更されていません。再試行"
+                    validation_failed: "検証に失敗しました",
+                    username_already_in_use: "このユーザー名はすでに使用されています",
+                    update_was_not_performed: "アカウントは変更されていません。再試行"
                 },
             }
         },

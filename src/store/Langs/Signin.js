@@ -102,53 +102,53 @@ export const SigninJS = defineStore("Signin", {
         response() {
             return {
                 en: {
-                    0: "Don't try to hack me bro :)",
-                    1: "Wrong email",
-                    2: "Email with link wasn't sent to you 'cause of some reason. Please, try again",
-                    3: "Some error occured on server. Try again and never give up",
-                    4: "Bro, u have been banned. But don't worry. U can create a new account whenever you like :)" 
+                    wrong_api_token: "Don't try to hack me bro :)",
+                    email_invalid: "Wrong email",
+                    email_not_dispatched: "Email with link wasn't sent to you 'cause of some reason. Please, try again",
+                    something_went_wrong: "Some error occured on server. Try again and never give up",
+                    user_is_banned: "Bro, u have been banned. But don't worry. U can create a new account whenever you like :)" 
                 },
                 ru: {
-                    0: "Не пытайся хакнуть меня бро :)",
-                    1: "Это не почта",
-                    2: "Письмо с сылкой не было отправленно на вашу почту по какой-то причине. Пожалуста, попробуйте снова",
-                    3: "Че то на сервере бахнуло. Попробуй снова и не здавайся",
-                    4: "Бро, ты был забанен. Но не парься. Я же не запретил тебе заводить новые аккаунты (подмиг, подмиг :D)"
+                    wrong_api_token: "Не пытайся хакнуть меня бро :)",
+                    email_invalid: "Это не почта",
+                    email_not_dispatched: "Письмо с сылкой не было отправленно на вашу почту по какой-то причине. Пожалуста, попробуйте снова",
+                    something_went_wrong: "Че то на сервере бахнуло. Попробуй снова и не здавайся",
+                    user_is_banned: "Бро, ты был забанен. Но не парься. Я же не запретил тебе заводить новые аккаунты (подмиг, подмиг :D)"
                 },
                 de: {
-                    0: "Versuch nicht, mich zu hacken, Bruder :)",
-                    1: "Falsche E-mail",
-                    2: "E-Mail mit Link wurde aus irgendeinem Grund nicht an Sie gesendet. Bitte versuche es erneut",
-                    3: "Auf dem Server ist ein Fehler aufgetreten. Versuchen Sie es erneut und geben Sie niemals auf",
-                    4: "Bruder, du wurdest gesperrt. Aber keine Sorge. Du kannst jederzeit ein neues Konto erstellen :)" 
+                    wrong_api_token: "Versuch nicht, mich zu hacken, Bruder :)",
+                    email_invalid: "Falsche E-mail",
+                    email_not_dispatched: "E-Mail mit Link wurde aus irgendeinem Grund nicht an Sie gesendet. Bitte versuche es erneut",
+                    something_went_wrong: "Auf dem Server ist ein Fehler aufgetreten. Versuchen Sie es erneut und geben Sie niemals auf",
+                    user_is_banned: "Bruder, du wurdest gesperrt. Aber keine Sorge. Du kannst jederzeit ein neues Konto erstellen :)" 
                 },
                 fr: {
-                    0: "N'essaie pas de me pirater frère :)",
-                    1: "Mauvaise adresse mail",
-                    2: "L'e-mail avec le lien ne vous a pas été envoyé pour une raison quelconque. Veuillez réessayer",
-                    3: "Une erreur s'est produite sur le serveur. Réessayez et n'abandonnez jamais",
-                    4: "Frère, tu as été banni. Mais ne vous inquiétez pas. Vous pouvez créer un nouveau compte quand vous le souhaitez :)" 
+                    wrong_api_token: "N'essaie pas de me pirater frère :)",
+                    email_invalid: "Mauvaise adresse mail",
+                    email_not_dispatched: "L'e-mail avec le lien ne vous a pas été envoyé pour une raison quelconque. Veuillez réessayer",
+                    something_went_wrong: "Une erreur s'est produite sur le serveur. Réessayez et n'abandonnez jamais",
+                    user_is_banned: "Frère, tu as été banni. Mais ne vous inquiétez pas. Vous pouvez créer un nouveau compte quand vous le souhaitez :)" 
                 },
                 es: {
-                    0: "No intentes hackearme hermano :)",
-                    1: "Email incorrecto",
-                    2: "No se le envió el correo electrónico con el enlace por algún motivo. Inténtalo de nuevo",
-                    3: "Se produjo algún error en el servidor. Inténtalo de nuevo y nunca te rindas",
-                    4: "Hermano, te han baneado. Pero no te preocupes. Puedes crear una nueva cuenta cuando quieras :)" 
+                    wrong_api_token: "No intentes hackearme hermano :)",
+                    email_invalid: "Email incorrecto",
+                    email_not_dispatched: "No se le envió el correo electrónico con el enlace por algún motivo. Inténtalo de nuevo",
+                    something_went_wrong: "Se produjo algún error en el servidor. Inténtalo de nuevo y nunca te rindas",
+                    user_is_banned: "Hermano, te han baneado. Pero no te preocupes. Puedes crear una nueva cuenta cuando quieras :)" 
                 },
                 zh: {
-                    0: "不要试图破解我兄弟:)",
-                    1: "错误的电子邮件",
-                    2: "由于某种原因，未向您发送带有链接的电子邮件。请再试一次",
-                    3: "服务器上发生了一些错误。再试一次，永不放弃",
-                    4: "兄弟，你被禁言了。但别担心。你可以随时创建一个新帐户:)" 
+                    wrong_api_token: "不要试图破解我兄弟:)",
+                    email_invalid: "错误的电子邮件",
+                    email_not_dispatched: "由于某种原因，未向您发送带有链接的电子邮件。请再试一次",
+                    something_went_wrong: "服务器上发生了一些错误。再试一次，永不放弃",
+                    user_is_banned: "兄弟，你被禁言了。但别担心。你可以随时创建一个新帐户:)" 
                 },
                 ja: {
-                    0: "私をハックしようとしないでください:)",
-                    1: "間違ったメール",
-                    2: "なんらかの理由で、リンク付きのメールが送信されませんでした。もう一度やり直してください",
-                    3: "サーバーで何らかのエラーが発生しました。もう一度やり直して、決してあきらめないでください",
-                    4: "ブロ、あなたは禁止されています。しかし、心配しないでください。いつでも新しいアカウントを作成できます:)" 
+                    wrong_api_token: "私をハックしようとしないでください:)",
+                    email_invalid: "間違ったメール",
+                    email_not_dispatched: "なんらかの理由で、リンク付きのメールが送信されませんでした。もう一度やり直してください",
+                    something_went_wrong: "サーバーで何らかのエラーが発生しました。もう一度やり直して、決してあきらめないでください",
+                    user_is_banned: "ブロ、あなたは禁止されています。しかし、心配しないでください。いつでも新しいアカウントを作成できます:)" 
                 },
             }
         },

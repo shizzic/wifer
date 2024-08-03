@@ -5,39 +5,39 @@ export const AuthJS = defineStore("Auth", {
         response() {
             return {
                 en: {
-                    "0": "Invalid code",
-                    "1": "Don't try to hack me",
-                    "2": "Error on a server. Try again"
+                    invalid_code: "Invalid code",
+                    code_not_found: "Don't try to hack me",
+                    user_not_found: "Error on a server. Try again"
                 },
                 ru: {
-                    "0": "Неверный формат кода",
-                    "1": "Не старайся меня хакнуть",
-                    "2": "Ошибка на сервере. Попробуй снова"
+                    invalid_code: "Неверный формат кода",
+                    code_not_found: "Не старайся меня хакнуть",
+                    user_not_found: "Ошибка на сервере. Попробуй снова"
                 },
                 de: {
-                    "0": "Ungültiger Code",
-                    "1": "Versuchen Sie nicht, mich zu hacken",
-                    "2": "Fehler auf einem Server. Versuchen Sie es nochmal"
+                    invalid_code: "Ungültiger Code",
+                    code_not_found: "Versuchen Sie nicht, mich zu hacken",
+                    user_not_found: "Fehler auf einem Server. Versuchen Sie es nochmal"
                 },
                 fr: {
-                    "0": "Code invalide",
-                    "1": "N'essayez pas de me pirater",
-                    "2": "Erreur sur un serveur. Réessayer"
+                    invalid_code: "Code invalide",
+                    code_not_found: "N'essayez pas de me pirater",
+                    user_not_found: "Erreur sur un serveur. Réessayer"
                 },
                 es: {
-                    "0": "Codigo invalido",
-                    "1": "No intentes hackearme",
-                    "2": "Error en un servidor. Intentar otra vez"
+                    invalid_code: "Codigo invalido",
+                    code_not_found: "No intentes hackearme",
+                    user_not_found: "Error en un servidor. Intentar otra vez"
                 },
                 zh: {
-                    "0": "无效的代码",
-                    "1": "不要试图破解我",
-                    "2": "服务器上的错误。再试一次"
+                    invalid_code: "无效的代码",
+                    code_not_found: "不要试图破解我",
+                    user_not_found: "服务器上的错误。再试一次"
                 },
                 ja: {
-                    "0": "無効なコード",
-                    "1": "私をハッキングしようとしないでください",
-                    "2": "サーバー上のエラー。再試行"
+                    invalid_code: "無効なコード",
+                    code_not_found: "私をハッキングしようとしないでください",
+                    user_not_found: "サーバー上のエラー。再試行"
                 },
             }
         }
