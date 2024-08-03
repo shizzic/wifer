@@ -9,6 +9,8 @@ import vue3GoogleLogin from "vue3-google-login"
 import vClickOutside from "click-outside-vue3"
 import Toaster from "@meforma/vue-toaster"
 
+import Image from './components/Image.vue'
+
 import { langJS } from "@/store/lang"
 import { userJS } from "@/store/user"
 import { navJS } from "@/store/nav"
@@ -22,11 +24,11 @@ import { sseJS } from "@/store/sse"
 const app = createApp(App)
 
 app
-.use(router)
-.use(createPinia())
-.use(Toaster, { position: "bottom-left", maxToasts: 3, duration: 4000 })
-.use(vClickOutside)
-.use(vue3GoogleLogin, { clientId: import.meta.env.VITE_GOOGLE_ID })
+    .use(router)
+    .use(createPinia())
+    .use(Toaster, { position: "bottom-left", maxToasts: 3, duration: 4000 })
+    .use(vClickOutside)
+    .use(vue3GoogleLogin, { clientId: import.meta.env.VITE_GOOGLE_ID })
 
 app.config.globalProperties.$app_name = name[0].toUpperCase() + name.slice(1)
 app.config.globalProperties.$domain = import.meta.env.VITE_DOMAIN
@@ -48,7 +50,9 @@ app.config.globalProperties.$file = (what, target_id, filename, dir = "") => {
 app.config.globalProperties.$date = (timestamp) => {
     const date = new Date(timestamp * 1000)
     return (String(date.getDate()).padStart(2, '0')) + '.' + (String(date.getMonth() + 1).padStart(2, '0')) + '.' + date.getFullYear() + " - " +
-    (String(date.getHours()).padStart(2, '0')) + '.' + (String(date.getMinutes() + 1).padStart(2, '0')) + '.' + (String(date.getSeconds() + 1).padStart(2, '0'))
+        (String(date.getHours()).padStart(2, '0')) + '.' + (String(date.getMinutes() + 1).padStart(2, '0')) + '.' + (String(date.getSeconds() + 1).padStart(2, '0'))
 }
 
-app.mount('#app')
+app
+    .component("Image", Image)
+    .mount('#app')

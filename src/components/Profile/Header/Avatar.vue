@@ -1,7 +1,7 @@
 <template>
     <div>
         <img v-if="avatar === false" src="/images/avatar.webp" class="no round" :class="{ premium: premium }">
-        <img v-else :src="$file('images', $route.params.id, 'avatar.webp')" class="avatar" :class="{ premium: premium }" @click="$emit('avatar')">
+        <Image v-else :src="$file('images', $route.params.id, 'avatar.webp')" class="avatar" :class="{ premium: premium }" @click="$emit('avatar')"/>
     </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper">
 		<div v-for="(user, index) in users" :key="index" class="user" :class="{ fresh : !mode && !viewed[user._id] }">
-            <img v-if="user.avatar" 
+            <Image v-if="user.avatar" 
                 :src="$file('images', user._id, 'avatar.webp')" class="avatar" :class="{ premium: user.premium }"
                 @click="$router.push({ name : 'profile', params : { id : user._id }})" 
             />

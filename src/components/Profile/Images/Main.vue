@@ -27,13 +27,13 @@
             <div v-if="data.avatar === true" class="image" style="display: none;">
                 <a ref="avatar" :href="$file('images', $route.params.id, 'avatar.webp')" target="_blank"
                     rel="noreferrer">
-                    <img :src="$file('images', $route.params.id, 'avatar.webp')" alt="" />
+                    <Image :src="$file('images', $route.params.id, 'avatar.webp')" alt="" />
                 </a>
             </div>
 
             <div v-for="(num, index) in data.public" :key="index" class="image-wrap">
                 <a :href="$file('images', $route.params.id, num + '.webp', 'public')" target="_blank" rel="noreferrer">
-                    <img :src="$file('images', $route.params.id, num + '.webp', 'public')" alt="" class="image" />
+                    <Image :src="$file('images', $route.params.id, num + '.webp', 'public')" alt="" class="image" />
                 </a>
 
                 <div class="icon-wrap"><img src="/images/public.webp" alt="" class="icon" /></div>
@@ -43,7 +43,7 @@
                 <div v-for="(num, index) in data.private" :key="index" class="image-wrap">
                     <a :href="$file('images', $route.params.id, num + '.webp', 'private')" target="_blank"
                         rel="noreferrer">
-                        <img :src="$file('images', $route.params.id, num + '.webp', 'private')" alt="" class="image" />
+                        <Image :src="$file('images', $route.params.id, num + '.webp', 'private')" alt="" class="image" />
                     </a>
 
                     <div class="icon-wrap"><img src="/images/private.webp" alt="" class="icon" /></div>

@@ -4,7 +4,7 @@
         <div class="elem pointer" @click="$router.push({ name: 'profile', params: { id: target.id } })"
             style="width: 100%;">
             <div class="avatar-wrapper">
-                <img v-if="target.avatar" :src="$file('images', target.id, 'avatar.webp')" class="avatar" />
+                <Image v-if="target.avatar" :src="$file('images', target.id, 'avatar.webp')" class="avatar" />
                 <img v-else src="/images/avatar.webp" class="avatar" />
                 <div v-show="rooms[target.id] && rooms[target.id].online" class="online" />
             </div>

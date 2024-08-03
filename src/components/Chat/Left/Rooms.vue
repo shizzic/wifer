@@ -5,7 +5,7 @@
             @click="set(rooms[user_id])"
         >
             <div class="icon-wrapper">
-                <img v-if="rooms[user_id].avatar" :src="$file('images', user_id, 'avatar.webp')" class="icon" />
+                <Image v-if="rooms[user_id].avatar" :src="$file('images', user_id, 'avatar.webp')" class="icon" />
                 <img v-else src="/images/avatar.webp" class="icon">
 
                 <div v-show="rooms[user_id].online" class="online" />
