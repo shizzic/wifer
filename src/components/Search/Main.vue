@@ -9,7 +9,7 @@
 
 		<List v-show="!filters" :l="l" :data="data" :sort="sort[l]" :create="createTemplate" :users="users"
 			:mode="data.data[data.active].mode" :first="first" :photos="photos[l]" :count="count" :founded="founded[l]"
-			:getUsers="getUsers" :titles="titles[l]" :values="values[l]" @filters="filters = true"
+			:getUsers="getUsers" :titles="titles[l]" :values="values[l]" :isFetched="isFetched" @filters="filters = true"
 			@moved="moved = true" />
 	</div>
 </template>
@@ -54,6 +54,7 @@ export default {
 	},
 	data() {
 		return {
+			isFetched: false,
 			checkbox: ["premium", "sex", "body", "smokes", "drinks", "ethnicity", "income", "industry", "search", "prefer"],
 			slider: {
 				age: { min: 18, max: 80 },
@@ -115,6 +116,9 @@ export default {
 	},
 	methods: {
 		getUsers(count = false) {
+			if (this.isFetched)
+				return
+			this.isFetched = true
 			let data = {}
 			data.skip = this.data.data[this.data.active].skip
 			data.limit = this.data.data[this.data.active].limit
@@ -187,7 +191,9 @@ export default {
 						this.users = data.users
 
 					this.first = null
+					this.isFetched = false
 				})
+				.catch(() => { this.isFetched = false })
 		},
 
 		createTemplate() {

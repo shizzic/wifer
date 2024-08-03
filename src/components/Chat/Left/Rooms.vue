@@ -118,6 +118,7 @@ export default {
 
     display: flex;
     align-items: center;
+    flex-wrap: nowrap;
 
     padding: 10px;
     margin-bottom: 5px;

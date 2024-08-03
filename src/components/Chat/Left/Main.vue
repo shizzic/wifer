@@ -1,8 +1,12 @@
 <template>
 	<div class="left" :class="{ show: !show, hide: show }">
-		<Hat :search="search" :getRooms="getRooms" @top="++changeTop" />
-		<Rooms v-if="order.length > 0" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms" :changeTop="changeTop" />
-		<None v-else :lang="chats" />
+		<Skeleton v-if="isFetched" />
+		<template v-else>
+			<Hat :search="search" :getRooms="getRooms" @top="++changeTop" />
+			<Rooms v-if="order.length > 0" :order="order" :rooms="rooms" :target="target" :getRooms="getRooms"
+				:changeTop="changeTop" />
+			<None v-else :lang="chats" />
+		</template>
 	</div>
 </template>
 
@@ -10,13 +14,15 @@
 import Hat from "@/components/Chat/Left/Hat.vue"
 import Rooms from "@/components/Chat/Left/Rooms.vue"
 import None from "@/components/Chat/Left/None.vue"
+import Skeleton from "./Skeleton.vue"
 export default {
 	name: "Left",
-	props: ["search", "order", "rooms", "target", "getRooms", "chats", "show"],
+	props: ["search", "order", "rooms", "target", "getRooms", "chats", "show", 'isFetched'],
 	components: {
 		Hat,
 		Rooms,
-		None
+		None,
+		Skeleton
 	},
 	data() {
 		return {
@@ -35,12 +41,12 @@ export default {
 
 	display: flex;
 	flex-direction: column;
-	
+
 	overflow: hidden;
 }
 
 @media screen and (max-width: 700px) {
-    .show {
+	.show {
 		width: 100%;
 		min-width: 0;
 	}

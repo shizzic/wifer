@@ -1,12 +1,15 @@
 <template>
 	<div class="right" :class="{ show: show, hide: !show }">
-		<Header :target="target" :access="messages.access" :rooms="rooms" />
-		<template v-if="premium > 0 || 'access' in messages && messages.access.target">
-			<Messages :target="target.id" :messages="messages" :getMessages="getMessages" :newMessages="newMessages"
-				:show="show" />
-			<Footer :input="input" :target="target.id" />
+		<Skeleton v-if="isFetched" />
+		<template v-else>
+			<Header :target="target" :access="messages.access" :rooms="rooms" />
+			<template v-if="premium > 0 || 'access' in messages && messages.access.target">
+				<Messages :target="target.id" :messages="messages" :getMessages="getMessages" :newMessages="newMessages"
+					:show="show" />
+				<Footer :input="input" :target="target.id" />
+			</template>
+			<Blur v-else :lang="blur" />
 		</template>
-		<Blur v-else :lang="blur" />
 	</div>
 </template>
 
@@ -15,14 +18,16 @@ import Header from "@/components/Chat/Right/Header.vue"
 import Messages from "@/components/Chat/Right/Messages.vue"
 import Blur from "@/components/Chat/Right/Blur.vue"
 import Footer from "@/components/Chat/Right/Footer.vue"
+import Skeleton from "./Skeleton.vue"
 export default {
 	name: "Right",
-	props: ["target", "input", "messages", "blur", "getMessages", "rooms", "show", "newMessages"],
+	props: ["target", "input", "messages", "blur", "getMessages", "rooms", "show", "newMessages", 'isFetched'],
 	components: {
 		Header,
 		Messages,
 		Blur,
-		Footer
+		Footer,
+		Skeleton
 	},
 	computed: {
 		premium() {
@@ -35,7 +40,7 @@ export default {
 				if (!old && value && this.messages.messages.length === 0)
 					this.getMessages(null, true)
 			},
-			deep:  true
+			deep: true
 		}
 	},
 }

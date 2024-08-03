@@ -1,13 +1,13 @@
 <template>
 	<div class="block">
 		<div class="pocket">
-            <span>{{ titles.weight }}: {{ user.weight }}</span>
-            <span>{{ titles.height }}: {{ user.height }}</span>
+            <span><span class="title">{{ titles.weight }}:</span>{{ user.weight }}</span>
+            <span><span class="title">{{ titles.height }}:</span>{{ user.height }}</span>
         </div>
 
         <div class="pocket">
-            <span>{{ titles.body }}: {{ values.body[user.body] }}</span>
-            <span>{{ titles.ethnicity }}: {{ values.ethnicity[user.ethnicity] }}</span>
+            <span><span class="title">{{ titles.body }}:</span>{{ values.body[user.body] }}</span>
+            <span><span class="title">{{ titles.ethnicity }}:</span>{{ values.ethnicity[user.ethnicity] }}</span>
         </div>
 	</div>
 </template>
@@ -39,6 +39,12 @@ export default {
 
 .pocket:first-of-type {
     margin-right: 50px;
+}
+
+.title {
+    font-weight: 600;
+
+    margin-right: 10px;
 }
 
 span {

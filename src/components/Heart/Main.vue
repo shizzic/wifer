@@ -1,17 +1,23 @@
 <template>
 	<div class="wrap">
-		<div v-if="users" class="content scroll" ref="heart" @touchend="saveScroll">
+		<div class="content scroll" ref="heart" @touchend="saveScroll">
 			<Hat :what="what[l]" :which="which" :limit="limit" :founded="founded[l]" :mode="mode" :all="all"
 				@which="$heart.set({ field: 'which', value: $event }); count = true; get();"
 				@mode="$heart.set({ field: 'mode', value: $event }); count = true; get();"
 				@limit="limit = $event; get();" />
-			<Users :users="users" :time="time" :viewed="viewed" :notes="notes" :photos="photos[l]" :titles="titles[l]"
-				:values="values[l]" :mode="mode" :which="which"
-				@modal="modal = $event.modal; index = $event.index; id = $event.id" />
+			<div v-if="isFetched" class="loader">
+				<SyncLoader :loading="true" v-bind="settings" />
+			</div>
+			<template v-else-if="!isFetched && users">
+				<Users :users="users" :time="time" :viewed="viewed" :notes="notes" :photos="photos[l]"
+					:titles="titles[l]" :values="values[l]" :mode="mode" :which="which"
+					@modal="modal = $event.modal; index = $event.index; id = $event.id" />
+				<Modal v-if="modal" :users="users" :modal="modal" :text="text[modal][l]" :submit="submit[l]"
+					:index="index" :id="id" @users="users = $event" @close="modal = null; index = null; id = null;"
+					@all="--all" />
+			</template>
 			<Pagination v-show="all > 0" :count="all" :limit="limit" :skip="skip"
 				@skip="skip = $event; get(); $refs.heart.scrollTop = 0; $scroll.set({ field: 'heart', value: 0 });" />
-			<Modal v-if="modal" :users="users" :modal="modal" :text="text[modal][l]" :submit="submit[l]" :index="index"
-				:id="id" @users="users = $event" @close="modal = null; index = null; id = null;" @all="--all" />
 		</div>
 	</div>
 </template>
@@ -21,6 +27,7 @@ import { clearTimeout, setTimeout } from 'worker-timers'
 import { HeartJS } from "@/store/Langs/Heart"
 import { InfoJS } from "@/store/Langs/Info"
 import { SearchJS } from "@/store/Langs/Search"
+import { SyncLoader } from "vue-spinner/src"
 import Hat from "@/components/Heart/Hat/Main.vue"
 import Users from "@/components/Heart/Users/Main.vue"
 import Pagination from "@/components/Heart/Pagination.vue"
@@ -30,6 +37,7 @@ export default {
 	name: "Heart",
 	props: ["l"],
 	components: {
+		SyncLoader,
 		Hat,
 		Users,
 		Pagination,
@@ -56,6 +64,12 @@ export default {
 	},
 	data() {
 		return {
+			isFetched: false,
+			settings: {
+                size: "25px",
+                color: "#CD5360"
+            },
+
 			limit: 25,
 			skip: 0,
 			count: true,
@@ -107,6 +121,9 @@ export default {
 	},
 	methods: {
 		get() {
+			if (this.isFetched)
+				return
+			this.isFetched = true
 			let data = {}
 			data.which = +this.which
 			data.mode = this.mode
@@ -172,7 +189,10 @@ export default {
 						this.notes = {}
 						this.all = 0
 					}
+
+					this.isFetched = false
 				})
+				.catch(() => { this.isFetched = false })
 
 			this.count = null
 			setTimeout(this.scroll, 100)
@@ -209,6 +229,16 @@ export default {
 	border-radius: 4px;
 
 	overflow-x: hidden;
+}
+
+.loader {
+	width: 100%;
+	height: calc(100% - 250px);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 0;
 }
 
 @media screen and (max-width: 768px) {

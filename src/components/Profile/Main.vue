@@ -1,24 +1,33 @@
 <template>
-	<div v-if="data" class="wrap scroll">
-		<Header :data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete" :l="l" :titles="titles[l]" :popover="popover[l]"
-			:live="live" @avatar="++avatar" @settings="settings = true" @modal="modal = $event" />
-		<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" :priv="checked.private" :add_text="popover[l].add" @modal="modal = $event" />
-
-		<div class="flex">
-			<Info :data="data" :titles="titles[l]" :values="values[l]" />
-			<About :title="titles[l].about" :username="data.username" :about="data.about" :l="l" :blank="about[l]" />
+	<div class="wrap scroll">
+		<div v-if="isFetched" class="loader">
+			<SyncLoader :loading="true" v-bind="loader_settings" />
 		</div>
+		<template v-else-if="!isFetched && data">
+			<Header :data="data" :lang="values[l].sex" :checked="checked" :add="modalJS.add" :del="modalJS.delete"
+				:l="l" :titles="titles[l]" :popover="popover[l]" :live="live" @avatar="++avatar"
+				@settings="settings = true" @modal="modal = $event" />
+			<Images :data="data" :lang="cropper" :l="l" :avatar="avatar" :priv="checked.private"
+				:add_text="popover[l].add" @modal="modal = $event" />
 
-		<Seeking v-show="data.search.length > 0" :list="values[l].search" :value="data.search" :title="titles[l].search" />
+			<div class="flex">
+				<Info :data="data" :titles="titles[l]" :values="values[l]" />
+				<About :title="titles[l].about" :username="data.username" :about="data.about" :l="l"
+					:blank="about[l]" />
+			</div>
 
-		<Settings v-if="settings" :l="l" :lang="settingsJS" :titles="titles" :fields="data" :info="values[l]"
-			@close="settings = null" @data="data = $event" />
+			<Seeking v-show="data.search.length > 0" :list="values[l].search" :value="data.search"
+				:title="titles[l].search" />
 
-		<Modal v-if="modal" :text="modalJS.text[modal][l]" :modal="modal" :submit="modalJS.submit[l]"
-			:success="modalJS.success" :l="l" @close="modal = null" />
+			<Settings v-if="settings" :l="l" :lang="settingsJS" :titles="titles" :fields="data" :info="values[l]"
+				@close="settings = null" @data="data = $event" />
 
-		<Note v-if="$user.id && data._id != $user.id" :checked="checked" :text="checked.like" :target="data._id" :placeholder="popover[l].note"
-			@note="note = $event" />
+			<Modal v-if="modal" :text="modalJS.text[modal][l]" :modal="modal" :submit="modalJS.submit[l]"
+				:success="modalJS.success" :l="l" @close="modal = null" />
+
+			<Note v-if="$user.id && data._id != $user.id" :checked="checked" :text="checked.like" :target="data._id"
+				:placeholder="popover[l].note" @note="note = $event" />
+		</template>
 	</div>
 </template>
 
@@ -27,6 +36,7 @@ import { ProfileJS } from "@/store/Langs/Profile"
 import { InfoJS } from "@/store/Langs/Info"
 import { SettingsJS } from "@/store/Langs/Settings"
 import { ModalJS } from "@/store/Langs/Modal"
+import { SyncLoader } from "vue-spinner/src"
 import Header from "@/components/Profile/Header/Main.vue"
 import Images from "@/components/Profile/Images/Main.vue"
 import Info from "@/components/Profile/Info.vue"
@@ -63,6 +73,7 @@ export default {
 		}
 	},
 	components: {
+		SyncLoader,
 		Header,
 		Images,
 		Info,
@@ -74,6 +85,11 @@ export default {
 	},
 	data() {
 		return {
+			isFetched: false,
+			loader_settings: {
+                size: "25px",
+                color: "#fff"
+            },
 			live: null,
 			data: null,
 			avatar: 0,
@@ -110,6 +126,9 @@ export default {
 	},
 	methods: {
 		getProfile() {
+			if (this.isFetched)
+				return
+			this.isFetched = true
 			this.data = null
 			fetch(this.$domain + "profile?id=" + this.$route.params.id, {
 				method: "GET",
@@ -145,8 +164,13 @@ export default {
 										this.checked.access.access = true
 						}
 					}
+
+					this.isFetched = false
 				})
-				.catch(() => { this.$toast.error(this.errors[this.l].server) })
+				.catch(() => {
+					this.$toast.error(this.errors[this.l].server)
+					this.isFetched = false
+				})
 		},
 
 		firstGet() {
@@ -175,6 +199,16 @@ export default {
 	padding: 25px;
 
 	overflow-x: hidden;
+}
+
+.loader {
+	width: 100%;
+	height: calc(100% - 50px);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 0;
 }
 
 @media screen and (max-width: 768px) {

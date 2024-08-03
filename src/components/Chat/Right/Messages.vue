@@ -245,7 +245,7 @@ export default {
 	align-self: start;
 	color: #fff;
 	max-width: 70%;
-	border-radius: 24px;
+	border-radius: 4px;
 
 	display: flex;
 	padding: 8px 18px;

@@ -2,12 +2,15 @@
 	<div class="wrap">
 		<div v-if="socket && $chat.open" id="chat">
 			<Left :search="search[l]" :chats="chats[l]" :order="order" :rooms="rooms" :target="target"
-				:getRooms="getRooms" :show="show" />
+				:getRooms="getRooms" :show="show" :isFetched="leftIsFetched" />
 
-			<Right v-if="rooms && target && target.id in messages" :key="target.id"
-				:target="target" :input="input[l]" :messages="messages[target.id]" :newMessages="newMessages[target.id]"
-				:blur="blur[l]" :getMessages="getMessages" :rooms="rooms" :show="show" />
+			<Right v-if="rooms && target && target.id in messages" :key="target.id" :target="target" :input="input[l]"
+				:messages="messages[target.id]" :newMessages="newMessages[target.id]" :blur="blur[l]"
+				:getMessages="getMessages" :rooms="rooms" :show="show" :isFetched="rightIsFetched" />
 			<None v-else :lang="none[l]" :show="show" />
+		</div>
+		<div v-else class="loader">
+			<SyncLoader :loading="true" v-bind="settings" />
 		</div>
 	</div>
 </template>
@@ -17,6 +20,7 @@ import { clearInterval, setInterval } from 'worker-timers'
 import Left from "@/components/Chat/Left/Main.vue"
 import Right from "@/components/Chat/Right/Main.vue"
 import None from "@/components/Chat/Right/None.vue"
+import { SyncLoader } from "vue-spinner/src"
 import { chatJS } from "@/store/chat"
 
 export default {
@@ -25,7 +29,8 @@ export default {
 	components: {
 		Left,
 		Right,
-		None
+		None,
+		SyncLoader
 	},
 	setup() {
 		const none = chatJS().none
@@ -44,7 +49,13 @@ export default {
 	},
 	data() {
 		return {
-			interval: null
+			settings: {
+                size: "25px",
+                color: "#fff"
+            },
+			interval: null,
+			leftIsFetched: false,
+			rightIsFetched: false,
 		}
 	},
 	computed: {
@@ -83,6 +94,9 @@ export default {
 	},
 	methods: {
 		getRooms(byUsername = false, username = "") {
+			if (this.leftIsFetched)
+				return
+			this.leftIsFetched = true
 			let order = this.order
 
 			if (byUsername !== this.$chat.lastSearch) {
@@ -159,11 +173,17 @@ export default {
 								this.$chat.set({ field: "order", value: order })
 							}
 						}
+
+						this.leftIsFetched = false
 					})
+					.catch(() => { this.leftIsFetched = false })
 			}
 		},
 
 		getMessages(scroll = null, anyway = undefined) {
+			if (this.rightIsFetched)
+				return
+			this.rightIsFetched = true
 			const have = this.target.id in this.messages
 
 			if (anyway || !have || this.target.id in this.messages && this.messages[this.target.id].left && (scroll || this.messages[this.target.id].first)) {
@@ -206,7 +226,10 @@ export default {
 								this.$chat.setMessages({ id: +this.target.id, messages: data.messages, left: left })
 							}
 						}
+
+						this.rightIsFetched = false
 					})
+					.catch(() => { this.rightIsFetched = false })
 			}
 		},
 
@@ -251,6 +274,16 @@ export default {
 
 	display: flex;
 	overflow: hidden;
+}
+
+.loader {
+	width: 100%;
+	height: calc(100% - 50px);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 0;
 }
 
 @media screen and (max-width: 768px) {
