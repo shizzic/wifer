@@ -25,7 +25,7 @@
 			</li>
 			<li>
 				<p><strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot;
-					or &quot;Our&quot; in this Agreement) refers to dateshipper.</p>
+					or &quot;Our&quot; in this Agreement) refers to wifer.</p>
 			</li>
 			<li>
 				<p><strong>Cookies</strong> are small files that are placed on Your computer, mobile device or any other
@@ -61,8 +61,8 @@
 					Service or from the Service infrastructure itself (for example, the duration of a page visit).</p>
 			</li>
 			<li>
-				<p><strong>Website</strong> refers to dateshipper, accessible from <a href="https://dateshiper.com"
-						rel="external nofollow noopener" target="_blank">https://dateshiper.com</a></p>
+				<p><strong>Website</strong> refers to wifer, accessible from <a href="https://wifer.lol"
+						rel="external nofollow noopener" target="_blank">https://wifer.lol</a></p>
 			</li>
 			<li>
 				<p><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal
@@ -298,8 +298,8 @@
 				<p>By email: kotcich@gmail.com</p>
 			</li>
 			<li>
-				<p>By visiting this page on our website: <a href="https://dateshipper.com/terms/privacy_policy"
-						rel="external nofollow noopener" target="_blank">https://dateshipper.com/terms/privacy_policy</a>
+				<p>By visiting this page on our website: <a href="https://wifer.lol/docs/privacy_policy"
+						rel="external nofollow noopener" target="_blank">https://wifer.lol/docs/privacy_policy</a>
 				</p>
 			</li>
 		</ul>

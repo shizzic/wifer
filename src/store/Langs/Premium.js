@@ -116,23 +116,23 @@ export const PremiumJS = defineStore("Premium", {
             return {
                 en: {
                     title: "Free chat",
-                    text: "With everyone, who gave you access to text them without premium :)"
+                    text: "With everyone, who gave you access to text them without premium"
                 },
                 ru: {
                     title: "Бесплатный чат",
-                    text: "Со всеми, кто дал вам доступ на переписку без премиума :)"
+                    text: "Со всеми, кто дал вам доступ на переписку без премиума"
                 },
                 de: {
                     title: "Kostenloser Chat",
-                    text: "Mit allen, die dir Zugriff gegeben haben, um ihnen ohne Premium zu schreiben :)"
+                    text: "Mit allen, die dir Zugriff gegeben haben, um ihnen ohne Premium zu schreiben"
                 },
                 fr: {
                     title: "Chat gratuit",
-                    text: "Avec tous ceux qui vous ont donné accès à leur envoyer des SMS sans surcoût :)"
+                    text: "Avec tous ceux qui vous ont donné accès à leur envoyer des SMS sans surcoût"
                 },
                 es: {
                     title: "Chat gratis",
-                    text: "Con todos los que te dieron acceso para enviarles mensajes de texto sin prima :)"
+                    text: "Con todos los que te dieron acceso para enviarles mensajes de texto sin prima"
                 },
                 zh: {
                     title: "免费聊天",
@@ -247,44 +247,44 @@ export const PremiumJS = defineStore("Premium", {
         response() {
             return {
                 en: {
-                    success: "Your message was successfully delivered to me. I'll answer as soon as i can :)",
+                    success: "Your message was successfully delivered to me. I'll answer as soon as i can",
                     error: "Sorry, somethin went wrong. Try again later",
                     trial: "You already used your one time trial. You can't do it again",
-                    trialSuccess: "You successfully got your trial period. Enjoy :)",
+                    trialSuccess: "You successfully got your trial period. Enjoy",
                     payError: "It looks like this payment already was used or doesn't exist at all. Check refund policy.",
-                    payed: "Thank you for buying my premium. Enjoy :)"
+                    payed: "Thank you for buying my premium. Enjoy"
                 },
                 ru: {
-                    success: "Ваше сообщение было успешно доставленно мне. Я отвечу настолько быстро, на сколько смогу :)",
+                    success: "Ваше сообщение было успешно доставленно мне. Я отвечу настолько быстро, на сколько смогу",
                     error: "Извините, что-то пошло не так. Попробуйте снова чуть позже",
                     trial: "Вы уже использовали ваш одноразовый пробник. Вы не можете использовать это снова",
-                    trialSuccess: "Вы успешно получили свой пробник. Наслаждайтесь :)",
+                    trialSuccess: "Вы успешно получили свой пробник. Наслаждайтесь",
                     payError: "Похоже что эта оплата уже производилась или не существует. Смотрите политику возврата средств.",
-                    payed: "Спасибо за покупку моего премиума. Наслаждайся :)"
+                    payed: "Спасибо за покупку моего премиума. Наслаждайся"
                 },
                 de: {
-                    success: "Ihre Nachricht wurde mir erfolgreich zugestellt. Ich antworte sobald ich kann :)",
+                    success: "Ihre Nachricht wurde mir erfolgreich zugestellt. Ich antworte sobald ich kann",
                     error: "Entschuldigung, etwas ist schief gelaufen. Versuchen Sie es später noch einmal",
                     trial: "Sie haben Ihre einmalige Testversion bereits verwendet. Du kannst es nicht noch einmal tun",
-                    trialSuccess: "Sie haben Ihre Probezeit erfolgreich erhalten. Genießen :)",
+                    trialSuccess: "Sie haben Ihre Probezeit erfolgreich erhalten. Genießen",
                     payError: "Anscheinend wurde diese Zahlung bereits verwendet oder existiert überhaupt nicht. Überprüfen Sie die Rückerstattungsrichtlinie.",
-                    payed: "Vielen Dank für den Kauf meiner Prämie. Genießen :)"
+                    payed: "Vielen Dank für den Kauf meiner Prämie. Genießen"
                 },
                 fr: {
-                    success: "Votre message m'a été livré avec succès. Je répondrai dès que possible :)",
+                    success: "Votre message m'a été livré avec succès. Je répondrai dès que possible",
                     error: "Désolé, quelque chose s'est mal passé. Réessayez plus tard",
                     trial: "Vous avez déjà utilisé votre essai unique. Tu ne peux pas le refaire",
-                    trialSuccess: "Vous avez réussi votre période d'essai. Prendre plaisir :)",
+                    trialSuccess: "Vous avez réussi votre période d'essai. Prendre plaisir",
                     payError: "Il semble que ce paiement ait déjà été utilisé ou n'existe pas du tout. Vérifiez la politique de remboursement.",
-                    payed: "Merci d'avoir acheté ma prime. Prendre plaisir :)"
+                    payed: "Merci d'avoir acheté ma prime. Prendre plaisir"
                 },
                 es: {
-                    success: "Su mensaje fue entregado con éxito a mí. Responderé tan pronto como pueda :)",
+                    success: "Su mensaje fue entregado con éxito a mí. Responderé tan pronto como pueda",
                     error: "Lo siento, algo salió mal. Vuelva a intentarlo más tarde",
                     trial: "Ya usaste tu prueba única. no puedes hacerlo de nuevo",
-                    trialSuccess: "Obtuvo con éxito su período de prueba. Disfrutar :)",
+                    trialSuccess: "Obtuvo con éxito su período de prueba. Disfrutar",
                     payError: "Parece que este pago ya se usó o no existe en absoluto. Consultar política de devoluciones.",
-                    payed: "Gracias por comprar mi prima. Disfrutar :)"
+                    payed: "Gracias por comprar mi prima. Disfrutar"
                 },
                 zh: {
                     success: "您的消息已成功发送给我。我会尽快回复:)",
@@ -298,7 +298,7 @@ export const PremiumJS = defineStore("Premium", {
                     success: "あなたのメッセージは無事に届きました。できるだけ早くお答えします:)",
                     error: "エラーが発生しました。あとでもう一度試してみてください",
                     trial: "すでに 1 回限りの試用版を使用しています。二度とできない",
-                    trialSuccess: "試用期間を取得しました。楽しみ :)",
+                    trialSuccess: "試用期間を取得しました。楽しみ",
                     payError: "この支払いは既に使用されているか、まったく存在しないようです。返金ポリシーを確認してください。",
                     payed: "私のプレミアムを購入していただきありがとうございます。楽しみ ：）"
                 },

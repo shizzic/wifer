@@ -2,12 +2,12 @@
 	<div class="wrap scroll">
 		<h1><strong>Terms and Conditions</strong></h1>
 
-		<p>Welcome to dateshipper!</p>
+		<p>Welcome to wifer!</p>
 
-		<p>These terms and conditions outline the rules and regulations for the use of dateshipper's Website, located at
-			https://dateshipper.com.</p>
+		<p>These terms and conditions outline the rules and regulations for the use of wifer's Website, located at
+			https://wifer.lol.</p>
 
-		<p>By accessing this website we assume you accept these terms and conditions. Do not continue to use dateshipper if
+		<p>By accessing this website we assume you accept these terms and conditions. Do not continue to use wifer if
 			you
 			do not agree to take all of the terms and conditions stated on this page.</p>
 
@@ -27,8 +27,8 @@
 
 		<h3><strong>Cookies</strong></h3>
 
-		<p>We employ the use of cookies. By accessing dateshipper, you agreed to use cookies in agreement with the
-			dateshipper's
+		<p>We employ the use of cookies. By accessing wifer, you agreed to use cookies in agreement with the
+			wifer's
 			Privacy Policy. </p>
 
 		<p>Most interactive websites use cookies to let us retrieve the user's details for each visit. Cookies are used by
@@ -39,20 +39,20 @@
 
 		<h3><strong>License</strong></h3>
 
-		<p>Unless otherwise stated, dateshipper and/or its licensors own the intellectual property rights for all material
+		<p>Unless otherwise stated, wifer and/or its licensors own the intellectual property rights for all material
 			on
-			dateshipper. All intellectual property rights are reserved. You may access this from dateshipper for your own
+			wifer. All intellectual property rights are reserved. You may access this from wifer for your own
 			personal use subjected to restrictions set in these terms and conditions.</p>
 
 		<p>You must not:</p>
 		<ul>
-			<li>Republish material from dateshipper</li>
-			<li>Sell, rent or sub-license material from dateshipper</li>
-			<li>Reproduce, duplicate or copy material from dateshipper</li>
-			<li>Redistribute content from dateshipper</li>
+			<li>Republish material from wifer</li>
+			<li>Sell, rent or sub-license material from wifer</li>
+			<li>Reproduce, duplicate or copy material from wifer</li>
+			<li>Redistribute content from wifer</li>
 		</ul>
 
-		<p>dateshipper reserves the right to monitor all Comments and to remove any Comments which can be considered
+		<p>wifer reserves the right to monitor all Comments and to remove any Comments which can be considered
 			inappropriate, offensive or causes breach of these Terms and Conditions.</p>
 
 		<p>You warrant and represent that:</p>
@@ -70,7 +70,7 @@
 				unlawful activity.</li>
 		</ul>
 
-		<p>You hereby grant dateshipper a non-exclusive license to use, reproduce, edit and authorize others to use,
+		<p>You hereby grant wifer a non-exclusive license to use, reproduce, edit and authorize others to use,
 			reproduce
 			and edit any of your Comments in any and all forms, formats or media.</p>
 
@@ -109,7 +109,7 @@
 		<p>We will approve link requests from these organizations if we decide that: (a) the link would not make us look
 			unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative
 			records
-			with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of dateshipper; and
+			with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of wifer; and
 			(d)
 			the link is in the context of general resource information.</p>
 
@@ -119,7 +119,7 @@
 			within the context of the linking party's site.</p>
 
 		<p>If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you
-			must inform us by sending an e-mail to dateshipper. Please include your name, your organization name, contact
+			must inform us by sending an e-mail to wifer. Please include your name, your organization name, contact
 			information as well as the URL of your site, a list of any URLs from which you intend to link to our Website,
 			and a
 			list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.</p>
@@ -134,7 +134,7 @@
 				content on the linking party's site.</li>
 		</ul>
 
-		<p>No use of dateshipper's logo or other artwork will be allowed for linking absent a trademark license agreement.
+		<p>No use of wifer's logo or other artwork will be allowed for linking absent a trademark license agreement.
 		</p>
 
 		<h3><strong>iFrames</strong></h3>

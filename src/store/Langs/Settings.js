@@ -7,37 +7,37 @@ export const SettingsJS = defineStore("Settings", {
                 en: {
                     username: "Your username",
                     title: "To get attention",
-                    about: "About yourself and who you seek :)"
+                    about: "About yourself and who you seek"
                 },
                 ru: {
                     username: "Ваш ник",
                     title: "Завлеки чем нибудь",
-                    about: "About yourself and who you seek :)"
+                    about: "О себе и кто вам нужен"
                 },
                 de: {
                     username: "Dein Benutzername",
                     title: "Aufmerksamkeit zu bekommen",
-                    about: "Über dich selbst und wen du suchst :)"
+                    about: "Über dich selbst und wen du suchst"
                 },
                 fr: {
                     username: "Votre nom d'utilisateur",
                     title: "Pour attirer l'attention",
-                    about: "A propos de vous et de qui vous cherchez :)"
+                    about: "A propos de vous et de qui vous cherchez"
                 },
                 es: {
                     username: "Su nombre de usuario",
                     title: "Para llamar la atencion",
-                    about: "Sobre ti y a quién buscas :)"
+                    about: "Sobre ti y a quién buscas"
                 },
                 zh: {
                     username: "您的用户名",
                     title: "为了引起注意",
-                    about: "关于你自己和你寻找的人:)"
+                    about: "关于你自己和你寻找的人"
                 },
                 ja: {
                     username: "あなたのユーザーネーム",
                     title: "注意を引くには",
-                    about: "あなた自身とあなたが求める人について:)"
+                    about: "あなた自身とあなたが求める人について"
                 },
             }
         },
@@ -87,31 +87,31 @@ export const SettingsJS = defineStore("Settings", {
         username() {
             return {
                 en: {
-                    required: "U need some username :)",
+                    required: "U need some username",
                     space: "U can't use spaces for username",
                     available: "Available",
                     taken: "This username is already used"
                 },
                 ru: {
-                    required: "Вам нужен ник :)",
+                    required: "Вам нужен ник",
                     space: "Вы не можете использовать пробел в нике",
                     available: "Доступен",
                     taken: "Этот ник уже занят"
                 },
                 de: {
-                    required: "Du brauchst einen Benutzernamen :)",
+                    required: "Du brauchst einen Benutzernamen",
                     space: "Sie können keine Leerzeichen für den Benutzernamen verwenden",
                     available: "Verfügbar",
                     taken: "Dieser Benutzername wird bereits verwendet"
                 },
                 fr: {
-                    required: "Tu as besoin d'un nom d'utilisateur :)",
+                    required: "Tu as besoin d'un nom d'utilisateur",
                     space: "Vous ne pouvez pas utiliser d'espaces pour le nom d'utilisateur",
                     available: "Disponible",
                     taken: "Ce nom d'utilisateur est déjà utilisé"
                 },
                 es: {
-                    required: "Necesitas un nombre de usuario :)",
+                    required: "Necesitas un nombre de usuario",
                     space: "No puedes usar espacios para el nombre de usuario",
                     available: "Disponible",
                     taken: "El nombre de usuario ya esta siendo usado"

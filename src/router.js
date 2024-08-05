@@ -8,9 +8,9 @@ let c = {
     Profile: () => import("@/components/Profile/Main.vue"),
     Signin: () => import("@/components/Signin/Main.vue"),
     Auth: () => import("@/components/Auth.vue"),
-    TermsAndConditions: () => import("@/components/terms/TermsAndConditions.vue"),
-    PrivacyPolicy: () => import("@/components/terms/PrivacyPolicy.vue"),
-    RefundPolicy: () => import("@/components/terms/RefundPolicy.vue"),
+    TermsAndConditions: () => import("@/components/docs/TermsAndConditions.vue"),
+    PrivacyPolicy: () => import("@/components/docs/PrivacyPolicy.vue"),
+    RefundPolicy: () => import("@/components/docs/RefundPolicy.vue"),
 }
 
 const routes = [
@@ -21,9 +21,9 @@ const routes = [
     { path: "/profile/:id", name: "profile", component: c.Profile, props: true, },
     { path: "/signin", name: "signin", component: c.Signin, props: true, },
     { path: "/auth/:id(\\S+)/:code", name: "auth", component: c.Auth, props: true, },
-    { path: "/terms/terms_and_conditions", name: "terms_and_conditions", component: c.TermsAndConditions, props: true, },
-    { path: "/terms/privacy_policy", name: "privacy_policy", component: c.PrivacyPolicy, props: true, },
-    { path: "/terms/refund_policy", name: "refund_policy", component: c.RefundPolicy, props: true, },
+    { path: "/docs/terms_and_conditions", name: "terms_and_conditions", component: c.TermsAndConditions, props: true, },
+    { path: "/docs/privacy_policy", name: "privacy_policy", component: c.PrivacyPolicy, props: true, },
+    { path: "/docs/refund_policy", name: "refund_policy", component: c.RefundPolicy, props: true, },
 ]
 
 const router = createRouter({

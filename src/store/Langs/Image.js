@@ -16,7 +16,7 @@ export const ImageJS = defineStore("Image", {
         error() {
             return {
                 en: "Bad request. Try again",
-                ru: "Че то шальнуло. Попробуй снова)",
+                ru: "Что-то пошло не так. Попробуйте снова",
                 de: "Ungültige Anforderung. Versuchen Sie es nochmal",
                 fr: "Mauvaise demande. Réessayer",
                 es: "Solicitud incorrecta. Intentar otra vez",

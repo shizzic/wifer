@@ -6,31 +6,31 @@ export const ProfileJS = defineStore("Profile", {
             return {
                 en: {
                     "title": "Enter",
-                    "text": "Hello there! If you want the best sugar on web, than welcome aboard :)"
+                    "text": "Hi! If you want to find something nice, then come in"
                 },
                 ru: {
                     "title": "Вход",
-                    "text": "Кулити, если ты хочешь лучший опыт знакомств в инете, тогда присаживайся к столу :)"
+                    "text": "Привет! Если ты хочешь найти что-то приятное, тогда заходи"
                 },
                 de: {
                     "title": "Eintreten",
-                    "text": "Hallo! Wenn Sie den besten zucker im Internet wollen, dann willkommen an Bord :)"
+                    "text": "Hallo! Wenn du etwas Schönes finden möchtest, dann komm rein"
                 },
                 fr: {
                     "title": "Entrer",
-                    "text": "Bonjour! Si vous voulez le meilleur sucre sur le web, alors bienvenue à bord :)"
+                    "text": "Salut ! Si tu veux trouver quelque chose de sympa, alors viens"
                 },
                 es: {
                     "title": "Ingresar",
-                    "text": "¡Hola! Si quieres el mejor azúcar en la web, bienvenido a bordo :)"
+                    "text": "Hola! Si quieres encontrar algo lindo, entra"
                 },
                 zh: {
                     "title": "进入",
-                    "text": "你好呀！如果您想要网络上最好的糖，欢迎加入 :)"
+                    "text": "嗨！如果你想找到好东西，那就进来吧"
                 },
                 ja: {
                     "title": "入る",
-                    "text": "こんにちは！ウェブ上で最高のシュガーが必要な場合は,ようこそ :)"
+                    "text": "こんにちは！何かいいものを見つけたいなら、ぜひお越しください"
                 },
             }
         },
@@ -79,13 +79,13 @@ export const ProfileJS = defineStore("Profile", {
         },
         success() {
             return {
-                en: "You signed in. Enjoy yourself :)",
-                ru: "Вы вошли. Развлекайтесь :)",
-                de: "Du hast dich angemeldet. Viel Spaß :)",
-                fr: "Vous vous êtes connecté. Amusez-vous bien :)",
-                es: "Has iniciado sesión. Diviértete :)",
-                zh: "您已登录。尽情享受吧 :)",
-                ja: "サインインしました。お楽しみください :)",
+                en: "You signed in",
+                ru: "Вы вошли",
+                de: "Du hast dich angemeldet",
+                fr: "Vous vous êtes connecté",
+                es: "Has iniciado sesión",
+                zh: "您已登录",
+                ja: "サインインしました",
             }
         },
         cropper() {
@@ -98,7 +98,7 @@ export const ProfileJS = defineStore("Profile", {
                     "max_size": "Max size of image is 20 MB. Excess: ",
                     "max_image": "You can have up to 20 images",
                     "error": "Something occured to the server, try again",
-                    "success": "Image was added)",
+                    "success": "Image was added",
                     avatar_must_be: "Nothing to replace the avatar with",
                 },
                 ru: {
@@ -109,7 +109,7 @@ export const ProfileJS = defineStore("Profile", {
                     "max_image": "Вы можете иметь до 20 фоток. Избыток: ",
                     "max_size": "Максимальный размер фотки 20 мб",
                     "error": "Что-то случилось с сервером, попробуйте снова",
-                    "success": "Фотка добавлена)",
+                    "success": "Фотка добавлена",
                     avatar_must_be: "Нечем заменить аватарку",
                 },
                 de: {
@@ -120,7 +120,7 @@ export const ProfileJS = defineStore("Profile", {
                     "max_image": "Sie können bis zu 20 Bilder haben. Überschuss: ",
                     "max_size": "Die maximale Bildgröße beträgt 20 MB",
                     "error": "Auf dem Server ist ein Fehler aufgetreten. Versuchen Sie es erneut",
-                    "success": "Bild wurde hinzugefügt)",
+                    "success": "Bild wurde hinzugefügt",
                     avatar_must_be: "Nichts, womit man den Avatar ersetzen könnte",
                 },
                 fr: {
@@ -131,7 +131,7 @@ export const ProfileJS = defineStore("Profile", {
                     "max_size": "La taille maximale de l'image est de 20 Mo. Excès: ",
                     "max_image": "Vous pouvez avoir jusqu'à 20 images",
                     "error": "Quelque chose s'est produit sur le serveur, réessayez",
-                    "success": "L'image a été ajoutée)",
+                    "success": "L'image a été ajoutée",
                     avatar_must_be: "Rien pour remplacer l'avatar",
                 },
                 es: {
@@ -142,7 +142,7 @@ export const ProfileJS = defineStore("Profile", {
                     "max_size": "El tamaño máximo de la imagen es de 20 MB",
                     "max_image": "Puedes tener hasta 20 imágenes. Exceso: ",
                     "error": "Algo le ocurrió al servidor, inténtalo de nuevo",
-                    "success": "Se agregó la imagen)",
+                    "success": "Se agregó la imagen",
                     avatar_must_be: "Nada con lo que reemplazar el avatar.",
                 },
                 zh: {
@@ -153,7 +153,7 @@ export const ProfileJS = defineStore("Profile", {
                     "max_image": "您最多可以拥有 20 张图片. 過量的: ",
                     "max_size": "图像的最大大小为 20 MB",
                     "error": "服务器出现问题，重试",
-                    "success": "图片已添加 )",
+                    "success": "图片已添加",
                     avatar_must_be: "没有什么可以代替头像的",
                 },
                 ja: {
@@ -164,7 +164,7 @@ export const ProfileJS = defineStore("Profile", {
                     "max_image": "最大 20 枚の画像を保持できます. 過剰: ",
                     "max_size": "画像の最大サイズは 20 MB です",
                     "error": "サーバーで問題が発生しました。もう一度お試しください",
-                    "success": "画像追加しました）",
+                    "success": "画像追加しました",
                     avatar_must_be: "アバターに代わるものはありません",
                 },
             }

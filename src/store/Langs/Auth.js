@@ -12,7 +12,7 @@ export const AuthJS = defineStore("Auth", {
                 ru: {
                     invalid_code: "Неверный формат кода",
                     code_not_found: "Не старайся меня хакнуть",
-                    user_not_found: "Ошибка на сервере. Попробуй снова"
+                    user_not_found: "Ошибка на сервере. Попробуйте снова"
                 },
                 de: {
                     invalid_code: "Ungültiger Code",

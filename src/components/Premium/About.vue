@@ -1,6 +1,6 @@
 <template>
 	<div class="square">
-        <h1>{{ $app_name }}</h1>
+        <h1>{{ $app_name.toLowerCase() }}</h1>
 
         <div class="block">
             <span>{{ lang.text }}</span>

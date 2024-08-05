@@ -6,31 +6,31 @@ export const SigninJS = defineStore("Signin", {
             return {
                 en: {
                     "title": "Enter",
-                    "text": "Hello there! If you want the best sugar on web, than welcome aboard :)"
+                    "text": "Hi! If you want to find something nice, then come in"
                 },
                 ru: {
                     "title": "Вход",
-                    "text": "Кулити, если ты хочешь лучший опыт знакомств в инете, тогда присаживайся к столу :)"
+                    "text": "Привет! Если ты хочешь найти что-то приятное, тогда заходи"
                 },
                 de: {
                     "title": "Eintreten",
-                    "text": "Hallo! Wenn Sie den besten Zucker im Internet wollen, dann willkommen an Bord :)"
+                    "text": "Hallo! Wenn du etwas Schönes finden möchtest, dann komm rein"
                 },
                 fr: {
                     "title": "Entrer",
-                    "text": "Bonjour! Si vous voulez le meilleur sucre sur le web, alors bienvenue à bord :)"
+                    "text": "Salut ! Si tu veux trouver quelque chose de sympa, alors viens"
                 },
                 es: {
                     "title": "Ingresar",
-                    "text": "¡Hola! Si quieres el mejor azúcar en la web, bienvenido a bordo :)"
+                    "text": "Hola! Si quieres encontrar algo lindo, entra"
                 },
                 zh: {
                     "title": "进入",
-                    "text": "你好呀！如果您想要网络上最好的糖，欢迎加入 :)"
+                    "text": "嗨！如果你想找到好东西，那就进来吧"
                 },
                 ja: {
                     "title": "入る",
-                    "text": "こんにちは！ウェブ上で最高のシュガーが必要な場合は、ようこそ :)"
+                    "text": "こんにちは！何かいいものを見つけたいなら、ぜひお越しください"
                 },
             }
         },
@@ -59,27 +59,27 @@ export const SigninJS = defineStore("Signin", {
         error() {
             return {
                 en: {
-                    "email": "A-a-a. Field must be an email",
+                    "email": "Field must be an email",
                     "required": "Hey, fill it!"
                 },
                 ru: {
-                    "password": "Не, не, не. Введи почту, а не что то другое",
-                    "required": "Хей, заполни поле!"
+                    "password": "Введите почту, а не что-то другое",
+                    "required": "Заполни поле!"
                 },
                 de: {
-                    "email": "A-a-a. Das Feld muss eine E-Mail sein",
+                    "email": "Das Feld muss eine E-Mail sein",
                     "required": "Hey, füll es!"
                 },
                 fr: {
-                    "email": "A-a-a. Le champ doit être un email",
+                    "email": "Le champ doit être un email",
                     "required": "Hé, remplis-le !"
                 },
                 es: {
-                    "email": "A-a-a. El campo debe ser un correo electrónico",
+                    "email": "El campo debe ser un correo electrónico",
                     "required": "¡Oye, llénalo!"
                 },
                 zh: {
-                    "email": "啊啊啊。字段必须是电子邮件",
+                    "email": "字段必须是电子邮件",
                     "required": "喂，填!"
                 },
                 ja: {
@@ -102,39 +102,39 @@ export const SigninJS = defineStore("Signin", {
         response() {
             return {
                 en: {
-                    wrong_api_token: "Don't try to hack me bro :)",
+                    wrong_api_token: "Don't try to hack me bro",
                     email_invalid: "Wrong email",
                     email_not_dispatched: "Email with link wasn't sent to you 'cause of some reason. Please, try again",
                     something_went_wrong: "Some error occured on server. Try again and never give up",
-                    user_is_banned: "Bro, u have been banned. But don't worry. U can create a new account whenever you like :)" 
+                    user_is_banned: "Bro, u have been banned. But don't worry. U can create a new account whenever you like" 
                 },
                 ru: {
-                    wrong_api_token: "Не пытайся хакнуть меня бро :)",
+                    wrong_api_token: "Не пытайся хакнуть меня бро",
                     email_invalid: "Это не почта",
                     email_not_dispatched: "Письмо с сылкой не было отправленно на вашу почту по какой-то причине. Пожалуста, попробуйте снова",
-                    something_went_wrong: "Че то на сервере бахнуло. Попробуй снова и не здавайся",
+                    something_went_wrong: "что-то случилось на сервере. Попробуйте снова",
                     user_is_banned: "Бро, ты был забанен. Но не парься. Я же не запретил тебе заводить новые аккаунты (подмиг, подмиг :D)"
                 },
                 de: {
-                    wrong_api_token: "Versuch nicht, mich zu hacken, Bruder :)",
+                    wrong_api_token: "Versuch nicht, mich zu hacken, Bruder",
                     email_invalid: "Falsche E-mail",
                     email_not_dispatched: "E-Mail mit Link wurde aus irgendeinem Grund nicht an Sie gesendet. Bitte versuche es erneut",
                     something_went_wrong: "Auf dem Server ist ein Fehler aufgetreten. Versuchen Sie es erneut und geben Sie niemals auf",
-                    user_is_banned: "Bruder, du wurdest gesperrt. Aber keine Sorge. Du kannst jederzeit ein neues Konto erstellen :)" 
+                    user_is_banned: "Bruder, du wurdest gesperrt. Aber keine Sorge. Du kannst jederzeit ein neues Konto erstellen" 
                 },
                 fr: {
-                    wrong_api_token: "N'essaie pas de me pirater frère :)",
+                    wrong_api_token: "N'essaie pas de me pirater frère",
                     email_invalid: "Mauvaise adresse mail",
                     email_not_dispatched: "L'e-mail avec le lien ne vous a pas été envoyé pour une raison quelconque. Veuillez réessayer",
                     something_went_wrong: "Une erreur s'est produite sur le serveur. Réessayez et n'abandonnez jamais",
-                    user_is_banned: "Frère, tu as été banni. Mais ne vous inquiétez pas. Vous pouvez créer un nouveau compte quand vous le souhaitez :)" 
+                    user_is_banned: "Frère, tu as été banni. Mais ne vous inquiétez pas. Vous pouvez créer un nouveau compte quand vous le souhaitez" 
                 },
                 es: {
-                    wrong_api_token: "No intentes hackearme hermano :)",
+                    wrong_api_token: "No intentes hackearme hermano",
                     email_invalid: "Email incorrecto",
                     email_not_dispatched: "No se le envió el correo electrónico con el enlace por algún motivo. Inténtalo de nuevo",
                     something_went_wrong: "Se produjo algún error en el servidor. Inténtalo de nuevo y nunca te rindas",
-                    user_is_banned: "Hermano, te han baneado. Pero no te preocupes. Puedes crear una nueva cuenta cuando quieras :)" 
+                    user_is_banned: "Hermano, te han baneado. Pero no te preocupes. Puedes crear una nueva cuenta cuando quieras" 
                 },
                 zh: {
                     wrong_api_token: "不要试图破解我兄弟:)",
@@ -154,13 +154,13 @@ export const SigninJS = defineStore("Signin", {
         },
         success() {
             return {
-                en: "You signed in. Enjoy yourself :)",
-                ru: "Вы вошли. Развлекайтесь :)",
-                de: "Du hast dich angemeldet. Viel Spaß :)",
-                fr: "Vous vous êtes connecté. Amusez-vous bien :)",
-                es: "Has iniciado sesión. Diviértete :)",
-                zh: "您已登录。尽情享受吧 :)",
-                ja: "サインインしました。お楽しみください :)",
+                en: "You signed in. Enjoy yourself",
+                ru: "Вы вошли. Удачи",
+                de: "Du hast dich angemeldet. Viel Spaß",
+                fr: "Vous vous êtes connecté. Amusez-vous bien",
+                es: "Has iniciado sesión. Diviértete",
+                zh: "您已登录。尽情享受吧",
+                ja: "サインインしました。お楽しみください",
             }
         },
         email() {

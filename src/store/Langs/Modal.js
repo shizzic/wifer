@@ -9,37 +9,37 @@ export const ModalJS = defineStore("Modal", {
                         "1. After deactivateing, your profile won't be showing in public search.",
                         "2. All your data will be saved.",
                         "3. I won't bother you anymore with emails (until next login :D)",
-                        "4. Just re-login and you'll see all your information again :)"
+                        "4. Just re-login and you'll see all your information again"
                     ],
                     ru: [
                         "1. После деактивации вы не будете отображаться в общем поиске.",
                         "2. Вся ваша инфа будет сохраненна.",
                         "3. Я больше не побеспокою вас имейлами (до следующего логина :D)",
-                        "4. Просто перелогиньтесь и вы увидите всю вашу информацию снова :)"
+                        "4. Просто перелогиньтесь и вы увидите всю вашу информацию снова"
                     ],
                     de: [
                         "1. Nach der Deaktivierung wird Ihr Profil nicht in der öffentlichen Suche angezeigt.",
                         "2. Alle Ihre Daten werden gespeichert.",
                         "3. Ich werde dich nicht mehr mit E-Mails belästigen (bis zum nächsten Login :D)",
-                        "4. Melden Sie sich einfach erneut an und Sie sehen wieder alle Ihre Informationen :)"
+                        "4. Melden Sie sich einfach erneut an und Sie sehen wieder alle Ihre Informationen"
                     ],
                     fr: [
                         "1. Après la désactivation, votre profil ne s'affichera pas dans la recherche publique.",
                         "2. Toutes vos données seront enregistrées.",
                         "3. Je ne vous embêterai plus avec les emails (jusqu'à la prochaine connexion :D)",
-                        "4. Connectez-vous à nouveau et vous verrez à nouveau toutes vos informations :)"
+                        "4. Connectez-vous à nouveau et vous verrez à nouveau toutes vos informations"
                     ],
                     es: [
                         "1. Después de la desactivación, su perfil no se mostrará en la búsqueda pública.",
                         "2. Todos sus datos serán guardados.",
                         "3. No te molestaré más con los correos electrónicos (hasta el próximo inicio de sesión: D)",
-                        "4. Simplemente vuelva a iniciar sesión y verá toda su información nuevamente :)"
+                        "4. Simplemente vuelva a iniciar sesión y verá toda su información nuevamente"
                     ],
                     zh: [
                         "1. 停用后，您的个人资料将不会显示在公开搜索中。",
                         "2. 您的所有数据都将被保存。",
                         "3. 我不会再用电子邮件打扰你了（直到下次登录 :D)",
-                        "4. 只需重新登录，您就会再次看到所有信息 :)"
+                        "4. 只需重新登录，您就会再次看到所有信息"
                     ],
                     ja: [
                         "1. 非アクティブ化すると、あなたのプロフィールは公開検索に表示されなくなります。",
@@ -62,31 +62,31 @@ export const ModalJS = defineStore("Modal", {
                         "1. You need to buy premium for chatting with users",
                         "2. Or maybe you have an access from this user directly",
                         "3. You ask me, how will i get an access if i can't write it to her/him?",
-                        "4. Just give an access from you to her/him and than, you'll get attention :)"
+                        "4. Just give an access from you to her/him and than, you'll get attention"
                     ],
                     ru: [
                         "1. Тебе нужно купить премиум, чтобы чатится",
                         "2. Или иметь доступ на переписку от этого юзера напрямую",
                         "3. Ты спросишь, как я получу доступ от нее/его, если я не могу написать ей/ему?",
-                        "4. Просто дай доступ на чат от самого себя и тогда (может быть), ты привлечешь внимание :)"
+                        "4. Просто дай доступ на чат от самого себя и тогда (может быть), ты привлечешь внимание"
                     ],
                     de: [
                         "1. Sie müssen Premium kaufen, um mit Benutzern zu chatten",
                         "2. Oder vielleicht haben Sie direkt einen Zugriff von diesem Benutzer",
                         "3. Du fragst mich, wie bekomme ich einen Zugang, wenn ich ihn ihr/ihm nicht schreiben kann?",
-                        "4. Gib ihr/ihm einfach einen Zugang von dir und dann bekommst du Aufmerksamkeit :)"
+                        "4. Gib ihr/ihm einfach einen Zugang von dir und dann bekommst du Aufmerksamkeit"
                     ],
                     fr: [
                         "1. Vous devez acheter une prime pour discuter avec les utilisateurs",
                         "2. Ou peut-être avez-vous directement accès à cet utilisateur",
                         "3. Vous me demandez, comment vais-je obtenir un accès si je ne peux pas lui écrire?",
-                        "4. Donnez juste un accès de vous à elle/lui et vous attirerez l'attention :)"
+                        "4. Donnez juste un accès de vous à elle/lui et vous attirerez l'attention"
                     ],
                     es: [
                         "1. Necesitas comprar premium para chatear con usuarios",
                         "2. O tal vez tenga un acceso de este usuario directamente",
                         "3. Me preguntas, ¿cómo obtendré un acceso si no puedo escribirle?",
-                        "4. Solo dale un acceso de ti a él/ella y entonces, obtendrás atención :)"
+                        "4. Solo dale un acceso de ti a él/ella y entonces, obtendrás atención"
                     ],
                     zh: [
                         "1. 您需要购买高级版才能与用户聊天",
@@ -136,20 +136,20 @@ export const ModalJS = defineStore("Modal", {
         success() {
             return {
                 deactivate: {
-                    en: "Your account was successfully deactivated. Looking forward of your returning :)",
-                    ru: "Аккаунт успешно деактивирован. Жду твоего возвращения :)",
-                    de: "Ihr Konto wurde erfolgreich deaktiviert. Ich freue mich auf Ihre Rückkehr :)",
-                    fr: "Votre compte a été désactivé avec succès. Dans l'attente de votre retour :)",
-                    es: "Su cuenta fue desactivada con éxito. Esperando su regreso :)",
+                    en: "Your account was successfully deactivated. Looking forward of your returning",
+                    ru: "Аккаунт успешно деактивирован. Жду твоего возвращения",
+                    de: "Ihr Konto wurde erfolgreich deaktiviert. Ich freue mich auf Ihre Rückkehr",
+                    fr: "Votre compte a été désactivé avec succès. Dans l'attente de votre retour",
+                    es: "Su cuenta fue desactivada con éxito. Esperando su regreso",
                     zh: "您的帐户已成功停用。期待你的归来:)",
                     ja: "あなたのアカウントは正常に無効化されました。あなたの帰りを楽しみにしています:)",
                 },
                 logout: {
-                    en: "You've logouted. I hope u got what u wanted :)",
-                    ru: "Вы вышли. Надеюсь классно провели время :)",
-                    de: "Sie haben sich abgemeldet. Ich hoffe du hast was du wolltest :)",
-                    fr: "Vous êtes déconnecté. J'espère que tu as eu ce que tu voulais :)",
-                    es: "Ha cerrado sesión. Espero que hayas conseguido lo que querías :)",
+                    en: "You've logouted. I hope u got what u wanted",
+                    ru: "Вы вышли. Надеюсь классно провели время",
+                    de: "Sie haben sich abgemeldet. Ich hoffe du hast was du wolltest",
+                    fr: "Vous êtes déconnecté. J'espère que tu as eu ce que tu voulais",
+                    es: "Ha cerrado sesión. Espero que hayas conseguido lo que querías",
                     zh: "您已注销。我希望你得到你想要的:)",
                     ja: "ログアウトしました。私はあなたが望んでいたものを手に入れたことを願っています:)",
                 }
@@ -159,7 +159,7 @@ export const ModalJS = defineStore("Modal", {
             return {
                 like: {
                     en: "You added this user to your favorites",
-                    ru: "Вы добавили юзера в свой список фаворитов",
+                    ru: "Вы добавили юзера в избранные",
                     de: "Sie haben diesen Benutzer zu Ihren Favoriten hinzugefügt",
                     fr: "Vous avez ajouté cet utilisateur à vos favoris",
                     es: "Has añadido este usuario a tus favoritos.",
@@ -177,7 +177,7 @@ export const ModalJS = defineStore("Modal", {
                 },
                 access: {
                     en: "You gave an access to text you and see last messages for this user",
-                    ru: "Вы дали доступ на переписку с Вами этому юзеру",
+                    ru: "Вы дали доступ на переписку с вами этому юзеру",
                     de: "Sie haben Zugriff auf Textnachrichten und die Anzeige der letzten Nachrichten für diesen Benutzer gewährt",
                     fr: "Vous avez donné un accès au SMS et voir les derniers messages de cet utilisateur",
                     es: "Le diste acceso para enviarte mensajes de texto y ver los últimos mensajes de este usuario",
@@ -190,7 +190,7 @@ export const ModalJS = defineStore("Modal", {
             return {
                 like: {
                     en: "You deleted this user from your favorites",
-                    ru: "Вы удалили юзера из списка фаворитов",
+                    ru: "Вы удалили юзера из избранных",
                     de: "Sie haben diesen Benutzer aus Ihren Favoriten gelöscht",
                     fr: "Vous avez supprimé cet utilisateur de vos favoris",
                     es: "Borraste a este usuario de tus favoritos",
@@ -199,7 +199,7 @@ export const ModalJS = defineStore("Modal", {
                 },
                 private: {
                     en: "You took away an access for your photos",
-                    ru: "Вы забрали доступ к свои првиатным фоткам",
+                    ru: "Вы забрали доступ к своим приватным фоткам",
                     de: "Du hast einen Zugang für deine Fotos weggenommen",
                     fr: "Vous avez enlevé un accès pour vos photos",
                     es: "Le quitaste un acceso a tus fotos",
@@ -208,7 +208,7 @@ export const ModalJS = defineStore("Modal", {
                 },
                 access: {
                     en: "Now, this user can't text you and see your last messages",
-                    ru: "Теперь этот юзер не может вам писать и видеть все что было написанно",
+                    ru: "Теперь этот юзер не может вам написать, а так же не может видеть все, что было написанно до этого",
                     de: "Jetzt kann dieser Benutzer Ihnen keine SMS schreiben und Ihre letzten Nachrichten sehen",
                     fr: "Maintenant, cet utilisateur ne peut pas vous envoyer de SMS et voir vos derniers messages",
                     es: "Ahora, este usuario no puede enviarte mensajes de texto y ver tus últimos mensajes.",
