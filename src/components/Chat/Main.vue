@@ -20,7 +20,7 @@ import { clearInterval, setInterval } from 'worker-timers'
 import Left from "@/components/Chat/Left/Main.vue"
 import Right from "@/components/Chat/Right/Main.vue"
 import None from "@/components/Chat/Right/None.vue"
-import { SyncLoader } from "vue-spinner/src"
+import SyncLoader from "vue-spinner/src/SyncLoader.vue"
 import { chatJS } from "@/store/chat"
 
 export default {

@@ -19,7 +19,7 @@ import { clearTimeout, setTimeout } from 'worker-timers'
 import Hat from "@/components/Search/List/Hat/Main.vue"
 import Users from "@/components/Search/List/Users/Main.vue"
 import Pagination from "@/components/Search/List/Pagination.vue"
-import { SyncLoader } from "vue-spinner/src"
+import SyncLoader from "vue-spinner/src/SyncLoader.vue"
 
 export default {
 	name: "List",

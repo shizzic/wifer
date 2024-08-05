@@ -27,7 +27,7 @@ import { clearTimeout, setTimeout } from 'worker-timers'
 import { HeartJS } from "@/store/Langs/Heart"
 import { InfoJS } from "@/store/Langs/Info"
 import { SearchJS } from "@/store/Langs/Search"
-import { SyncLoader } from "vue-spinner/src"
+import SyncLoader from "vue-spinner/src/SyncLoader.vue"
 import Hat from "@/components/Heart/Hat/Main.vue"
 import Users from "@/components/Heart/Users/Main.vue"
 import Pagination from "@/components/Heart/Pagination.vue"
