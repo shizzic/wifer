@@ -63,7 +63,7 @@ export const SigninJS = defineStore("Signin", {
                     "required": "Hey, fill it!"
                 },
                 ru: {
-                    "password": "Введите почту, а не что-то другое",
+                    "email": "Введите почту, а не что-то другое",
                     "required": "Заполни поле!"
                 },
                 de: {

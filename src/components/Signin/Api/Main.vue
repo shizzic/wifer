@@ -1,15 +1,19 @@
 <template>
 	<div class="wrapper" :class="{ disabled: !terms }">
-		<Google @signin="signin" :terms="terms" />
-		<Facebook v-if="https" @signin="signin" :terms="terms" />
-		<!-- <Twitter @signin="signin" :terms="terms" /> -->
+		<template v-if="!country || country && country !== 'Russia'">
+			<Google @signin="signin" :terms="terms" />
+			<Facebook v-if="https" @signin="signin" :terms="terms" />
+			<Twitter @signin="signin" :terms="terms" />
+		</template>
 	</div>
 </template>
 
 <script scoped>
+import * as time_zones from './timezone_to_country'
 import Google from "@/components/Signin/Api/Google.vue"
 import Facebook from "@/components/Signin/Api/Facebook.vue"
 import Twitter from "@/components/Signin/Api/Twitter.vue"
+
 export default {
 	name: "Api",
 	props: ["l", "success", "response", "terms"],
@@ -22,10 +26,11 @@ export default {
 		id() {
 			return this.$user.id
 		}
-    },
+	},
 	data() {
 		return {
-			https: false
+			https: false,
+			country: time_zones.default[Intl.DateTimeFormat().resolvedOptions().timeZone]
 		}
 	},
 	beforeMount() {
@@ -64,9 +69,9 @@ export default {
 
 <style scoped>
 .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 25px;
 }
 </style>
