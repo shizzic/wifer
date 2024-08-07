@@ -6,14 +6,14 @@
 
 <script scoped>
 export default {
-    props: ['redirect_uri'],
+    props: ['terms', 'redirect_uri'],
     beforeMount() {
         if (this.$route.query.method === 'Yandex' && this.$route.query.code)
             this.$emit("signin", { "token": this.$route.query.code, "method": this.$route.query.method })
     },
     methods: {
         popup() {
-            window.open('https://oauth.yandex.ru/authorize?response_type=code&client_id=9096eee5b689417a8b708aaf58e06659&display=popup&redirect_uri=' + this.redirect_uri + '?method=Yandex', '_self')
+            window.open('https://oauth.yandex.ru/authorize?response_type=code&client_id=' + import.meta.env.VITE_YANDEX_ID + '&display=popup&redirect_uri=' + this.redirect_uri + '?method=Yandex', '_self')
         }
     }
 }
