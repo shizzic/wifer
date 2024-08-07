@@ -1,26 +1,29 @@
 <template>
-	<div class="wrapper" :class="{ disabled: !terms }">
-		<template v-if="!country || country && country !== 'Russia'">
+	<div class="wrapper" :class="{disabled: !terms}">
+		<template v-if="!https || https && (!country || country && country !== 'Russia')">
 			<Google @signin="signin" :terms="terms" />
-			<Facebook v-if="https" @signin="signin" :terms="terms" />
-			<Twitter @signin="signin" :terms="terms" />
+			<!-- <Twitter @signin="signin" :terms="terms" :redirect_uri="redirect_uri" /> -->
 		</template>
+		<Yandex @signin="signin" :terms="terms" :redirect_uri="redirect_uri" />
+		<Mail @signin="signin" :terms="terms" :redirect_uri="redirect_uri" />
 	</div>
 </template>
 
 <script scoped>
 import * as time_zones from './timezone_to_country'
 import Google from "@/components/Signin/Api/Google.vue"
-import Facebook from "@/components/Signin/Api/Facebook.vue"
 import Twitter from "@/components/Signin/Api/Twitter.vue"
+import Yandex from "@/components/Signin/Api/Yandex.vue"
+import Mail from "@/components/Signin/Api/Mail.vue"
 
 export default {
 	name: "Api",
 	props: ["l", "success", "response", "terms"],
 	components: {
 		Google,
-		Facebook,
 		Twitter,
+		Yandex,
+		Mail,
 	},
 	computed: {
 		id() {
@@ -30,6 +33,7 @@ export default {
 	data() {
 		return {
 			https: false,
+			redirect_uri: window.location.origin + window.location.pathname,
 			country: time_zones.default[Intl.DateTimeFormat().resolvedOptions().timeZone]
 		}
 	},
@@ -39,6 +43,9 @@ export default {
 	},
 	methods: {
 		signin(data) {
+			if (!this.terms)
+				return
+
 			fetch(this.$domain + "signin", {
 				method: "POST",
 				credentials: "include",
@@ -48,16 +55,18 @@ export default {
 				body: JSON.stringify({
 					id: data.id,
 					token: data.token,
-					api: true,
 					method: data.method,
+					redirect_uri: data.redirect_uri,
+					api: true,
 				})
 			})
 				.then(data => { return data.json() })
-				.then(data => {
-					if ("error" in data)
-						this.$toast.error(this.response[this.l][data.error])
-					else {
-						this.$user.set({ field: "id", value: data.id })
+				.then(response => {
+					if ("error" in response) {
+						this.$toast.error(this.response[this.l][response.error])
+						this.$router.push({ name: "signin" })
+					} else {
+						this.$user.set({ field: "id", value: response.id })
 						this.$router.push({ name: "profile", params: { id: this.id } })
 						this.$toast.success(this.success[this.l])
 					}
@@ -73,5 +82,14 @@ export default {
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 25px;
+}
+
+.wrapper *:not(:last-child) {
+	margin: 0;
+	margin-right: 10px;
+}
+
+.disabled {
+	pointer-events: none;
 }
 </style>

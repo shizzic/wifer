@@ -21,7 +21,7 @@ export const chatJS = defineStore("chat", {
     actions: {
         start() {
             if (!this.server) {
-                this.server = new WebSocket(import.meta.env.VITE_WEBSOCKET_PROTOCOL + "://" + import.meta.env.VITE_DOMAIN_NAME + "chat")
+                this.server = new WebSocket(import.meta.env.VITE_WEBSOCKET_PROTOCOL + "://" + import.meta.env.VITE_SERVER_DOMAIN_NAME + "chat")
 
                 this.server.onmessage = (e) => {
                     this.onMessage(e.data)
