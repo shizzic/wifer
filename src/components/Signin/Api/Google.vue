@@ -1,6 +1,6 @@
 <template>
-	<div @click="terms ? popup() : null">
-		<img src="/images/apis/google.webp">
+	<div @click="terms ? popup() : null" class="btn_wrap">
+		<div class="btn" :data-title="'Google'"><img src="/images/apis/google.webp"></div>
 	</div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped>
-div {
+.btn {
 	cursor: pointer;
 	width: 40px;
 	height: 40px;
@@ -39,11 +39,26 @@ div {
 	padding: 8px;
 }
 
-div:hover {
+.btn:hover {
 	background-color: #ededed;
 }
 
 img {
 	width: 100%;
+}
+
+.btn_wrap:hover [data-title]::after {
+  content: attr(data-title);
+  font-size: 15px;
+  z-index: 100;
+  background-color: rgb(199, 199, 199);
+  border-radius: 2px;
+  word-break: normal;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  padding: 1px 6px;
 }
 </style>
