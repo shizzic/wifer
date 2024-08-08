@@ -2,8 +2,7 @@
     <label for="accept" :value="terms">
         <input type="checkbox" id="accept" name="accept" v-model="value" />
         {{ lang }}
-        <a href="https://app.termly.io/document/terms-of-use-for-website/6bcad083-6995-488c-afa5-34cb4a635dfc"
-            target="_blank">Terms and Conditions</a>
+        <router-link :to="{name: 'terms_and_conditions'}" target="_blank">Terms and Conditions</router-link>
     </label>
 </template>
 
