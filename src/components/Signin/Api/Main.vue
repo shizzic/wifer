@@ -1,7 +1,8 @@
 <template>
 	<div class="wrapper" :class="{disabled: !terms}">
 		<template v-if="!https || https && (!country || country && country !== 'Russia')">
-			<Google @signin="signin" :terms="terms" />
+			<Google @signin="signin" :terms="terms" :redirect_uri="redirect_uri" />
+			<Discord @signin="signin" :terms="terms" :redirect_uri="redirect_uri" />
 			<Twitch @signin="signin" :terms="terms" :redirect_uri="redirect_uri" />
 		</template>
 		<Yandex @signin="signin" :terms="terms" :redirect_uri="redirect_uri" />
@@ -13,6 +14,7 @@
 <script scoped>
 import * as time_zones from './timezone_to_country'
 import Google from "@/components/Signin/Api/Google.vue"
+import Discord from "@/components/Signin/Api/Discord.vue"
 import Twitch from "@/components/Signin/Api/Twitch.vue"
 import Yandex from "@/components/Signin/Api/Yandex.vue"
 import Mail from "@/components/Signin/Api/Mail.vue"
@@ -23,6 +25,7 @@ export default {
 	props: ["l", "success", "response", "terms"],
 	components: {
 		Google,
+		Discord,
 		Twitch,
 		Yandex,
 		Mail,

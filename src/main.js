@@ -5,7 +5,6 @@ import "./style"
 import { name, store_version } from "/package"
 
 import { createPinia, getActivePinia } from "pinia"
-import vue3GoogleLogin from "vue3-google-login"
 import vClickOutside from "click-outside-vue3"
 import Toaster from "@meforma/vue-toaster"
 
@@ -28,7 +27,6 @@ app
     .use(createPinia())
     .use(Toaster, { position: "bottom-left", maxToasts: 3, duration: 4000 })
     .use(vClickOutside)
-    .use(vue3GoogleLogin, { clientId: import.meta.env.VITE_GOOGLE_ID })
     .component("Image", Image)
 
 const curruent_db_version = +localStorage.getItem("store_version")

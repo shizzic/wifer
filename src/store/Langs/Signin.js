@@ -106,49 +106,56 @@ export const SigninJS = defineStore("Signin", {
                     email_invalid: "Wrong email",
                     email_not_dispatched: "Email with link wasn't sent to you 'cause of some reason. Please, try again",
                     something_went_wrong: "Some error occured on server. Try again and never give up",
-                    user_is_banned: "Bro, u have been banned. But don't worry. U can create a new account whenever you like" 
+                    user_is_banned: "Bro, u have been banned. But don't worry. U can create a new account whenever you like",
+                    email_not_verified: "It looks like your email is not verified on the authorization resource"
                 },
                 ru: {
                     wrong_api_token: "Не пытайся хакнуть меня бро",
                     email_invalid: "Это не почта",
                     email_not_dispatched: "Письмо с сылкой не было отправленно на вашу почту по какой-то причине. Пожалуста, попробуйте снова",
                     something_went_wrong: "что-то случилось на сервере. Попробуйте снова",
-                    user_is_banned: "Бро, ты был забанен. Но не парься. Я же не запретил тебе заводить новые аккаунты (подмиг, подмиг :D)"
+                    user_is_banned: "Бро, ты был забанен. Но не парься. Я же не запретил тебе заводить новые аккаунты (подмиг, подмиг :D)",
+                    email_not_verified: "Похоже что, ваша почта не верифицирована на ресурсе авторизации"
                 },
                 de: {
                     wrong_api_token: "Versuch nicht, mich zu hacken, Bruder",
                     email_invalid: "Falsche E-mail",
                     email_not_dispatched: "E-Mail mit Link wurde aus irgendeinem Grund nicht an Sie gesendet. Bitte versuche es erneut",
                     something_went_wrong: "Auf dem Server ist ein Fehler aufgetreten. Versuchen Sie es erneut und geben Sie niemals auf",
-                    user_is_banned: "Bruder, du wurdest gesperrt. Aber keine Sorge. Du kannst jederzeit ein neues Konto erstellen" 
+                    user_is_banned: "Bruder, du wurdest gesperrt. Aber keine Sorge. Du kannst jederzeit ein neues Konto erstellen",
+                    email_not_verified: "Es sieht so aus, als ob Ihre E-Mail bei der Autorisierungsressource nicht verifiziert ist",
                 },
                 fr: {
                     wrong_api_token: "N'essaie pas de me pirater frère",
                     email_invalid: "Mauvaise adresse mail",
                     email_not_dispatched: "L'e-mail avec le lien ne vous a pas été envoyé pour une raison quelconque. Veuillez réessayer",
                     something_went_wrong: "Une erreur s'est produite sur le serveur. Réessayez et n'abandonnez jamais",
-                    user_is_banned: "Frère, tu as été banni. Mais ne vous inquiétez pas. Vous pouvez créer un nouveau compte quand vous le souhaitez" 
+                    user_is_banned: "Frère, tu as été banni. Mais ne vous inquiétez pas. Vous pouvez créer un nouveau compte quand vous le souhaitez",
+                    email_not_verified: "Il semble que votre e-mail ne soit pas vérifié sur la ressource d'autorisation",
                 },
                 es: {
                     wrong_api_token: "No intentes hackearme hermano",
                     email_invalid: "Email incorrecto",
                     email_not_dispatched: "No se le envió el correo electrónico con el enlace por algún motivo. Inténtalo de nuevo",
                     something_went_wrong: "Se produjo algún error en el servidor. Inténtalo de nuevo y nunca te rindas",
-                    user_is_banned: "Hermano, te han baneado. Pero no te preocupes. Puedes crear una nueva cuenta cuando quieras" 
+                    user_is_banned: "Hermano, te han baneado. Pero no te preocupes. Puedes crear una nueva cuenta cuando quieras",
+                    email_not_verified: "Parece que su correo electrónico no está verificado en el recurso de autorización",
                 },
                 zh: {
                     wrong_api_token: "不要试图破解我兄弟:)",
                     email_invalid: "错误的电子邮件",
                     email_not_dispatched: "由于某种原因，未向您发送带有链接的电子邮件。请再试一次",
                     something_went_wrong: "服务器上发生了一些错误。再试一次，永不放弃",
-                    user_is_banned: "兄弟，你被禁言了。但别担心。你可以随时创建一个新帐户:)" 
+                    user_is_banned: "兄弟，你被禁言了。但别担心。你可以随时创建一个新帐户:)",
+                    email_not_verified: "您的电子邮件似乎未在授权资源上进行验证",
                 },
                 ja: {
                     wrong_api_token: "私をハックしようとしないでください:)",
                     email_invalid: "間違ったメール",
                     email_not_dispatched: "なんらかの理由で、リンク付きのメールが送信されませんでした。もう一度やり直してください",
                     something_went_wrong: "サーバーで何らかのエラーが発生しました。もう一度やり直して、決してあきらめないでください",
-                    user_is_banned: "ブロ、あなたは禁止されています。しかし、心配しないでください。いつでも新しいアカウントを作成できます:)" 
+                    user_is_banned: "ブロ、あなたは禁止されています。しかし、心配しないでください。いつでも新しいアカウントを作成できます:)",
+                    email_not_verified: "あなたのメールは認証リソースで確認されていないようです",
                 },
             }
         },
