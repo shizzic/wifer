@@ -3,21 +3,9 @@
 <!--  created with sitemap generator https://octopus.do  -->
 
     <url>
-        <loc>https://dateshipper.com</loc>
+        <loc>https://wifer.lol</loc>
         <lastmod>2023-05-27</lastmod>
         <changefreq>always</changefreq>
         <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://dateshipper.com/search</loc>
-        <lastmod>2023-05-27</lastmod>
-        <changefreq>always</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://dateshipper.com/signin</loc>
-        <lastmod>2023-05-27</lastmod>
-        <changefreq>always</changefreq>
-        <priority>0.5</priority>
     </url>
 </urlset>
