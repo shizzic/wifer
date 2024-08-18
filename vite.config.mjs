@@ -15,7 +15,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: new Regexp('/external/.*')
+      external: new RegExp('/external/.*')
     },
   }
 })
