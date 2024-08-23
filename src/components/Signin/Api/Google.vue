@@ -18,7 +18,7 @@ export default {
 	methods: {
 		popup() {
 			window.open('https://accounts.google.com/o/oauth2/auth?scope=email&response_type=code&access_type=offline&state=Google&redirect_uri=' 
-			+ this.redirect_uri + '&client_id=' + import.meta.env.VITE_GOOGLE_ID, '_self')
+			+ this.redirect_uri + '&client_id=' + (import.meta.env.VITE_GOOGLE_ID || '__GOOGLE_ID__'), '_self')
 		}
 	}
 }
