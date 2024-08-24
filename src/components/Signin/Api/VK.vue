@@ -20,8 +20,8 @@ export default {
     methods: {
         popup() {
             window.open('https://id.vk.com/authorize?scope=email&response_type=code&state=' + Date.now() +
-                '&code_challenge=' + (import.meta.env.VITE_VK_SECRET || '__VK_SECRET__') + '&code_challenge_method=s256' +
-                '&client_id=' + (import.meta.env.VITE_VK_ID || '__VK_ID__') + '&redirect_uri=' + this.redirect_uri + '?method=VK', '_self')
+                '&code_challenge=' + import.meta.env.VITE_VK_SECRET + '&code_challenge_method=s256' +
+                '&client_id=' + import.meta.env.VITE_VK_ID + '&redirect_uri=' + this.redirect_uri + '?method=VK', '_self')
         }
     }
 }

@@ -12,7 +12,7 @@ export const sseJS = defineStore("sse", {
             if (this.server)
                 return
 
-            this.server = new EventSource((import.meta.env.VITE_PROTOCOL || '__PROTOCOL__') + "://" + (import.meta.env.VITE_SERVER_DOMAIN_NAME || '__SERVER_DOMAIN_NAME__') + 'sse', {
+            this.server = new EventSource(import.meta.env.VITE_PROTOCOL + "://" + import.meta.env.VITE_SERVER_DOMAIN_NAME + 'sse', {
                 withCredentials: true,
             })
 

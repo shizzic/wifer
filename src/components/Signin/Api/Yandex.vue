@@ -13,7 +13,7 @@ export default {
     },
     methods: {
         popup() {
-            window.open('https://oauth.yandex.ru/authorize?response_type=code&client_id=' + (import.meta.env.VITE_YANDEX_ID || '__YANDEX_ID__') + '&display=popup&redirect_uri=' + this.redirect_uri + '?method=Yandex', '_self')
+            window.open('https://oauth.yandex.ru/authorize?response_type=code&client_id=' + import.meta.env.VITE_YANDEX_ID + '&display=popup&redirect_uri=' + this.redirect_uri + '?method=Yandex', '_self')
         }
     }
 }
