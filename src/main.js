@@ -38,6 +38,7 @@ localStorage.setItem("store_version", store_version)
 
 const test = import.meta.env.VITE_SERVER_DOMAIN || "__SERVER_DOMAIN__"
 console.log(test)
+console.log(import.meta.env)
 app.config.globalProperties.$app_name = name[0].toUpperCase() + name.slice(1)
 app.config.globalProperties.$domain = (import.meta.env.VITE_SERVER_DOMAIN || "__SERVER_DOMAIN__")
 app.config.globalProperties.$domainName = (import.meta.env.VITE_SERVER_DOMAIN_NAME || "__SERVER_DOMAIN_NAME__")
