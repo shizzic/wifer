@@ -12,13 +12,13 @@ export default {
 			this.$emit("signin", {
 				token: this.$route.query.code,
 				method: this.$route.params.method,
-				redirect_uri: this.redirect_uri
+				redirect_uri: this.redirect_uri + '/' + this.$route.params.method
 			})
 	},
 	methods: {
 		popup() {
 			window.open('https://accounts.google.com/o/oauth2/auth?scope=email&response_type=code&access_type=offline&state=Google&redirect_uri=' 
-			+ this.redirect_uri + '&client_id=' + import.meta.env.VITE_GOOGLE_ID, '_self')
+			+ this.redirect_uri + '/' + this.$route.params.method + '&client_id=' + import.meta.env.VITE_GOOGLE_ID, '_self')
 		}
 	}
 }

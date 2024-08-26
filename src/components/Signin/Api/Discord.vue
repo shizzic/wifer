@@ -12,12 +12,12 @@ export default {
             this.$emit("signin", { 
                 token: this.$route.query.code, 
                 method: this.$route.params.method, 
-                redirect_uri: this.redirect_uri
+                redirect_uri: this.redirect_uri + '/' + this.$route.params.method
             })
     },
     methods: {
         popup() {
-            window.open('https://discord.com/oauth2/authorize?response_type=code&scope=email&client_id=' + import.meta.env.VITE_DISCORD_ID + '&redirect_uri=' + this.redirect_uri, '_self')
+            window.open('https://discord.com/oauth2/authorize?response_type=code&scope=email&client_id=' + import.meta.env.VITE_DISCORD_ID + '&redirect_uri=' + this.redirect_uri + '/' + this.$route.params.method, '_self')
         },
     }
 }

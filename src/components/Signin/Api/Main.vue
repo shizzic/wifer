@@ -39,7 +39,7 @@ export default {
 	data() {
 		return {
 			https: false,
-			redirect_uri: window.location.origin + window.location.pathname + (this.$route.params.method ? '/' + this.$route.params.method : ''),
+			redirect_uri: window.location.origin + window.location.pathname,
 			country: time_zones.default[Intl.DateTimeFormat().resolvedOptions().timeZone]
 		}
 	},
