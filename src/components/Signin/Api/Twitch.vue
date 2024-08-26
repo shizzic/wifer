@@ -17,7 +17,7 @@ export default {
     },
     methods: {
         popup() {
-            window.open('https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=' + import.meta.env.VITE_TWITCH_ID + '&scope=user%3Aread%3Aemail&redirect_uri=' + this.redirect_uri + '/' + this.$route.params.method, '_self')
+            window.open('https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=' + import.meta.env.VITE_TWITCH_ID + '&scope=user%3Aread%3Aemail&redirect_uri=' + this.redirect_uri + '/Twitch', '_self')
         },
     }
 }

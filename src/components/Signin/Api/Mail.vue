@@ -12,12 +12,12 @@ export default {
             this.$emit("signin", { 
                 token: this.$route.query.code, 
                 method: this.$route.params.method, 
-                redirect_uri: this.redirect_uri + '/' + this.$route.params.method
+                redirect_uri: this.redirect_uri + '/Mail'
             })
     },
     methods: {
         popup() {
-            window.open('https://oauth.mail.ru/login?client_id=' + import.meta.env.VITE_MAIL_ID + '&response_type=code&scope=userinfo&state=' + Date.now() + '&redirect_uri=' + this.redirect_uri + '/' + this.$route.params.method, '_self')
+            window.open('https://oauth.mail.ru/login?client_id=' + import.meta.env.VITE_MAIL_ID + '&response_type=code&scope=userinfo&state=' + Date.now() + '&redirect_uri=' + this.redirect_uri + '/Mail', '_self')
         }
     }
 }
