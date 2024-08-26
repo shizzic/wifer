@@ -8,20 +8,20 @@
 export default {
     props: ['redirect_uri', 'terms'],
     beforeMount() {
-        if (this.$route.query.method === 'VK' && this.$route.query.code && this.$route.query.device_id && this.$route.query.state)
+        if (this.$route.params.method === 'VK' && this.$route.query.code && this.$route.query.device_id && this.$route.query.state)
             this.$emit("signin", {
-                "token": this.$route.query.code,
-                "method": this.$route.query.method,
-                "state": this.$route.query.state,
-                "device_id": this.$route.query.device_id,
-                redirect_uri: this.redirect_uri + '?method=VK'
+                token: this.$route.query.code,
+                method: this.$route.params.method,
+                state: this.$route.query.state,
+                device_id: this.$route.query.device_id,
+                redirect_uri: this.redirect_uri
             })
     },
     methods: {
         popup() {
             window.open('https://id.vk.com/authorize?scope=email&response_type=code&state=' + Date.now() +
                 '&code_challenge=' + import.meta.env.VITE_VK_SECRET + '&code_challenge_method=s256' +
-                '&client_id=' + import.meta.env.VITE_VK_ID + '&redirect_uri=' + this.redirect_uri + '?method=VK', '_self')
+                '&client_id=' + import.meta.env.VITE_VK_ID + '&redirect_uri=' + this.redirect_uri, '_self')
         }
     }
 }

@@ -19,7 +19,7 @@ const routes = [
     { path: "/chat", name: "chat", component: c.Chat, props: true, },
     { path: "/heart", name: "heart", component: c.Heart, props: true, },
     { path: "/profile/:id", name: "profile", component: c.Profile, props: true, },
-    { path: "/signin", name: "signin", component: c.Signin, props: true, },
+    { path: "/signin/:method(\\S+)?", name: "signin", component: c.Signin, props: true, },
     { path: "/auth/:id(\\S+)/:code", name: "auth", component: c.Auth, props: true, },
     { path: "/docs/terms_and_conditions", name: "terms_and_conditions", component: c.TermsAndConditions, props: true, },
     { path: "/docs/privacy_policy", name: "privacy_policy", component: c.PrivacyPolicy, props: true, },
