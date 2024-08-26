@@ -8,10 +8,10 @@
 export default {
 	props: ['redirect_uri', 'terms'],
 	beforeMount() {
-		if (!this.$route.query.method && this.$route.query.code && this.$route.query.state === 'Google')
+		if (!this.$route.params.method && this.$route.query.code)
 			this.$emit("signin", {
-				"token": this.$route.query.code,
-				"method": "Google",
+				token: this.$route.query.code,
+				method: this.$route.params.method,
 				redirect_uri: this.redirect_uri
 			})
 	},

@@ -8,12 +8,15 @@
 export default {
     props: ['terms', 'redirect_uri'],
     beforeMount() {
-        if (this.$route.query.method === 'Yandex' && this.$route.query.code)
-            this.$emit("signin", { "token": this.$route.query.code, "method": this.$route.query.method })
+        if (this.$route.params.method === 'Yandex' && this.$route.query.code)
+            this.$emit("signin", { 
+                token: this.$route.query.code, 
+                method: this.$route.params.method
+            })
     },
     methods: {
         popup() {
-            window.open('https://oauth.yandex.ru/authorize?response_type=code&client_id=' + import.meta.env.VITE_YANDEX_ID + '&display=popup&redirect_uri=' + this.redirect_uri + '?method=Yandex', '_self')
+            window.open('https://oauth.yandex.ru/authorize?response_type=code&client_id=' + import.meta.env.VITE_YANDEX_ID + '&display=popup&redirect_uri=' + this.redirect_uri, '_self')
         }
     }
 }
