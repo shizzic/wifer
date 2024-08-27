@@ -7,7 +7,7 @@
 		</template>
 		<Yandex @signin="signin" :terms="terms" :redirect_uri="redirect_uri" />
 		<Mail @signin="signin" :terms="terms" :redirect_uri="redirect_uri" />
-		<VK @signin="signin" :terms="terms" :redirect_uri="redirect_uri" />
+		<!-- <VK @signin="signin" :terms="terms" :redirect_uri="redirect_uri" /> -->
 	</div>
 </template>
 

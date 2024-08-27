@@ -17,7 +17,8 @@ export default {
     },
     methods: {
         popup() {
-            window.open('https://discord.com/oauth2/authorize?response_type=code&scope=email&client_id=' + import.meta.env.VITE_DISCORD_ID + '&redirect_uri=' + this.redirect_uri + '/Discord', '_self')
+            location.assign('https://discord.com/oauth2/authorize?response_type=code&scope=email&client_id=' + import.meta.env.VITE_DISCORD_ID + 
+            '&redirect_uri=' + this.redirect_uri + '/Discord')
         },
     }
 }

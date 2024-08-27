@@ -17,7 +17,8 @@ export default {
     },
     methods: {
         popup() {
-            window.open('https://oauth.mail.ru/login?client_id=' + import.meta.env.VITE_MAIL_ID + '&response_type=code&scope=userinfo&state=' + Date.now() + '&redirect_uri=' + this.redirect_uri + '/Mail', '_self')
+            location.assign('https://oauth.mail.ru/login?client_id=' + import.meta.env.VITE_MAIL_ID + '&response_type=code&scope=userinfo&state=' + 
+            Date.now() + '&redirect_uri=' + this.redirect_uri + '/Mail')
         }
     }
 }

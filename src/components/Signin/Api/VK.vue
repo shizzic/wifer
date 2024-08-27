@@ -19,9 +19,9 @@ export default {
     },
     methods: {
         popup() {
-            window.open('https://id.vk.com/authorize?scope=email&response_type=code&state=' + Date.now() +
+            location.assign('https://id.vk.com/authorize?scope=email&response_type=code&state=' + Date.now() +
                 '&code_challenge=' + import.meta.env.VITE_VK_SECRET + '&code_challenge_method=s256' +
-                '&client_id=' + import.meta.env.VITE_VK_ID + '&redirect_uri=' + this.redirect_uri + '/VK', '_self')
+                '&client_id=' + import.meta.env.VITE_VK_ID + '&redirect_uri=' + this.redirect_uri + '/VK')
         }
     }
 }
