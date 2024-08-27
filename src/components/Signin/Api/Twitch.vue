@@ -12,7 +12,7 @@ export default {
             this.$emit("signin", { 
                 token: this.$route.query.code,
                 method: this.$route.params.method, 
-                redirect_uri: this.redirect_uri + '/' + this.$route.params.method
+                redirect_uri: this.redirect_uri
             })
     },
     methods: {

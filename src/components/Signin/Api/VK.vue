@@ -14,7 +14,7 @@ export default {
                 method: this.$route.params.method,
                 state: this.$route.query.state,
                 device_id: this.$route.query.device_id,
-                redirect_uri: this.redirect_uri + '/' + this.$route.params.method
+                redirect_uri: this.redirect_uri
             })
     },
     methods: {
