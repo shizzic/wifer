@@ -2,7 +2,7 @@
 	<div id="cookie">
 		<span>{{ text[l] }}</span>
         <a href="https://app.termly.io/document/cookie-policy/18caf124-ff04-4f09-8ed0-1b0cdd6653d6">Cookie Policy</a>
-        <div id="cookie-btn" @click="$user.set({field: 'cookies', value: true})">ok</div>
+        <div id="cookie_approve" @click="$user.set({field: 'cookies', value: true})">ok</div>
 	</div>
 </template>
 
@@ -48,7 +48,7 @@ export default {
     overflow-wrap: break-word;
 }
 
-#cookie-btn {
+#cookie_approve {
     cursor: pointer;
     background-color: #2c3249;
     color: #fff;
