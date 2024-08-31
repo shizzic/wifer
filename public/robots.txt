@@ -8,4 +8,4 @@ Disallow: /chat
 Disallow: /heart
 Disallow: /profile
 Disallow: /auth
-Sitemap: https://wifer.ru/sitemap.xml
+Sitemap: https://wifer.lol/sitemap.xml
