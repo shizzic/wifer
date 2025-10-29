@@ -10,7 +10,7 @@ export const ProfileJS = defineStore("Profile", {
                 },
                 ru: {
                     "title": "Вход",
-                    "text": "Привет! Если ты хочешь найти что-то приятное, тогда заходи"
+                    "text": "Привет! Если ты хочешь найти кого-то, тогда заходи"
                 },
                 de: {
                     "title": "Eintreten",

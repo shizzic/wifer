@@ -168,7 +168,7 @@ export const ModalJS = defineStore("Modal", {
                 },
                 private: {
                     en: "You gave an access to your private photos",
-                    ru: "Вы дали доступ к свои приватным фоткам",
+                    ru: "Вы дали доступ к своим приватным фоткам",
                     de: "Sie haben Zugriff auf Ihre privaten Fotos gewährt",
                     fr: "Vous avez donné accès à vos photos privées",
                     es: "Has dado acceso a tus fotos privadas.",

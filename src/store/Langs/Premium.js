@@ -83,31 +83,31 @@ export const PremiumJS = defineStore("Premium", {
         about() {
             return {
                 en: {
-                    text: "Just the best website for sugar daddy/baby relationship",
+                    text: "Simply the best website for finding relationships",
                     reasons: " by price, by speed, by service"
                 },
                 ru: {
-                    text: "Просто лучший веб-сайт для отношений вида спонсор/содержанка",
+                    text: "Просто лучший веб-сайт для поиска отношений",
                     reasons: " по цене, по скорости, по сервису"
                 },
                 de: {
-                    text: "Einfach die beste Website für die Sugar-Daddy/Baby-Beziehung",
+                    text: "Einfach die beste Website zum Finden von Beziehungen",
                     reasons: " nach Preis, nach Geschwindigkeit, nach Service"
                 },
                 fr: {
-                    text: "Juste le meilleur site Web pour la relation Sugar Daddy / Baby",
+                    text: "Tout simplement le meilleur site pour trouver des relations",
                     reasons: " par prix, par rapidité, par service"
                 },
                 es: {
-                    text: "Simplemente el mejor sitio web para la relación sugar daddy/bebé",
+                    text: "Simplemente el mejor sitio web para encontrar relaciones.",
                     reasons: " por precio, por velocidad, por servicio"
                 },
                 zh: {
-                    text: "只是最好的傍大款/宝贝关系网站",
+                    text: "简直是寻找关系的最佳网站",
                     reasons: " 按价格、按速度、按服务"
                 },
                 ja: {
-                    text: "シュガーダディと赤ちゃんの関係に最適なウェブサイト",
+                    text: "まさに人間関係を見つけるのに最適なウェブサイト",
                     reasons: " 価格別、速度別、サービス別"
                 },
             }

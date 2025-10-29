@@ -38,7 +38,7 @@ export const SearchJS = defineStore("Search", {
                     title: "个人资料文本",
                     hold: "您想从用户那里看到的文字",
                     full: "搜索整个短语",
-                    is: "用户填写了“关于我”"
+                    is: "用户填写了\"关于我\""
                 },
                 ja: {
                     title: "プロフィールテキスト",

@@ -6,31 +6,31 @@ export const SigninJS = defineStore("Signin", {
             return {
                 en: {
                     "title": "Enter",
-                    "text": "Hi! If you want to find something nice, then come in"
+                    "text": "Hello! If you want to find someone, then come in"
                 },
                 ru: {
                     "title": "Вход",
-                    "text": "Привет! Если ты хочешь найти что-то приятное, тогда заходи"
+                    "text": "Привет! Если ты хочешь найти кого-то, тогда заходи"
                 },
                 de: {
                     "title": "Eintreten",
-                    "text": "Hallo! Wenn du etwas Schönes finden möchtest, dann komm rein"
+                    "text": "Hallo! Wenn Sie jemanden finden möchten, dann kommen Sie vorbei"
                 },
                 fr: {
                     "title": "Entrer",
-                    "text": "Salut ! Si tu veux trouver quelque chose de sympa, alors viens"
+                    "text": "Bonjour! Si vous voulez trouver quelqu'un, entrez"
                 },
                 es: {
                     "title": "Ingresar",
-                    "text": "Hola! Si quieres encontrar algo lindo, entra"
+                    "text": "¡Hola! Si quieres encontrar a alguien entonces entra."
                 },
                 zh: {
                     "title": "进入",
-                    "text": "嗨！如果你想找到好东西，那就进来吧"
+                    "text": "你好！如果你想找人就进来吧"
                 },
                 ja: {
                     "title": "入る",
-                    "text": "こんにちは！何かいいものを見つけたいなら、ぜひお越しください"
+                    "text": "こんにちは！誰かを見つけたいなら来てください"
                 },
             }
         },
@@ -114,7 +114,7 @@ export const SigninJS = defineStore("Signin", {
                     email_invalid: "Это не почта",
                     email_not_dispatched: "Письмо с сылкой не было отправленно на вашу почту по какой-то причине. Пожалуста, попробуйте снова",
                     something_went_wrong: "что-то случилось на сервере. Попробуйте снова",
-                    user_is_banned: "Бро, ты был забанен. Но не парься. Я же не запретил тебе заводить новые аккаунты (подмиг, подмиг :D)",
+                    user_is_banned: "Бро, ты был забанен. Но не парься. Я же не запретил тебе заводить новые аккаунты",
                     email_not_verified: "Похоже что, ваша почта не верифицирована на ресурсе авторизации"
                 },
                 de: {

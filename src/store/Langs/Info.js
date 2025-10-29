@@ -265,8 +265,8 @@ export const InfoJS = defineStore("Info", {
                     search: {
                         1: "Relationships",
                         2: "Marriage",
-                        3: "One time sex",
-                        4: "Long term sex",
+                        3: "Casual",
+                        4: "Long term",
                         5: "Friend",
                         6: "Travel",
                         7: "Fetish",
@@ -355,11 +355,11 @@ export const InfoJS = defineStore("Info", {
                     search: {
                         1: "Отношения",
                         2: "Брак",
-                        3: "Секс на разок",
+                        3: "Ничего серьезного",
                         4: "Содержание",
                         5: "Друга",
                         6: "Путешествие",
-                        7: "Фетиш",
+                        7: "Странности",
                         8: "Платоническая любовь",
                         9: "Не знаю",
                         10: "Ивестора"
