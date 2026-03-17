@@ -93,7 +93,7 @@ export default {
 		}
 	},
 	beforeMount() {
-		this.data = Object.assign({}, this.fields)
+		this.data = JSON.parse(JSON.stringify(this.fields))
 	},
 	methods: {
 		change() {

@@ -24,7 +24,10 @@ export default {
 		return {
 			input_value: ''
 		}
-	}
+	},
+	mounted() {
+        this.input_value = this.value ?? ''
+    },
 }
 </script>
 

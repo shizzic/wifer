@@ -17,7 +17,7 @@ export default {
     },
 	data() {
 		return {
-            input_value: '',
+            input_value: 0,
             options: {
                 min: 18,
                 max: 80
@@ -25,8 +25,8 @@ export default {
 		}
 	},
     mounted() {
-        if (this.value === 0)
-            this.$emit("value", 18)
+        const value = Number(this.value)
+        this.input_value = value >= this.options.min && value <= this.options.max ? value : this.options.min
     },
     methods: {
         get(value) {

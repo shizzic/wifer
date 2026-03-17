@@ -17,13 +17,17 @@ export default {
     },
 	data() {
 		return {
-            input_value: '',
+            input_value: 0,
             options: {
                 min: 0,
                 max: 9
             }
 		}
 	},
+    mounted() {
+        const value = Number(this.value)
+        this.input_value = value >= this.options.min && value <= this.options.max ? value : this.options.min
+    },
     methods: {
         get(value) {
             this.$emit("value", value)

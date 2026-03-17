@@ -28,11 +28,7 @@ export default {
 		}
 	},
     mounted() {
-        if (this.value === 0)
-            this.$emit("value", 1)
-        else
-            if (this.value === 2)
-                this.mode = null
+        this.mode = this.value === 0 || this.value === 1 ? true : false
     },
     methods: {
         get(bool) {
